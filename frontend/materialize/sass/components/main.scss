@@ -432,13 +432,11 @@ span.twitter-typeahead{
   -webkit-mask-box-image: url("../img/svg/routeMap.svg");
   mask-border: url("../img/svg/routeMap.svg");
   background-color:$empty-slider-color;
-  background-repeat: no-repeat;
   height:60%;
   // width:60%;
   position: relative;
   // past this point it gets choppy.
-  max-width: 136px !important;
-  min-width: 120px !important;
+  max-width:100%;
 }
 
 #resizable-element {
@@ -737,6 +735,15 @@ $google_expando_transition: (
 }
 
 
+@media #{$medium-only}{
+  .google-expando__card.active {
+   height:400px !important;
+  }
+}
+
+
+
+
 // Google Expando State
 // .google-expando__icon.active {
 //   transform: scale(1.1);
@@ -1004,7 +1011,7 @@ hr {
   -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
   background: url("../img/svg/downChev.svg") no-repeat !important;
-  z-index: 3;
+  z-index: 13;
 
   width: 25px;  
   height: 25px;
@@ -1107,4 +1114,10 @@ hr {
   z-index: 1000 !important;
 }
 
+.tutorialSlide{
+  background-size:contain;
+  background-repeat: no-repeat;
+  min-height: 440px;
+  max-width:100%;
+}
 
