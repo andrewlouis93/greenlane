@@ -4,14 +4,13 @@ var Loader = React.createClass({
 
 
 	loadText: function() {
-	var quotes= new Array();
-	quotes.push("mapping your greenlane");
-	quotes.push("soaking in the sun");
-	quotes.push("turning over a new leaf");
-	quotes.push("smelling the roses");
-	quotes.push("mingling with mother nature");
-
-	return quotes[Math.round(Math.random()*(quotes.length))];
+		var quotes= new Array();
+		quotes.push("mapping your greenlane");
+		quotes.push("soaking in the sun");
+		quotes.push("turning over a new leaf");
+		quotes.push("smelling the roses");
+		quotes.push("mingling with mother nature");
+		return quotes[Math.round(Math.random()*(quotes.length))];
 },
 
 
