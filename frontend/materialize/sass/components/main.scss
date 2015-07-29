@@ -432,11 +432,13 @@ span.twitter-typeahead{
   -webkit-mask-box-image: url("../img/svg/routeMap.svg");
   mask-border: url("../img/svg/routeMap.svg");
   background-color:$empty-slider-color;
+  background-repeat: no-repeat;
   height:60%;
   // width:60%;
   position: relative;
   // past this point it gets choppy.
   max-width: 136px !important;
+  min-width: 120px !important;
 }
 
 #resizable-element {
