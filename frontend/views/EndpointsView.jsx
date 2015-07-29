@@ -5,7 +5,7 @@ var Actions = require('../stores/Actions.jsx');
 var Navigate = require('../stores/Navigate.jsx');
 var Analytics = require('../stores/Analytics.jsx');
 
-var inputClasses = inputClassnames('typeahead');
+var inputClasses = inputClassnames('typeahead', 'validate');
 
 var Endpoints = React.createClass({
   getInitialState: function(){
@@ -14,6 +14,8 @@ var Endpoints = React.createClass({
       "origin": {},
       "destination": {},
       "greenpoints": [],
+      "origin_error": false,
+      "destination_error": false
     };
   },
   componentDidMount: function(){
@@ -22,6 +24,13 @@ var Endpoints = React.createClass({
       displayKey: 'description',
       source: Navigate.getSuggestions
     });
+    var _this = this;
+    $('.typeahead').on('typeahead:selected', function(){
+      // reset error state!
+      var err = {};
+      err[this.id + '_error'] = false;
+      _this.setState(err);
+    });   
   }, 
   // Looks at the store state and decides whether
   // to show one or two inputs.
@@ -33,7 +42,10 @@ var Endpoints = React.createClass({
         return [
               <div className="input-field">
                 <input id="origin" type="text" placeholder="Looping From" className={inputClasses} required/>
-              </div>
+              </div>,
+              <label className='error_label' htmlFor="origin" data-error="message here" data-success="right">
+                {this.state.origin_error}
+              </label>
         ];
       }
       else{
@@ -41,15 +53,96 @@ var Endpoints = React.createClass({
         console.log("I'M ROUTING!");
         return [
               <div className="input-field">
-                <div className="yourLoc"></div>
+                <div onClick={this.geolocateUser} className="yourLoc"></div>
                 <input id="origin" type="text" placeholder="Home" className={inputClasses} required/>
                 <label className="active" htmlFor="origin">Im starting here</label>
               </div>,
+              <label className='error_label' htmlFor="origin" data-error="message here" data-success="right">
+                {this.state.origin_error}
+              </label>,              
               <div className="input-field">
                 <input id="destination" type="text" placeholder="Critical Mass" className={inputClasses} required/>
                 <label className="active" htmlFor="origin">Im going there</label>
-              </div>
+              </div>,
+              <label className='error_label' htmlFor="destination" data-error="message here" data-success="right">
+                {this.state.destination_error}
+              </label>              
         ];        
+      }
+  },
+  geolocateUser: function(){
+      var _this = this;
+
+
+      function showError(){
+        alert("User declined");
+        Actions.deactivateError();
+      }
+      if (navigator.geolocation) {
+          Actions.activateError('location');        
+          navigator.geolocation.getCurrentPosition(function (position) {
+              console.log('Grabbed current location!');
+              
+
+              var latitude = position.coords.latitude;
+              var longitude = position.coords.longitude;
+              var latlng = new google.maps.LatLng(latitude, longitude);
+              var geocoder = new google.maps.Geocoder();    
+            geocoder.geocode({
+                location: latlng, 
+            }, function(results, status){
+                        if (status == google.maps.GeocoderStatus.OK) {
+                          console.log(results);
+                          // Grab the most likely candidate for the reverse geocode lookup.
+                          if (results[0]){
+                            //setting store with destination sessions state////////////////
+                          
+                            console.log("REVERSE GEOCODE HERE");
+                            console.log(results[0]);
+
+                            var _Name = results[0].formatted_address;
+                            _Name = _Name.split(',', 1).join("");
+                            Actions.setSessionState('originName', _Name );
+                            
+                            // See if we can avoid using jQuery here...
+                            $('#origin').val(_Name)
+
+                            Actions.setSessionState('origin', {
+                              "latLng": L.latLng(
+                                            results[0].geometry.location.lat(),
+                                            results[0].geometry.location.lng()
+                                        )
+                            });
+                            
+                            // proceed to the next page ONLY after
+                            // processing the input field args
+                            
+
+                          } else {
+                            Analytics.locationError(_id);
+                            var err = {};
+                            err['origin_error'] = "we're only able to map greenlanes in toronto. please try again";
+                            _this.setState(err)
+                            // alert('No results found for ' + _id);
+                          }
+                        }
+                        else{
+                            var err = {};
+                            err['origin_error'] = "we're only able to map greenlanes in toronto. please try again";
+                            _this.setState(err)
+                        }
+                    Actions.deactivateError();
+                })   
+
+
+
+
+
+              
+          }, showError, {timeout:5000});
+      }
+      else{
+        Actions.activateError('nogeolocation');
       }
   },
   validate: function(){
@@ -61,9 +154,17 @@ var Endpoints = React.createClass({
     );
 
     var validated = true;
+
+    // the following deal with the async validtion
+    var inputCount = document.getElementsByClassName('input-field').length;
+    var validatedCount = 0;
+    
+    var _this = this;
     $('.distContainer input[required]').map(function(){
         if (!this.value){
-          validated = false;
+          var err = {};
+          err[this.id + '_error'] = this.id + ' must be filled';
+          _this.setState(err)
         }
         else{
             var _value = this.value;
@@ -90,20 +191,29 @@ var Endpoints = React.createClass({
                                             results[0].geometry.location.lng()
                                         )
                             });
+                            
+                            // proceed to the next page ONLY after
+                            // processing the input field args
+                            ++ validatedCount;
+                            (validatedCount == inputCount) ? addLoc() : null;
+
                           } else {
-                            validated = false;
                             Analytics.locationError(_id);
-                            alert('No results found for ' + _id);
+                            var err = {};
+                            err[_id + '_error'] = "we're only able to map greenlanes in toronto. please try again";
+                            _this.setState(err)
+                            // alert('No results found for ' + _id);
                           }
+                        }
+                        else{
+                            var err = {};
+                            err[_id + '_error'] = "we're only able to map greenlanes in toronto. please try again";
+                            _this.setState(err)
                         }
                 })        
             }
     });
-    
-    if (validated)
-      addLoc(); 
-    else
-      alert('Form remains incomplete');
+  
 
     return false;
   },

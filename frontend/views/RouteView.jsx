@@ -30,7 +30,7 @@ var RouteView = React.createClass({
   },
   favouriteRoute: function(){
     if (readCookie('authenticated') == false){
-      alert('must be logged in to favourite!');
+      Actions.activateError('auth');
       return;
     }
 
