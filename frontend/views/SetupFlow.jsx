@@ -6,6 +6,9 @@ var TimeDrag = require('./DragInt.jsx')
 var ScenicStore = require('../stores/Stores.jsx');
 var Actions = require('../stores/Actions.jsx');
 
+var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+
+
 var SetupFlow = React.createClass({
   getInitialState: function(){    
     var _seed = this.routes().transBtns;
@@ -37,9 +40,10 @@ var SetupFlow = React.createClass({
           reactBlob:
           (
             <div className="optSwitch">
-              <p className="introTag">I have</p>
+              <p className="introTag">i have</p>
               <a className="waves-effect waves-light">
-                <div onClick={addBike.bind(this, Actions)} className="svg svg-bike-switch"></div>
+                <ReactCSSTransitionGroup component="div" transitionName="anim" onClick={addBike.bind(this, Actions)} className="svg svg-bike-switch">
+                </ReactCSSTransitionGroup>
               </a>
               <a className="waves-effect waves-light">
                 <div onClick={addWalk.bind(this, Actions)} className="svg svg-walk-switch"></div>
@@ -52,7 +56,7 @@ var SetupFlow = React.createClass({
         travelType: {
           reactBlob:(
             <div className="optSwitch">
-              <p className="introTag">I have</p>
+              <p className="introTag">i have</p>
               <a className="waves-effect waves-light">
                 <div onClick={addRoute.bind(this, Actions)} className="svg routeBtn"></div>
               </a>
@@ -136,19 +140,3 @@ var SetupFlow = React.createClass({
 });
 
 module.exports = SetupFlow;
-
-
-// <div className="nxtBtn">
-//   <a className="waves-effect waves-light btn-large" onClick={this.nextState}>Next</a>
-// </div>
-
-
-// <nav className="formSteps step1">
-//             <span className="current"></span>
-//               <ul>
-//               <li><a onClick={this.transBtns} href="#step-1">walk/bike</a></li>
-//               <li><a onClick={this.travelType} href="#step-2">route/loop</a></li>
-//               <li><a onClick={this.destSel} href="#step-3">to & from</a></li>
-//               <li><a onClick={this.timeSel} href="#step-4">range</a></li>
-//               </ul>
-//             </nav>

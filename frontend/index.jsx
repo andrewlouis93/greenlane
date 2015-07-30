@@ -8,6 +8,7 @@ var ParkInfo = require('./views/ParkInfo.jsx');
 var MapView = require('./views/Map.jsx');
 var StaticPages = require('./views/StaticPages.jsx');
 var Loader = require('./views/Loader.jsx');
+var ErrorView = require('./views/Error.jsx');
 
 var ScenicStore = require('./stores/Stores.jsx');
 var Actions = require('./stores/Actions.jsx');
@@ -46,6 +47,7 @@ var Body = React.createClass({
 				<Loader stateClass={ (this.state.hideLoader) ? '' : 'hidden'} /> 
 				<RouteView />
 				<StaticPages />
+				<ErrorView />
             </div>
       );
     },

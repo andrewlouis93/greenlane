@@ -4,6 +4,7 @@ var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 
 var CHANGE_EVENT = 'change';
+var ERROR_EVENT = 'error';
 
 var dataText = "Test A";
 
@@ -26,7 +27,7 @@ var sessionState = {
   // Default the "greenLevel" to 1.
   // Should be sent as 3*(1,2,3,4)
   'greenness': 1,
-  'activeCarousel': 0,
+  'activeCarousel': 0
 };
 
 
@@ -98,6 +99,21 @@ var layout = {
   },
 };
 
+// can this be refactored into the layout 
+// object?
+var errObj = {
+  css: 'hide',
+  // where state is either auth, location, geolocate
+  state: false,
+  activate: function(_state){
+    this.css = '';
+    this.state = _state;
+  },
+  deactivate: function(){
+    this.css = 'hide';
+  }
+};
+
 /*
  * Contains the activePage prop
  * associated with the StaticPages
@@ -144,6 +160,9 @@ var ScenicStore = assign({}, EventEmitter.prototype, {
   getData: function() {
     return dataText;
   },
+  getErrObj: function(){
+    return errObj;
+  },
   getSessionState: function(){
     return sessionState;
   },
@@ -160,6 +179,10 @@ var ScenicStore = assign({}, EventEmitter.prototype, {
     console.log("Change Emitted");
     this.emit(CHANGE_EVENT);
   },
+  emitError: function(){
+    console.log("Error Emitted");
+    this.emit(ERROR_EVENT);
+  },
   /**
    * @param {function} callback
    */
@@ -171,6 +194,12 @@ var ScenicStore = assign({}, EventEmitter.prototype, {
    */
   removeChangeListener: function(callback) {
     this.removeListener(CHANGE_EVENT, callback);
+  },
+  addErrorListener: function(callback){
+    this.on(ERROR_EVENT, callback);
+  },
+  removeErrorListener: function(callback){
+    this.removeListener(ERROR_EVENT, callback);
   }
 });
 
@@ -260,6 +289,13 @@ Dispatcher.register(function(payload) {
         layout.initialized();
         ScenicStore.emitChange();
         break;
+      case 'activateError':
+        errObj.activate(payload.state);
+        ScenicStore.emitError();
+        break;
+      case 'deactivateError': 
+        errObj.deactivate();
+        ScenicStore.emitError();
       // add more cases for other actionTypes, like TODO_UPDATE, etc.
     }
     return true; // No errors. Needed by promise in Dispatcher.

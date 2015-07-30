@@ -96,6 +96,17 @@ var ScenicActions = {
     Dispatcher.dispatch({
       actionType: 'initialized'
     })
+  },
+  activateError: function(_state){
+    Dispatcher.dispatch({
+      actionType: 'activateError',
+      state: _state
+    })
+  },
+  deactivateError: function(){
+    Dispatcher.dispatch({
+      actionType:'deactivateError'
+    })
   }
 };
 

@@ -46,6 +46,8 @@ html, body, .table-container{
 }
 #map-container{
   .map-start-btn{
+    font-family:Roboto;
+    font-weight:200;
     z-index:50;
     position: absolute;
     top:25%;
@@ -75,23 +77,58 @@ html, body, .table-container{
 /* Overriding the materialize input to allow more padding down below */
 .distContainer{
   .input-field{
-    box-shadow: 0 62px 0 0 $secondary-color-light !important;
+    // box-shadow: 0 85px 0 0 $secondary-color-light !important;
+    margin:3rem 0 6rem !important;
+
   }
 } 
 
 /* Since typeahead wraps the input elements in this span */
 span.twitter-typeahead{
+  top: 12px !important;
   width: 100%;
+  #origin{
+    /* These widths should match */
+    max-width:80%;
+  }
+  #origin, #destination{
+    margin-top:5%;
+    min-height:30px;
+  }
+  .tt-hint{
+    margin-top:5%;
+    min-height:30px;
+    /* These widths should match */
+    max-width: 80%;
+    color: #999;
+  }
 }
+
+.error_label{
+  color: $primary-color;
+  position: relative;
+}
+
+.yourLoc {
+  right: 0;
+  position: absolute;
+  background-image: url('../img/svg/yourLoc.svg');
+  background-size: 100% 100%;
+  width: 20%;
+  height: 37px;
+  opacity: 0.8;
+  transition: opacity 0.2s ease-in-out;
+  &:hover{
+    cursor: pointer;
+    opacity: 1;
+  }
+}
+
 
 .tt-query {
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
      -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
           box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-}
-
-.tt-hint {
-  color: #999
 }
 
 .tt-dropdown-menu {
@@ -193,14 +230,6 @@ span.twitter-typeahead{
     margin:auto;
     li {
       text-align:center;
-    }
-    .left {
-      width:50%;
-    }
-    .centerLine {
-      float: left;
-      width:50%;
-      border-right:3px solid $text-color;
     }
   }
 }
@@ -485,7 +514,7 @@ span.twitter-typeahead{
 .distContainer {
   height:100%;
   position: relative;
-  padding: 20% 0 50% 0;
+  padding: 10% 0 50% 0;
 }
 
 /// BUTTTON STYLES /////////////////////////////////////////////////////////
@@ -500,11 +529,21 @@ span.twitter-typeahead{
   font-size:1.2rem;
   font-weight:200;
   letter-spacing:2rem;
-  box-shadow:0px 3px 0px #aa4660 !important;
+  box-shadow:0px 4px 0px #aa4660 !important;
   background-color:$primary-color;
 
   &:hover {
     background-color:$primary-color;
+    box-shadow:0 3px 0px #aa4660 !important;
+  }
+
+  &:active {
+    transform: translate(0px, 4px);
+    -webkit-transform: translate(0px, 4px);
+    -moz-transform: translate(0px, 4px);
+    -o-transform: translate(0px, 4px);
+    -ms-transform: translate(0px, 4px);
+    box-shadow:0px 0px 0px #aa4660 !important;
   }
 }
 
@@ -514,12 +553,21 @@ span.twitter-typeahead{
   position: absolute !important;
   bottom:0;
   right:5%;
-  font-weight:100;
-  box-shadow:0px 3px 0px #1a9169 !important;
+  font-size:1.2rem;
+  font-weight:200;
+  box-shadow:0px 4px 0px #1a9169 !important;
   background-color:$secondary-color;
 
   &:hover {
     background-color:$secondary-color;
+  }
+  &:active {
+     transform: translate(0px, 4px);
+    -webkit-transform: translate(0px, 4px);
+    -moz-transform: translate(0px, 4px);
+    -o-transform: translate(0px, 4px);
+    -ms-transform: translate(0px, 4px);
+    box-shadow:0px 0px 0px #aa4660 !important;
   }
 }
 
@@ -605,9 +653,13 @@ span.twitter-typeahead{
   font-weight:400 !important;
   font-family:Roboto;
   color:$primary-color;
-  padding:20px;
+  padding:40px 30px;
   font-weight:400;
   border-bottom:1px solid $text-color;
+
+      a {
+        padding:0 !important;
+      }
 }
 
 .loginStyles {
@@ -622,6 +674,10 @@ span.twitter-typeahead{
   font-weight:200 !important;
   padding:20px;
   color:$primary-color;
+
+      li {
+        line-height:35px !important;
+      }
 }
 
 
@@ -636,7 +692,6 @@ span.twitter-typeahead{
     font-weight:700;
     font-size:1.3em;
     color:$secondary-color;
-    @include transform(translateY(-60%));
   }
 
 
@@ -753,9 +808,6 @@ $google_expando_transition: (
    height:400px !important;
   }
 }
-
-
-
 
 // Google Expando State
 // .google-expando__icon.active {
@@ -984,7 +1036,7 @@ hr {
 .staticPageContainer{
   display:block;
   width:25%;
-  height: 100%;
+  height: calc(100% - 64px) !important;
   padding:0 30px;
   position: absolute;
   top:64px;
@@ -1045,6 +1097,7 @@ hr {
   }  
   .staticPageContainer{
     top:0;
+    height:100% !important;
     width:100%;
 
     .staticTitle {
@@ -1056,7 +1109,8 @@ hr {
 
 @media #{$medium-only} {
   .staticPageContainer{
-    width:50%;
+    height: calc(100% - 64px) !important;  
+    width:100%;
   }
 }
 
@@ -1070,7 +1124,6 @@ hr {
   transform: rotate(90deg);
   background: url("../img/svg/downChev.svg") no-repeat !important;
   z-index: 13;
-
   width: 25px;  
   height: 25px;
   top: 15px;
@@ -1087,13 +1140,32 @@ hr {
 }
 
 
-/// acordian -----------------------------------
+/// acordian for FAVOURITE ROUTES -----------------------------------
+
+.favouritedRoute {
+  margin:0 -30px;
+
+  .sectionhead {
+    height:100%;
+  }
+  .section {
+    padding:1em 30px;
+    border-bottom:1px solid rgba(146,148,154,0.5);
+    opacity:50%;
+
+    .article {
+      right:0;
+    }
+
+  }
+}
 .section {
   position: relative;
   width: 100%;
   button {
     position: absolute;
-    right: 0;
+    top:30px;
+    right: 36px;
     margin: 0;
     padding: 0;
     height: 2em;
@@ -1118,7 +1190,7 @@ hr {
   transform: rotate(180deg);
   }
   .articlewrap {
-    height: 120px;
+    height: 100px;
   }
     .favDelete {
       opacity:1;
@@ -1135,6 +1207,7 @@ hr {
 }
 
 .articlewrap {
+  position:relative;
   height: 0;
   overflow: hidden;
   transition: all .2s ease-in;
@@ -1145,21 +1218,27 @@ hr {
   font-weight:300;
   color:$text-color;
   height:50px;
-  width: 90%;
+  width: 80%;
   overflow: hidden;
   background: white;
   cursor: pointer;
   text-overflow: ellipsis;
-  padding:0 1em;
+  padding:1em 0;
   padding-right: 2.1em;
+  span {
+    width:70%;
+    float: right;
+    white-space:pre;
+  }
 }
 
 .article {
+  position:absolute;
+  bottom:0;
   font-family:Roboto;
   font-weight:300;
   color:$primary-color;
-  width:90%;
-  padding: 1em;
+  width:80%;
   line-height: 1.3;
 }
 
@@ -1172,10 +1251,248 @@ hr {
   z-index: 1000 !important;
 }
 
+
+// TUTORIAL SLIDER /////////////////////////////////////////////////////////////////
+
 .tutorialSlide{
+  height:100%;
+  background-position:50% 50%;
   background-size:contain;
   background-repeat: no-repeat;
   min-height: 440px;
-  max-width:100%;
+  width:100%;
 }
 
+.tutorial {
+  height:100%;
+  background-image:url("../img/png/1Walkthrough-10.svg");
+  background-size:cover;
+  background-repeat:no-repeat;
+  background-position:50% 50%;
+  margin:0 -30px;
+}
+
+#error{
+  position:fixed;
+  top: 0; 
+  left: 0;
+  right: 0;
+  /* must be - the height of .side-nav  */
+  // width: calc(100% - 25%);
+  width:100%;
+
+  background-color: rgba(42,209,157,0.8);
+  height: 120vh;
+  z-index: 1001;
+  will-change: opacity;
+  @media #{$medium-only} {
+    // width:calc(100% - 50%);
+  }
+
+  @media #{$small-and-down} {
+    // width:calc(100% - 80%);
+  }  
+  #error_container{
+    
+    width: 40%;
+    /* Vertically Center */
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    position: absolute;
+    max-height: 48%;
+
+    @media #{$medium-only} {
+      width: 60%;
+    }
+
+    @media #{$small-and-down} {
+      width: 80%;
+      max-height: 43%;
+    }  
+
+    .error_inline_btns{
+      display: inline-block !important;
+      width: 40%;
+      margin-left: 7%;  
+      font-size: 1.2em;
+    }    
+  }
+  #error_title{
+    font-family: Roboto-Slab;
+    font-weight: 700;
+    font-size: 2em;
+    text-align: center;
+    letter-spacing: 1px;
+    color: $secondary-color;
+    margin-bottom:30px;
+  }
+
+
+
+  .error-btn{    
+      left: 0;
+      right: 0;
+      margin-left: auto;
+      margin-right: auto;
+
+      border-radius: 9px;
+
+      height: auto;
+      width: auto;
+
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      margin-bottom: 10px;
+      margin-top: 15px;
+
+      max-width: 80%;
+
+      position: relative !important;   
+      display: block;
+      @media #{$medium-only} {
+        max-width: 90%;
+      }
+
+      @media #{$small-and-down} {
+        max-width: 100%;
+      }        
+  }
+
+  .err-cancel{
+      left: 0;
+      right: 0;
+      margin-left: auto;
+      margin-right: auto;
+      /* position: absolute !important; */
+      /* text-align: center; */
+      display: block;
+      width: 40%;
+      margin-top: 25px;    
+      border-radius: 9px;
+  }
+  span{
+    font-size: 1.2em;
+    text-align: center;
+    width: 90%;
+    display: block;
+    @media #{$small-and-down}{
+      font-size: 1.2em;
+    }       
+  }  
+}
+#error_content{
+  background: white;
+  position: relative !important;
+  padding: 40px;
+  border-radius: 14px;
+  height: auto;    
+  padding-bottom: 37px;    
+  position: relative !important;
+}
+
+.sub-text{
+  margin-top: -15px;
+  margin-bottom: 20px;
+  position: relative;
+  font-size: 1em;
+  text-align: center;
+  font-family: Roboto;
+  font-weight: 400;
+  color: $secondary-color;  
+}
+
+/* more styles for the error scren */
+.choice-container{
+  height:5px;
+
+  position:relative;
+
+  margin-top: 40px;
+  margin-bottom: 40px;  
+}
+
+.line-1{
+  float: left;
+  position:relative;
+  display: inline-block;
+}
+.line-2{
+  float: right;
+  position:relative;
+  display: inline-block;
+}
+
+.line-container{
+  width: 40%;
+  background: $secondary-color;
+  opacity:0.8;
+  height: 100%; 
+  border-radius: 50px; 
+}
+
+.centered-or{
+  width: 20%;
+  left: 0;
+  right: 0;
+  height: 13px;
+  /* height: 0; */
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  display: inline-block;
+  float: left;
+  color: $secondary-color;
+  margin-top: -15px;
+  font-family: Roboto-Slab;
+  font-weight: 700;
+  font-size: 1.5em;  
+}
+
+.slick-list {
+  height:100% !important;
+  .slick-track {
+    height:100% !important;
+    .slick-slide {
+      height:100% !important;
+    }
+  }
+}
+.slick-slider {
+  margin:0 !important;
+  height:100%;
+}
+
+.slick-dots {
+  bottom:0 !important;
+
+  li button:before {
+    font-size:12px !important;
+    color:#fff !important;
+  }
+
+  .slick-active {
+    color:#fff !important;
+  }
+}
+
+/// ANIMATION FOR ROUTE SETUP //////////////////////
+
+
+.optSwitch{
+
+  a {
+    .anim-enter {
+    opacity: 0.01;
+    }
+
+    .anim-enter.anim-enter-active {
+    opacity: 1;
+    transition: opacity .5s ease-in;
+    }
+  }
+}
