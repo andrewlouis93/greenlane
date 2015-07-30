@@ -649,6 +649,11 @@ span.twitter-typeahead{
   padding:0px;
   box-shadow:none;
 }
+@media #{$large-and-up} {
+  #directionsContainer{
+    left: 2.4%;
+  }
+}
 
 @media #{$small-and-down} {
     /* Styles for Directions Tab */
@@ -787,8 +792,15 @@ $google_expando_transition: (
     width: auto;
 }
 
+@media #{$medium-and-down} {
+  .openInfo{
+    margin-top: 0px;
+    height: 15px;
+  }
+}
+
 .expandedInfo {
-  overflow:scroll;
+  overflow-y:scroll;
   display:none;
   position:absolute;
   background-color:white;
@@ -803,20 +815,20 @@ $google_expando_transition: (
 
   width:100%;
   padding:0% 5%;
-    h4 {
+  h4 {
       text-align:center;
       margin-bottom:5%;
-      font-size:1.2rem;
+      font-size:1.0rem;
       font-family:Roboto-Slab;
       color:$text-color;
       font-weight:600 !important;
-    } 
+  } 
 
   ul {
     width:100%;
     display:inline-block;
-    padding-bottom:5%;
-    border-bottom:2px solid $text-color;
+    padding-bottom:11%;
+    border-bottom:1px solid $text-color;
     text-align:center;
     font-family:Roboto;
     font-size:1.2em;
@@ -826,9 +838,33 @@ $google_expando_transition: (
       display:inline-block;
       float: left;
       width:50%;
+      font-family: Roboto-Slab;
+      font-size:0.85rem;
+      margin-bottom: 0.5rem;
+      color: #929496;
     }
   }
 }
+
+@media #{$medium-and-down} {
+  .expandedInfo {
+    h4{
+      font-size:1.6rem;
+    }
+    
+    ul{
+      padding: 5% 0;
+      width: 75%;
+      margin: 0 auto;
+      display: block;
+      
+      li{
+        font-size:1.35rem;
+      }
+    }
+  }
+}
+
 
 .imgGrid {
 
@@ -864,7 +900,13 @@ hr {
       font-weight:600 !important;
     }
 }
-
+@media #{$medium-and-down} {
+  .slider.parkMenu {
+    h3{
+      font-size:2.4rem;
+    } 
+  }
+}
 
 .slider-frame{
   width: auto !important;
@@ -918,6 +960,14 @@ hr {
     button:selected {
     background-color:#fff;
   }
+}
+
+@media #{$medium-and-down} {
+  .slider-decorator-0,
+  .slider-decorator-1{
+    width: 32px;
+  }
+  
 }
 
 .slider-decorator-2 {
