@@ -40,8 +40,10 @@ var Endpoints = React.createClass({
         // Show looping inputs!
         console.log("I'M LOOPING");
         return [
+              <div className="introTag">i am</div>,
               <div className="input-field">
-                <input id="origin" type="text" placeholder="Looping From" className={inputClasses} required/>
+                <input id="origin" type="text"className={inputClasses} required/>
+                <label className="active" htmlFor="origin">looping from</label>
               </div>,
               <label className='error_label' htmlFor="origin" data-error="message here" data-success="right">
                 {this.state.origin_error}
@@ -52,17 +54,18 @@ var Endpoints = React.createClass({
         // Show routing inputs
         console.log("I'M ROUTING!");
         return [
+              <div className="introTag">i am</div>,
               <div className="input-field">
                 <div onClick={this.geolocateUser} className="yourLoc"></div>
-                <input id="origin" type="text" placeholder="Home" className={inputClasses} required/>
-                <label className="active" htmlFor="origin">Im starting here</label>
+                <input id="origin" type="text" className={inputClasses} required/>
+                <label className="active" htmlFor="origin">starting here</label>
               </div>,
               <label className='error_label' htmlFor="origin" data-error="message here" data-success="right">
                 {this.state.origin_error}
               </label>,              
               <div className="input-field">
-                <input id="destination" type="text" placeholder="Critical Mass" className={inputClasses} required/>
-                <label className="active" htmlFor="origin">Im going there</label>
+                <input id="destination" type="text" className={inputClasses} required/>
+                <label className="active" htmlFor="origin">going there</label>
               </div>,
               <label className='error_label' htmlFor="destination" data-error="message here" data-success="right">
                 {this.state.destination_error}
@@ -225,7 +228,7 @@ var Endpoints = React.createClass({
                 return reactComponent;
               })
             }
-          <button id='submitRoute' onClick={this.validate} className="btn-secondary waves-effect waves-light col s8 offset-s2">continue
+          <button id='submitRoute' onClick={this.validate} className="btn-secondary col s8 offset-s2">continue
           </button>          
         </div>
     );

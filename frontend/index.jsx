@@ -9,6 +9,7 @@ var MapView = require('./views/Map.jsx');
 var StaticPages = require('./views/StaticPages.jsx');
 var Loader = require('./views/Loader.jsx');
 var ErrorView = require('./views/Error.jsx');
+var TutorialSection = require('./views/Tutorial.jsx');
 
 var ScenicStore = require('./stores/Stores.jsx');
 var Actions = require('./stores/Actions.jsx');
@@ -41,13 +42,9 @@ var Body = React.createClass({
       return (
 			<div id='containerRow' style={this.state.lockHeight} className="row">
 		        <div id='backBtn' onClick={Actions.goBack} className={this.state.backBtn}></div>  			
-				<ProfileNav />
-				<SetupFlow layout={this.state.layout.nav} parentState={this.state} isLoading={Actions.isLoading} />
-				<MapView layout={this.state.layout.map} />
-				<Loader stateClass={ (this.state.hideLoader) ? '' : 'hidden'} /> 
-				<RouteView />
-				<StaticPages />
-				<ErrorView />
+		        <div className="viewContainer tutorial">
+					<TutorialSection/>
+				</div>
             </div>
       );
     },
