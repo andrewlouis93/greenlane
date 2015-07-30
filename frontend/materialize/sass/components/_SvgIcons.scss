@@ -104,6 +104,8 @@
 
 .rightTurn {
   position:absolute;
+  top:50%;
+  transform: translateY(-50%);
   float: left;
   background-image:url('../img/svg/turnRight.svg');
   background-size:100% 100%;
@@ -114,6 +116,8 @@
 
 .leftTurn {
   position:absolute;
+  top:50%;
+  transform: translateY(-50%);
   float: left;
   background-image:url('../img/svg/turnLeft.svg');
   background-size:100% 100%;
@@ -125,6 +129,8 @@
 
 .straight {
   position:absolute;
+  top:50%;
+  transform: translateY(-50%);
   float: left;
   background-image:url('../img/svg/straight.svg');
   background-size:100% 100%;
@@ -136,6 +142,8 @@
 
 .parkIcon {
   position:absolute;
+  top:50%;
+  transform: translateY(-50%);
   float: left;
   background-image:url('../img/svg/park.svg');
   background-size:100% 100%;
@@ -144,9 +152,10 @@
   height:20px;
 
 }
-
 .locIcon {
   position:absolute;
+  top:50%;
+  transform: translateY(-50%);
   float: left;
   background-image:url('../img/svg/locIcon.svg');
   background-size:100% 100%;
@@ -189,6 +198,7 @@
   width:100%;
   height:10px;
   left: 0px;
+  bottom:10px;
 }
 
 @media #{$medium-and-down}{

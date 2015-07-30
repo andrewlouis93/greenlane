@@ -38,6 +38,7 @@
     };
 
     function addBike(_Actions, clickEvent){
+      $('.svg-bike-switch').addClass('addAnim');
       _Actions.setTransitMode('cycling');
       dataLayer.push({
         'transportationType': 'BIKE',

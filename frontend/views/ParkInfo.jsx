@@ -94,6 +94,7 @@ var ParkTab = React.createClass({
       console.log("CLOSING PARK INFO");
       $(".google-expando__icon").removeClass("active");
       $(".google-expando__icon").next().removeClass("active");
+
     },
     closeDirections: function(){
       console.log("CLOSING DIRECTIONS");
@@ -183,7 +184,8 @@ updateExpInfoHeight: function(){
             {this.state.parkName.length ? <ParkCarousel updateActiveCarousel={this.updateActiveCarousel}/> : false}
 
             <div className="openInfo"></div>
-            <div className="expandedInfo">
+          </div>
+            <div className="expandedInfo" aria-hidden="true">
               <ul>
                 <h4>i'm going to see</h4>
                 {
@@ -220,7 +222,6 @@ updateExpInfoHeight: function(){
                 }
               </div>
             </div>
-          </div>
 
         </div>
       </div>

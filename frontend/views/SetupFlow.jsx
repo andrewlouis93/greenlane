@@ -6,9 +6,6 @@ var TimeDrag = require('./DragInt.jsx')
 var ScenicStore = require('../stores/Stores.jsx');
 var Actions = require('../stores/Actions.jsx');
 
-var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
-
-
 var SetupFlow = React.createClass({
   getInitialState: function(){    
     var _seed = this.routes().transBtns;
@@ -42,8 +39,7 @@ var SetupFlow = React.createClass({
             <div className="optSwitch">
               <p className="introTag">i have</p>
               <a className="waves-effect waves-light">
-                <ReactCSSTransitionGroup component="div" transitionName="anim" onClick={addBike.bind(this, Actions)} className="svg svg-bike-switch">
-                </ReactCSSTransitionGroup>
+                <div onClick={addBike.bind(this, Actions)} className="svg svg-bike-switch"></div>
               </a>
               <a className="waves-effect waves-light">
                 <div onClick={addWalk.bind(this, Actions)} className="svg svg-walk-switch"></div>

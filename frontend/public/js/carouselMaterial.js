@@ -11,6 +11,7 @@ function googleExpandoToggle() {
   $(this).toggleClass('active');
   $(this).next().toggleClass('active');
   // ARIA
+  $(".openInfo.active").trigger('click');
 }
 
 // Google Expando Event
@@ -26,10 +27,10 @@ var _parkHeight = $('.google-expando--wrap').height();
 
 $('.openInfo').on('click', function() {
 	$('.openInfo').toggleClass('active');
-	$( ".expandedInfo" ).slideToggle( 400, function() {
+	$( ".expandedInfo" ).slideToggle( 200, function() {
 		$(".expandedInfo").animate({
 			height: ($(".HeaderRoute").offset().top - ($(".openInfo").offset().top + $(".openInfo").outerHeight(true))) + 'px'
-		},200);
+		},100);
   	});
 });
 

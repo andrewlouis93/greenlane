@@ -89,8 +89,8 @@ render: function() {
 
         </div>
       
-        <button className="btn-primary col s4">skip</button> 
-        <button onClick={Navigate.generateRoute} className="btn-secondary col s4 Time_Submit">map it</button>       
+        <button className="btn-primary col s5">skip</button> 
+        <button onClick={Navigate.generateRoute} className="btn-secondary col s5 Time_Submit">map it</button>       
       </div>
     );
   }

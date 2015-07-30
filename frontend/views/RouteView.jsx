@@ -67,6 +67,7 @@ var RouteView = React.createClass({
           travelTime: (ScenicStore.getSessionState().activePath) ? ScenicStore.getSessionState().activePath.formatted.duration : null,
           travelDist: (ScenicStore.getSessionState().activePath) ? ScenicStore.getSessionState().activePath.formatted.distance : null,
           travelDest: null,
+          travelOrig: null,
           turns: null,
           directionsState: Classnames('card','col','l3','m12','s12',ScenicStore.getLayout().directions)
         };
@@ -82,18 +83,23 @@ var RouteView = React.createClass({
 
   createList: function(){
     var Directions = this.state.list;
-  
     var updatedStateProp = {
       turns: (<ul tabIndex="-1">
+                <div className="ui-menu-item">
+                  <li className="locIcon"></li>
+                  <li className="menuitem">{this.state.travelOrig}</li>
+                </div>
                   {Directions.map(function(row, i){
                     var rightTurn = "right";
                     var leftTurn = "left";
-                    var straight = "Continue";
-                    var waypoint = "waypoint";
+                    var straight = "continue";
+                    var wayPark = "waypoint";
+                    var yourLoc = "arrive";
                     var rExp = new RegExp('\\b' + rightTurn + '\\b');
                     var lExp = new RegExp('\\b' + leftTurn + '\\b');
                     var sExp = new RegExp('\\b' + straight + '\\b');
-                    var pExp = new RegExp('\\b' + waypoint + '\\b');
+                    var pExp = new RegExp('\\b' + wayPark + '\\b');
+                    var dExp = new RegExp('\\b' + yourLoc + '\\b');
                     if (rExp.test(row.maneuver.instruction)){
                       return (
                         <div className="ui-menu-item"><li className="rightTurn"></li>
@@ -106,7 +112,7 @@ var RouteView = React.createClass({
                         <li dangerouslySetInnerHTML={{__html:row.maneuver.instruction}}  className="menuitem">
                         </li></div>
                       )
-                    } else if (sExp.test(row.maneuver.instruction)){
+                    } else if (sExp.test(row.maneuver.type)){
                       return(
                         <div className="ui-menu-item"><li className="straight"></li>
                         <li dangerouslySetInnerHTML={{__html:row.maneuver.instruction}}  className="menuitem">
@@ -115,6 +121,12 @@ var RouteView = React.createClass({
                     } else if (pExp.test(row.maneuver.instruction)){
                       return(
                         <div className="ui-menu-item"><li className="parkIcon"></li>
+                        <li dangerouslySetInnerHTML={{__html:row.maneuver.instruction}}  className="menuitem">
+                        </li></div>
+                      )
+                    } else if (dExp.test(row.maneuver.type)){
+                      return(
+                        <div className="ui-menu-item"><li className="locIcon"></li>
                         <li dangerouslySetInnerHTML={{__html:row.maneuver.instruction}}  className="menuitem">
                         </li></div>
                       )
@@ -142,9 +154,11 @@ var RouteView = React.createClass({
                      travelTime: (ScenicStore.getSessionState().activePath) ? ScenicStore.getSessionState().activePath.formatted.duration : null,
                      travelDist: (ScenicStore.getSessionState().activePath) ? ScenicStore.getSessionState().activePath.formatted.distance : null,
                      travelDest: ScenicStore.getSessionState().destinationName,
+                     travelOrig: ScenicStore.getSessionState().originName,
                      directionsState: Classnames('card','col','l3','m12','s12',ScenicStore.getLayout().directions)                   
                   });  
     console.log('Invoking createList to update the list.');
+    console.log(this.state.list);
     this.createList();
   },
 

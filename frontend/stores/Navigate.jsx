@@ -135,16 +135,16 @@ function formatDuration(_seconds){
   var result = new String();
   if (hours > 0){
     var plural = (hours == 1) ? '' : 's'; 
-    result += '<b>' + hours + '</b>'+ ' hour' + plural;
+    result += '<b>' + hours + '</b>'+ ' hr' + plural;
   }
   if (minutes > 0){
-    var plural = (minutes == 1) ? '' : 's'; 
+    var plural = (minutes == 1) ? '' : ''; 
     var spacing = (hours > 0) ? ' ' : '';
-    result += spacing + '<b>' + minutes + '</b>'+ ' minute' + plural;
+    result += spacing + '<b>' + minutes + '</b>'+ ' m' + plural;
   }
   // Only show seconds if no minutes value.
   if ( (seconds>0) && (minutes<1) ){
-    var plural = (seconds == 1) ? '' : 's';
+    var plural = (seconds == 1) ? '' : '';
     result += '<b>' + seconds + '</b>' + ' second' + plural;
   }
   return result;
@@ -177,7 +177,7 @@ function formatDistance(_distance){
   if (minutes > 0){
     var plural = (minutes == 1) ? '' : 's'; 
     var spacing = (hours > 0) ? ' ' : '';
-    result += spacing + minutes + ' min';
+    result += spacing + minutes + ' m';
   }
   // Only show seconds if no minutes value.
   if ( (seconds>0) && (minutes<1) ){
