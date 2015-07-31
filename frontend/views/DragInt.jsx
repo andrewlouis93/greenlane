@@ -1,4 +1,5 @@
 var React = require('react');
+var ScenicStore = require('../stores/Stores.jsx');
 var Actions = require('../stores/Actions.jsx');
 var Navigate = require('../stores/Navigate.jsx');
 var Analytics = require('../stores/Analytics.jsx');
@@ -26,17 +27,21 @@ initResizer: function(){
     document.getElementById('resizer').style.top= seedResizer;
   }
 },
+_onChange: function(){
+  // this.initResizer();
+},
 componentDidMount: function(){
   var _height = $('#resizer').height()/2;
   var _height_Cont = $('#resize-cont').height();
-
+  ScenicStore.addChangeListener(this._onChange);
+  window._draggy = this;
   this.initResizer();
 
   $('#resizer').draggable({
       drag: function() {
           var adjustTo = $(this).parent().height() - $(this).position().top - _height;
-          // $('#resizable-element-two').css('height',  adjustTo ); 
-          $('#resizable-element').css('height',  adjustTo ); 
+          // $('#resizable-element-two').css('height',  adjustTo );
+          $('#resizable-element').css('height',  adjustTo );
       },
       axis: 'y',
       containment: '#resize-cont',
@@ -44,7 +49,7 @@ componentDidMount: function(){
         var grid_x = 0;
         var grid_y = _height_Cont/3;
         var elem = $( this );
-        var sliderHeight = parseInt($('#resize-cont').css('height')); 
+        var sliderHeight = parseInt($('#resize-cont').css('height'));
         var top = parseInt(elem.css('top'));
         var cy = (top % grid_y);
         var new_top = (Math.abs(cy)+0.5*grid_y >= grid_y) ? (top - cy + (top/Math.abs(top))*grid_y) : (top - cy);
@@ -55,7 +60,7 @@ componentDidMount: function(){
         var adjustTo = sliderHeight - new_top;
 
         var greenness = normalize(adjustTo/$("#resizable-element").parent().height());
-        
+
         // Analytics line here.
         Analytics.greenLevel(greenness);
         Actions.setGreenness(greenness);
@@ -67,7 +72,7 @@ componentDidMount: function(){
 
   window.addEventListener('resize', this.initResizer);
 
-},  
+},
 componentWillUnmount: function(){
   window.removeEventListener('resize', this.initResizer)
 },
@@ -75,8 +80,8 @@ render: function() {
     return (
       <div className="row" id="timeSlider">
         <p className="introTag">i want my greenlane to be</p>
-      
-        <div id="drag-container" className="row">  
+
+        <div id="drag-container" className="row">
 
             <div id="resize-cont" className="col s6 offset-s3 m6 offset-m3 l5 offset-l3">
               <div id="resizable-element">
@@ -88,9 +93,9 @@ render: function() {
             </div>
 
         </div>
-      
-        <button className="btn-primary col s5">skip</button> 
-        <button onClick={Navigate.generateRoute} className="btn-secondary col s5 Time_Submit">map it</button>       
+
+        <button className="btn-primary col s5">skip</button>
+        <button onClick={Navigate.generateRoute} className="btn-secondary col s5 Time_Submit">map it</button>
       </div>
     );
   }
@@ -98,11 +103,3 @@ render: function() {
 
 
 module.exports = TimeDrag;
-
-
-
-
-
-
-
-

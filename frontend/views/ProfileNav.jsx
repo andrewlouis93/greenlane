@@ -12,8 +12,8 @@ function readCookie(name) {
 }
 
 var ProfileNav = React.createClass({
-  validPassport: function(){ 
-    return (this.props.passport && Object.keys(this.props.passport).length); 
+  validPassport: function(){
+    return (this.props.passport && Object.keys(this.props.passport).length);
   },
   componentDidMount: function(){
 
@@ -26,18 +26,18 @@ var ProfileNav = React.createClass({
         authId: readCookie('authId'),
         type: readCookie('type'),
         displayName: readCookie('displayName'),
-        profileUrl: readCookie('profileUrl'), // returns false if no picture
+        profileUrl: readCookie('profileUrl') ? readCookie('profileUrl') : '/public/assets/no-profile.svg', // returns false if no picture
       })
     }else{
       this.setState({ auth : false });
     }
-  }, 
+  },
   clearCookies: function(){
     document.cookie = 'authenticated' + '=; Max-Age=0';
     this.setState({auth: false});
     return false;
   },
-  userButtons: function(){  
+  userButtons: function(){
     return([
         <li id="accountName">
           <img src={this.state.profileUrl} className="profileImage"></img>
@@ -103,7 +103,7 @@ var ProfileNav = React.createClass({
   },
   render: function() {
     return (
-      <nav id='top-nav'>    
+      <nav id='top-nav'>
         <ul id="slide-out" className="side-nav">
           {this.authButtons()}
           {this.profileButtons()}

@@ -2,12 +2,12 @@ function googleExpandoToggle() {
   /*
 	The React Carousel Component makes the bad assumption
 	that it will be placed in the outer-most DOM level.
-	
+
 	when the dimensions are set, the parent components
 	have not been rendered yet, forcing it to assign
-	incorrect dimensions. 
+	incorrect dimensions.
   */
-  window.dispatchEvent(new Event('resize'));	
+  window.dispatchEvent(new Event('resize'));
   $(this).toggleClass('active');
   $(this).next().toggleClass('active');
   // ARIA
@@ -28,9 +28,14 @@ var _parkHeight = $('.google-expando--wrap').height();
 $('.openInfo').on('click', function() {
 	$('.openInfo').toggleClass('active');
 	$( ".expandedInfo" ).slideToggle( 200, function() {
-		$(".expandedInfo").animate({
-			height: ($(".HeaderRoute").offset().top - ($(".openInfo").offset().top + $(".openInfo").outerHeight(true))) + 'px'
-		},100);
+
+			var _toHeight = ($(".HeaderRoute").offset().top - ($(".openInfo").offset().top + $(".openInfo").outerHeight(true))) + 'px';
+			if ($(window).width() < 993)
+				_toHeight = '100%';
+
+			$(".expandedInfo").animate({
+				height: _toHeight
+			},100);
   	});
 });
 
@@ -380,4 +385,3 @@ $('.openInfo').on('click', function() {
       }
     }; // PLugin end
 }( jQuery ));
-

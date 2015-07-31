@@ -15,7 +15,7 @@ var Decorators = [{
     }
   }),
   position: 'CenterLeft',
-  style: { 
+  style: {
     WebkitTransform: 'rotate(90deg)',
     msTransform: 'rotate(90deg)',
     transform: 'rotate(90deg)'
@@ -57,19 +57,44 @@ var ParkCarousel = React.createClass({
     $(document).on('click','.slider-decorator-0,.slider-decorator-1', this.updateActiveCarousel);
   },
   updateParkList: function(){
+      var oldParks = this.state.parks;
       this.setState({parks: ScenicStore.getSessionState().activePath.info.parks});
+      // Check that they are both equal!
+      var noChange = true;
+      console.log('oldParks',oldParks);
+      console.log('newParks',this.state.parks);
+      for (var i = 0; i < Math.max(oldParks.length,this.state.parks.length); i++){
+        if (oldParks[i] != this.state.parks[i])
+          noChange = false;
+      }
+
+      console.log('noChange',noChange);
+      window._pC = this.state.carousels.parkCarousel;
+      if (noChange == false){
+        this.state.carousels.parkCarousel.goToSlide(0);
+        setTimeout(function(){
+          Actions.setSessionState('activeCarousel', 0);
+        }.bind(this),0);
+      }
+
+
+      // check park list, hide.
+      if (this.state.parks.length <= 1)
+        $(".slider-decorator-0, .slider-decorator-1").addClass("hide")
+      else
+        $(".slider-decorator-0, .slider-decorator-1").removeClass("hide")
   },
   updateActiveCarousel: function(){
     setTimeout(function(){
       console.log("IN UPDATE ACTIVE CAROUSEL", this.state.carousels.parkCarousel.state.currentSlide);
-      Actions.setSessionState('activeCarousel', this.state.carousels.parkCarousel.state.currentSlide);      
+      Actions.setSessionState('activeCarousel', this.state.carousels.parkCarousel.state.currentSlide);
     }.bind(this),0);
   },
   mixins: [Carousel.ControllerMixin],
   render() {
     return (
-        <Carousel ref='parkCarousel' 
-                  className="parkMenu" 
+        <Carousel ref='parkCarousel'
+                  className="parkMenu"
                   decorators={Decorators}
                   data={this.setCarouselData.bind(this, 'parkCarousel')}>
           {
@@ -104,10 +129,10 @@ var ParkTab = React.createClass({
         .velocity(
             {
               translateY: '0%'
-            }, 
+            },
             {
-              duration: 300, 
-              queue: false, 
+              duration: 300,
+              queue: false,
               easing: 'easeInOutQuad'
             }
         );
@@ -115,8 +140,8 @@ var ParkTab = React.createClass({
 
 getInitialState: function(){
   var parkList = {
-    activeCarousel: 0, 
-    expandedInfoHeight: null,    
+    activeCarousel: 0,
+    expandedInfoHeight: null,
     parkName: (ScenicStore.getSessionState().activePath) ? ScenicStore.getSessionState().activePath.info.parks : [],
     parkFac: (ScenicStore.getSessionState().activePath) ? ScenicStore.getSessionState().activePath.info.facilities : [],
     parkPic: (ScenicStore.getSessionState().activePath) ? ScenicStore.getSessionState().activePath.info.pictures : []
@@ -124,10 +149,19 @@ getInitialState: function(){
   return parkList;
  },
 updateExpInfoHeight: function(){
+  if ($(window).width() < 1200)
+  {
+    this.setState({
+      'expandedInfoHeight': '100%'
+    });
+  }
+  else{
     this.setState({
       'expandedInfoHeight': $(".HeaderRoute").offset().top - ($(".openInfo").offset().top + $(".openInfo").outerHeight(true))
     });
-}, 
+  }
+
+},
  updateActiveCarousel: function(current){
   console.log("updated active carousel");
   this.setState({'activeCarousel': current});
@@ -161,7 +195,7 @@ updateExpInfoHeight: function(){
       parkName: (ScenicStore.getSessionState().activePath) ? ScenicStore.getSessionState().activePath.info.parks : [],
       parkFac: (ScenicStore.getSessionState().activePath) ? ScenicStore.getSessionState().activePath.info.facilities : [],
       parkPic: (ScenicStore.getSessionState().activePath) ? ScenicStore.getSessionState().activePath.info.pictures : []
-    });  
+    });
     console.log(ScenicStore.getSessionState().activePath);
     window.myParkState = this.state;
   },
@@ -170,6 +204,18 @@ updateExpInfoHeight: function(){
 
 
   render: function() {
+
+    var currentFacilities = null;
+    var legitFac = [];
+    if (this.state.parkFac && this.state.parkFac[this.state.activeCarousel]){
+      for (var i = 0; i < this.state.parkFac[this.state.activeCarousel].length; i++){
+        var current = this.state.parkFac[this.state.activeCarousel][i];
+        if (current != "NULL")
+          legitFac.push(current.split('"').join(""));
+      }
+    }
+
+    window._legitFac = legitFac;
 
     return (
 
@@ -180,44 +226,39 @@ updateExpInfoHeight: function(){
           </div>
 
           <div className="google-expando__card" aria-hidden="true">
-            
+
             {this.state.parkName.length ? <ParkCarousel updateActiveCarousel={this.updateActiveCarousel}/> : false}
 
             <div className="openInfo"></div>
           </div>
             <div className="expandedInfo" aria-hidden="true">
-              <ul>
-                <h4>i'm going to see</h4>
-                {
-                  (this.state.parkFac && this.state.parkFac[this.state.activeCarousel]) ? 
-                  this.state.parkFac[this.state.activeCarousel].map(function(it){
-                    if (it == "NULL"){
-                      return <li>No facilities here!</li>  
-                    }
-                    else{
-                      return <li>{it}</li>  
-                    }
-                  })
-                : 
-                  false
-                }
-              </ul>
-              <h4>photos taken here</h4>
+              {
+                (legitFac.length) ?
+                <ul>
+                  <h4>i'm going to see</h4>
+                  {
+                    legitFac.map(function(it,id){
+                        var liClass = (id % 2 == 0) ? 'roboto-thick' : 'roboto-thick-red';
+                        return <li className={liClass}>{it}</li>
+                    })
+                   }
+                </ul> : false
+              }
               <div className="row imgGrid">
                 {
-                  (this.state.parkPic && this.state.parkPic[this.state.activeCarousel]) ? 
+                  (this.state.parkPic && this.state.parkPic[this.state.activeCarousel]) ?
                   this.state.parkPic[this.state.activeCarousel].map(function(it){
                     if (it == "NULL"){
-                      return <div className="noParkImg"></div>  
+                      return <div className="noParkImg"></div>
                     }
                     else{
                       var divStyle = {
                         backgroundImage: 'url(' + it + ')',
-                      };                      
-                      return <div style={divStyle} className="square"></div>  
+                      };
+                      return <div style={divStyle} className="square"></div>
                     }
                   })
-                : 
+                :
                   false
                 }
               </div>

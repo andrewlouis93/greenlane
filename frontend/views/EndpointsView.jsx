@@ -22,7 +22,12 @@ var Endpoints = React.createClass({
     var geocoder = new google.maps.Geocoder();
     $('.typeahead').typeahead(null, {
       displayKey: 'description',
-      source: Navigate.getSuggestions
+      source: Navigate.getSuggestions,
+      templates:{
+        suggestion: function(data){
+          return "<div class='tt-address'>"+data.terms[0].value+"</div><div class='tt-locale'>"+ [data.terms[1].value, data.terms[2].value, data.terms[3].value].join(', ')+"</div>"
+        }
+      }
     });
     var _this = this;
     $('.typeahead').on('typeahead:selected', function(){
@@ -30,8 +35,8 @@ var Endpoints = React.createClass({
       var err = {};
       err[this.id + '_error'] = false;
       _this.setState(err);
-    });   
-  }, 
+    });
+  },
   // Looks at the store state and decides whether
   // to show one or two inputs.
   routeInputs: function(){
@@ -62,51 +67,47 @@ var Endpoints = React.createClass({
               </div>,
               <label className='error_label' htmlFor="origin" data-error="message here" data-success="right">
                 {this.state.origin_error}
-              </label>,              
+              </label>,
               <div className="input-field">
                 <input id="destination" type="text" className={inputClasses} required/>
                 <label className="active" htmlFor="origin">going there</label>
               </div>,
               <label className='error_label' htmlFor="destination" data-error="message here" data-success="right">
                 {this.state.destination_error}
-              </label>              
-        ];        
+              </label>
+        ];
       }
   },
   geolocateUser: function(){
       var _this = this;
-
 
       function showError(){
         alert("User declined");
         Actions.deactivateError();
       }
       if (navigator.geolocation) {
-          Actions.activateError('location');        
+          Actions.activateError('location');
           navigator.geolocation.getCurrentPosition(function (position) {
               console.log('Grabbed current location!');
-              
+
 
               var latitude = position.coords.latitude;
               var longitude = position.coords.longitude;
               var latlng = new google.maps.LatLng(latitude, longitude);
-              var geocoder = new google.maps.Geocoder();    
+              var geocoder = new google.maps.Geocoder();
             geocoder.geocode({
-                location: latlng, 
+                location: latlng,
             }, function(results, status){
                         if (status == google.maps.GeocoderStatus.OK) {
                           console.log(results);
                           // Grab the most likely candidate for the reverse geocode lookup.
                           if (results[0]){
                             //setting store with destination sessions state////////////////
-                          
                             console.log("REVERSE GEOCODE HERE");
                             console.log(results[0]);
-
                             var _Name = results[0].formatted_address;
                             _Name = _Name.split(',', 1).join("");
                             Actions.setSessionState('originName', _Name );
-                            
                             // See if we can avoid using jQuery here...
                             $('#origin').val(_Name)
 
@@ -116,11 +117,6 @@ var Endpoints = React.createClass({
                                             results[0].geometry.location.lng()
                                         )
                             });
-                            
-                            // proceed to the next page ONLY after
-                            // processing the input field args
-                            
-
                           } else {
                             Analytics.locationError(_id);
                             var err = {};
@@ -135,13 +131,8 @@ var Endpoints = React.createClass({
                             _this.setState(err)
                         }
                     Actions.deactivateError();
-                })   
+                })
 
-
-
-
-
-              
           }, showError, {timeout:5000});
       }
       else{
@@ -149,7 +140,7 @@ var Endpoints = React.createClass({
       }
   },
   validate: function(){
-    var geocoder = new google.maps.Geocoder();    
+    var geocoder = new google.maps.Geocoder();
 
     var TorontoBbox = new google.maps.LatLngBounds(
         new google.maps.LatLng(43.574896,-79.601904),
@@ -161,7 +152,7 @@ var Endpoints = React.createClass({
     // the following deal with the async validtion
     var inputCount = document.getElementsByClassName('input-field').length;
     var validatedCount = 0;
-    
+
     var _this = this;
     $('.distContainer input[required]').map(function(){
         if (!this.value){
@@ -174,7 +165,7 @@ var Endpoints = React.createClass({
             var _id = this.id;
 
             geocoder.geocode({
-                address: this.value, 
+                address: this.value,
                 bounds:  new google.maps.LatLngBounds(
                       new google.maps.LatLng(43.574896,-79.601904),
                       new google.maps.LatLng(43.856788, -79.167944)
@@ -194,7 +185,7 @@ var Endpoints = React.createClass({
                                             results[0].geometry.location.lng()
                                         )
                             });
-                            
+
                             // proceed to the next page ONLY after
                             // processing the input field args
                             ++ validatedCount;
@@ -213,10 +204,10 @@ var Endpoints = React.createClass({
                             err[_id + '_error'] = "we're only able to map greenlanes in toronto. please try again";
                             _this.setState(err)
                         }
-                })        
+                })
             }
     });
-  
+
 
     return false;
   },
@@ -229,7 +220,7 @@ var Endpoints = React.createClass({
               })
             }
           <button id='submitRoute' onClick={this.validate} className="btn-secondary col s9 offset-s1.5">continue
-          </button>          
+          </button>
         </div>
     );
   }

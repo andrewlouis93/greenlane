@@ -41,7 +41,7 @@ html, body, .table-container{
 }
 @media #{$medium-and-up}{
   #map{
-    height: calc(100% - 64px) !important;  
+    height: calc(100% - 64px) !important;
   }
 }
 #map-container{
@@ -81,7 +81,7 @@ html, body, .table-container{
     margin:3rem 0 6rem !important;
 
   }
-} 
+}
 
 /* Since typeahead wraps the input elements in this span */
 span.twitter-typeahead{
@@ -92,11 +92,11 @@ span.twitter-typeahead{
     max-width:80%;
   }
   #origin, #destination{
-    margin-top:15px;
+    margin-top:25px;
     min-height:30px;
   }
   .tt-hint{
-    margin-top:15px;
+    margin-top:25px;
     min-height:30px;
     /* These widths should match */
     max-width: 80%;
@@ -111,16 +111,16 @@ span.twitter-typeahead{
 }
 
 .yourLoc {
-  z-index:15;
-  top:25px;
+  top: 25px;
   right: 0;
   position: absolute;
-  background-image: url('../img/svg/yourLoc.svg');
-  background-size: 100% 100%;
-  width: 20%;
-  height: 30px;
+  background-image: url("../img/svg/yourLoc.svg");
+  background-size: contain;
+  width: 40px;
+  height: 40px;
   opacity: 0.8;
   transition: opacity 0.2s ease-in-out;
+  z-index: 1000;
   &:hover{
     cursor: pointer;
     opacity: 1;
@@ -129,41 +129,42 @@ span.twitter-typeahead{
 
 
 .tt-query {
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  // -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  //    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  //         box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 
 .tt-dropdown-menu {
   width: 100%;
   margin: 12px 0;
-  padding: 8px 0;
   background-color: #fff;
-  border: 1px solid #ccc;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  -webkit-border-radius: 8px;
-     -moz-border-radius: 8px;
-          border-radius: 8px;
-  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
-     -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
-          box-shadow: 0 5px 10px rgba(0,0,0,.2);
+  border: 1px solid $secondary-color;
+  border: 1px solid rgba(42,209,157,0.8);
+  -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+          border-radius: 5px;
+}
+
+.tt-dataset-0 .tt-suggestion:not(:first-child), .tt-dataset-1 .tt-suggestion:not(:first-child) {
+    border-top: 1px solid $secondary-color;
 }
 
 .tt-suggestion {
-  padding: 3px 20px;
-  font-size: 18px;
+  padding: 15px 20px;
+  border-top:0px;
+  font-size: 15px;
   line-height: 24px;
 }
 
 .tt-suggestion:hover {
   cursor: pointer;
   color: #fff;
-  background-color: #0097cf;
+  background-color: rgba(42,209,157,0.5);
 }
 
 .tt-suggestion.tt-cursor {
   color: #fff;
-  background-color: #0097cf;
+  background-color: rgba(42,209,157,0.5);
 
 }
 .tt-suggestion p {
@@ -171,20 +172,20 @@ span.twitter-typeahead{
 }
 /* Loading screen styles */
 
-/* 
+/*
   Modify the containing main row to
   listen to the vertical alignment hack.
  */
 #containerRow{
   -webkit-transform-style: preserve-3d;
   -moz-transform-style: preserve-3d;
-  transform-style: preserve-3d;  
+  transform-style: preserve-3d;
   /* Where's this 1% of overflow coming from????? */
   overflow: hidden;
 }
 
 /*
- * Maximum height of container must be 
+ * Maximum height of container must be
  * 100% - (height of navbar)
 */
 
@@ -209,8 +210,8 @@ span.twitter-typeahead{
     margin: 0 auto;
     text-align: center;
     max-width: 33.333%;
-    color:#fff;    
-  }  
+    color:#fff;
+  }
 }
 
 .hidden{
@@ -332,7 +333,7 @@ span.twitter-typeahead{
   background-color:#fff;
   -moz-border-radius: 0px;
   -webkit-border-radius: 15px 15px 0px 0px;
-  border-radius: 15px 15px 0px 0px; 
+  border-radius: 15px 15px 0px 0px;
 }
 
 /// TIME SLIDER STYLES ////////////////////////////////////////////////////
@@ -361,7 +362,7 @@ span.twitter-typeahead{
 }
 @media #{$medium-and-up}{
   .routeSel{
-    height: calc(100% - 64px) !important;  
+    height: calc(100% - 64px) !important;
   }
 }
 .current {
@@ -406,14 +407,14 @@ span.twitter-typeahead{
     transition: opacity .5s ease-in;
     }
   }
-  // To vertically center fa elements underneath 
+  // To vertically center fa elements underneath
   -webkit-transform-style: preserve-3d;
   -moz-transform-style: preserve-3d;
   transform-style: preserve-3d;
   .fa{
     position: relative;
     top: 50%;
-    transform: translateY(-50%);    
+    transform: translateY(-50%);
   }
 }
 
@@ -653,7 +654,7 @@ span.twitter-typeahead{
     h2 {
       width:70%;
       float: right;
-      font-size:1.5rem;
+      font-size:1.2rem;
       color:$text-color;
       font-family:Roboto;
       font-weight:300;
@@ -661,6 +662,19 @@ span.twitter-typeahead{
       translate:0 50%;
     }
 
+}
+
+#slide-out{
+  li{
+    &:hover{
+      background: rgba(42,209,157, 0.5);
+    }
+  }
+  a{
+    &:hover{
+      cursor: pointer;
+    }
+  }
 }
 .profileImage {
   width:50px;
@@ -672,10 +686,11 @@ span.twitter-typeahead{
   font-weight:400 !important;
   font-family:Roboto;
   color:$primary-color;
-  padding:40px 30px;
   font-weight:400;
   border-bottom:1px solid $text-color;
-
+      li{
+          padding:10px 30px;
+      }
       a {
         padding:0 !important;
       }
@@ -691,11 +706,11 @@ span.twitter-typeahead{
   font-family:Roboto;
   font-size:1rem;
   font-weight:200 !important;
-  padding:20px;
   color:$primary-color;
 
       li {
         line-height:35px !important;
+        padding:10px;
       }
 }
 
@@ -737,7 +752,7 @@ span.twitter-typeahead{
       position: absolute;
       bottom: 0;
       padding: 0;
-    }    
+    }
 }
 
 /// PARK PROFILE PAGE ///////////////////////////////////////////////
@@ -874,17 +889,15 @@ $google_expando_transition: (
 
 .expandedInfo {
   overflow-y:scroll;
-  margin-top:-5%;
   z-index:5;
   display:none;
   position:absolute;
   background-color:white;
   height: 0px;
-  top:30%;
+  top:20vh;
   left:0px;
-
   width:100%;
-  padding:0% 5%;
+  padding:10% 5%;
   h4 {
       text-align:center;
       margin-bottom:5%;
@@ -892,12 +905,11 @@ $google_expando_transition: (
       font-family:Roboto-Slab;
       color:$text-color;
       font-weight:600 !important;
-  } 
-
+  }
   ul {
     width:100%;
     display:inline-block;
-    padding-bottom:11%;
+    padding-bottom:5%;
     border-bottom:1px solid $text-color;
     text-align:center;
     font-family:Roboto;
@@ -921,23 +933,18 @@ $google_expando_transition: (
     h4{
       font-size:1.6rem;
     }
-    
+
     ul{
-      padding: 5% 0;
+      padding: 10% 0;
       width: 75%;
       margin: 0 auto;
       display: block;
-      
+
       li{
         font-size:1.35rem;
       }
     }
   }
-}
-
-
-.imgGrid {
-
 }
 
 .square {
@@ -962,9 +969,8 @@ hr {
 
     h3 {
       margin:0;
-      line-height:130%;
-      // white-space: nowrap;
-      font-size:1.4rem;
+      line-height: 130%;
+      font-size:2.6vh;
       font-family:Roboto-Slab;
       color:$secondary-color;
       font-weight:600 !important;
@@ -973,8 +979,8 @@ hr {
 @media #{$medium-and-down} {
   .slider.parkMenu {
     h3{
-      font-size:2.4rem;
-    } 
+      font-size:2.6vh;
+    }
   }
 }
 
@@ -1037,7 +1043,7 @@ hr {
   .slider-decorator-1{
     width: 32px;
   }
-  
+
 }
 
 .slider-decorator-2 {
@@ -1112,7 +1118,7 @@ hr {
   .containerMask::after{
     // height: $navbar-height-mobile;
     height: 61px;
-  }  
+  }
   .staticPageContainer{
     top:0;
     height:100% !important;
@@ -1123,11 +1129,11 @@ hr {
       margin-left:10px;
     }
   }
-}  
+}
 
 @media #{$medium-only} {
   .staticPageContainer{
-    height: calc(100% - 64px) !important;  
+    height: calc(100% - 64px) !important;
     width:100%;
   }
 }
@@ -1142,11 +1148,11 @@ hr {
   transform: rotate(90deg);
   background: url("../img/svg/downChev.svg") no-repeat !important;
   z-index: 13;
-  width: 25px;  
+  width: 25px;
   height: 25px;
   top: 15px;
-  
-  position: absolute;  
+
+  position: absolute;
   &:hover{
     cursor: pointer;
   }
@@ -1154,7 +1160,7 @@ hr {
 @media #{$small-and-down}{
   #backBtn{
     height: 25px;
-  }  
+  }
 }
 
 
@@ -1292,7 +1298,7 @@ hr {
 
 #error{
   position:fixed;
-  top: 0; 
+  top: 0;
   left: 0;
   right: 0;
   /* must be - the height of .side-nav  */
@@ -1309,9 +1315,9 @@ hr {
 
   @media #{$small-and-down} {
     // width:calc(100% - 80%);
-  }  
+  }
   #error_container{
-    
+
     width: 40%;
     /* Vertically Center */
     left: 0;
@@ -1329,14 +1335,14 @@ hr {
     @media #{$small-and-down} {
       width: 80%;
       max-height: 43%;
-    }  
+    }
 
     .error_inline_btns{
       display: inline-block !important;
       width: 40%;
-      margin-left: 7%;  
+      margin-left: 7%;
       font-size: 1.2em;
-    }    
+    }
   }
   #error_title{
     font-family: Roboto-Slab;
@@ -1350,7 +1356,7 @@ hr {
 
 
 
-  .error-btn{    
+  .error-btn{
       left: 0;
       right: 0;
       margin-left: auto;
@@ -1370,7 +1376,7 @@ hr {
 
       max-width: 80%;
 
-      position: relative !important;   
+      position: relative !important;
       display: block;
       @media #{$medium-only} {
         max-width: 90%;
@@ -1378,7 +1384,7 @@ hr {
 
       @media #{$small-and-down} {
         max-width: 100%;
-      }        
+      }
   }
 
   .err-cancel{
@@ -1390,7 +1396,7 @@ hr {
       /* text-align: center; */
       display: block;
       width: 40%;
-      margin-top: 25px;    
+      margin-top: 25px;
       border-radius: 9px;
   }
   span{
@@ -1400,16 +1406,16 @@ hr {
     display: block;
     @media #{$small-and-down}{
       font-size: 1.2em;
-    }       
-  }  
+    }
+  }
 }
 #error_content{
   background: white;
   position: relative !important;
   padding: 40px;
   border-radius: 14px;
-  height: auto;    
-  padding-bottom: 37px;    
+  height: auto;
+  padding-bottom: 37px;
   position: relative !important;
 }
 
@@ -1421,7 +1427,7 @@ hr {
   text-align: center;
   font-family: Roboto;
   font-weight: 400;
-  color: $secondary-color;  
+  color: $secondary-color;
 }
 
 /* more styles for the error scren */
@@ -1431,7 +1437,7 @@ hr {
   position:relative;
 
   margin-top: 40px;
-  margin-bottom: 40px;  
+  margin-bottom: 40px;
 }
 
 .line-1{
@@ -1449,8 +1455,8 @@ hr {
   width: 40%;
   background: $secondary-color;
   opacity:0.8;
-  height: 100%; 
-  border-radius: 50px; 
+  height: 100%;
+  border-radius: 50px;
 }
 
 .centered-or{
@@ -1468,7 +1474,7 @@ hr {
   margin-top: -15px;
   font-family: Roboto-Slab;
   font-weight: 700;
-  font-size: 1.5em;  
+  font-size: 1.5em;
 }
 
 .slick-list {
@@ -1477,6 +1483,7 @@ hr {
     height:100% !important;
     .slick-slide {
       height:100% !important;
+      position: relative;
     }
   }
 }
@@ -1502,14 +1509,115 @@ hr {
 /// ANIMATION FOR ROUTE SETUP //////////////////////
 
 
-.addAnim {
-      -webkit-transition: all 1.3s ease-in-out;
-  -moz-transition:    all 1.3s ease-in-out;
-  -o-transition:      all 1.3s ease-in-out;
-  -ms-transition:     all 1.3s ease-in-out;
-    -webkit-transform: rotate(360deg) scale(1.3);
-  -moz-transform:    rotate(360deg) scale(1.3);
-  -o-transform:      rotate(360deg) scale(1.3);
-  -ms-transform:     rotate(360deg) scale(1.3);
 
+.clickable-center{
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  position: absolute;
+}
+
+.clickable-social{
+  @extend .clickable-center;
+  height: 6.8%;
+  width:56%;
+  max-width: 335px;
+
+  z-index: 21;
+  opacity: 0.5;
+}
+
+#clickable-fb{
+  @extend .clickable-social;
+  top: 38.3%;
+  background: red;
+}
+
+#clickable-google{
+  @extend .clickable-social;
+  top: 46%;
+  background: yellow;
+}
+
+#clickable-start{
+  @extend .clickable-social;
+  height: 7.1%;
+  top: 66%;
+  @media #{$small-and-down}{
+      top: 65.5%;
+  }
+  // background: purple;
+}
+
+.clickable-area{
+  &:hover{
+    cursor: pointer;
+  }
+}
+
+/*
+ *  Keeping space for the skip btn on the landing
+ *  page tutorial
+ */
+.landing-tutorial{
+  .slick-slider{
+    height:94% !important;
+  }
+  #skip-tutorial{
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    display: block;
+    color: white;
+    width: 5%;
+    font-family: Roboto;
+    font-weight: 200;
+    font-size: 1.4em;
+    text-align: center;
+    &:hover{
+      cursor: pointer;
+    }
+  }
+}
+
+.landing-animation{
+  width: 100%;
+  height: 100%;
+  background-position-x: 0px !important;
+  background-size: 100% !important;
+  @media #{$small-and-down}{
+    background: url("/public/assets/splash-mobile.svg") no-repeat;
+    background-position-y: 10%;
+  }
+  @media #{$medium-only}{
+    background: url("/public/assets/splash-mobile.svg") no-repeat;
+    background-position-y: 15%;
+  }
+  @media #{$large-and-up}{
+    background: url("/public/assets/splash-large.svg") no-repeat;
+    background-position-y: 0%;
+  }
+}
+
+.roboto-thick-red{
+  font-weight: 700;
+  color: $primary-color;
+  font-size: 1.5vh;
+}
+
+.tt-locale{
+  font-size: 14px;
+  white-space: normal;
+  font-weight: 100;
+  color: gray;
+}
+
+.tt-address{
+  font-size: 16px;
+  font-weight: 600;
+  white-space: normal;
 }

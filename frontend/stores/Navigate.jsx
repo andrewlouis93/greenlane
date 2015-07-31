@@ -4,6 +4,9 @@ var Actions = require('./Actions.jsx');
 
 // Will be "saved" to sessionState.activePath.
 var paths = [];
+var originMarker;
+var destMarker;
+var curMarker;
 
 // Used only when re-draw routes
 function liteClearDrawnRoutes(){
@@ -13,7 +16,7 @@ function liteClearDrawnRoutes(){
       window.map.removeLayer(path);
     });
   }
-  return;  
+  return;
 }
 
 // Should draw and re-draw.
@@ -22,14 +25,14 @@ function drawRoutes(){
   paths.map(function(path, index){
     if (path.active)
         activeIndex = index;
-    else{ 
+    else{
         path.addTo(window.map);
         path._path.setAttribute('route', index);
     }
   });
   // Now draw active map so it's on stacked on top.
   paths[activeIndex].addTo(window.map);
-  paths[activeIndex]._path.setAttribute('route', activeIndex);  
+  paths[activeIndex]._path.setAttribute('route', activeIndex);
   return;
 }
 
@@ -55,21 +58,27 @@ function updateActivePath(activeIndex){
       else if (p_index == activeIndex){
         path.active = true;
       }
-    }); 
-    
+    });
+
     // Update CSS attributes to reflect
     // this.
     var oldActive = document.querySelector('path.activePath');
     if (oldActive){
+
+      $('.active-popup').removeClass('active-popup');
+
       oldActive.setAttribute('class','inactivePath leaflet-clickable');
       paths[activeIndex]._path.setAttribute('class','activePath leaflet-clickable');
+
+      $(".leaflet-popup[route="+ activeIndex +"]").addClass("active-popup");
+
       liteClearDrawnRoutes();
       drawRoutes();
       syncActivePath();
     }
     else{
       console.log("Routes haven't been drawn yet...")
-    }    
+    }
 
   }
   else{
@@ -83,10 +92,10 @@ window.updateActivePath = updateActivePath;
 function onPathClick(){
   console.log(this.duration);
   console.log(this.distance);
-  
+
   var pathIndex = paths.indexOf(this);
   updateActivePath(pathIndex);
-  
+
   return;
 }
 
@@ -98,8 +107,32 @@ function clearDrawnRoutes(){
       window.map.removeLayer(path._popup);
       window.map.removeLayer(path);
     });
+
+    window.map.removeLayer(originMarker);
+    window.map.removeLayer(destMarker);
   }
   return [];
+}
+
+function drawPins(){
+  var originIcon = L.icon({
+      iconUrl: 'public/assets/origin.gif',
+      iconSize:     [40, 40], // size of the icon
+      iconAnchor:   [0, 0] // point of the icon which will correspond to marker's location
+  });
+  var destIcon = L.icon({
+    iconUrl: 'public/assets/dest.svg',
+    iconSize:     [30, 65], // size of the icon
+    iconAnchor:   [30, 65] // point of the icon which will correspond to marker's location
+  });
+  if (ScenicStore.getSessionState().loop){
+    originMarker = L.marker(ScenicStore.getSessionState().origin.latLng,{icon: originIcon}).addTo(window.map)
+    destMarker = L.marker(ScenicStore.getSessionState().origin.latLng,{icon: originIcon}).addTo(window.map)
+  }
+  else{
+    originMarker = L.marker(ScenicStore.getSessionState().origin.latLng,{icon: originIcon}).addTo(window.map)
+    destMarker = L.marker(ScenicStore.getSessionState().destination.latLng,{icon: destIcon}).addTo(window.map)
+  }
 }
 
 // Refactor this ugly af function.
@@ -108,7 +141,7 @@ function drawMarkers(){
       var formattedRouteInfo = formatRouteInfo(paths[i].duration,paths[i].distance);
       console.log("INDEX IS :", i);
       console.log("LENGTH IS :", paths[i]._latlngs.length);
-      var popupLocation = Math.round( (1/3) * (i) * (paths[i]._latlngs.length-1) );
+      var popupLocation = Math.round( ((1/6)*(paths[i]._latlngs.length-1)) + ((1/3) * (i) * (paths[i]._latlngs.length-1)));
       console.log("POPUP LOCATION IS :", popupLocation);
       paths[i]._popup = L.popup().setLatLng(paths[i]._latlngs[popupLocation]).setContent(formattedRouteInfo);
       console.dir(paths[i]._popup);
@@ -120,11 +153,13 @@ function drawMarkers(){
       catch(err){
         console.error(err);
       }
-    }  
+    }
+
+
 }
 
 
-// Takes in seconds and returns 
+// Takes in seconds and returns
 // a nicely formatted time string.
 function formatDuration(_seconds){
   var sec_num = parseInt(_seconds, 10); // don't forget the second param
@@ -134,24 +169,24 @@ function formatDuration(_seconds){
 
   var result = new String();
   if (hours > 0){
-    var plural = (hours == 1) ? '' : 's'; 
+    var plural = (hours == 1) ? '' : 's';
     result += '<b>' + hours + '</b>'+ ' hr' + plural;
   }
   if (minutes > 0){
-    var plural = (minutes == 1) ? '' : ''; 
+    var plural = (minutes == 1) ? '' : 's';
     var spacing = (hours > 0) ? ' ' : '';
-    result += spacing + '<b>' + minutes + '</b>'+ ' m' + plural;
+    result += spacing + '<b>' + minutes + '</b>'+ ' min';
   }
   // Only show seconds if no minutes value.
   if ( (seconds>0) && (minutes<1) ){
-    var plural = (seconds == 1) ? '' : '';
-    result += '<b>' + seconds + '</b>' + ' second' + plural;
+    var plural = (seconds == 1) ? '' : 's';
+    result += '<b>' + seconds + '</b>' + ' s';
   }
   return result;
 }
 
-// Takes in distance in metre, 
-// outputs either km or metres 
+// Takes in distance in metre,
+// outputs either km or metres
 function formatDistance(_distance){
   var km = (parseInt(_distance)/1000);
   if (Math.floor(km) == 0){
@@ -171,13 +206,13 @@ function formatDistance(_distance){
 
   var result = new String();
   if (hours > 0){
-    var plural = (hours == 1) ? '' : 's'; 
+    var plural = (hours == 1) ? '' : 's';
     result += hours + ' hr' + plural;
   }
   if (minutes > 0){
-    var plural = (minutes == 1) ? '' : 's'; 
+    var plural = (minutes == 1) ? '' : 's';
     var spacing = (hours > 0) ? ' ' : '';
-    result += spacing + minutes + ' m';
+    result += spacing + minutes + ' min';
   }
   // Only show seconds if no minutes value.
   if ( (seconds>0) && (minutes<1) ){
@@ -234,7 +269,7 @@ function fetchData(callback, pathLength) {
                 };
                 var path = L.polyline(poly_raw,_pathStyles);
                 // Assign path traversal time, distance, directions
-                // as a property that can 
+                // as a property that can
                 // can be referenced in the handler handleRouteSelection
                 path.active = (index == 0) ? true : false;
                 path.duration = routesInfo.routes[0].duration;
@@ -246,9 +281,9 @@ function fetchData(callback, pathLength) {
                 path.steps = routesInfo.routes[0].steps;
                 path.info = ScenicStore.getSessionState().greenpoints.results[index];
                 path.transit = ScenicStore.getSessionState().transit;
-                
+
                 /* REFACTOR */
-                Actions.setSessionState('steps', path.steps);      
+                Actions.setSessionState('steps', path.steps);
                 Actions.setSessionState('routeTime',path.duration);
                 Actions.setSessionState('routeDist',path.distance);
 
@@ -256,7 +291,7 @@ function fetchData(callback, pathLength) {
                 path.addEventListener('click', onPathClick);
                 // Plug it into the local-global variable paths.
                 paths.push(path);
-                return; 
+                return;
             };
 
             requests.push($.ajax({
@@ -295,10 +330,11 @@ var Navigate = {
             console.log("Autocomplete status: " + status);
             return;
         }
+        console.log('predictions',predictions);
         return cb(predictions);
     });
   },
-  // Sample query: http://104.131.189.81/greenify?origin=-79.380658,43.645388&dest=-79.391974,43.647957   
+  // Sample query: http://104.131.189.81/greenify?origin=-79.380658,43.645388&dest=-79.391974,43.647957
   buildGreenifyURL: function(){
     var origin = ScenicStore.getSessionState().origin;
 
@@ -317,7 +353,7 @@ var Navigate = {
     api += "dest=" + destination.latLng.lng + ',' + destination.latLng.lat;
     api += "&";
     api += "greenness=" + (greenness*3);
-    return api;    
+    return api;
   },
   buildMapboxDirectionsURL: function(item){
     var origin = ScenicStore.getSessionState().origin;
@@ -333,7 +369,7 @@ var Navigate = {
 
     console.log("STILL THERE");
     console.log(destination);
-    
+
     var greenpoints = ScenicStore.getSessionState().greenpoints;
 
     console.log("ALSO STILL HERE");
@@ -361,7 +397,7 @@ var Navigate = {
     api += destination.latLng.lng + ',' + destination.latLng.lat;
     api += '.json?instructions=html&access_token=';
     api += 'pk.eyJ1IjoibWFwYm94IiwiYSI6IlhHVkZmaW8ifQ.hAMX5hSW-QnTeRCMAy9A8Q';
-    return api;    
+    return api;
   },
   prepareSingleton: function(route){
     // origin & destination
@@ -388,7 +424,7 @@ var Navigate = {
     Actions.setSessionState('greenpoints', greenlane);
     Actions.setSessionState('loop', JSON.parse(route.loop));
     Actions.setSessionState('transit', route.transit);
- 
+
 
   },
   generateSingleton: function(route){
@@ -423,7 +459,7 @@ var Navigate = {
     });
     directionsSetup.setOrigin(origin.latLng);
     directionsSetup.setDestination(destination.latLng);
-    
+
     // Get green waypoints, before you request for directions.
     Actions.isLoading(true);
     fetchData(function(array){
@@ -437,20 +473,24 @@ var Navigate = {
 
         // Get the bounds of the longest route.
         var bounds = paths[0].getBounds();
-        window.map.fitBounds(bounds);          
+        window.map.fitBounds(bounds);
+
+        drawPins();
         drawRoutes();
         drawMarkers();
         // Only for initialization.
         syncActivePath();
-        // Handle the state change. 
+        // Handle the state change.
         Actions.setParkMode();
+        $(".leaflet-popup[route=0]").addClass("active-popup");
         Actions.isLoading(false);
-        // If you try and draw 
+        // If you try and draw
         // a favourited route from here the following
         // action will handle the state changes.
         Actions.initialized();
-        setTimeout(window.map.invalidateSize, 5);
-        
+        // console.log("InvalidatedSize");
+        // setTimeout(window.map.invalidateSize, 5);
+
     }, 1)
 
     return false;
@@ -458,7 +498,6 @@ var Navigate = {
   generateRoute: function(event){
     event.preventDefault();
     event.stopPropagation();
-
     var origin = ScenicStore.getSessionState().origin;
 
     var destination;
@@ -477,7 +516,7 @@ var Navigate = {
     });
     directionsSetup.setOrigin(origin.latLng);
     directionsSetup.setDestination(destination.latLng);
-    
+
     // Get green waypoints, before you request for directions.
     Actions.isLoading(true);
 
@@ -488,7 +527,7 @@ var Navigate = {
         results.results = results.results.slice(-3);
         Actions.setGreenpoints(results);
         // console.log("Inspect _routesInfo");
-        // window._routesInfo = routesInfo;   
+        // window._routesInfo = routesInfo;
         fetchData(function(array){
             // Debugging variable below.
             console.log("Finished getting everything");
@@ -497,21 +536,23 @@ var Navigate = {
             console.log(paths);
             Actions.setDirectionsState(true);
 
-            window.map.invalidateSize();
+            // window.map.invalidateSize();
             // Get the bounds of the longest route.
-            var bounds = paths[2].getBounds();
-            window.map.fitBounds(bounds);          
+            var bounds = paths[0].getBounds();
+            window.map.fitBounds(bounds);
+            drawPins();
             drawRoutes();
             drawMarkers();
             // Only for initialization.
             syncActivePath();
-            // Handle the state change. 
+            // Handle the state change.
+            $(".leaflet-popup[route=0]").addClass("active-popup");
             Actions.setParkMode();
-            Actions.isLoading(false);           
+            Actions.isLoading(false);
         }, 3)
     });
     return false;
-  }  
+  }
 };
 
 
@@ -519,7 +560,7 @@ var Navigate = {
 // popup associated with a path.
 $(document).on('click','.leaflet-popup',function(){
   console.log("Clicked popup");
-  
+
   var routeId = $(this).attr('route');
   var relatedRoute = $("path[route='"+routeId+"']");
 
@@ -532,11 +573,83 @@ $(document).on('click','.leaflet-popup',function(){
   }
 });
 
-$(document).on('click','.routeChoice', function(){
+$(document).on('click','.go-to-route', function(){
   var activePathIndex = parseFloat($('.activePath').attr('route'));
   $("[route]").not("[route="+ activePathIndex +"]").fadeOut();
+
+  $(".go-to-route").addClass("hide");
+  $(".favorite").removeClass("hide");
+
   // Center the selected route.
-  window.map.fitBounds(paths[activePathIndex].getBounds())
+  window.map.fitBounds(paths[activePathIndex].getBounds(),{padding: [8, 8]})
+  window.map.invalidateSize();
+})
+
+$(document).on('click','.routeChoice', function(){
+
+
+  var originIcon = L.icon({
+      iconUrl: 'public/assets/origin.gif',
+      iconSize:     [40, 40], // size of the icon
+      iconAnchor:   [0, 0] // point of the icon which will correspond to marker's location
+  });
+
+  var destIcon = L.icon({
+    iconUrl: 'public/assets/dest.svg',
+    iconSize:     [30, 65], // size of the icon
+    iconAnchor:   [30, 65] // point of the icon which will correspond to marker's location
+  });
+
+  function showError(){
+    alert("User declined");
+    Actions.deactivateError();
+  }
+  if (navigator.geolocation) {
+      Actions.activateError('location');
+      navigator.geolocation.getCurrentPosition(function (position) {
+          console.log('Grabbed current location!');
+
+          var latitude = position.coords.latitude;
+          var longitude = position.coords.longitude;
+          var latlng = new google.maps.LatLng(latitude, longitude);
+          var geocoder = new google.maps.Geocoder();
+
+          var radlat1 = Math.PI * ScenicStore.getSessionState().origin.latLng.lat/180
+          var radlat2 = Math.PI * latitude/180
+          var radlon1 = Math.PI * ScenicStore.getSessionState().origin.latLng.lng/180
+          var radlon2 = Math.PI * longitude/180
+          var theta = ScenicStore.getSessionState().origin.latLng.lng-longitude;
+          var radtheta = Math.PI * theta/180
+          var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+          dist = Math.acos(dist)
+          dist = dist * 180/Math.PI
+          dist = dist * 60 * 1.1515
+          dist = dist * 1.609344*1000;
+
+          if (dist > 15){
+            // Do the swap before zooming in.
+            if (curMarker)
+              window.map.removeLayer(curMarker)
+            else{
+              window.map.removeLayer(originMarker);
+              originMarker = L.marker(ScenicStore.getSessionState().origin.latLng,{icon: destIcon}).addTo(window.map);
+            }
+
+            curMarker = L.marker([latitude, longitude],{icon: originIcon}).addTo(window.map);
+            window.map.setView([latitude, longitude], 18, {animate:true})
+          }
+          else{
+            // zoom in on the userLocation.
+            window.map.setView(ScenicStore.getSessionState().origin.latLng, 18, {animate:true})
+          }
+          Actions.deactivateError();
+      }, showError, {timeout:5000});
+  }
+  else{
+    Actions.activateError('nogeolocation');
+  }
+
+
 })
 
 

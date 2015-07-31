@@ -23,7 +23,7 @@ var RouteView = React.createClass({
     window.nateState = this.state;
 
   },
-  // takes in an array of mapbox latLng objects and 
+  // takes in an array of mapbox latLng objects and
   // converts to regular objects.
   serializeLatLng: function(point){
       return {lat: point.latLng.lat, lng: point.latLng.lng};
@@ -39,15 +39,15 @@ var RouteView = React.createClass({
       type: readCookie('type'),
       route: {
         loop: ScenicStore.getSessionState().loop,
-        originName: ScenicStore.getSessionState().originName, 
+        originName: ScenicStore.getSessionState().originName,
         origin: this.serializeLatLng(ScenicStore.getSessionState().origin),
         destinationName: ScenicStore.getSessionState().destinationName,
-        destination: this.serializeLatLng(ScenicStore.getSessionState().destination),
-        formatted: ScenicStore.getSessionState().activePath.formatted, 
+        destination: (ScenicStore.getSessionState().loop) ? false : this.serializeLatLng(ScenicStore.getSessionState().destination),
+        formatted: ScenicStore.getSessionState().activePath.formatted,
         transit: ScenicStore.getSessionState().activePath.transit,
         info: ScenicStore.getSessionState().activePath.info
       }
-    };  
+    };
     console.log(pkg);
    $.ajax
     ({
@@ -57,9 +57,9 @@ var RouteView = React.createClass({
         //json object to sent to the authentication url
         data: pkg,
         success: function () {
-          alert("Thanks!"); 
+          $('.favorite').addClass('favorited').removeClass('favorite');
         }
-    })    
+    })
   },
   getInitialState: function(){
     var listItem = {
@@ -83,6 +83,7 @@ var RouteView = React.createClass({
 
   createList: function(){
     var Directions = this.state.list;
+    var current = null;
     var updatedStateProp = {
       turns: (<ul tabIndex="-1">
                 <div className="ui-menu-item">
@@ -100,6 +101,14 @@ var RouteView = React.createClass({
                     var sExp = new RegExp('\\b' + straight + '\\b');
                     var pExp = new RegExp('\\b' + wayPark + '\\b');
                     var dExp = new RegExp('\\b' + yourLoc + '\\b');
+
+                    if (current == row.maneuver.instruction){
+                      return;
+                    }
+                    else {
+                      current = row.maneuver.instruction;
+                    }
+
                     if (rExp.test(row.maneuver.instruction)){
                       return (
                         <div className="ui-menu-item"><li className="rightTurn"></li>
@@ -149,17 +158,21 @@ var RouteView = React.createClass({
     console.log("in directions view, the following is the updated directions list.");
     console.log(ScenicStore.getLayout().directions);
 
+    var oldList = this.state.list;
+
     this.setState({
                      list: (ScenicStore.getSessionState().activePath) ? ScenicStore.getSessionState().activePath.steps : [],
-                     travelTime: (ScenicStore.getSessionState().activePath) ? ScenicStore.getSessionState().activePath.formatted.duration : null,
+                     travelTime: (ScenicStore.getSessionState().activePath ) ? ScenicStore.getSessionState().activePath.formatted.duration : null,
                      travelDist: (ScenicStore.getSessionState().activePath) ? ScenicStore.getSessionState().activePath.formatted.distance : null,
                      travelDest: ScenicStore.getSessionState().destinationName,
                      travelOrig: ScenicStore.getSessionState().originName,
-                     directionsState: Classnames('card','col','l3','m12','s12',ScenicStore.getLayout().directions)                   
-                  });  
-    console.log('Invoking createList to update the list.');
-    console.log(this.state.list);
-    this.createList();
+                     directionsState: Classnames('card','col','l3','m12','s12',ScenicStore.getLayout().directions)
+                  });
+
+    if (this.state.list != oldList)
+      this.createList();
+
+    window._hrrr = this.state.list;
   },
 
   render: function() {
@@ -181,7 +194,8 @@ var RouteView = React.createClass({
                 </li>
               </ul>
           </div>
-          <div onClick={this.favouriteRoute} className="favorite"></div>
+          <div className="go-to-route"></div>
+          <div onClick={this.favouriteRoute} className="favorite hide"></div>
         </div>
 
         <div id="turnList" className='card-reveal'>
@@ -197,7 +211,8 @@ var RouteView = React.createClass({
                 </li>
               </ul>
           </div>
-          <div onClick={this.favouriteRoute} className="favorite"></div>
+          <div className="go-to-route"></div>
+          <div onClick={this.favouriteRoute} className="favorite hide"></div>
           </div>
           <div className="turnDirect">
           {this.state.turns}
@@ -209,4 +224,3 @@ var RouteView = React.createClass({
 });
 
 module.exports = RouteView;
-

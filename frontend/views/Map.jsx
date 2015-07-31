@@ -28,8 +28,8 @@ var Map = React.createClass({
 			layout: Classnames('col', this.props.layout),
 			logoStyle: Classnames('logo', ScenicStore.getLayout().logoState),
 			startButtonStyle: Classnames(
-									'col s4 m2 l2 map-start-btn btn-secondary', 
-									'Begin_Setup', 
+									'col s4 m2 l2 map-start-btn btn-secondary',
+									'Begin_Setup',
 									ScenicStore.getLayout().logoState
 							)
 		};
@@ -42,7 +42,7 @@ var Map = React.createClass({
 	    L.mapbox.accessToken = 'pk.eyJ1IjoiYWxvdWlzIiwiYSI6ImUwZWUwYmIzNThmZjAxYWI2YTIwNGNmYmQxZjUzNWU1In0.9QfqI_cVh9_6w1kBSA-yaQ';
 	    window.map = L.mapbox.map('map', 'alouis.n127p3ip',{closePopupOnClick: false})
 	      			.setView([43.64, -79.39], 15);
-	    window.addEventListener("resize", this.updateDimensions);	      			
+	    window.addEventListener("resize", this.updateDimensions);
 
 	    // Parent mounts only after all children elements mount!
 	    // console.log("CHANGING PARENT STATE...", this.props.parentState);
@@ -61,7 +61,7 @@ var Map = React.createClass({
 		this.state.logoStyle = Classnames('logo', ScenicStore.getLayout().logoState);
 		this.state.startButtonStyle = Classnames(
 										'col s4 m4 l2 map-start-btn btn-secondary',
-										'Begin_Setup', 
+										'Begin_Setup',
 										ScenicStore.getLayout().logoState
 									);
 	},
@@ -75,7 +75,7 @@ var Map = React.createClass({
 		// Resize the map following state changes.
 		this.updateDimensions();
 		evt.stopPropagation();
-		evt.preventDefault();		
+		evt.preventDefault();
 		return false;
     },
     componentWillUnmount: function(){
