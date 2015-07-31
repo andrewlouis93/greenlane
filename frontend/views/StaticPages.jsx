@@ -6,6 +6,8 @@ var ScenicStore = require('../stores/Stores.jsx');
 var TutorialSection = require('./Tutorial.jsx');
 
 
+
+
 function readCookie(name) {
     var value = (name = new RegExp('(?:^|;\\s*)' + ('' + name).replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&') + '=([^;]*)').exec(document.cookie)) && name[1];
     console.log('cookie value', value);
@@ -170,6 +172,28 @@ var PageController = React.createClass({
 	componentDidMount: function(){
 		window.hrr = this;
 		ScenicStore.addChangeListener(this.updateState);
+
+
+    $(document).on('click', '.favDelete', function(){
+      var routeId = parseFloat($(this).attr('key'));
+      var _this = this;
+      $.ajax
+       ({
+           type: "POST",
+           url: 'http://localhost:3000/delete-route',
+           dataType: 'json',
+           //json object to sent to the authentication url
+           data: {
+             authId: parseFloat(readCookie('authId')),
+             type: readCookie('type'),
+             routeId: routeId
+           },
+           success: function () {
+             $(_this).parent().parent().fadeOut();
+           }
+       })
+    })
+
 
 	},
 	updateState: function(){

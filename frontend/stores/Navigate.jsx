@@ -212,7 +212,7 @@ function formatDistance(_distance){
   if (minutes > 0){
     var plural = (minutes == 1) ? '' : 's';
     var spacing = (hours > 0) ? ' ' : '';
-    result += spacing + minutes + ' min';
+    result += spacing + minutes + ' m';
   }
   // Only show seconds if no minutes value.
   if ( (seconds>0) && (minutes<1) ){
@@ -330,7 +330,7 @@ var Navigate = {
             console.log("Autocomplete status: " + status);
             return;
         }
-        console.log('predictions',predictions);
+        console.log(predictions);
         return cb(predictions);
     });
   },

@@ -84,7 +84,6 @@ var ProfileNav = React.createClass({
       <div>
         <div className="profileOpt">
             {(this.state && this.state.auth) ? this.favouritedRoutes() : false}
-            <li><a><i className="restart left"></i>restart route</a></li>
             <li><a><i className="share left"></i>share</a></li>
         </div>
         <div className="footer">
