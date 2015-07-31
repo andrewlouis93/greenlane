@@ -47,6 +47,7 @@ var Endpoints = React.createClass({
         return [
               <div className="introTag">i am</div>,
               <div className="input-field">
+                <div onClick={this.geolocateUser} className="yourLoc"></div>
                 <input id="origin" type="text"className={inputClasses} required/>
                 <label className="active" htmlFor="origin">looping from</label>
               </div>,

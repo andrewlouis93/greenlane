@@ -86,7 +86,7 @@ var RouteView = React.createClass({
     var current = null;
     var updatedStateProp = {
       turns: (<ul tabIndex="-1">
-                <div className="ui-menu-item">
+                <div className="ui-menu-item startLocation">
                   <li className="locIcon"></li>
                   <li className="menuitem">{this.state.travelOrig}</li>
                 </div>
@@ -187,7 +187,7 @@ var RouteView = React.createClass({
           <div id="routeInfo">
               <ul onClick={this.createList}>
                 <li className="destLbl">
-                  <span className="activator">{this.state.travelDest}</span>
+                  <span className="activator">{null ? this.state.travelDest : this.state.travelOrig}</span>
                 </li>
                 <li className="timeLbl">
                   <span className="activator">{this.state.travelTime + ' | ' + this.state.travelDist}</span>
@@ -204,7 +204,7 @@ var RouteView = React.createClass({
           <div id="routeInfo">
               <ul>
                 <li className="destLbl">
-                  <span className="card-title">{this.state.travelDest}</span>
+                  <span className="card-title">{null ? this.state.travelDest : this.state.travelOrig}</span>
                 </li>
                 <li className="timeLbl">
                   <span className="card-title">{this.state.travelTime + ' | ' + this.state.travelDist}</span>

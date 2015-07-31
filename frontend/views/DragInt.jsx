@@ -80,22 +80,22 @@ render: function() {
     return (
       <div className="row" id="timeSlider">
         <p className="introTag">i want my greenlane to be</p>
-
-        <div id="drag-container" className="row">
-
-            <div id="resize-cont" className="col s6 offset-s3 m6 offset-m3 l5 offset-l3">
+        <p className="scaleG">greener</p>
+        <div id="drag-container" className="row">  
+            <div id="resize-cont" className="col s8 offset-s2 m6 offset-m4 l8 offset-l2">
               <div id="resizable-element">
               </div>
             </div>
-            <div id="drag-cont" className="col s2 m2 l2">
+            <div id="drag-cont">
               <div id="resizer" className="greenBoob">
               </div>
             </div>
-
+            <p className="scaleG">faster</p>
         </div>
 
-        <button className="btn-primary col s5">skip</button>
-        <button onClick={Navigate.generateRoute} className="btn-secondary col s5 Time_Submit">map it</button>
+
+        <button className="btn-primary col s5">skip</button> 
+        <button onClick={Navigate.generateRoute} className="btn-secondary col s5 Time_Submit">map it</button>       
       </div>
     );
   }
