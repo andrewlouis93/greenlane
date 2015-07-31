@@ -25,7 +25,8 @@ var Endpoints = React.createClass({
       source: Navigate.getSuggestions,
       templates:{
         suggestion: function(data){
-          return "<div class='tt-address'>"+data.terms[0].value+"</div><div class='tt-locale'>"+ [data.terms[1].value, data.terms[2].value, data.terms[3].value].join(', ')+"</div>"
+          if (data && data.terms[0].value && data.terms[1].value && data.terms[2].value && data.terms[3].value)
+            return "<div class='tt-address'>"+data.terms[0].value+"</div><div class='tt-locale'>"+ [data.terms[1].value, data.terms[2].value, data.terms[3].value].join(', ')+"</div>";
         }
       }
     });
