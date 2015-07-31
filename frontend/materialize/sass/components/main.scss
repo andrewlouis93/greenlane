@@ -146,7 +146,7 @@ span.twitter-typeahead{
           border-radius: 5px;
 }
 
-.tt-dataset-0 .tt-suggestion:not(:first-child), .tt-dataset-1 .tt-suggestion:not(:first-child), .tt-dataset-2 .tt-suggestion:not(:first-child) {
+div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
     border-top: 1px solid $secondary-color !important;
 }
 
