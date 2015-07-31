@@ -68,7 +68,7 @@ var Accordion = React.createClass({
         	Yes, if you take a photo along your greenlane and upload to Instagram with your location tagged, you may be featured. Note that the photos are updated monthly, and only a selected quantity of photos are added per month.
         </Section>
         <Section title="Why do I have to sign in to favourite or share a route?">
-        	In order for Greenlane to keep track of individual users and their favourite routes, we require users to login.  
+        	In order for Greenlane to keep track of individual users and their favourite routes, we require users to login.
         </Section>
         <Section title="What are the parameters in Toronto that Greenlane will create routes?">
 			Greenlane will map routes within the following bounds:
@@ -78,7 +78,7 @@ var Accordion = React.createClass({
 			South – Downtown Toronto, including Toronto Island
         </Section>
         <Section title="Will my greenlane always be a longer route than my regular route?">
-        	Not necessarily, some green routes may be equal to or shorter than your everyday route. 
+        	Not necessarily, some green routes may be equal to or shorter than your everyday route.
         </Section>
       </div>
     );
@@ -94,19 +94,20 @@ var PageController = React.createClass({
 			'saved': [],
 			'containerCSS': Classnames(
 								'staticPageContainer',
-								'hide', 
+								'hide',
 								ScenicStore.getLayout().containerMask
 							),
 		};
 	},
 
 	favSection: function(){
+    console.log(this.state.saved);
 		return (
 			<div className="viewContainer">
 			<div className="staticTitle">favourited routes</div>
 			<div className='favouritedRoute'>
-			{	
-			    this.state.saved.map(function(route) {
+			{
+			    this.state.saved.map(function(route, key) {
 			        var destFav = 'to: ' + route.destinationName +  '\n' + 'from: '  + route.originName;
 			        var transitType = route.transit == 'cycling' ? <div><div className='bikeGrey'></div>{destFav}</div>: false || route.transit == 'walking' ? <div><div className='walkGrey'></div>{destFav}</div> : false;
 			    	console.log('ROUTE', route.originName)
@@ -116,15 +117,15 @@ var PageController = React.createClass({
 								<div>{route.formatted.date}</div>
 								<div>{route.info.parks}</div>
 								<div onClick={Navigate.generateSingleton.bind(this, route)} className="favGo"></div>
-								<div className="favDelete"></div>	
+								<div key={key} className="favDelete"></div>
 							</Section>
-			
+
 				})
 			}
 				</div>
 			</div>
 		);
-	},	
+	},
 	aboutUs: function(){
 		return (
 			<div className="viewContainer">
@@ -143,7 +144,7 @@ var PageController = React.createClass({
 
 	FAQ: function(){
 		return (
-			<Accordion title="frequently asked questions" />		
+			<Accordion title="frequently asked questions" />
 		);
 	},
 
@@ -155,16 +156,16 @@ var PageController = React.createClass({
 				<p>Though we all specialize in different areas, the one thing we have in common is our love for our city and the great outdoors.</p>
 				<p>We wanted to create something that used the city’s green spaces to make Torontonians’ lives just a little bit better. So we got together, thought long and hard and came up with Greenlane - an app that uses park, tree and trail data to map scenic routes through the city.</p>
 				<p>	So next time you’re moving through Toronto, choose Greenlane and see the city differently.</p>
-			</div>		
+			</div>
 		);
 	},
 	tutorial: function(){
 	return (
 		<div className="viewContainer tutorial">
 			<TutorialSection/>
-		</div>		
+		</div>
 	);
-},	
+},
 
 	componentDidMount: function(){
 		window.hrr = this;
@@ -172,29 +173,29 @@ var PageController = React.createClass({
 
 	},
 	updateState: function(){
-		var containerCSS; 
+		var containerCSS;
 		if (!ScenicStore.getActivePage()){
 			containerCSS = Classnames(
 								'staticPageContainer',
-								'hide', 
+								'hide',
 								ScenicStore.getLayout().containerMask
 							);
 		}
 		else{
 			containerCSS = Classnames(
-								'staticPageContainer', 
+								'staticPageContainer',
 								ScenicStore.getLayout().containerMask
 							);
 		}
-		
+
 
 		console.log(ScenicStore.getActivePage());
 		console.log(readCookie('authenticated'));
 		if ((ScenicStore.getActivePage() == 'favSection') && readCookie('authenticated')){
 			$.get("http://localhost:3000/favourite-routes", {
-				authId: parseFloat(readCookie('authId')), 
+				authId: parseFloat(readCookie('authId')),
 				type: readCookie('type')
-			}, 
+			},
 			function(res, err){
 				console.log(res);
 				console.log(err);
@@ -205,18 +206,18 @@ var PageController = React.createClass({
 					this.setState({
 						'activePage': ScenicStore.getActivePage(),
 						'containerCSS': containerCSS,
-					})					
+					})
 				}.bind(this), 10)
 
-			}.bind(this));					
+			}.bind(this));
 		}
 		else{
 			this.setState({
 				'activePage': ScenicStore.getActivePage(),
 				'containerCSS': containerCSS,
-			})			
+			})
 		}
-	},		
+	},
 	render: function() {
 		return (
 		    <div className={this.state.containerCSS}>
@@ -227,4 +228,3 @@ var PageController = React.createClass({
 });
 
 module.exports = PageController;
-
