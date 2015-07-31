@@ -54,7 +54,7 @@ var Loader = React.createClass({
 							</div>
 						</div>
 					</div>
-					<h2 className="flow-text">{this.loadText()[this.state.quotesId]}</h2>
+					<h2 className="loaderText">{this.loadText()[this.state.quotesId]}</h2>
 					</div>
 			</div>
 
