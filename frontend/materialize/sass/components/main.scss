@@ -151,11 +151,12 @@ span.twitter-typeahead{
 }
 
 .tt-suggestion {
-  padding: 15px 20px;
+  color: $secondary-color;
+  padding: 10px 20px;
   // border-top:0px;
   font-size: 15px;
-  line-height: 24px;
-  letter-spacing: 1px;
+  line-height: 17px;
+  letter-spacing: 0.5px;
 }
 
 .tt-suggestion:hover {
@@ -744,9 +745,6 @@ span.twitter-typeahead{
     font-weight:700;
     font-size:1.3em;
     color:$secondary-color;
-     -ms-transform: translate(0px,-10px); /* IE 9 */
-    -webkit-transform: translate(0px,-10px); /* Safari */
-    transform: translate(0px,-10px);
   }
 
 
@@ -1426,7 +1424,7 @@ hr {
       border-radius: 9px;
   }
   span{
-    font-size: 1.2em;
+    font-size: 2vh;
     text-align: center;
     width: 90%;
     display: block;
@@ -1558,13 +1556,11 @@ hr {
 #clickable-fb{
   @extend .clickable-social;
   top: 38.3%;
-  background: red;
 }
 
 #clickable-google{
   @extend .clickable-social;
   top: 46%;
-  background: yellow;
 }
 
 #clickable-start{
