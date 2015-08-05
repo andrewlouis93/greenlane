@@ -55,7 +55,7 @@ var Section = React.createClass({
 var Accordion = React.createClass({
   render: function() {
     return (
-      <div className="main">
+      <div className="faqMain">
         <div className="staticTitle">{this.props.title}</div>
         <Section title="What data does Greenlane use to map scenic routes?">
         	Greenlane utilizes park, trail and tree coverage data to map out the nicest greenlanes for you to enjoy.

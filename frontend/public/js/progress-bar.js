@@ -37,46 +37,80 @@
       $(".progress-point.active").next().click();    
     };
 
+// $('.cloudOne').animate({width:"200px"},200)
     function addBike(_Actions, clickEvent){
-      $('.svg-bike-switch').addClass('addAnim');
-      _Actions.setTransitMode('cycling');
-      dataLayer.push({
-        'transportationType': 'BIKE',
-      });
-      console.log("Mode set to cycling");
-      $(".progress-point.active").addClass('bikeProg').removeClass('walkProg');
-      $("#travelType").removeClass("disabled");
-      nextPage();
+
+      $('a').has('.svg-bike-switch').animate({padding:'0px'},200);
+      $('a').has('.svg-bike-switch').animate({padding:"5%"},200);
+      $('.cloudTwoBike').delay(400).animate({left:"-15%",opacity:'1'},200);
+      $('.cloudOneBike').delay(400).animate({right:"-10%",opacity:'1'},200).delay(200).promise().then(
+        function() {
+          _Actions.setTransitMode('cycling');
+          dataLayer.push({
+          'transportationType': 'BIKE',
+          });
+          console.log("Mode set to cycling");
+          $(".progress-point.active").addClass('bikeProg').removeClass('walkProg');
+          $("#travelType").removeClass("disabled");
+          nextPage(); 
+        }
+      );
     };
 
     function addWalk(_Actions){
-      _Actions.setTransitMode('walking');
-      dataLayer.push({
-        'transportationType': 'WALK',
-      });
-      $(".progress-point.active").addClass('walkProg').removeClass('bikeProg');
-      $("#travelType").removeClass("disabled");
-      nextPage();
+      $('a').has('.svg-walk-switch').animate({padding:'0px'},200);
+      $('a').has('.svg-walk-switch').animate({padding:"5%"},200);
+      $('.cloudTwoWalk').delay(400).animate({left:"-15%",opacity:'1'},200);
+      $('.cloudOneWalk').delay(400).animate({right:"-10%",opacity:'1'},200).delay(200).promise().then(
+        function() {
+          _Actions.setTransitMode('walking');
+          dataLayer.push({
+            'transportationType': 'WALK',
+          });
+          $(".progress-point.active").addClass('walkProg').removeClass('bikeProg');
+          $("#travelType").removeClass("disabled");
+          nextPage();
+        }
+      );
     };
 
     function addRoute(_Actions){
-      _Actions.setRoute();
-      dataLayer.push({
-        'travelType': 'ROUTE',
-      });      
-      $(".progress-point.active").addClass('routeProg').removeClass('loopProg');
-      $("#destSel").removeClass("disabled");
-      nextPage();
+      $('a').has('.routeBtn').animate({padding:'0px'},200);
+      $('a').has('.routeBtn').animate({padding:"5%"},200);
+
+    setTimeout( function(){
+      $('.routeBtn').css("background-image", "url('../../materialize/img/svg/routeEmpty.svg')"),
+      $('div.locIconStart').addClass('bounceOne')
+      $('div.locIconEnd').addClass('bounceTwo')},400);
+
+         setTimeout( function() {
+          _Actions.setRoute();
+          dataLayer.push({
+            'travelType': 'ROUTE',
+          });      
+          $(".progress-point.active").addClass('routeProg').removeClass('loopProg');
+          $("#destSel").removeClass("disabled");
+          nextPage();
+        },1500);
     };
 
     function addLoop(_Actions){
-      _Actions.setLoop();
-      dataLayer.push({
-        'travelType': 'LOOP',
-      });            
-      $(".progress-point.active").addClass('loopProg').removeClass('routeProg');
-      $("#destSel").removeClass("disabled");
-      nextPage();
+      $('a').has('.loopBtn').animate({padding:'0px'},200);
+      $('a').has('.loopBtn').animate({padding:"5%"},200);
+
+      setTimeout( function(){
+      $('.loopBtn').css("background-image", "url('../../materialize/img/svg/loopEmpty.svg')"),
+      $('div.locIconLoop').addClass('bounceOne')},400);
+      
+        setTimeout( function() {
+          _Actions.setLoop();
+          dataLayer.push({
+            'travelType': 'LOOP',
+          });            
+          $(".progress-point.active").addClass('loopProg').removeClass('routeProg');
+          $("#destSel").removeClass("disabled");
+          nextPage();
+        },1500);
     };
 
     function addLoc(){

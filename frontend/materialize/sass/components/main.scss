@@ -112,6 +112,7 @@ span.twitter-typeahead{
 
 .yourLoc {
   top: 35px;
+  // top: 5px;
   right: 0;
   position: absolute;
   background-image: url("../img/svg/yourLoc.svg");
@@ -390,7 +391,7 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
   font-spacing:1px;
   font-family:Roboto;
   letter-spacing:1.2px;
-  font-size:1.2em;
+  font-size:2.5vh;
   font-weight:100;
   text-align:center;
 }
@@ -401,7 +402,7 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
   color:$text-color;
   font-family:Roboto-Slab;
   font-weight:600;
-  font-size:1.5em;
+  font-size:3vh;
 }
 
 .heightFix {
@@ -416,6 +417,8 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
   height:90%;
 
   a {
+    position:relative;
+    display:inline-block;
     padding:5% 0%;
     height:50%;
     width:100%;
@@ -475,7 +478,7 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
   // -webkit-transform: translate(0px, 0px);
   // transform: translate(0px, 0px);
   width: 100%;
-  height: 40px;
+  height: 10%;
   cursor: move;
   z-index: 10;
   position:absolute;
@@ -497,12 +500,13 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
   background-color:$empty-slider-color;
   background-repeat: no-repeat;
   height:60%;
-  margin-bottom:10px;
-
+  left:0;
+  right:0;
+  margin:0 auto;
   // width:60%;
-  position: relative;
+  position: absolute;
   // past this point it gets choppy.
-  max-width:100%;
+  max-width:70%;
 }
 
 @media #{$medium-and-up}{
@@ -563,7 +567,7 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
   left:5%;
   font-family:Roboto;
   font-size:1.2rem;
-  font-weight:200;
+  font-weight:300;
   letter-spacing:2rem;
   box-shadow:0px 4px 0px #aa4660 !important;
   background-color:$primary-color;
@@ -590,7 +594,7 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
   bottom:0;
   right:5%;
   font-size:1.2rem;
-  font-weight:200;
+  font-weight:300;
   box-shadow:0px 4px 0px #1a9169 !important;
   background-color:$secondary-color;
 
@@ -610,7 +614,7 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
 .btn-facebook{
   color:#fff;
   width:100%;
-  font-weight:100;
+  font-weight:300;
   font-family:Roboto;
   background-color:#527ebb;
   box-shadow:0px 3px 0px #3a5d87;
@@ -637,7 +641,7 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
 .btn-google {
   color:#fff;
   width:100%;
-  font-weight:100;
+  font-weight:300;
   font-family:Roboto;
   background-color:#e85749;
   box-shadow:0px 3px 0px #d82908;
@@ -682,9 +686,6 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
 
 #slide-out{
   li{
-    &:hover{
-      background: rgba(42,209,157, 0.5);
-    }
   }
   a{
     &:hover{
@@ -1200,6 +1201,15 @@ hr {
 
   }
 }
+
+.faqMain {
+  .sectionhead {
+    width:100%;
+  }
+  button {
+    right:0 !important;
+  }
+}
 .section {
   position: relative;
   width: 100%;
@@ -1231,7 +1241,8 @@ hr {
   transform: rotate(180deg);
   }
   .articlewrap {
-    height: 100px;
+    max-height: 600px;
+    transition: max-height .2s ease-in;
   }
     .favDelete {
       opacity:1;
@@ -1249,9 +1260,9 @@ hr {
 
 .articlewrap {
   position:relative;
-  height: 0;
+  max-height: 0;
   overflow: hidden;
-  transition: all .2s ease-in;
+  transition: max-height .2s ease-in;
 }
 
 .sectionhead {
@@ -1274,12 +1285,11 @@ hr {
 }
 
 .article {
-  position:absolute;
-  bottom:0;
+  margin:5% 0;
   font-family:Roboto;
   font-weight:300;
   color:$primary-color;
-  width:80%;
+  width:100%;
   line-height: 1.3;
 
   span {

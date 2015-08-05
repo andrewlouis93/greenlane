@@ -38,11 +38,15 @@ var SetupFlow = React.createClass({
           (
             <div className="optSwitch">
               <p className="introTag">i have</p>
-              <a className="waves-effect waves-light">
+              <a className="bikeGroup">
                 <div onClick={addBike.bind(this, Actions)} className="svg svg-bike-switch"></div>
+                <div className="cloudOneBike"></div>
+                <div className="cloudTwoBike"></div>
               </a>
-              <a className="waves-effect waves-light">
+              <a className="walkGroup">
                 <div onClick={addWalk.bind(this, Actions)} className="svg svg-walk-switch"></div>
+                <div className="cloudOneWalk"></div>
+                <div className="cloudTwoWalk"></div>
               </a>
             </div>
           ),
@@ -53,10 +57,13 @@ var SetupFlow = React.createClass({
           reactBlob:(
             <div className="optSwitch">
               <p className="introTag">i have</p>
-              <a className="waves-effect waves-light">
+              <a>
+                <div className="locIconStart"></div>
+                <div className="locIconEnd"></div>
                 <div onClick={addRoute.bind(this, Actions)} className="svg routeBtn"></div>
               </a>
-              <a className="waves-effect waves-light">
+              <a>
+                <div className="locIconLoop"></div>
                 <div onClick={addLoop.bind(this, Actions)} className="svg loopBtn"></div>
               </a>
             </div>

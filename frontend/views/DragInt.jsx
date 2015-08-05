@@ -86,8 +86,8 @@ render: function() {
       <div className="row" id="timeSlider">
         <p className="introTag">i want my greenlane to be</p>
         <p className="scaleG">greener</p>
-        <div id="drag-container" className="row">
-            <div id="resize-cont" className="col s8 offset-s2 m6 offset-m4 l8 offset-l2">
+        <div id="drag-container" className="row">  
+            <div id="resize-cont">
               <div id="resizable-element">
               </div>
             </div>
