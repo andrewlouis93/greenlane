@@ -110,7 +110,7 @@
           $(".progress-point.active").addClass('loopProg').removeClass('routeProg');
           $("#destSel").removeClass("disabled");
           nextPage();
-        },2500);
+        },1500);
     };
 
     function addLoc(){
