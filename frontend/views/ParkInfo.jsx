@@ -242,7 +242,7 @@ updateExpInfoHeight: function(){
                         return <li className={liClass}>{it}</li>
                     })
                    }
-                </ul> : false
+                </ul> : <div className='zeroFacilitiesPadding'></div>
               }
               <div className="row imgGrid">
                 {

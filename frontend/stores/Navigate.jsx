@@ -483,6 +483,8 @@ var Navigate = {
         // Handle the state change.
         Actions.setParkMode();
         $(".leaflet-popup[route=0]").addClass("active-popup");
+        // Turn off the park info stuff if it exists
+        $(".parkBtn.active").trigger('click');
         Actions.isLoading(false);
         // If you try and draw
         // a favourited route from here the following
@@ -548,6 +550,8 @@ var Navigate = {
             // Handle the state change.
             $(".leaflet-popup[route=0]").addClass("active-popup");
             Actions.setParkMode();
+            // Turn the park view off if active
+            $(".parkBtn.active").trigger('click')
             Actions.isLoading(false);
         }, 3)
     });
