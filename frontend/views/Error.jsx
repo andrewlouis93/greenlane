@@ -66,12 +66,9 @@ var Error = React.createClass({
 			title: "your browser doesn't support geolocation",
 			body: (
 			[
-				<div onClick={this.deactivate} className='btn-primary error-btn error_inline_btns'>
-					no thanks
-				</div>,
 				<div onClick={this.deactivate} className='btn-primary err-cancel error-btn'>
 					cancel
-				</div>			
+				</div>
 			]
 		)}
 	},
@@ -82,7 +79,7 @@ var Error = React.createClass({
 			[
 				<div onClick={this.deactivate} className='btn-primary err-cancel error-btn'>
 					cancel
-				</div>			
+				</div>
 			]
 		)}
 	},
@@ -96,7 +93,7 @@ var Error = React.createClass({
 				</div>,
 				<div className='btn-secondary error-btn error_inline_btns'>
 					continue
-				</div>				
+				</div>
 			]
 		)}
 	},
@@ -110,7 +107,7 @@ var Error = React.createClass({
 			err_css: errState.css,
 		});
 		this.setState(this[ScenicStore.getErrObj().state]())
-	}	
+	}
 })
 
 module.exports = Error;

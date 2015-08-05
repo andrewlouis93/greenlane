@@ -8,6 +8,7 @@ var originMarker;
 var destMarker;
 var curMarker;
 
+
 // Used only when re-draw routes
 function liteClearDrawnRoutes(){
   if ($("path").length){
@@ -127,7 +128,7 @@ function drawPins(){
   });
   if (ScenicStore.getSessionState().loop){
     originMarker = L.marker(ScenicStore.getSessionState().origin.latLng,{icon: originIcon}).addTo(window.map)
-    destMarker = L.marker(ScenicStore.getSessionState().origin.latLng,{icon: originIcon}).addTo(window.map)
+    destMarker = L.marker(ScenicStore.getSessionState().origin.latLng,{icon: destIcon}).addTo(window.map)
   }
   else{
     originMarker = L.marker(ScenicStore.getSessionState().origin.latLng,{icon: originIcon}).addTo(window.map)
@@ -154,8 +155,6 @@ function drawMarkers(){
         console.error(err);
       }
     }
-
-
 }
 
 
@@ -541,6 +540,7 @@ var Navigate = {
             // window.map.invalidateSize();
             // Get the bounds of the longest route.
             var bounds = paths[0].getBounds();
+
             window.map.fitBounds(bounds);
             drawPins();
             drawRoutes();
@@ -552,6 +552,7 @@ var Navigate = {
             Actions.setParkMode();
             // Turn the park view off if active
             $(".parkBtn.active").trigger('click')
+
             Actions.isLoading(false);
         }, 3)
     });
@@ -652,7 +653,6 @@ $(document).on('click','.routeChoice', function(){
   else{
     Actions.activateError('nogeolocation');
   }
-
 
 })
 

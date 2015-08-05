@@ -10,7 +10,6 @@ var Loader = React.createClass({
 		}
 	},
 	componentDidMount: function(){
-		window.loadState = this.state;
 		ScenicStore.addChangeListener(this.updateLoader);
 	},
 	updateLoader: function(){
