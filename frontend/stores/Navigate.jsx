@@ -329,6 +329,9 @@ var Navigate = {
             console.log("Autocomplete status: " + status);
             return;
         }
+
+        // PRUNE RESTRICTIONS HERE.
+
         console.log(predictions);
         return cb(predictions);
     });
