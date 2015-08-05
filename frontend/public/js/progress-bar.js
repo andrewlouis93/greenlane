@@ -81,7 +81,7 @@
     setTimeout( function(){
       $('.routeBtn').css("background-image", "url('../../materialize/img/svg/routeEmpty.svg')"),
       $('div.locIconStart').addClass('bounceOne')
-      $('div.locIconEnd').addClass('bounceTwo')},400);
+      $('div.locIconEnd').addClass('bounceTwo')},350);
 
          setTimeout( function() {
           _Actions.setRoute();
@@ -100,8 +100,8 @@
 
       setTimeout( function(){
       $('.loopBtn').css("background-image", "url('../../materialize/img/svg/loopEmpty.svg')"),
-      $('div.locIconLoop').addClass('bounceOne')},400);
-      
+      $('div.locIconLoop').addClass('bounceOne')},350);
+
         setTimeout( function() {
           _Actions.setLoop();
           dataLayer.push({
@@ -110,7 +110,7 @@
           $(".progress-point.active").addClass('loopProg').removeClass('routeProg');
           $("#destSel").removeClass("disabled");
           nextPage();
-        },1500);
+        },2500);
     };
 
     function addLoc(){
