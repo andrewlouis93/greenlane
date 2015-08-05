@@ -65,9 +65,9 @@ var Map = React.createClass({
 										ScenicStore.getLayout().logoState
 									);
 	},
-	// componentDidUpdate: function(){
-	// 	this.updateDimensions();
-	// },
+	componentDidUpdate: function(){
+		this.updateDimensions();
+	},
 	routeNav: function(evt) {
 		// toggleFullScreen();
 		Actions.updateMenu('toggle');
