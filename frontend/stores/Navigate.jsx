@@ -320,8 +320,8 @@ var Navigate = {
    */
   getSuggestions: function(query, cb) {
     var TorontoBbox = new google.maps.LatLngBounds(
-        new google.maps.LatLng(43.574896,-79.601904),
-        new google.maps.LatLng(43.856788, -79.167944)
+        new google.maps.LatLng(43.581, -79.6393),
+        new google.maps.LatLng(43.8555, -79.1152)
     );
     var service = new google.maps.places.AutocompleteService();
     service.getPlacePredictions({ input: query, bounds: TorontoBbox, componentRestrictions: { country: 'CA' } }, function(predictions, status) {

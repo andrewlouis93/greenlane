@@ -302,12 +302,10 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
   .timeLbl {
     font-size:3.5vh !important;
   }
-
   .parkBtn {
     width:10.5vh !important;
     height:10.5vh !important;
   }
-
   .favourite, .favourited, .go-to-route, .routeChoice {
     height:9.5vh !important;
   }
@@ -507,7 +505,7 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
 #resizer {
   // -webkit-transform: translate(0px, 0px);
   // transform: translate(0px, 0px);
-  width: 100%;
+  width: 105%;
   height: 15%;
   cursor: move;
   z-index: 10;
@@ -536,13 +534,20 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
   // width:60%;
   position: absolute;
   // past this point it gets choppy.
-  max-width:70%;
+  max-width:200px;
 }
 
-@media #{$medium-and-up}{
+@media #{$medium-only}{
   #resize-cont{
     min-width: 130px;
     max-width: 253px;
+  }
+}
+
+@media #{$large-and-up}{
+  #resize-cont{
+    min-width: 130px;
+    max-width: 200px;
   }
 }
 

@@ -19,11 +19,21 @@ function normalize(percentage){
 }
 
 var TimeDrag = React.createClass({
+getInitialState: function(){
+  return {
+    'resizer-top': false
+  }
+},
 initResizer: function(){
-  if ($('#drag-cont').length && $('#resizer').length){
+
+  var backButtonState = ScenicStore.getBackBtnState().states.length ? ScenicStore.getBackBtnState().states[ScenicStore.getBackBtnState().states.length-1] : null;
+
+  if ($('#drag-cont').length && $('#resizer').length && (backButtonState != 'parkview')){
     // Plant the draggable to where it should be.
     var seedResizer = ($("#drag-cont").height()-$("#resizable-element").height()) + 'px';
     // Doesn't seem to set the top attribute the jQuery way?
+
+    console.log("IN INIT RESIZER", seedResizer);
     document.getElementById('resizer').style.top= seedResizer;
   }
 },
@@ -36,6 +46,7 @@ handleSkip: function(clickEvent){
   Navigate.generateRoute(clickEvent);
 },
 componentDidMount: function(){
+  window.DragState = this.state;
   var _height = $('#resizer').height()/2;
   var _height_Cont = $('#resize-cont').height();
   ScenicStore.addChangeListener(this._onChange);
@@ -58,11 +69,15 @@ componentDidMount: function(){
         var top = parseInt(elem.css('top'));
         var cy = (top % grid_y);
         var new_top = (Math.abs(cy)+0.5*grid_y >= grid_y) ? (top - cy + (top/Math.abs(top))*grid_y) : (top - cy);
+
         ui.helper.stop(true).animate({
             top: new_top,
             opacity: 1,
         }, 200);
+
         var adjustTo = sliderHeight - new_top;
+
+        console.log("RESIZING, NEW TOP", new_top);
 
         var greenness = normalize(adjustTo/$("#resizable-element").parent().height());
 
@@ -70,13 +85,10 @@ componentDidMount: function(){
         Analytics.greenLevel(greenness);
         Actions.setGreenness(greenness);
 
-
         $("#resizable-element").animate({height:adjustTo},200);
       },
   });
-
   window.addEventListener('resize', this.initResizer);
-
 },
 componentWillUnmount: function(){
   window.removeEventListener('resize', this.initResizer)
@@ -86,7 +98,7 @@ render: function() {
       <div className="row" id="timeSlider">
         <p className="introTag">i want my greenlane to be</p>
         <p className="scaleG">greener</p>
-        <div id="drag-container" className="row">  
+        <div id="drag-container" className="row">
             <div id="resize-cont">
               <div id="resizable-element">
               </div>

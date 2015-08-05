@@ -148,8 +148,8 @@ var Endpoints = React.createClass({
     var geocoder = new google.maps.Geocoder();
 
     var TorontoBbox = new google.maps.LatLngBounds(
-        new google.maps.LatLng(43.574896,-79.601904),
-        new google.maps.LatLng(43.856788, -79.167944)
+        new google.maps.LatLng(43.581, -79.6393),
+        new google.maps.LatLng(43.8555, -79.1152)
     );
 
     var validated = true;
@@ -197,8 +197,8 @@ var Endpoints = React.createClass({
                             (validatedCount == inputCount) ? addLoc() : null;
 
                           } else {
-                            Analytics.locationError(_id);
                             var err = {};
+                            Analytics.locationError(_id.toUpperCase());
                             err[_id + '_error'] = "we're only able to map greenlanes in toronto. please try again";
                             _this.setState(err)
                             // alert('No results found for ' + _id);
@@ -206,6 +206,7 @@ var Endpoints = React.createClass({
                         }
                         else{
                             var err = {};
+                            Analytics.locationError(_id.toUpperCase());
                             err[_id + '_error'] = "we're only able to map greenlanes in toronto. please try again";
                             _this.setState(err)
                         }
