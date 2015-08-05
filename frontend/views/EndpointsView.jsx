@@ -224,7 +224,7 @@ var Endpoints = React.createClass({
                 return reactComponent;
               })
             }
-          <button id='submitRoute' onClick={this.validate} className="btn-secondary col s9 offset-s1.5 m6 offset-s3">continue
+          <button id='submitRoute' onClick={this.validate} className="btn-secondary col s9 offset-s1.5 m6 offset-m3">continue
           </button>
         </div>
     );

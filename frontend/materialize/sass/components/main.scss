@@ -302,9 +302,10 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
   .timeLbl {
     font-size:3.5vh !important;
   }
-  
-  .straight, .turnLeft, .turnRight, .parkBtn {
-    height:2.5vh !important;
+
+  .parkBtn {
+    width:10.5vh !important;
+    height:10.5vh !important;
   }
 
   .favourite, .favourited, .go-to-route, .routeChoice {
@@ -319,7 +320,7 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
   height:2px;
   background-color:white;
   position: absolute;
-  top:-2px;
+  top:-1px;
 }
 
 .ui-menu-item:before {
