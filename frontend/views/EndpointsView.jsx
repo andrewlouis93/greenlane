@@ -130,6 +130,7 @@ var Endpoints = React.createClass({
                           }
                         }
                         else{
+                            Analytics.locationError(_id);
                             var err = {};
                             err['origin_error'] = "we're only able to map greenlanes in toronto. please try again";
                             _this.setState(err)

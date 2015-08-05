@@ -118,7 +118,7 @@ var PageController = React.createClass({
 								<div>{route.formatted.distance}</div>
 								<div>{route.formatted.date}</div>
 								<div className="parkList">{route.info.parks}</div>
-								<div onClick={Navigate.generateSingleton.bind(this, route)} className="favGo"></div>
+								<div onClick={Navigate.generateSingleton.bind(this, route)} className="favGo goToRoute"></div>
 								<div key={key} className="favDelete"></div>
 							</Section>
 

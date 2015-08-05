@@ -211,7 +211,7 @@ var RouteView = React.createClass({
                 </li>
               </ul>
           </div>
-          <div className="go-to-route"></div>
+          <div className="go-to-route goToRoute"></div>
           <div onClick={this.favouriteRoute} className="favorite hide"></div>
           </div>
           <div className="turnDirect">
