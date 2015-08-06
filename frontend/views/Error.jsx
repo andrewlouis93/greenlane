@@ -61,6 +61,27 @@ var Error = React.createClass({
 			]
 		)}
 	},
+	share: function(){
+		return{
+			title: 'share Greenlane with your friends!',
+			body: (
+			[
+				<a onClick={this.deactivate} className='btn-facebook error-btn fb-share-button' dataHref="http://www.your-domain.com/your-page.html">
+        		<i className="fa fa-facebook left fa-2x"></i>
+        		<span>share on facebook</span>
+        </a>
+				,
+				<a onClick={this.deactivate} className='btn-twitter error-btn'>
+        		<i className="fa fa-twitter left fa-2x"></i>
+        		<span>share on twitter</span>
+        </a>
+				,
+				<div onClick={this.deactivate} className='btn-primary err-cancel error-btn'>
+					cancel
+				</div>
+			]
+		)}
+	},
 	nogeolocation: function(){
 		return{
 			title: "your browser doesn't support geolocation",
