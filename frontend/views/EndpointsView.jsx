@@ -25,8 +25,10 @@ var Endpoints = React.createClass({
       source: Navigate.getSuggestions,
       templates:{
         suggestion: function(data){
-          if (data && data.terms[0].value && data.terms[1].value && data.terms[2].value && data.terms[3].value)
+          if (data && data.terms[0] && data.terms[1] && data.terms[2] && data.terms[3])
             return "<div class='tt-address'>"+data.terms[0].value+"</div><div class='tt-locale'>"+ [data.terms[1].value, data.terms[2].value, data.terms[3].value].join(', ')+"</div>";
+          else if (data && data.terms[0] && data.terms[1] && data.terms[2])
+            return "<div class='tt-address'>"+data.terms[0].value+"</div><div class='tt-locale'>"+ [data.terms[1].value, data.terms[2].value].join(', ')+"</div>";
         }
       },
       limit: 3,
@@ -177,7 +179,11 @@ var Endpoints = React.createClass({
             )}, function(results, status){
                         if (status == google.maps.GeocoderStatus.OK) {
                           // Grab the most likely candidate for the reverse geocode lookup.
-                          if (results[0]){
+                          if (results[0])
+                            console.log(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+
+                          if (results[0] && (results[0].geometry.location.lng()>-79.6393) && (results[0].geometry.location.lng()<-79.1152) && (results[0].geometry.location.lat()>43.581) && (results[0].geometry.location.lat() < 43.8555) ){
+
                             //setting store with destination sessions state////////////////
                             var _Name = _value;
                             _Name = _Name.split(',', 1).join("");

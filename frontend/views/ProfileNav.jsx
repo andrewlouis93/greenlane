@@ -100,7 +100,6 @@ var ProfileNav = React.createClass({
       </div>
     ])
   },
-
   authButtons: function(){
     return ( ( this.state && this.state.auth )? this.userButtons() : this.loginButtons() );
   },
