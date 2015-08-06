@@ -418,9 +418,8 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
   color:#a1a1a1;
   font-spacing:1px;
   font-family:Roboto;
-  letter-spacing:1.2px;
   font-size:2.5vh;
-  font-weight:100;
+  font-weight:300;
   text-align:center;
 }
 
@@ -534,7 +533,7 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
   // width:60%;
   position: absolute;
   // past this point it gets choppy.
-  max-width:200px;
+  max-width:150px;
 }
 
 @media #{$medium-only}{
@@ -1702,3 +1701,54 @@ hr {
 .parkList{
   font-size:13px;
 }
+
+// your location animation styles ////////////////////////////////////
+
+@-webkit-keyframes svg_pulse {
+   0% {
+    -webkit-transform: matrix(1,0,01,0,0);
+        stroke-width: 1;
+    opacity: 1;
+   }
+
+   50% {
+    opacity: 1;
+   }
+   100% {
+    -webkit-transform: matrix(2,0,0,2,-26,-18);
+        stroke-width: 7;
+    opacity: 0;
+   }
+}
+
+@-webkit-keyframes svg_pulseTwo {
+   0% {
+    -webkit-transform: matrix(1,0,01,0,0);
+        stroke-width: 1;
+    opacity: 1;
+   }
+
+   50% {
+    opacity: 1;
+   }
+   100% {
+    -webkit-transform: matrix(2,0,0,2,-26,-18);
+        stroke-width: 7;
+    opacity: 0;
+   }
+}
+
+.p-svg-pulse .pulse {
+    -webkit-animation: svg_pulse 1s ease;
+    -webkit-animation-delay:1s;
+    -webkit-animation-duration:3s ;
+    -webkit-animation-iteration-count: infinite;
+}
+
+.p-svg-pulse .pulseTwo {
+    -webkit-animation: svg_pulseTwo 1s ease;
+    -webkit-animation-delay:1.5s;
+    -webkit-animation-duration:3s;
+    -webkit-animation-iteration-count: infinite;
+}
+

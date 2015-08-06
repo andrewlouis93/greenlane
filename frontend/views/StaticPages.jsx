@@ -57,30 +57,25 @@ var Accordion = React.createClass({
     return (
       <div className="faqMain">
         <div className="staticTitle">{this.props.title}</div>
-        <Section title="What data does Greenlane use to map scenic routes?">
-        	Greenlane utilizes park, trail and tree coverage data to map out the nicest greenlanes for you to enjoy.
+        <Section title="How does Greenlane work?">
+        	Greenlane utilizes park, tree and trail data to map scenic paths through Toronto for you to enjoy. 
         </Section>
         <Section title="Why are there no parks along my route?">
-        	While Greenlane would always like to provide you parks along your journey, they are not always available. Not to worry, Greenlane also incorporates other green elements for you to experience such as trails and tree coverage. Enjoy!
+        	While we work hard to ensure that there are parks along your journey, Toronto doesn’t always cooperate. Not to worry, Greenlane also incorporates trail and tree coverage for you to experience. Enjoy!
         </Section>
         <Section title="Why do some parks not contain photos?">
-        	The photos that we present of parks are pulled from Instagram photos that have been location tagged. Unfortunately, not every park has been geo-located on Instagram. If you wish to be the first, snap a photo of some natural beauty along your greenlane, upload to Instagram & tag your park location.
+        	For our photos, we rely on talented Instagrammers who are kind enough to add a location tag to their images.  Unfortunately, not every park pic on Instagram has been geo-located. Help us show off each park by tagging your Instagram photos with the park location and #GreenlaneTO.
         </Section>
         <Section title="Can my Instagram photos appear on Greenlane’s park pages?">
-        	Yes, if you take a photo along your greenlane and upload to Instagram with your location tagged, you may be featured. Note that the photos are updated monthly, and only a selected quantity of photos are added per month.
-        </Section>
+			Yes! If you take a photo along your greenlane and upload it to Instagram with the location, you may be featured. Heads up - photos are updated monthly, and only a select quantity of photos are added each month.         </Section>
         <Section title="Why do I have to sign in to favourite or share a route?">
-        	In order for Greenlane to keep track of individual users and their favourite routes, we require users to login.
+        	In order for Greenlane to be tailored to your needs and keep track of your favourite routes, we require you to login.
         </Section>
         <Section title="What are the parameters in Toronto that Greenlane will create routes?">
-			Greenlane will map routes within the following bounds:
-			East – Scarborough Pickering Town Line, Including Rouge Park
-			West – Dixie Rd, Hwy 407
-			North – Steeles Ave
-			South – Downtown Toronto, including Toronto Island
+			Toronto’s a big city. We can map greenlanes from the North (Steeles Ave) to the South (Downtown Toronto, including the Toronto Islands), and from East (Scarborough Pickering Town Line, including Rouge Park) to West (Dixie Road, Highway 407).
         </Section>
         <Section title="Will my greenlane always be a longer route than my regular route?">
-        	Not necessarily, some green routes may be equal to or shorter than your everyday route.
+        	Not necessarily. Some green routes may be equal to - or shorter than -your everyday route. Remember, you can always tell us how fast or green you’d like your greenlane to be.
         </Section>
       </div>
     );

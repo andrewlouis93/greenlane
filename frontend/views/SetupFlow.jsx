@@ -128,9 +128,11 @@ var SetupFlow = React.createClass({
                 </li>
               </ol>
               <span className="current">
-                  <svg height="50" width="50">
-                    <circle cx="26" cy="18" r="8" stroke="rgba(56,208,149,0.5)" strokeWidth="8" fill='rgb(88,189,152)'/>
-                  </svg>
+                <svg version="1.1" className="p-svg-pulse" xmlns="http://www.w3.org/2000/svg" x="50px" y="50px">
+                  <circle className="pulse" fill="none" stroke="rgba(56,208,149,0.2)" stroke-miterlimit="10" cx="26" cy="18" r="5"/>
+                  <circle className="pulseTwo" fill="none" stroke="rgba(56,208,149,0.5)" stroke-miterlimit="10" cx="26" cy="18" r="5"/>
+                  <circle className="center" fill="rgb(88,189,152)" cx="26" cy="18" r="8"/>
+                </svg>
               </span>
             </div>
           </div>

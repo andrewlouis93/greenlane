@@ -152,7 +152,7 @@
         // console.log(val);
         $(".progress-point").eq(val).addClass("active");
 
-        return  $current.css('top', (index / 3 * 92) + "%"),
+        return  $current.css('top', (index / 3 * 91) + "%"),
                 $progress.css('height', (index / 3 * 100)+ "%");
         }
       };
