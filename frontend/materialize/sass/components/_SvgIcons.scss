@@ -51,34 +51,34 @@
   background-image:url('../img/svg/cloudTwo.svg');
 }
 
-.locIconMain {
-  opacity:0 !important;
-  position:absolute;
-  background-image:url('../img/svg/locIcon.svg');
-  background-size:100% 100%;
-  background-position:50%;
-  width:20%;
-  height:20%;
-}
+// .locIconMain {
+//   opacity:0 !important;
+//   position:absolute;
+//   background-image:url('../img/svg/locIcon.svg');
+//   background-size:100% 100%;
+//   background-position:50%;
+//   width:20%;
+//   height:20%;
+// }
 
-.locIconStart {
-  @extend .locIconMain;
-  left:7%;
-}
+// .locIconStart {
+//   @extend .locIconMain;
+//   left:7%;
+// }
 
-.locIconEnd {
-  @extend .locIconMain;
-  top:35%;
-  right:7% !important;
+// .locIconEnd {
+//   @extend .locIconMain;
+//   top:35%;
+//   right:7% !important;
 
-}
+// }
 
-.locIconLoop {
-  @extend .locIconMain;
-  left:0 !important;
-  width:100%;
+// .locIconLoop {
+//   @extend .locIconMain;
+//   left:0 !important;
+//   width:100%;
 
-}
+// }
 
 @-webkit-keyframes bounceOne {
     0%, 20%, 40%, 60%, 80%, 100% {-webkit-transform: translateY(0);
@@ -132,6 +132,16 @@
     animation-name: bounceOne;
 }
 
+  .st1{fill:#FFFFFF;}
+  .st4{fill:#2AD19D;}
+  .st5{fill:#F46B83;}
+  .st6{fill:#17916A;}
+  .st13{fill:#A17644;}
+  .st14{fill:#79E2BC;}
+  .st29{fill:#D1D3D4;}
+  .st30{fill:#16A457;}
+  .st31{fill:#929496;}
+
 .svg-bike-switch {
   background-image:url('../img/svg/bike.svg');
 }
@@ -141,11 +151,18 @@
 }
 
 .routeBtn {
-  background-image:url('../img/svg/route.svg');
+  margin:0 auto;
+}
+
+#routeSmall {
+  padding-top:2%;
+}
+
+#loopSmall {
+  padding-top:4%;
 }
 
 .loopBtn {
-  background-image:url('../img/svg/loop.svg');
 }
 
 .hamburger {

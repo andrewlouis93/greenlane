@@ -77,11 +77,10 @@
     function addRoute(_Actions){
       $('a').has('.routeBtn').animate({padding:'0px'},200);
       $('a').has('.routeBtn').animate({padding:"5%"},200);
-
     setTimeout( function(){
-      $('.routeBtn').css("background-image", "url('../../materialize/img/svg/routeEmpty.svg')"),
-      $('div.locIconStart').addClass('bounceOne')
-      $('div.locIconEnd').addClass('bounceTwo')},350);
+      // $('.routeBtn').css("background-image", "url('../../materialize/img/svg/routeEmpty.svg')"),
+      $('#locIconStart').attr('class','bounceOne')
+      $('#locIconEnd').attr('class','bounceTwo')},350);
 
          setTimeout( function() {
           _Actions.setRoute();
@@ -99,8 +98,7 @@
       $('a').has('.loopBtn').animate({padding:"5%"},200);
 
       setTimeout( function(){
-      $('.loopBtn').css("background-image", "url('../../materialize/img/svg/loopEmpty.svg')"),
-      $('div.locIconLoop').addClass('bounceOne')},350);
+      $('#locIconLoop').attr('class','bounceOne')},350);
 
         setTimeout( function() {
           _Actions.setLoop();
