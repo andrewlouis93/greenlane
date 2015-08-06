@@ -4,14 +4,14 @@
   <head>
     <title>Greenlane</title>
 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <meta property="og:url"           content="http://greenlane.io" />
     <meta property="og:type"          content="website" />
-    <meta property="og:title"         content="Your Website Title" />
-    <meta property="og:description"   content="Your description" />
-    <meta property="og:image"         content="http://www.your-domain.com/path/image.jpg" />
+    <meta property="og:title"         content="Greenlane" />
+    <meta property="og:description"   content="Greenlane uses park, tree and trail data to map scenic paths through Toronto. So the next time you're moving through the city, choose Greenlane and Toronto differently." />
+    <meta property="og:image"         content="http://gallery.photo.net/photo/4951429-md.jpg" />
 
 
-     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
      <link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.css' rel='stylesheet' />
      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
@@ -64,6 +64,31 @@
   <script type="text/javascript" src="bundle.js"></script>
   <!-- UI Scripts -->
   <script type="text/javascript" src="public/js/carouselMaterial.js"></script>
+
+  <div id="fb-root"></div>
+   <script>
+     window.fbAsyncInit = function() {
+       FB.init({
+         appId      : '937090636349988',
+         status     : true,
+         xfbml      : true
+       });
+     };
+
+     (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+
+    // Refactor!
+    //   FB.ui({
+    //     method: 'share',
+    //     href: 'http://greenlane.io',
+    // }, function(response){});
+   </script>
 
   </body>
 </html>

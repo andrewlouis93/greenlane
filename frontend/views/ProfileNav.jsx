@@ -79,12 +79,16 @@ var ProfileNav = React.createClass({
               </a>
           </li>)
   },
+  activateShare: function(){
+    $("#sidenav-overlay").trigger('click');
+    Actions.activateError('share');
+  },
   profileButtons: function(){
     return ([
       <div>
         <div className="profileOpt">
             {(this.state && this.state.auth) ? this.favouritedRoutes() : false}
-            <li><a><i className="share left"></i>share</a></li>
+            <li><a onClick={this.activateShare}><i className="share left"></i>share</a></li>
         </div>
         <div className="footer">
           <li><a onClick={Actions.setActivePage.bind(this,'FAQ')}>faq</a></li>

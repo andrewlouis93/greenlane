@@ -66,12 +66,12 @@ var Error = React.createClass({
 			title: 'share Greenlane with your friends!',
 			body: (
 			[
-				<a onClick={this.deactivate} className='btn-facebook error-btn fb-share-button' dataHref="http://www.your-domain.com/your-page.html">
+				<a target="_blank" className='btn-facebook error-btn fb-share-button' href="https://www.facebook.com/sharer/sharer.php?u=greenlane.io">
         		<i className="fa fa-facebook left fa-2x"></i>
         		<span>share on facebook</span>
         </a>
 				,
-				<a onClick={this.deactivate} className='btn-twitter error-btn'>
+				<a target="_blank" className='btn-twitter error-btn' href="https://twitter.com/home?status=Get%20your%20friends%20on%20the%20greenlane!">
         		<i className="fa fa-twitter left fa-2x"></i>
         		<span>share on twitter</span>
         </a>
