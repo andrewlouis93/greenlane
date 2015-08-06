@@ -272,17 +272,17 @@ input:not(:valid) + .mapbox-close-icon {
 
 path.leaflet-clickable {
 /*    stroke: #3BB2D0;
-*/    
+*/
     stroke-width: 6px;
 }
 
 path.activePath{
-    stroke: #38d09f;    
+    stroke: #38d09f;
     stroke-opacity:1;
 }
 path.inactivePath{
     stroke: #f36d85;
-    stroke-opacity:0.5;
+    stroke-opacity:1;
 }
 
 .leaflet-popup:hover{

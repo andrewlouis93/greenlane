@@ -1758,3 +1758,19 @@ hr {
     -webkit-animation-iteration-count: infinite;
 }
 
+/* Styles for the Google Maps Link */
+#gmaps-link{
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 30vh;
+  height: 45px;
+  line-height: 45px;
+}
+#gmaps-image{
+  font-size: 1.5rem;
+  margin-right: 0px;
+  line-height: 45px;
+}

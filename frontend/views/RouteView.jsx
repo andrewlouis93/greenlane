@@ -15,13 +15,24 @@ function readCookie(name) {
 
 
 var RouteView = React.createClass({
+  getInitialState: function(){
+    var listItem = {
+          list: (ScenicStore.getSessionState().activePath) ? ScenicStore.getSessionState().activePath.steps : [],
+          travelTime: (ScenicStore.getSessionState().activePath) ? ScenicStore.getSessionState().activePath.formatted.duration : null,
+          travelDist: (ScenicStore.getSessionState().activePath) ? ScenicStore.getSessionState().activePath.formatted.distance : null,
+          travelDest: null,
+          travelOrig: null,
+          turns: null,
+          directionsState: Classnames('card','col','l3','m12','s12',ScenicStore.getLayout().directions),
+          url: null
+        };
+        return listItem;
+  },
   componentDidMount: function(){
     console.log("Route View has Mounted!");
     ScenicStore.addChangeListener(this._onChange);
     console.log(ScenicStore.getSessionState().activePath);
-
     window.nateState = this.state;
-
   },
   // takes in an array of mapbox latLng objects and
   // converts to regular objects.
@@ -61,26 +72,25 @@ var RouteView = React.createClass({
         }
     })
   },
-  getInitialState: function(){
-    var listItem = {
-          list: (ScenicStore.getSessionState().activePath) ? ScenicStore.getSessionState().activePath.steps : [],
-          travelTime: (ScenicStore.getSessionState().activePath) ? ScenicStore.getSessionState().activePath.formatted.duration : null,
-          travelDist: (ScenicStore.getSessionState().activePath) ? ScenicStore.getSessionState().activePath.formatted.distance : null,
-          travelDest: null,
-          travelOrig: null,
-          turns: null,
-          directionsState: Classnames('card','col','l3','m12','s12',ScenicStore.getLayout().directions)
-        };
-        return listItem;
+  googleMapsURL: function(){
+    //https://www.google.com/maps/dir/lat,lng/...
+    var url = "https://www.google.com/maps/dir/";
+
+    if (ScenicStore.getSessionState().origin && ScenicStore.getSessionState().destination && ScenicStore.getSessionState().activePath){
+      url += ScenicStore.getSessionState().origin.latLng.lat+","+ScenicStore.getSessionState().origin.latLng.lng;
+      ScenicStore.getSessionState().activePath.info.scenic_route.map(function(scenic){
+        // 1 -> lat, 0->lng
+        url+="/"+scenic[1]+","+scenic[0];
+      })
+      url+="/" + ScenicStore.getSessionState().destination.latLng.lat+","+ScenicStore.getSessionState().destination.latLng.lng;
+
+      if (ScenicStore.getSessionState().transit == "cycling")
+        url+="/data=!4m2!4m1!3e1";
+      else if (ScenicStore.getSessionState().transit == "walking")
+        url+="/data=!4m2!4m1!3e2";
+    }
+    return url;
   },
-
-  // shortenDestination: function() {
-  //       var destShort = ScenicStore.getSessionState().destinationName;
-  //       var shortenDest = destShort.indexOf('Toronto');
-  //       destShort = destShort.substring(0, n != -1 ? n : s.length);
-  // },
-
-
   createList: function(){
     var Directions = this.state.list;
     var current = null;
@@ -148,6 +158,12 @@ var RouteView = React.createClass({
                     }
                   }
               )}
+              <a href={this.state.url} target="_blank" className="ui-menu-item hide-on-large-only">
+                <div id='gmaps-link' className='btn-secondary'>
+                  <i id='gmaps-image' className="fa fa-google left fa-2x"></i>
+                  <span>listen to your route</span>
+                </div>
+              </a>
             </ul>),
     }
     this.setState(updatedStateProp);
@@ -173,6 +189,8 @@ var RouteView = React.createClass({
       this.createList();
 
     window._hrrr = this.state.list;
+
+    this.setState({url: this.googleMapsURL()});
   },
   render: function() {
     return (
