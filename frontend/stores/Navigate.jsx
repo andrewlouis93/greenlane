@@ -117,14 +117,14 @@ function clearDrawnRoutes(){
 
 function drawPins(){
   var originIcon = L.icon({
-      iconUrl: 'public/assets/origin.gif',
+      iconUrl: 'public/assets/locBubble.svg',
       iconSize:     [40, 40], // size of the icon
       iconAnchor:   [0, 0] // point of the icon which will correspond to marker's location
   });
   var destIcon = L.icon({
     iconUrl: 'public/assets/dest.svg',
-    iconSize:     [30, 65], // size of the icon
-    iconAnchor:   [30, 65] // point of the icon which will correspond to marker's location
+    iconSize:     [30, 35], // size of the icon
+    iconAnchor:   [30, 35] // point of the icon which will correspond to marker's location
   });
   if (ScenicStore.getSessionState().loop){
     originMarker = L.marker(ScenicStore.getSessionState().origin.latLng,{icon: originIcon}).addTo(window.map)
@@ -609,7 +609,7 @@ $(document).on('click','.routeChoice', function(){
 
 
   var originIcon = L.icon({
-      iconUrl: 'public/assets/origin.gif',
+      iconUrl: 'public/assets/locBubble.svg',
       iconSize:     [40, 40], // size of the icon
       iconAnchor:   [0, 0] // point of the icon which will correspond to marker's location
   });
