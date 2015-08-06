@@ -616,8 +616,8 @@ $(document).on('click','.routeChoice', function(){
 
   var destIcon = L.icon({
     iconUrl: 'public/assets/dest.svg',
-    iconSize:     [30, 65], // size of the icon
-    iconAnchor:   [30, 65] // point of the icon which will correspond to marker's location
+    iconSize:     [30, 35], // size of the icon
+    iconAnchor:   [30, 35] // point of the icon which will correspond to marker's location
   });
 
   function showError(){
