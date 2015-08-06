@@ -78,8 +78,8 @@ var Body = React.createClass({
 	componentDidMount: function(){
 		// only occurs once once the rest of the site has loaded!
 		createCookie('onboardedUser', true, 365);
-		$("body").css({
-			'min-height': window.innerHeight
+		$("#containerRow").css({
+			'z-index': -1
 		})
     this.landingAnimation();
 	},

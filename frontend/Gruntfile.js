@@ -1,4 +1,4 @@
-module.exports = function(grunt) {  
+module.exports = function(grunt) {
   	// Initial configuration
 	grunt.initConfig({
 		browserify:{
@@ -12,22 +12,21 @@ module.exports = function(grunt) {
 			}
 		},
 	    connect: {
-	        server:{ 
+	        server:{
 	        	options: {
 	            	port: 3001,
                 open: true,
-                hostname: 'localhost',
-	            	base: '.'        	
+	            	base: '.'
 	        	}
 	        }
-	    },	   
+	    },
 	    autoprefixer: {
 	    	options: {
   				browsers: ['last 2 versions']
 			},
             single_file: {
                 src: 'materialize/sass/materialize.css',
-            }			
+            }
 	    },
 	    sass: {
 	        dist: {
@@ -35,11 +34,11 @@ module.exports = function(grunt) {
 	                'materialize/sass/materialize.css': 'materialize/sass/materialize.scss'
 	            }
 	        }
-	    },    
+	    },
 		watch: {
 		  options: {
 		    livereload: true
-		  },			
+		  },
 		  css: {
 		    files: ['materialize/sass/*.scss','materialize/sass/components/*.scss'],
 		    tasks: ['sass','autoprefixer'],
