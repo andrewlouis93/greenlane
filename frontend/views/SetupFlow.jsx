@@ -28,7 +28,7 @@ var SetupFlow = React.createClass({
     ScenicStore.addChangeListener(this.updateState);
     this.setState({
       lockHeight: {
-        zIndex: -1
+        // zIndex: -1
       }
     });
   },
