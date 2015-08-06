@@ -560,6 +560,9 @@ var Navigate = {
             Actions.setParkMode();
             // Turn the park view off if active
             $(".parkBtn.active").trigger('click')
+            // Setting up for a fresh run.
+            $(".go-to-route").removeClass("hide");
+            $(".favorite").addClass("hide");
 
             Actions.isLoading(false);
         }, 3)
