@@ -1738,6 +1738,11 @@ hr {
    }
 }
 
+.p-svg-pulse {
+  width:50px;
+  height:50px;
+}
+
 .p-svg-pulse .pulse {
     -webkit-animation: svg_pulse 1s ease;
     -webkit-animation-delay:1s;
