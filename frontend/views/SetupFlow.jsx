@@ -3,14 +3,15 @@ var Classnames = require('classnames');
 var Endpoints = require('./EndpointsView.jsx');
 var TimeDrag = require('./DragInt.jsx')
 
+var Analytics = require('../stores/Analytics.jsx');
 var ScenicStore = require('../stores/Stores.jsx');
 var Actions = require('../stores/Actions.jsx');
 
 var SetupFlow = React.createClass({
-  getInitialState: function(){    
+  getInitialState: function(){
     var _seed = this.routes().transBtns;
     var _initState = {};
-    
+
     _initState['reactBlob'] = _seed.reactBlob;
     _initState['linkTo'] = _seed.linkTo;
     _initState['sessionState'] = ScenicStore.getSessionState();
@@ -20,10 +21,14 @@ var SetupFlow = React.createClass({
     return _initState;
   },
   componentDidMount: function(){
+
+    // Hit landing page
+    Analytics.virtualPage('Home','/home');
+
     ScenicStore.addChangeListener(this.updateState);
     this.setState({
       lockHeight: {
-        minHeight: window.innerHeight 
+        minHeight: window.innerHeight
       }
     });
   },
@@ -521,28 +526,32 @@ var SetupFlow = React.createClass({
         }
       }
     }
-  , 
+  ,
   nextState: function(){
     // Gets the linkTo value
     var nextView = this.state.linkTo;
     // Sets the state object identified by the above property.
+
+    // Analytics.virtualPageRouter(nextView);
+
     this.setState(this.routes()[nextView]);
     $(".progress-point.active").next().trigger('click');
   },
 
   transBtns: function() {
+    Analytics.virtualPage('Setup|Transport','/setup/transport');
     this.setState(this.routes().transBtns);
-
   },
-    travelType: function() {
+  travelType: function() {
+    Analytics.virtualPage('Setup|TravelType','/setup/type');
     this.setState(this.routes().travelType);
   },
-
   destSel: function() {
+    Analytics.virtualPage('Setup|Destination','/setup/destination');
     this.setState(this.routes().destSel);
   },
-
   timeSel: function() {
+    Analytics.virtualPage('Setup|Time','/setup/time');
     this.setState(this.routes().timeSel);
   },
 

@@ -3,6 +3,7 @@ var Slider = require('react-slick');
 var Classnames = require('classnames');
 
 var Navigate = require('../stores/Navigate.jsx');
+var Analytics = require('../stores/Analytics.jsx');
 var Actions = require('../stores/Actions.jsx');
 var ScenicStore = require('../stores/Stores.jsx');
 
@@ -12,6 +13,9 @@ var config = require('../config.js');
  * Tutorial! Needs to be fixed.
 */
   var Slideshow = React.createClass({
+    componentDidMount: function(){
+      Analytics.virtualPage('Intro|Landing', '/intro/landing');
+    },
     getInitialState: function(){
       return {
         'tutorialData' : [
@@ -37,7 +41,17 @@ var config = require('../config.js');
         dots: true,
         infinite: true,
         slidesToShow: 1,
-        slidesToScroll: 1
+        slidesToScroll: 1,
+        afterChange: function(slideId){
+          if (slideId != 7){
+            var title = 'Intro|Page'+slideId;
+            var url = '/intro/page'+slideId;
+            Analytics.virtualPage(title, url);
+          }
+          else{
+            Analytics.virtualPage('Intro|SignIn','/intro/sign-in');
+          }
+        }
       };
       // WTF is this ...settings syntax?
       return (

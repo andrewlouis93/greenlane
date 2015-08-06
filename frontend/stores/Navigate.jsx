@@ -1,13 +1,13 @@
 var Dispatcher = require('./Dispatcher.jsx');
 var ScenicStore = require('./Stores.jsx');
 var Actions = require('./Actions.jsx');
+var Analytics = require('./Analytics.jsx');
 
 // Will be "saved" to sessionState.activePath.
 var paths = [];
 var originMarker;
 var destMarker;
 var curMarker;
-
 
 // Used only when re-draw routes
 function liteClearDrawnRoutes(){
@@ -329,9 +329,6 @@ var Navigate = {
             console.log("Autocomplete status: " + status);
             return;
         }
-
-        // PRUNE RESTRICTIONS HERE.
-
         console.log(predictions);
         return cb(predictions);
     });
@@ -430,6 +427,8 @@ var Navigate = {
 
   },
   generateSingleton: function(route){
+
+    // Andrew: Why was this placed here??
     Actions.goBack();
 
     event.preventDefault();
@@ -500,6 +499,12 @@ var Navigate = {
     return false;
   },
   generateRoute: function(event){
+
+    Analytics.virtualPage('Route Options|Map','/options/map');
+    // Attach event listener to .activator
+    $(document).off('click','.activator', Analytics.virtualPageChosenList );
+    $(document).on('click','.activator', Analytics.virtualPageChoiceList );
+
     event.preventDefault();
     event.stopPropagation();
     var origin = ScenicStore.getSessionState().origin;
@@ -582,6 +587,13 @@ $(document).on('click','.leaflet-popup',function(){
 });
 
 $(document).on('click','.go-to-route', function(){
+
+  Analytics.virtualPage('Route Chosen|Map','/chosen/map');
+
+  // Attach click event listener, handler to .activator
+  $(document).off('click','.activator', Analytics.virtualPageChoiceList );
+  $(document).on('click','.activator', Analytics.virtualPageChosenList );
+
   var activePathIndex = parseFloat($('.activePath').attr('route'));
   $("[route]").not("[route="+ activePathIndex +"]").fadeOut();
 

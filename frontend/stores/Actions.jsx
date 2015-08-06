@@ -1,5 +1,6 @@
 var Dispatcher = require('./Dispatcher.jsx');
 var Store = require('./Stores.jsx');
+var Analytics = require('./Analytics.jsx');
 
 var ScenicActions = {
   /**
@@ -67,6 +68,9 @@ var ScenicActions = {
     });
   },
   isLoading: function(_isLoading){
+    if (_isLoading)
+      Analytics.virtualPage('Setup|Loading','/setup/loading');
+
     Dispatcher.dispatch({
       actionType: 'isLoading',
       isLoading: _isLoading

@@ -174,7 +174,6 @@ var RouteView = React.createClass({
 
     window._hrrr = this.state.list;
   },
-
   render: function() {
     return (
 

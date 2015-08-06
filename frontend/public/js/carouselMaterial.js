@@ -7,9 +7,18 @@ function googleExpandoToggle() {
 	have not been rendered yet, forcing it to assign
 	incorrect dimensions.
   */
+  if (!$(this).hasClass('active')){
+    // Fire virtualPageView indicating that we clicked on park info
+    dataLayer.push({
+      'event':'VirtualPageview',
+      'virtualPageURL': '/park/all',
+      'virtualPageTitle' : 'Park|All'
+    });
+  }
   window.dispatchEvent(new Event('resize'));
   $(this).toggleClass('active');
   $(this).next().toggleClass('active');
+
   // ARIA
   $(".openInfo.active").trigger('click');
 }
@@ -27,6 +36,16 @@ var _parkHeight = $('.google-expando--wrap').height();
 
 $('.openInfo').on('click', function() {
 	$('.openInfo').toggleClass('active');
+
+  if ($(this).hasClass('active')){
+    // Send virtual page view
+    dataLayer.push({
+      'event':'VirtualPageview',
+      'virtualPageURL': '/park/info',
+      'virtualPageTitle' : 'Park|Info'
+    });
+  }
+
 	$( ".expandedInfo" ).slideToggle( 200, function() {
 
 			var _toHeight = ($(".HeaderRoute").offset().top - ($(".openInfo").offset().top + $(".openInfo").outerHeight(true))) + 'px';

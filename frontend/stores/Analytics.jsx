@@ -27,7 +27,30 @@ var Analytics = {
     dataLayer.push({
       'travelType': _type
     })
-   }
+  },
+  virtualPage: function(title, url){
+    dataLayer.push({
+      'event':'VirtualPageview',
+      'virtualPageURL': url,
+      'virtualPageTitle' : title
+    });
+  },
+  virtualPageChoiceList: function(){
+    console.log("IN ANALYTICS CHOICE LIST");
+    dataLayer.push({
+      'event':'VirtualPageview',
+      'virtualPageURL': '/options/list',
+      'virtualPageTitle' : 'Route Options|List'
+    });
+  },
+  virtualPageChosenList: function(){
+    console.log("IN ANALYTICS CHOSEN LIST");
+    dataLayer.push({
+      'event':'VirtualPageview',
+      'virtualPageURL': '/chosen/list',
+      'virtualPageTitle' : 'Route Chosen|List'
+    })
+  }
 };
 
 

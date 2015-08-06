@@ -2,6 +2,7 @@ var React = require('react/addons');
 var Carousel = require('nuka-carousel');
 var ScenicStore = require('../stores/Stores.jsx');
 var Actions = require('../stores/Actions.jsx');
+var Analytics = require('../stores/Analytics.jsx');
 
 var Decorators = [{
   component: React.createClass({
@@ -123,6 +124,7 @@ var ParkTab = React.createClass({
     },
     closeDirections: function(){
       console.log("CLOSING DIRECTIONS");
+
       $('#turnList.card-reveal')
         .css({ display: 'block'})
         .velocity("stop", false)
@@ -173,6 +175,7 @@ updateExpInfoHeight: function(){
   this._onChange();
   var ParkState = this.state.parkName;
   console.log("IN CREATE PARK LIST", ParkState);
+
   var updatedStateProp = {
     parkName: ParkState.map(function(row, i){
                       return (
