@@ -82,6 +82,55 @@ var Accordion = React.createClass({
   }
 });
 
+var PrivacyAccordion = React.createClass({
+  render: function() {
+    return (
+      <div className="privacyMain">
+        <div className="staticTitle">{this.props.title}</div>
+        <Section title="We collect limited information from you">
+        	If you use our website or application, we may collect information about the browser you’re using. We might look at what site you came from, or what site you visit when you leave us.
+        </Section>
+        <Section title="We collect information passively">
+        	We collect information from you passively. We use tracking tools like browser cookies and web beacons. We collect information about users over time when you use this website.  We may have third parties collect personal information this way. 
+        </Section>
+        <Section title="We use information as disclosed and described here.">
+        	We use information to improve our products and services. We may use your information to make our website and products better. We might use your information to customize your experience with us. We use information as otherwise permitted by law or as we may notify you.
+        </Section>
+        <Section title="We will not share information with third parties">
+        	While we may share information within the Critical Mass family of companies, we will not share information with any third party.
+		</Section>
+        <Section title="You have certain choices about how we use your information">
+        	You can control cookies and tracking tools. Your browser may give you the ability to control cookies or other tracking tools.  How you do so depends on the type of tool.  Certain browsers can be set to reject browser cookies.  
+			Our Do Not Track Policy: Some websites have “do not track” features that allow you to tell a website not to track you. These features are not all uniform. We do not currently respond to those signals.  If you block cookies, certain features on our sites may not work.  If you block or reject cookies, not all of the tracking described here will stop. 
+			Options you select are browser and device specific.
+        </Section>
+        <Section title="We use standard security measures">
+        	The Internet is not 100% secure. We cannot promise that your use of our sites will be completely safe. We encourage you to use caution when using the Internet. This includes not sharing your passwords.  
+			We also keep information as otherwise required by law.
+        </Section>
+        <Section title="We store information both in Canada and the United States">
+        	Information we maintain may be stored both within Canada and the United States.
+        	If you live outside of the United States, you understand and agree that we may transfer your information to the United States.
+			This site is subject to Canadian laws, which may not afford the same level of protection as those in your country.
+        </Section>
+        <Section title="We may link to other sites or apps or have third party services on our platforms we don’t control">
+        	If you click on a third party link, you will be taken to platforms we do not control. This policy does not apply to the privacy practices of that website. Read other company’s privacy policy carefully. We are not responsible for these third parties.
+        </Section>
+        <Section title="Feel free to contact us if you have more questions">
+        	If you have any questions about this Policy or want to correct or update your information, please email us at criticalmass@criticalmass.com 
+				You can also write to us or call at:  Greenlane Help
+				Critical Mass 
+				312 Adelaide Street W, 6th floor 
+                Toronto, ON  M5V 1R2
+                Phone: 416.673.5275
+        </Section>
+        <Section title="We may link to other sites or apps or have third party services on our platforms we don’t control">
+        	If you click on a third party link, you will be taken to platforms we do not control. This policy does not apply to the privacy practices of that website. Read other company’s privacy policy carefully. We are not responsible for these third parties.
+        </Section>
+      </div>
+    );
+  }
+});
 // STATIC PAGE CONTROLLER //////////////////////////////////////////////////////////
 
 var PageController = React.createClass({
@@ -148,11 +197,7 @@ var PageController = React.createClass({
 	privacy: function(){
 		return (
 			<div className="viewContainer">
-				<h1 className="staticTitle">privacy</h1>
-				<p>We’re a group of interns at Critical Mass, an experience design agency based in Toronto.</p>
-				<p>Though we all specialize in different areas, the one thing we have in common is our love for our city and the great outdoors.</p>
-				<p>We wanted to create something that used the city’s green spaces to make Torontonians’ lives just a little bit better. So we got together, thought long and hard and came up with Greenlane - an app that uses park, tree and trail data to map scenic routes through the city.</p>
-				<p>	So next time you’re moving through Toronto, choose Greenlane and see the city differently.</p>
+				<PrivacyAccordion title="CM privacy policy"/>
 			</div>
 		);
 	},

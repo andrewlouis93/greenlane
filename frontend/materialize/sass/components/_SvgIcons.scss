@@ -155,7 +155,7 @@
 }
 
 #routeSmall {
-  padding-top:2%;
+  padding-top:4%;
 }
 
 #loopSmall {
@@ -298,10 +298,22 @@
 
 }
 
-.parkIcon {
+.uTurn {
   position:absolute;
   top:50%;
   transform: translateY(-50%);
+  float: left;
+  background-image:url('../img/svg/uTurn.svg');
+  background-size:100% 100%;
+  background-position:50%;
+  width:10%;
+  height:30%;
+}
+
+.parkIcon {
+  position:absolute;
+  top:50%;
+  transform: translateY(-48%);
   float: left;
   background-image:url('../img/svg/park.svg');
   background-size:100% 100%;
@@ -313,7 +325,7 @@
 .locIcon {
   position:absolute;
   top:50%;
-  transform: translateY(-50%);
+  transform: translateY(-48%);
   float: left;
   background-image:url('../img/svg/locIcon.svg');
   background-size:100% 100%;

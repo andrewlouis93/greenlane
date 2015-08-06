@@ -46,13 +46,13 @@ var Loader = React.createClass({
 			<div id="green_loader" className={this.state.css}>
 				<div className="loading_content s4 m4 l4">
 					<div className="logoWhite"></div>
-					<div className="preloader-wrapper big active">
-						<div className="spinner-layer spinner-white-only">
-							<div className="circle-clipper left">
-								<div className="circle"></div>
-							</div>
-						</div>
-					</div>
+						<div className="load-wrapp">
+						    <div className="load-3">
+				                <div className="line"></div>
+				                <div className="line"></div>
+				                <div className="line"></div>
+		        			</div>
+            			</div>
 					<p className="loaderText flow-text">{this.loadText()[this.state.quotesId]}</p>
 					</div>
 			</div>
