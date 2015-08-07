@@ -2,6 +2,7 @@ var React = require('react/addons');
 
 var config = require('../config.js');
 
+var Classnames = require('classnames');
 var ScenicStore = require('../stores/Stores.jsx');
 var Actions = require('../stores/Actions.jsx');
 
@@ -11,7 +12,7 @@ var Error = React.createClass({
 			err_css: ScenicStore.getErrObj().css,
 			title: false,
 			body: false,
-			hasLogo: false
+			hasLogo: Classnames()
 		}
 	},
 	componentDidMount: function(){
@@ -20,11 +21,15 @@ var Error = React.createClass({
 		ScenicStore.addErrorListener(this._errorUpdate);
 		// Orientation Lock!
 		window.addEventListener("orientationchange", function() {
-			if (window.orientation != 0)
-				this.setState({hasLogo: 'contains_logo'})
-			else
-				this.setState({hasLogo: false})
-		}, false);
+			if (window.orientation === 0){
+				this.setState({hasLogo: Classnames()})
+				this.deactivate();
+			}
+			else{
+				Actions.activateError('landscape');
+				this.setState({hasLogo: Classnames('contains_logo')})
+			}
+		}.bind(this), false);
 		// this.setState(this['geolocate']());
 	},
 	render: function(){
