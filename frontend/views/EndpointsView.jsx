@@ -53,7 +53,7 @@ var Endpoints = React.createClass({
               <div className="introTag">i am</div>,
               <div className="input-field">
                 <div onClick={this.geolocateUser} className="yourLoc"></div>
-                <input id="origin" type="text"className={inputClasses} required/>
+                <input id="origin" type="text" tabIndex="1" className={inputClasses} required/>
                 <label className="active" htmlFor="origin">looping from</label>
               </div>,
               <label className='error_label' htmlFor="origin" data-error="message here" data-success="right">
@@ -68,14 +68,14 @@ var Endpoints = React.createClass({
               <div className="introTag">i am</div>,
               <div className="input-field">
                 <div onClick={this.geolocateUser} className="yourLoc"></div>
-                <input id="origin" type="text" className={inputClasses} required/>
+                <input id="origin" type="text" tabIndex="1" className={inputClasses} required/>
                 <label className="active" htmlFor="origin">starting here</label>
               </div>,
               <label className='error_label' htmlFor="origin" data-error="message here" data-success="right">
                 {this.state.origin_error}
               </label>,
               <div className="input-field">
-                <input id="destination" type="text" className={inputClasses} required/>
+                <input id="destination" type="text" tabIndex="2" className={inputClasses} required/>
                 <label className="active" htmlFor="origin">going there</label>
               </div>,
               <label className='error_label' htmlFor="destination" data-error="message here" data-success="right">
@@ -231,7 +231,7 @@ var Endpoints = React.createClass({
                 return reactComponent;
               })
             }
-          <button id='submitRoute' onClick={this.validate} className="btn-secondary col s9 offset-s1.5 m6 offset-m3">continue
+          <button id='submitRoute' onClick={this.validate} tabIndex="3" className="btn-secondary col s9 offset-s1.5 m6 offset-m3">continue
           </button>
         </div>
     );

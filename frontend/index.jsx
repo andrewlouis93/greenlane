@@ -18,17 +18,51 @@ var is_keyboard = false;
 var is_landscape = false;
 var initial_screen_size = window.innerHeight;
 
+ function toggleFullScreen(){
+  if ($(window).width() <= 800) {
+    var doc = window.document;
+    var docEl = doc.documentElement;
+
+    var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+    var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+
+    if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+      requestFullScreen.call(docEl);
+    }
+    else {
+      cancelFullScreen.call(doc);
+    }
+  }
+};
+
+// $(document).on("keydown", function(e)
+//   {
+//     //Only do something when the user presses enter
+//     if( e.keyCode ==  13 )
+//     {
+//        var nextElement = $('[tabindex="' + (this.tabIndex+1)  + '"]');
+//        console.log( this , nextElement ); 
+//        if(nextElement.length )
+//          nextElement.focus()
+//        else
+//          $('[tabindex="1"]').focus();  
+//     }   
+//   });
+
 
 $(document).on('focus', 'input[type="text"]', function(){
   var _windowHeight = initial_screen_size;
-  $('body').css({'height':_windowHeight + 'px'});
-  $('.progress-meter').css({'height':_windowHeight + 'px'})
+  $('body').css({'height':_windowHeight + 'px',
+                  'background-color':'white'});
+  $('.progress-meter').css({'height':_windowHeight + 'px'});
+  $('.landError').css({'display':'none'});
+  $('.progress-meter').css({'display':'block'});
 });      
 
 
 $(document).on('blur', 'input[type="text"]', function(){
   $('body').css({'height':100 + 'vh'});
-  $('.progress-meter').css({'height':100 + 'vh'})
+  $('.progress-meter').css({'height':100 + '%'})
 }); 
 
 
@@ -117,6 +151,10 @@ var Body = React.createClass({
     return (
 
 			<div id='containerRow' style={this.state.lockHeight} className="row">
+      <div className="landError">
+        <div className="logoWhite"></div>
+        <h1>landscapes are best seen in portrait mode</h1>
+      </div>
         <div className={tutClasses}>
                 <div className="landing-animation"></div>
                 <Tutorial startApplication={this.startApplication} />
