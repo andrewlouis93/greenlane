@@ -633,7 +633,7 @@ var Navigate = {
 
             setTimeout(function(){
               console.log("timeout invoked");
-              window.map.fitBounds(L.featureGroup(paths).getBounds(), {padding: [8, 8],animate:true, duration: 0.5});
+              window.map.fitBounds(L.featureGroup(paths).getBounds(), {padding: [10, 10],animate:true, duration: 0.5});
             }, 500);
 
         }, 3)

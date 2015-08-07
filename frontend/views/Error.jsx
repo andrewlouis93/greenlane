@@ -10,19 +10,27 @@ var Error = React.createClass({
 		return {
 			err_css: ScenicStore.getErrObj().css,
 			title: false,
-			body: false
+			body: false,
+			hasLogo: false
 		}
 	},
 	componentDidMount: function(){
 		// Seed with default state.
 		// this.setState(this['auth']());
 		ScenicStore.addErrorListener(this._errorUpdate);
+		// Orientation Lock!
+		window.addEventListener("orientationchange", function() {
+			if (window.orientation != 0)
+				this.setState({hasLogo: 'contains_logo'})
+			else
+				this.setState({hasLogo: false})
+		}, false);
 		// this.setState(this['geolocate']());
 	},
 	render: function(){
 		return (
 			<div id='error' className={this.state.err_css}>
-				<div id='error_container'>
+				<div id='error_container' className={this.state.hasLogo}>
 					<div id='error_content'>
 						<div id='error_title'>{this.state.title}</div>
 						{this.state.body}
@@ -104,6 +112,17 @@ var Error = React.createClass({
 			]
 		)}
 	},
+	landscape: function(){
+		this.setState({hasLogo: 'contains_logo'})
+		return{
+			title: null,
+			body: (
+			[
+				<div className="logoWhite"></div>,
+				<p className="loaderText flow-text">You're in landscape!</p>
+			]
+		)}
+	},
 	geolocate: function(){
 		return{
 			title: "you're about to use Google Maps to navigate to your greenlane",
@@ -128,7 +147,7 @@ var Error = React.createClass({
 			err_css: errState.css,
 		});
 
-		if (ScenicStore.getErrObj().state)
+		if (ScenicStore.getErrObj() && ScenicStore.getErrObj().state)
 			this.setState(this[ScenicStore.getErrObj().state]())
 	},
 	componentWillUnmount: function(){

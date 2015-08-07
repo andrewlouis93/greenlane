@@ -41,12 +41,12 @@ var initial_screen_size = window.innerHeight;
 //     if( e.keyCode ==  13 )
 //     {
 //        var nextElement = $('[tabindex="' + (this.tabIndex+1)  + '"]');
-//        console.log( this , nextElement ); 
+//        console.log( this , nextElement );
 //        if(nextElement.length )
 //          nextElement.focus()
 //        else
-//          $('[tabindex="1"]').focus();  
-//     }   
+//          $('[tabindex="1"]').focus();
+//     }
 //   });
 
 
@@ -57,13 +57,13 @@ $(document).on('focus', 'input[type="text"]', function(){
   $('.progress-meter').css({'height':_windowHeight + 'px'});
   $('.landError').css({'display':'none'});
   $('.progress-meter').css({'display':'block'});
-});      
+});
 
 
 $(document).on('blur', 'input[type="text"]', function(){
   $('body').css({'height':100 + 'vh'});
   $('.progress-meter').css({'height':100 + '%'})
-}); 
+});
 
 
 function readCookie(name) {
@@ -151,10 +151,6 @@ var Body = React.createClass({
     return (
 
 			<div id='containerRow' style={this.state.lockHeight} className="row">
-      <div className="landError">
-        <div className="logoWhite"></div>
-        <h1>landscapes are best seen in portrait mode</h1>
-      </div>
         <div className={tutClasses}>
                 <div className="landing-animation"></div>
                 <Tutorial startApplication={this.startApplication} />
