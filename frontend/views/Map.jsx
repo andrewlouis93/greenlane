@@ -69,7 +69,6 @@ var Map = React.createClass({
 		this.updateDimensions();
 	},
 	routeNav: function(evt) {
-		toggleFullScreen();
 		window.scrollTo(0,1);
 		Actions.updateMenu('toggle');
 		$(".progress-point").first().addClass('active');

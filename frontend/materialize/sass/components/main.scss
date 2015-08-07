@@ -3,17 +3,40 @@ html, body, .table-container{
   overflow:hidden;
 }
 
-// @media (orientation: landscape) {
-//   body {
-//     -webkit-transform: rotate(90deg);
-//     -moz-transform: rotate(90deg);
-//     -o-transform: rotate(90deg);
-//     -ms-transform: rotate(90deg);
-//     transform: rotate(90deg);
-//     width:100vh;
-//     height:100vh;
-//   }
-// }
+
+.landError {
+  display:none;
+}
+
+@media (orientation: landscape) {
+  body {
+    background-color:$secondary-color;
+  }
+ .landError {
+  background-color:$secondary-color;
+  text-align:center;
+  display:block;
+  width:100vw;
+  height:100vh;
+  h1 {
+    transform:translateY(-50%);
+    position:absolute;
+    top:50%;
+    margin:10% auto;
+    left:0;
+    right:0;
+    text-align:center;
+    font-family:Roboto-Slab;
+    font-size:1.5rem;
+    font-weight:700;
+    color:#fff !important;
+  }
+ }
+ .progress-meter, #slide-out {
+  display:none;
+ }
+
+}
 
 /* Navigation Styles Below */
 
@@ -459,6 +482,7 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
     position:relative;
     display:inline-block;
     padding:5% 0%;
+    margin-bottom:2%;
     height:50%;
     width:100%;
   }
@@ -1071,7 +1095,7 @@ hr {
 @media #{$medium-and-down} {
   .slider.parkMenu {
     h3{
-      font-size:2.2vh;
+      font-size:3.6vh;
     }
   }
 }
@@ -1838,9 +1862,9 @@ hr {
 .line {
     margin:0 1vh;
     display: inline-block;
-    width: 3vh;
-    height: 3vh;
-    border-radius: 3vh;
+    width: 2vh;
+    height: 2vh;
+    border-radius: 2vh;
     background-color: white;
 }
 
