@@ -14,6 +14,24 @@ var Tutorial = require('./views/Tutorial.jsx');
 var ScenicStore = require('./stores/Stores.jsx');
 var Actions = require('./stores/Actions.jsx');
 
+var is_keyboard = false;
+var is_landscape = false;
+var initial_screen_size = window.innerHeight;
+
+
+$(document).on('focus', 'input[type="text"]', function(){
+  var _windowHeight = initial_screen_size;
+  $('body').css({'height':_windowHeight + 'px'});
+  $('.progress-meter').css({'height':_windowHeight + 'px'})
+});      
+
+
+$(document).on('blur', 'input[type="text"]', function(){
+  $('body').css({'height':100 + 'vh'});
+  $('.progress-meter').css({'height':100 + 'vh'})
+}); 
+
+
 function readCookie(name) {
     var value = (name = new RegExp('(?:^|;\\s*)' + ('' + name).replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&') + '=([^;]*)').exec(document.cookie)) && name[1];
     console.log('cookie value', value);
@@ -28,7 +46,6 @@ function createCookie(name,value,days) {
     else var expires = "";
     document.cookie = name+"="+value+expires+";";
 }
-
 
 
 var Body = React.createClass({
