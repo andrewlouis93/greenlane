@@ -588,3 +588,9 @@
     background: $secondary-color !important;
   }
 }
+
+@media #{$medium-and-down} {
+  .leaflet-left .leaflet-control {
+    display:none;
+  }
+}

@@ -113,7 +113,7 @@ render: function() {
 
 
         <button onClick={this.handleSkip} className="btn-primary col s5 Green_Skip">skip</button>
-        <button onClick={Navigate.generateRoute} className="btn-secondary col s5 Time_Submit">map it</button>
+        <button onClick={Navigate.generateRoute} className="btn-secondary col s5 Time_Submit" autoFocus>map it</button>
       </div>
     );
   }

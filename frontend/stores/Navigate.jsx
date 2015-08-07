@@ -125,8 +125,10 @@ function clearDrawnRoutes(){
       window.map.removeLayer(path);
     });
 
-    window.map.removeLayer(originMarker);
-    window.map.removeLayer(destMarker);
+    if (originMarker)
+        window.map.removeLayer(originMarker);
+    if (destMarker)
+      window.map.removeLayer(destMarker);
   }
   return [];
 }
@@ -144,7 +146,7 @@ function drawPins(){
   });
   if (ScenicStore.getSessionState().loop){
     originMarker = L.marker(ScenicStore.getSessionState().origin.latLng,{icon: originIcon}).addTo(window.map)
-    destMarker = L.marker(ScenicStore.getSessionState().origin.latLng,{icon: destIcon}).addTo(window.map)
+    // destMarker = L.marker(ScenicStore.getSessionState().origin.latLng,{icon: destIcon}).addTo(window.map)
   }
   else{
     originMarker = L.marker(ScenicStore.getSessionState().origin.latLng,{icon: originIcon}).addTo(window.map)
@@ -155,24 +157,36 @@ function drawPins(){
 // Refactor this ugly af function.
 function drawMarkers(){
     for (var i = 0; i < paths.length; i++){
-      var formattedRouteInfo = formatRouteInfo(paths[i].duration,paths[i].distance);
-      console.log("INDEX IS :", i);
-      console.log("LENGTH IS :", paths[i]._latlngs.length);
-      var popupLocation = Math.round( ((1/6)*(paths[i]._latlngs.length-1)) + ((1/3) * (i) * (paths[i]._latlngs.length-1)));
-      console.log("POPUP LOCATION IS :", popupLocation);
-      paths[i]._popup = L.popup().setLatLng(paths[i]._latlngs[popupLocation]).setContent(formattedRouteInfo);
-      console.dir(paths[i]._popup);
-      console.log("BOUND");
+      (function(i){
+        var formattedRouteInfo = formatRouteInfo(paths[i].duration,paths[i].distance);
+        console.log("INDEX IS :", i);
+        console.log("LENGTH IS :", paths[i]._latlngs.length);
 
-      // do we need to do fitBounds at this point?
+        var lastIndex = paths[i]._latlngs.length-1;
 
-      try {
-        window.map.addLayer(paths[i]._popup);
-        paths[i]._popup._container.setAttribute('route', i);
-      }
-      catch(err){
-        console.error(err);
-      }
+        var popupLocation;
+        if (i == 0)
+        popupLocation = Math.round( (10/100) * (lastIndex) );
+        else if (i == 1)
+          popupLocation = Math.round( (50/100) * (lastIndex) );
+        else
+          popupLocation = Math.round( (80/100) * (lastIndex) );
+
+        // popupLocation = Math.round( ((1/6) * (lastIndex)) + ((1/3) * (i) * (lastIndex)));
+
+        console.log("POPUP LOCATION IS :", popupLocation);
+        paths[i]._popup = L.popup().setLatLng(paths[i]._latlngs[popupLocation]).setContent(formattedRouteInfo);
+        console.dir(paths[i]._popup);
+        console.log("BOUND");
+        // do we need to do fitBounds at this point?
+        try {
+          window.map.addLayer(paths[i]._popup);
+          paths[i]._popup._container.setAttribute('route', i);
+        }
+        catch(err){
+          console.error(err);
+        }
+      })(i);
     }
 }
 
@@ -516,7 +530,7 @@ var Navigate = {
 
         // Get the bounds of the longest route.
         var bounds = paths[0].getBounds();
-        window.map.fitBounds(bounds);
+        window.map.fitBounds(bounds, {padding: [8, 8],animate:true, duration: 0.5});
     }, 1)
 
     return false;
@@ -560,8 +574,11 @@ var Navigate = {
         // Do the click handler stuff here...
         results.results = results.results.slice(-3);
 
+        console.log("This is right after you get it", results.results);
 
         var greenifyResults = results.results;
+
+
         greenifyResults.map(function(it,id){
           var currentDups = returnDuplicateIds(it.parks);
             var cleanParks = [];
@@ -579,6 +596,9 @@ var Navigate = {
             greenifyResults[id].pictures = cleanPictures;
         })
         results.results = greenifyResults;
+
+        window._greenify = greenifyResults;
+
         Actions.setGreenpoints(results);
 
 
@@ -613,10 +633,12 @@ var Navigate = {
 
             setTimeout(function(){
               console.log("timeout invoked");
-              window.map.fitBounds(paths[0].getBounds());
+              window.map.fitBounds(L.featureGroup(paths).getBounds(), {padding: [8, 8],animate:true, duration: 0.5});
             }, 500);
 
         }, 3)
+    }).fail(function(){
+      Actions.timeOut();
     });
     return false;
   }
@@ -655,7 +677,7 @@ $(document).on('click','.go-to-route', function(){
   $(".favorite").removeClass("hide");
 
   // Center the selected route.
-  window.map.fitBounds(paths[activePathIndex].getBounds(),{padding: [8, 8]})
+  window.map.fitBounds(paths[activePathIndex].getBounds(),{padding: [8, 8], animate:true, duration: 0.5})
   window.map.invalidateSize();
 })
 

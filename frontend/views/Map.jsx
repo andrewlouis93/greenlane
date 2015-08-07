@@ -69,7 +69,7 @@ var Map = React.createClass({
 		this.updateDimensions();
 	},
 	routeNav: function(evt) {
-		// toggleFullScreen();
+		toggleFullScreen();
 		window.scrollTo(0,1);
 		Actions.updateMenu('toggle');
 		$(".progress-point").first().addClass('active');
@@ -88,7 +88,7 @@ var Map = React.createClass({
 			<div id="map" className={this.state.layout}>
 				<div id="map-container">
 					<div className={this.state.logoStyle}></div>
-					<a onClick={this.routeNav} className={this.state.startButtonStyle}>
+					<a onClick={this.routeNav} className={this.state.startButtonStyle} autoFocus>
 						begin
 					</a>
 				</div>

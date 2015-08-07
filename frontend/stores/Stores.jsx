@@ -28,7 +28,8 @@ var sessionState = {
   // Default the "greenLevel" to 1.
   // Should be sent as 3*(1,2,3,4)
   'greenness': 1,
-  'activeCarousel': 0
+  'activeCarousel': 0,
+  'timedOut': false
 };
 
 
@@ -297,6 +298,15 @@ Dispatcher.register(function(payload) {
       case 'deactivateError':
         errObj.deactivate();
         ScenicStore.emitError();
+        break;
+      case 'timeOut':
+        sessionState.timedOut = true;
+        ScenicStore.emitChange();
+        break;
+      case 'resetTimeout':
+        sessionState.timedOut = false;
+        ScenicStore.emitChange();
+        break;
       // add more cases for other actionTypes, like TODO_UPDATE, etc.
     }
     return true; // No errors. Needed by promise in Dispatcher.

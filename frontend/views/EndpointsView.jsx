@@ -19,6 +19,7 @@ var Endpoints = React.createClass({
     };
   },
   componentDidMount: function(){
+    window._endP = this;
     var geocoder = new google.maps.Geocoder();
     $('.typeahead').typeahead(null, {
       displayKey: 'description',
@@ -44,6 +45,25 @@ var Endpoints = React.createClass({
       err[this.id + '_error'] = false;
       _this.setState(err);
     });
+
+    // Attach keydown handlers for the inputs
+    $(document).on('keydown','#origin', function(e){
+      if (e.keyCode == 13){
+        e.preventDefault();
+        if (document.getElementById('destination')){
+          console.log("triggered");
+          $("#destination").focus();
+        }
+        else{
+          $("#submitRoute").focus();
+        }
+      }
+    }).on('keydown','#destination', function(e){
+      if (e.keyCode == 13){
+        e.preventDefault();
+        $("#submitRoute").focus();
+      }
+    });
   },
   // Looks at the store state and decides whether
   // to show one or two inputs.
@@ -56,7 +76,7 @@ var Endpoints = React.createClass({
               <div className="introTag">i am</div>,
               <div className="input-field">
                 <div onClick={this.geolocateUser} className="yourLoc"></div>
-                <input id="origin" type="text"className={inputClasses} required/>
+                <input id="origin" type="text" className={inputClasses} tabIndex="1" required/>
                 <label className="active" htmlFor="origin">looping from</label>
               </div>,
               <label className='error_label' htmlFor="origin" data-error="message here" data-success="right">
@@ -71,14 +91,14 @@ var Endpoints = React.createClass({
               <div className="introTag">i am</div>,
               <div className="input-field">
                 <div onClick={this.geolocateUser} className="yourLoc"></div>
-                <input id="origin" type="text" className={inputClasses} required/>
+                <input id="origin" type="text" className={inputClasses} tabIndex="1" required/>
                 <label className="active" htmlFor="origin">starting here</label>
               </div>,
               <label className='error_label' htmlFor="origin" data-error="message here" data-success="right">
                 {this.state.origin_error}
               </label>,
               <div className="input-field">
-                <input id="destination" type="text" className={inputClasses} required/>
+                <input id="destination" type="text" name="destination" className={inputClasses} tabIndex="2" required/>
                 <label className="active" htmlFor="origin">going there</label>
               </div>,
               <label className='error_label' htmlFor="destination" data-error="message here" data-success="right">
@@ -232,7 +252,7 @@ var Endpoints = React.createClass({
                 return reactComponent;
               })
             }
-          <button id='submitRoute' onClick={this.validate} className="btn-secondary col s9 offset-s1.5 m6 offset-m3">continue
+          <button id='submitRoute' onClick={this.validate} tabIndex="3" className="btn-secondary col s9 offset-s1.5 m6 offset-m3">continue
           </button>
         </div>
     );

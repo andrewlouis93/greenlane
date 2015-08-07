@@ -6,7 +6,8 @@ var Loader = React.createClass({
 	getInitialState: function(){
 		return {
 			quotesId: Math.round(Math.random()*(this.loadText().length-1)),
-			css: "hide"
+			css: "hide",
+			timedOut: false
 		}
 	},
 	componentDidMount: function(){
@@ -31,6 +32,8 @@ var Loader = React.createClass({
 			})
 		}
 		this.setState(_css);
+		console.log("THIS STATE", this.state.timedOut);
+		this.setState({timedOut: ScenicStore.getSessionState().timedOut});
 	},
 	loadText: function() {
 		var quotes= new Array();
@@ -41,19 +44,32 @@ var Loader = React.createClass({
 		quotes.push("mingling with mother nature");
 		return quotes;
 	},
+	resetTimeout: function(){
+		Actions.resetTimeout();
+		Actions.isLoading(false);
+		$("#destSel").trigger('click');
+	},
 	render: function(){
 		return (
 			<div id="green_loader" className={this.state.css}>
 				<div className="loading_content s4 m4 l4">
 					<div className="logoWhite"></div>
-						<div className="load-wrapp">
-						    <div className="load-3">
-				                <div className="line"></div>
-				                <div className="line"></div>
-				                <div className="line"></div>
-		        			</div>
-            			</div>
-					<p className="loaderText flow-text">{this.loadText()[this.state.quotesId]}</p>
+						{(this.state.timedOut) ?
+								<div className="load-wrapp">
+									<p className='first-timeout flow-text'>oops! a tree fell in the forest and no one heard</p>
+									<p className='second-timeout flow-text'>please map your journey again</p>
+									<a id='timeoutReset' className='btn-primary' onClick={this.resetTimeout}>try again</a>
+								</div>
+								:
+								[<div className="load-wrapp">
+								    <div className="load-3">
+						                <div className="line"></div>
+						                <div className="line"></div>
+						                <div className="line"></div>
+				        			</div>
+		            </div>,
+								<p className="loaderText flow-text">{this.loadText()[this.state.quotesId]}</p>]
+						}
 					</div>
 			</div>
 		);

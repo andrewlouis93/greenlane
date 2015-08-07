@@ -111,6 +111,16 @@ var ScenicActions = {
     Dispatcher.dispatch({
       actionType:'deactivateError'
     })
+  },
+  timeOut: function(){
+    Dispatcher.dispatch({
+      actionType:'timeOut'
+    })
+  },
+  resetTimeout: function(){
+    Dispatcher.dispatch({
+      actionType:'resetTimeout'
+    })
   }
 };
 
