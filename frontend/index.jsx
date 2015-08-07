@@ -17,41 +17,28 @@ var Actions = require('./stores/Actions.jsx');
 var is_keyboard = false;
 var is_landscape = false;
 var initial_screen_size = window.innerHeight;
+var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+
 
  function toggleFullScreen(){
-  if ($(window).width() <= 800) {
+  if ($(window).width() <= 800 && isSafari == false) {
     var doc = window.document;
     var docEl = doc.documentElement;
-
     var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
     var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
 
     if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
       requestFullScreen.call(docEl);
-    }
-    else {
+    } else {
       cancelFullScreen.call(doc);
     }
   }
 };
 
-// $(document).on("keydown", function(e)
-//   {
-//     //Only do something when the user presses enter
-//     if( e.keyCode ==  13 )
-//     {
-//        var nextElement = $('[tabindex="' + (this.tabIndex+1)  + '"]');
-//        console.log( this , nextElement );
-//        if(nextElement.length )
-//          nextElement.focus()
-//        else
-//          $('[tabindex="1"]').focus();
-//     }
-//   });
-
 
 $(document).on('focus', 'input[type="text"]', function(){
   var _windowHeight = initial_screen_size;
+  document.webkitCancelFullScreen();
   $('body').css({'height':_windowHeight + 'px',
                   'background-color':'white'});
   $('.progress-meter').css({'height':_windowHeight + 'px'});

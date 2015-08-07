@@ -6,6 +6,22 @@ var Navigate = require('../stores/Navigate.jsx');
 var Analytics = require('../stores/Analytics.jsx');
 
 var inputClasses = inputClassnames('typeahead', 'validate');
+var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+
+ function toggleFullScreen(){
+  if ($(window).width() <= 800 && isSafari == false) {
+    var doc = window.document;
+    var docEl = doc.documentElement;
+    var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+    var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+
+    if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+      requestFullScreen.call(docEl);
+    } else {
+      cancelFullScreen.call(doc);
+    }
+  }
+};
 
 var Endpoints = React.createClass({
   getInitialState: function(){
@@ -170,6 +186,7 @@ var Endpoints = React.createClass({
       }
   },
   validate: function(){
+    toggleFullScreen();
     var geocoder = new google.maps.Geocoder();
 
     var TorontoBbox = new google.maps.LatLngBounds(
