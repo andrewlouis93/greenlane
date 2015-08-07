@@ -92,6 +92,7 @@ componentDidMount: function(){
 },
 componentWillUnmount: function(){
   window.removeEventListener('resize', this.initResizer)
+  ScenicStore.removeChangeListener(this._onChange);
 },
 render: function() {
     return (

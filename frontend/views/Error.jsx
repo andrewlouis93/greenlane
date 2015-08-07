@@ -128,6 +128,9 @@ var Error = React.createClass({
 			err_css: errState.css,
 		});
 		this.setState(this[ScenicStore.getErrObj().state]())
+	},
+	componentWillUnmount: function(){
+		ScenicStore.removeChangeListener(this._errorUpdate);
 	}
 })
 

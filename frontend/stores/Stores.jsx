@@ -1,6 +1,7 @@
 
 var Dispatcher = require('./Dispatcher.jsx');
 var EventEmitter = require('events').EventEmitter;
+EventEmitter.prototype._maxListeners = 100;
 var assign = require('object-assign');
 
 var CHANGE_EVENT = 'change';
@@ -21,7 +22,7 @@ var sessionState = {
   'routeTime':null,
   'routeDist':null,
   'routeDest':null,
-  'originName': null, 
+  'originName': null,
   'destinationName': null,
   'activePath': null,
   // Default the "greenLevel" to 1.
@@ -54,29 +55,29 @@ var layout = {
     /* Not sure about this? */
     this.directions = "";
     this.backBtn = "";
-    this.containerMask = "";    
+    this.containerMask = "";
   },
   menuActivate: function(){
     this.map = "hide-on-small-and-down m7 l8";
     this.nav = "l4 m12 s12";
     this.state = "active";
-    
+
     this.logoState = "hide";
-    
-    this.directions = "hide";    
+
+    this.directions = "hide";
     this.backBtn = "pushRight";
     this.containerMask = "containerMask";
   },
   menuToggle: function(){
-    if (this.state == "active"){ 
+    if (this.state == "active"){
       this.menuDeactivate();
     }
     else if (this.state == "inactive"){
-      this.menuActivate();  
+      this.menuActivate();
     }
   },
   // Once you have directions, lock behaviour
-  // such that you either see the side menu tab or 
+  // such that you either see the side menu tab or
   // the directions tab.
   directionsActivate: function(){
     if (this.state == "active"){
@@ -89,7 +90,7 @@ var layout = {
       this.menuActivate();
       this.directions = "hide";
     }
-  }, 
+  },
   initialized: function(){
       console.log("IN INITIALIZED");
       this.logoState = "hide";
@@ -99,7 +100,7 @@ var layout = {
   },
 };
 
-// can this be refactored into the layout 
+// can this be refactored into the layout
 // object?
 var errObj = {
   css: 'hide',
@@ -122,7 +123,7 @@ var activePage = null;
 var backBtn = {
    css : "hide",
    states: [],
-   //_page can either be static 
+   //_page can either be static
    // another type of back button
    // navigation
    pushState: function(_page){
@@ -131,7 +132,7 @@ var backBtn = {
     this.css = "";
 
     if (_page == 'parkview'){
-      // Google Analytics to only capture 
+      // Google Analytics to only capture
       // when you go back to the map.
       this.css = "Back_Map_Edit";
     }
@@ -139,7 +140,7 @@ var backBtn = {
    popState: function(){
     var popped = this.states.pop();
     if (popped && (popped=='static')){
-      activePage = null;  
+      activePage = null;
     }
     else if (popped && (popped =='parkview')){
       console.log("Popped Parkview!");
@@ -203,7 +204,7 @@ var ScenicStore = assign({}, EventEmitter.prototype, {
   }
 });
 
-Dispatcher.register(function(payload) {   
+Dispatcher.register(function(payload) {
     console.log(payload.actionType) ;
     var action = payload.actionType;
     switch(payload.actionType) {
@@ -218,7 +219,7 @@ Dispatcher.register(function(payload) {
         ScenicStore.emitChange();
         break;
       // for toggling the loop flag.
-      case 'setMode': 
+      case 'setMode':
         console.log("Changing loop or route mode", payload.loop);
         sessionState.loop = payload.loop;
         ScenicStore.emitChange();
@@ -285,7 +286,7 @@ Dispatcher.register(function(payload) {
         backBtn.popState();
         ScenicStore.emitChange();
         break;
-      case 'initialized': 
+      case 'initialized':
         layout.initialized();
         ScenicStore.emitChange();
         break;
@@ -293,7 +294,7 @@ Dispatcher.register(function(payload) {
         errObj.activate(payload.state);
         ScenicStore.emitError();
         break;
-      case 'deactivateError': 
+      case 'deactivateError':
         errObj.deactivate();
         ScenicStore.emitError();
       // add more cases for other actionTypes, like TODO_UPDATE, etc.

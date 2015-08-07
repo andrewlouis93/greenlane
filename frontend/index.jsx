@@ -117,7 +117,7 @@ var Body = React.createClass({
     );
   },
   componentWillUnmount: function(){
-  	// ScenicStore.removeChangeListener(this._onChange);
+  	ScenicStore.removeChangeListener(this._onChange);
   },
   shouldComponentUpdate: function(){
     this.forceUpdate();

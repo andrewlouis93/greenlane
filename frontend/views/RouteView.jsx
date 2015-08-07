@@ -34,6 +34,9 @@ var RouteView = React.createClass({
     console.log(ScenicStore.getSessionState().activePath);
     window.nateState = this.state;
   },
+  componentWillUnmount: function(){
+    ScenicStore.removeChangeListener(this._onChange);
+  },
   // takes in an array of mapbox latLng objects and
   // converts to regular objects.
   serializeLatLng: function(point){
@@ -76,13 +79,23 @@ var RouteView = React.createClass({
     //https://www.google.com/maps/dir/lat,lng/...
     var url = "https://www.google.com/maps/dir/";
 
-    if (ScenicStore.getSessionState().origin && ScenicStore.getSessionState().destination && ScenicStore.getSessionState().activePath){
+    if (ScenicStore.getSessionState().origin && ScenicStore.getSessionState().activePath){
+
       url += ScenicStore.getSessionState().origin.latLng.lat+","+ScenicStore.getSessionState().origin.latLng.lng;
       ScenicStore.getSessionState().activePath.info.scenic_route.map(function(scenic){
         // 1 -> lat, 0->lng
         url+="/"+scenic[1]+","+scenic[0];
       })
-      url+="/" + ScenicStore.getSessionState().destination.latLng.lat+","+ScenicStore.getSessionState().destination.latLng.lng;
+
+      // check for loop or route.
+      if (ScenicStore.getSessionState().origin && ScenicStore.getSessionState().origin.latLng && ScenicStore.getSessionState().destination && ScenicStore.getSessionState().destination.latLng){
+        if (ScenicStore.getSessionState().loop){
+          url+="/" + ScenicStore.getSessionState().origin.latLng.lat+","+ScenicStore.getSessionState().origin.latLng.lng;
+        }
+        else{
+        url+="/" + ScenicStore.getSessionState().destination.latLng.lat+","+ScenicStore.getSessionState().destination.latLng.lng;
+        }
+      }
 
       if (ScenicStore.getSessionState().transit == "cycling")
         url+="/data=!4m2!4m1!3e1";
@@ -166,7 +179,7 @@ var RouteView = React.createClass({
                     }
                   }
               )}
-              <a href={this.state.url} target="_blank" className="ui-menu-item hide-on-large-only">
+              <a href={this.state.url} target="_blank" className="ui-menu-item hide-on-large-only google-link">
                 <div id='gmaps-link' className='btn-secondary'>
                   <i id='gmaps-image' className="fa fa-google left fa-2x"></i>
                   <span>listen to your route</span>

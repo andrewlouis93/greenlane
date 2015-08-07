@@ -1060,7 +1060,7 @@ hr {
 @media #{$medium-and-down} {
   .slider.parkMenu {
     h3{
-      font-size:2.6vh;
+      font-size:2.2vh;
     }
   }
 }
@@ -1797,12 +1797,20 @@ hr {
   width: 30vh;
   height: 45px;
   line-height: 45px;
+  span{
+    font-size:2vh;
+  }
 }
 #gmaps-image{
   font-size: 1.5rem;
   margin-right: 0px;
   line-height: 45px;
 }
+
+.google-link{
+  border-bottom: 0 !important;
+}
+
 /* =Elements style FOR LOADER
 ---------------------- */
 .load-wrapp {
@@ -2011,7 +2019,7 @@ hr {
 
 @keyframes loadingJ {
   0%,100% {transform: translate(0,0);}
-  
+
   50% {
       transform: translate(80px,0);
       background-color: #f5634a;

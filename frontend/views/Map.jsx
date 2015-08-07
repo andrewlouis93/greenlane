@@ -65,9 +65,9 @@ var Map = React.createClass({
 										ScenicStore.getLayout().logoState
 									);
 	},
-	// componentDidUpdate: function(){
-	// 	this.updateDimensions();
-	// },
+	componentDidUpdate: function(){
+		this.updateDimensions();
+	},
 	routeNav: function(evt) {
 		// toggleFullScreen();
 		window.scrollTo(0,1);
@@ -80,7 +80,8 @@ var Map = React.createClass({
 		return false;
     },
     componentWillUnmount: function(){
-		window.removeEventListener("resize", this.updateDimensions);
+  		window.removeEventListener("resize", this.updateDimensions);
+      ScenicStore.removeChangeListener(this.updateState);
     },
 	render: function(){
 		return (

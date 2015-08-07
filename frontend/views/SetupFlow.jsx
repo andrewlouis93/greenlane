@@ -32,6 +32,9 @@ var SetupFlow = React.createClass({
       }
     });
   },
+  componentWillUnmount: function(){
+    ScenicStore.removeChangeListener(this.updateState);
+  },
   updateState: function(){
     this.state.sessionState = ScenicStore.getSessionState();
     this.state.layout = Classnames('row','routeSel','left','col', ScenicStore.getLayout().nav);

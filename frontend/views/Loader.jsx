@@ -56,8 +56,10 @@ var Loader = React.createClass({
 					<p className="loaderText flow-text">{this.loadText()[this.state.quotesId]}</p>
 					</div>
 			</div>
-
 		);
+	},
+	componentWillUnmount: function(){
+		ScenicStore.removeChangeListener(this.updateLoader)
 	}
 });
 module.exports = Loader;

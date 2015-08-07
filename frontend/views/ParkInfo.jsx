@@ -57,6 +57,9 @@ var ParkCarousel = React.createClass({
     ScenicStore.addChangeListener(this.updateParkList);
     $(document).on('click','.slider-decorator-0,.slider-decorator-1', this.updateActiveCarousel);
   },
+  componentWillUnmount: function(){
+    ScenicStore.removeChangeListener(this.updateParkList);
+  },
   updateParkList: function(){
       var oldParks = this.state.parks;
       this.setState({parks: ScenicStore.getSessionState().activePath.info.parks});

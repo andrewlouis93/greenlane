@@ -58,7 +58,7 @@ var Accordion = React.createClass({
       <div className="faqMain">
         <div className="staticTitle">{this.props.title}</div>
         <Section title="How does Greenlane work?">
-        	Greenlane utilizes park, tree and trail data to map scenic paths through Toronto for you to enjoy. 
+        	Greenlane utilizes park, tree and trail data to map scenic paths through Toronto for you to enjoy.
         </Section>
         <Section title="Why are there no parks along my route?">
         	While we work hard to ensure that there are parks along your journey, Toronto doesn’t always cooperate. Not to worry, Greenlane also incorporates trail and tree coverage for you to experience. Enjoy!
@@ -91,7 +91,7 @@ var PrivacyAccordion = React.createClass({
         	If you use our website or application, we may collect information about the browser you’re using. We might look at what site you came from, or what site you visit when you leave us.
         </Section>
         <Section title="We collect information passively">
-        	We collect information from you passively. We use tracking tools like browser cookies and web beacons. We collect information about users over time when you use this website.  We may have third parties collect personal information this way. 
+        	We collect information from you passively. We use tracking tools like browser cookies and web beacons. We collect information about users over time when you use this website.  We may have third parties collect personal information this way.
         </Section>
         <Section title="We use information as disclosed and described here.">
         	We use information to improve our products and services. We may use your information to make our website and products better. We might use your information to customize your experience with us. We use information as otherwise permitted by law or as we may notify you.
@@ -100,12 +100,12 @@ var PrivacyAccordion = React.createClass({
         	While we may share information within the Critical Mass family of companies, we will not share information with any third party.
 		</Section>
         <Section title="You have certain choices about how we use your information">
-        	You can control cookies and tracking tools. Your browser may give you the ability to control cookies or other tracking tools.  How you do so depends on the type of tool.  Certain browsers can be set to reject browser cookies.  
-			Our Do Not Track Policy: Some websites have “do not track” features that allow you to tell a website not to track you. These features are not all uniform. We do not currently respond to those signals.  If you block cookies, certain features on our sites may not work.  If you block or reject cookies, not all of the tracking described here will stop. 
+        	You can control cookies and tracking tools. Your browser may give you the ability to control cookies or other tracking tools.  How you do so depends on the type of tool.  Certain browsers can be set to reject browser cookies.
+			Our Do Not Track Policy: Some websites have “do not track” features that allow you to tell a website not to track you. These features are not all uniform. We do not currently respond to those signals.  If you block cookies, certain features on our sites may not work.  If you block or reject cookies, not all of the tracking described here will stop.
 			Options you select are browser and device specific.
         </Section>
         <Section title="We use standard security measures">
-        	The Internet is not 100% secure. We cannot promise that your use of our sites will be completely safe. We encourage you to use caution when using the Internet. This includes not sharing your passwords.  
+        	The Internet is not 100% secure. We cannot promise that your use of our sites will be completely safe. We encourage you to use caution when using the Internet. This includes not sharing your passwords.
 			We also keep information as otherwise required by law.
         </Section>
         <Section title="We store information both in Canada and the United States">
@@ -117,10 +117,10 @@ var PrivacyAccordion = React.createClass({
         	If you click on a third party link, you will be taken to platforms we do not control. This policy does not apply to the privacy practices of that website. Read other company’s privacy policy carefully. We are not responsible for these third parties.
         </Section>
         <Section title="Feel free to contact us if you have more questions">
-        	If you have any questions about this Policy or want to correct or update your information, please email us at criticalmass@criticalmass.com 
+        	If you have any questions about this Policy or want to correct or update your information, please email us at criticalmass@criticalmass.com
 				You can also write to us or call at:  Greenlane Help
-				Critical Mass 
-				312 Adelaide Street W, 6th floor 
+				Critical Mass
+				312 Adelaide Street W, 6th floor
                 Toronto, ON  M5V 1R2
                 Phone: 416.673.5275
         </Section>
@@ -236,6 +236,9 @@ var PageController = React.createClass({
 
 
 	},
+  componentWillUnmount: function(){
+    ScenicStore.removeChangeListener(this.updateState);
+  },
 	updateState: function(){
 		var containerCSS;
 		if (!ScenicStore.getActivePage()){

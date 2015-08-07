@@ -9,6 +9,22 @@ var originMarker;
 var destMarker;
 var curMarker;
 
+// Finds unique elements in an array!
+function returnDuplicateIds(a) {
+  var seen = new Set();
+  var retval = [];
+  a.filter(function(x, id) {
+    if (!seen.has(x)){
+       seen.add(x);
+    }
+    else{
+      // Found a duplicate.
+      retval.push(id);
+    }
+  })
+  return retval;
+}
+
 // Used only when re-draw routes
 function liteClearDrawnRoutes(){
   if ($("path").length){
@@ -147,6 +163,9 @@ function drawMarkers(){
       paths[i]._popup = L.popup().setLatLng(paths[i]._latlngs[popupLocation]).setContent(formattedRouteInfo);
       console.dir(paths[i]._popup);
       console.log("BOUND");
+
+      // do we need to do fitBounds at this point?
+
       try {
         window.map.addLayer(paths[i]._popup);
         paths[i]._popup._container.setAttribute('route', i);
@@ -472,9 +491,7 @@ var Navigate = {
 
         Actions.setDirectionsState(true);
 
-        // Get the bounds of the longest route.
-        var bounds = paths[0].getBounds();
-        window.map.fitBounds(bounds);
+        Actions.setParkMode();
 
         drawPins();
         drawRoutes();
@@ -482,10 +499,13 @@ var Navigate = {
         // Only for initialization.
         syncActivePath();
         // Handle the state change.
-        Actions.setParkMode();
+
         $(".leaflet-popup[route=0]").addClass("active-popup");
         // Turn off the park info stuff if it exists
         $(".parkBtn.active").trigger('click');
+
+
+
         Actions.isLoading(false);
         // If you try and draw
         // a favourited route from here the following
@@ -494,6 +514,9 @@ var Navigate = {
         // console.log("InvalidatedSize");
         // setTimeout(window.map.invalidateSize, 5);
 
+        // Get the bounds of the longest route.
+        var bounds = paths[0].getBounds();
+        window.map.fitBounds(bounds);
     }, 1)
 
     return false;
@@ -531,12 +554,34 @@ var Navigate = {
 
     $.get(Navigate.buildGreenifyURL(), function(results,err){
         console.log("Hit Greenify API", results);
+        console.log('catching error here', err);
+
 
         // Do the click handler stuff here...
         results.results = results.results.slice(-3);
+
+
+        var greenifyResults = results.results;
+        greenifyResults.map(function(it,id){
+          var currentDups = returnDuplicateIds(it.parks);
+            var cleanParks = [];
+            var cleanRoutes = [];
+            var cleanPictures = [];
+            for (var i = 0; i < greenifyResults[id].parks.length; i++){
+              if ( currentDups.indexOf(i) == -1 ){
+                cleanParks.push(greenifyResults[id].parks[i]);
+                cleanRoutes.push(greenifyResults[id].scenic_route[i]);
+                cleanPictures.push(greenifyResults[id].pictures[i]);
+              }
+            }
+            greenifyResults[id].parks = cleanParks;
+            greenifyResults[id].scenic_route = cleanRoutes;
+            greenifyResults[id].pictures = cleanPictures;
+        })
+        results.results = greenifyResults;
         Actions.setGreenpoints(results);
-        // console.log("Inspect _routesInfo");
-        // window._routesInfo = routesInfo;
+
+
         fetchData(function(array){
             // Debugging variable below.
             console.log("Finished getting everything");
@@ -547,9 +592,9 @@ var Navigate = {
 
             // window.map.invalidateSize();
             // Get the bounds of the longest route.
-            var bounds = paths[0].getBounds();
 
-            window.map.fitBounds(bounds);
+            Actions.setParkMode();
+
             drawPins();
             drawRoutes();
             drawMarkers();
@@ -557,7 +602,7 @@ var Navigate = {
             syncActivePath();
             // Handle the state change.
             $(".leaflet-popup[route=0]").addClass("active-popup");
-            Actions.setParkMode();
+
             // Turn the park view off if active
             $(".parkBtn.active").trigger('click')
             // Setting up for a fresh run.
@@ -565,6 +610,12 @@ var Navigate = {
             $(".favorite").addClass("hide");
 
             Actions.isLoading(false);
+
+            setTimeout(function(){
+              console.log("timeout invoked");
+              window.map.fitBounds(paths[0].getBounds());
+            }, 500);
+
         }, 3)
     });
     return false;
