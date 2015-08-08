@@ -1089,7 +1089,7 @@ hr {
     h3 {
       margin:0;
       line-height: 130%;
-      font-size:3.6vh;
+      font-size:1.6vw;
       font-family:Roboto-Slab;
       color:$secondary-color;
       font-weight:600 !important;
@@ -1098,7 +1098,7 @@ hr {
 @media #{$medium-and-down} {
   .slider.parkMenu {
     h3{
-      font-size:3.6vh;
+      font-size:4.6vw;
     }
   }
 }
