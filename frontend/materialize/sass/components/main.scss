@@ -784,8 +784,9 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
 
 #slide-out{
   li{
-    &:hover{
-      background: rgba(42,209,157, 0.5);
+    &:hover a{
+      color: rgba(42,209,157, 0.5);
+      font-weight: 500;
     }
   }
   a{
@@ -805,7 +806,7 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
   font-family:Roboto;
   color:$primary-color;
   font-weight:400;
-  border-bottom:1px solid $text-color;
+  border-bottom:1px solid #E8E8E8;
       li{
           padding:10px 30px;
       }
@@ -816,7 +817,7 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
 
 .loginStyles {
   padding:20px;
-  border-bottom:1px solid $text-color;
+  border-bottom:1px solid #E8E8E8;
 }
 
 
@@ -1772,6 +1773,12 @@ hr {
 
 .loginSection li:hover, #accountName:hover{
   background: inherit !important;
+}
+
+.loginSection{
+  li:hover a{
+    color: white !important;
+  }
 }
 
 .parkList{

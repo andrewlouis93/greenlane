@@ -52,6 +52,15 @@ var Map = React.createClass({
 			window.map.invalidateSize();
 			console.log("Map Invalidated");
 		}
+
+		// close side-menu, 
+		if ($("#sidenav-overlay").length == 0)
+			$("#slide-out").css({
+				right: -1*$("#slide-out").width() 
+			});
+		else{
+			;
+		}
 	},
 	updateState: function(){
 		this.state.layout = Classnames('col','leaflet-container','leaflet-fade-anim', ScenicStore.getLayout().map);
