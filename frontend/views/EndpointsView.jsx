@@ -186,7 +186,7 @@ var Endpoints = React.createClass({
       }
   },
   validate: function(){
-    toggleFullScreen();
+    // toggleFullScreen();
     var geocoder = new google.maps.Geocoder();
 
     var TorontoBbox = new google.maps.LatLngBounds(
