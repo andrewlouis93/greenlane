@@ -2,6 +2,7 @@ var Dispatcher = require('./Dispatcher.jsx');
 var ScenicStore = require('./Stores.jsx');
 var Actions = require('./Actions.jsx');
 var Analytics = require('./Analytics.jsx');
+var equals = require('deep-equal');
 
 // Will be "saved" to sessionState.activePath.
 var paths = [];
@@ -156,6 +157,17 @@ function drawPins(){
 
 // Refactor this ugly af function.
 function drawMarkers(){
+
+    let markerLocations = [];
+    function markerExists(prospect){
+      for (let i = 0; i < markerLocations.length; i++){
+        if ( equals(markerLocations[i], prospect) )
+          return true;
+      }
+      return false;
+    }
+
+
     for (var i = 0; i < paths.length; i++){
       (function(i){
         var formattedRouteInfo = formatRouteInfo(paths[i].duration,paths[i].distance);
@@ -163,16 +175,13 @@ function drawMarkers(){
         console.log("LENGTH IS :", paths[i]._latlngs.length);
 
         var lastIndex = paths[i]._latlngs.length-1;
-
-        var popupLocation;
-        if (i == 0)
-        popupLocation = Math.round( (10/100) * (lastIndex) );
-        else if (i == 1)
-          popupLocation = Math.round( (50/100) * (lastIndex) );
-        else
-          popupLocation = Math.round( (80/100) * (lastIndex) );
-
-        // popupLocation = Math.round( ((1/6) * (lastIndex)) + ((1/3) * (i) * (lastIndex)));
+        var popupLocation = Math.round( ((1/6) * (lastIndex)) + ((1/3) * (i) * (lastIndex)));
+        while(markerExists( paths[i]._latlngs[popupLocation] )){
+          // Add 10% spacing if it exists in the same location.
+          popupLocation = popupLocation + Math.round((0.3)*(lastIndex-popupLocation))
+          console.log('modified popuplocation', popupLocation);
+        }
+        markerLocations.push( paths[i]._latlngs[popupLocation] );
 
         console.log("POPUP LOCATION IS :", popupLocation);
         paths[i]._popup = L.popup().setLatLng(paths[i]._latlngs[popupLocation]).setContent(formattedRouteInfo);
