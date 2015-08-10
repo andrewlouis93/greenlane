@@ -11,9 +11,9 @@ var api_cache = [];
 
 app.use(session(
 	{
-		resave: true, 
+		resave: true,
 		saveUninitialized: true,
-		secret: 'SOMERANDOMSECRETHERE', 
+		secret: 'SOMERANDOMSECRETHERE',
 		cookie: { maxAge: 600000 }
 	}
 ));
@@ -58,14 +58,14 @@ passport.use(new google({
 ));
 
 app.get('/google-debug', function(req, res){
-	res.send(api_cache);	
+	res.send(api_cache);
 })
 app.get('/auth/facebook',
 	passport.authenticate('facebook')
 );
 app.get('/auth/facebook/callback',
 	passport.authenticate('facebook', { failureRedirect: '/' }),
-	function(req, res) 
+	function(req, res)
 	{
 	    console.log('we b logged in!')
 	    console.dir(req.user)
@@ -80,25 +80,25 @@ app.get('/auth/facebook/callback',
 	    	res.cookie('profileUrl', req.user.photos[0].value, { maxAge: 600 * 1000 });
 	    }
 
-	    res.redirect('http://localhost:3001');
+	    res.redirect('http://greenlane.io:3001');
 	}
 );
-app.get('/auth/google', 
-	passport.authenticate('google', { 
-		scope: auth.google.scope 
+app.get('/auth/google',
+	passport.authenticate('google', {
+		scope: auth.google.scope
 	})
 );
-app.get('/auth/google/callback', 
+app.get('/auth/google/callback',
   passport.authenticate('google'),
   function(req, res) {
     // Successful authentication, redirect home.
     console.log('google: authenticated, cookies sent.');
-    console.dir(req.user)	
+    console.dir(req.user)
     res.cookie('authenticated', 'true', { maxAge: 600 * 1000 });
     res.cookie('authId', req.user.id, { maxAge: 600 * 1000 });
-    res.cookie('type','google',{ maxAge: 600 * 1000 });    
+    res.cookie('type','google',{ maxAge: 600 * 1000 });
    	res.cookie('displayName', req.user.displayName, { maxAge: 600 * 1000 });
-	
+
 	if (!req.user._json.image.isDefault){
 		res.cookie('profileUrl', req.user.photos[0].value, { maxAge: 600 * 1000 });
 	}

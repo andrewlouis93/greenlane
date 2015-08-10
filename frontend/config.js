@@ -1,5 +1,5 @@
 var config = {
-	api_url: 'http://localhost:3000'
+	api_url: 'http://greenlane.io:3000'
 };
 
 module.exports = config;
