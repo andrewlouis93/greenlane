@@ -7,6 +7,8 @@ var RouteView = require('./views/RouteView.jsx');
 var ParkInfo = require('./views/ParkInfo.jsx');
 var MapView = require('./views/Map.jsx');
 var StaticPages = require('./views/StaticPages.jsx');
+var LoopComponent = require('./views/LoopComponent.jsx');
+var RouteComponent = require('./views/RouteComponent.jsx');
 var Loader = require('./views/Loader.jsx');
 var ErrorView = require('./views/Error.jsx');
 var Tutorial = require('./views/Tutorial.jsx');
@@ -20,37 +22,34 @@ var initial_screen_size = window.innerHeight;
 var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
 
 
- function toggleFullScreen(){
-  if ($(window).width() <= 800 && isSafari == false) {
-    var doc = window.document;
-    var docEl = doc.documentElement;
-    var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
-    var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+//  function toggleFullScreen(){
+//   if ($(window).width() <= 800 && isSafari == false) {
+//     var doc = window.document;
+//     var docEl = doc.documentElement;
+//     var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+//     var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
 
-    if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
-      requestFullScreen.call(docEl);
-    } else {
-      cancelFullScreen.call(doc);
-    }
-  }
-};
+//     if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+//       requestFullScreen.call(docEl);
+//     } else {
+//       cancelFullScreen.call(doc);
+//     }
+//   }
+// };
 
 
 $(document).on('focus', 'input[type="text"]', function(){
   var _windowHeight = initial_screen_size;
-  // document.webkitCancelFullScreen();
   $('body').css({'height':_windowHeight + 'px',
                   'background-color':'white'});
   $('.progress-meter').css({'height':_windowHeight + 'px'});
-  $('.landError').css({'display':'none'});
   $('.progress-meter').css({'display':'block'});
 });
 
 
-$(document).on('blur', 'input[type="text"]', function(){
-  $('body').css({'height':100 + 'vh'});
-  $('.progress-meter').css({'height':100 + '%'})
-});
+// $(document).on('blur', 'input[type="text"]', function(){
+
+// });
 
 
 function readCookie(name) {

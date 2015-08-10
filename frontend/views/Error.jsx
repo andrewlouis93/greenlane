@@ -20,6 +20,7 @@ var Error = React.createClass({
 		// this.setState(this['auth']());
 		ScenicStore.addErrorListener(this._errorUpdate);
 		// Orientation Lock!
+
 		window.addEventListener("orientationchange", function() {
 			if (window.orientation === 0){
 				this.setState({hasLogo: Classnames()})
@@ -32,11 +33,12 @@ var Error = React.createClass({
 		}.bind(this), false);
 		// this.setState(this['geolocate']());
 	},
+
 	render: function(){
 		return (
 			<div id='error' className={this.state.err_css}>
 				<div id='error_container' className={this.state.hasLogo}>
-					<div id='error_content'>
+					<div id='error_content' className="animation-error">
 						<div id='error_title'>{this.state.title}</div>
 						{this.state.body}
 					</div>
@@ -124,7 +126,7 @@ var Error = React.createClass({
 			body: (
 			[
 				<div className="logoWhite"></div>,
-				<p className="loaderText flow-text">You're in landscape!</p>
+				<p className="loaderText flow-text">landscapes are best seen in portrait mode</p>
 			]
 		)}
 	},
