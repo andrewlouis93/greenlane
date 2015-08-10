@@ -79,6 +79,17 @@ var ScenicActions = {
   setActivePage: function(_activePage){
     console.log('setActivePage');
     console.log(_activePage);
+
+    // Virtual Page Views
+    switch(_activePage){
+      case 'FAQ':
+        Analytics.virtualPage('Menu|FAQ','/menu/faq');
+        break;
+      case 'aboutUs':
+        Analytics.virtualPage('Menu|About','/menu/about');
+        break;
+    }
+
     Dispatcher.dispatch({
       actionType: 'setActivePage',
       activePage: _activePage
