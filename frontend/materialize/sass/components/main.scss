@@ -1197,12 +1197,12 @@ hr {
   color:$primary-color;
   font-family:Roboto;
   font-weight:400;
-  font-size:1.5rem;
+  font-size:1.4rem;
 
 }
 
 .ourNames {
-  padding:5% 10%;
+  padding:5% 7%;
   text-align:center;
   font-family:Roboto;
   font-size:1em;
@@ -1309,6 +1309,10 @@ hr {
   }
 }
 .section {
+  // .articlewrap {
+  //   max-height: 0px;
+  //   transition: max-height 0.5s ease-in-out;
+  // }
   position: relative;
   width: 100%;
   button {
@@ -1329,18 +1333,20 @@ hr {
         -ms-transform: rotate(0deg); /* IE 9 */
   -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */
   transform: rotate(0deg);
+  transition:0.5s;
   }
 }
 
 .section.open {
   button {
-      -ms-transform: rotate(180deg); /* IE 9 */
-  -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
-  transform: rotate(180deg);
+      -ms-transform: rotate(-180deg); /* IE 9 */
+  -webkit-transform: rotate(-180deg); /* Chrome, Safari, Opera */
+  transform: rotate(-180deg);
+  transition:0.5s;
   }
   .articlewrap {
     max-height: 600px;
-    transition: max-height .2s ease-in;
+    transition: max-height 0.5s ease-in-out;
   }
     .favDelete {
       opacity:1;
@@ -1360,7 +1366,7 @@ hr {
   position:relative;
   max-height: 0;
   overflow: hidden;
-  transition: max-height .2s ease-in;
+  transition: max-height 0.5s ease-in-out;
 }
 
 .sectionhead {

@@ -120,12 +120,14 @@ var RouteView = React.createClass({
                     var wayPark = "waypoint";
                     var uTurn = "u-turn";
                     var yourLoc = "arrive";
+                    var head = "Head";
                     var rExp = new RegExp('\\b' + rightTurn + '\\b');
                     var lExp = new RegExp('\\b' + leftTurn + '\\b');
                     var sExp = new RegExp('\\b' + straight + '\\b');
                     var pExp = new RegExp('\\b' + wayPark + '\\b');
                     var dExp = new RegExp('\\b' + yourLoc + '\\b');
                     var uExp = new RegExp('\\b' + uTurn + '\\b');
+                    var hExp = new RegExp('\\b' + head + '\\b');
 
                     if (current == row.maneuver.instruction){
                       return;
@@ -167,6 +169,12 @@ var RouteView = React.createClass({
                     } else if (uExp.test(row.maneuver.type)){
                       return(
                         <div className="ui-menu-item"><li className="uTurn"></li>
+                        <li dangerouslySetInnerHTML={{__html:row.maneuver.instruction}}  className="menuitem">
+                        </li></div>
+                      )
+                    } else if (hExp.test(row.maneuver.instruction)){
+                      return(
+                        <div className="ui-menu-item"><li className="straight"></li>
                         <li dangerouslySetInnerHTML={{__html:row.maneuver.instruction}}  className="menuitem">
                         </li></div>
                       )
