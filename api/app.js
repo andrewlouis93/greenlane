@@ -59,7 +59,7 @@ app.post('/delete-route', function(req, res) {
   var authId = req.body.authId,
       type = req.body.type,
       // should receive trimmed down active path.
-      routeId = req.body.routeId; 
+      routeId = req.body.routeId;
 
     User.findOne({
     	authId: authId,
@@ -100,6 +100,6 @@ app.get('/favourite-routes', function(req, res){
 // 	res.send(req.session.passport);
 // })
 
-app.listen(3000, function() {
+app.listen(8080, function() {
   console.log('Listening on port 3000...')
 })
