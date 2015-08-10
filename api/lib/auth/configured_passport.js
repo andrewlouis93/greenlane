@@ -80,7 +80,7 @@ app.get('/auth/facebook/callback',
 	    	res.cookie('profileUrl', req.user.photos[0].value, { maxAge: 600 * 1000 });
 	    }
 
-	    res.redirect('http://greenlane.io:3001');
+	    res.redirect('http://greenlane.io');
 	}
 );
 app.get('/auth/google',
