@@ -371,6 +371,12 @@ var Navigate = {
             console.log("Autocomplete status: " + status);
             return;
         }
+
+        // Prune to best 3 matches.
+        if (predictions.length > 3){
+          predictions = predictions.slice(0,3);
+        }
+
         console.log(predictions);
         return cb(predictions);
     });
@@ -587,14 +593,15 @@ var Navigate = {
 
         var greenifyResults = results.results;
 
-
+        // Formatting API Results for convenience
+        // 1 - Cleaning out duplicates
         greenifyResults.map(function(it,id){
           var currentDups = returnDuplicateIds(it.parks);
             var cleanParks = [];
             var cleanRoutes = [];
             var cleanPictures = [];
             for (var i = 0; i < greenifyResults[id].parks.length; i++){
-              if ( currentDups.indexOf(i) == -1 ){
+              if  (currentDups.indexOf(i) == -1 ){
                 cleanParks.push(greenifyResults[id].parks[i]);
                 cleanRoutes.push(greenifyResults[id].scenic_route[i]);
                 cleanPictures.push(greenifyResults[id].pictures[i]);
@@ -604,6 +611,23 @@ var Navigate = {
             greenifyResults[id].scenic_route = cleanRoutes;
             greenifyResults[id].pictures = cleanPictures;
         })
+        // 2 - Cleaning out common facilities, pictures etc.
+        greenifyResults.map(function(it, id){
+          var cleanParks = [],
+              cleanPictures = [],
+              cleanFacilities = [];
+          for (var i = 0; i < greenifyResults[id].parks.length; i++){
+            if ( greenifyResults[id].parks[i] != "NULL" ){
+              cleanParks.push(greenifyResults[id].parks[i]);
+              cleanPictures.push(greenifyResults[id].pictures[i]);
+              cleanFacilities.push(greenifyResults[id].facilities[i]);
+            }
+          }
+          greenifyResults[id].parks = cleanParks;
+          greenifyResults[id].pictures = cleanPictures;
+          greenifyResults[id].facilities = cleanFacilities;
+        })
+
         results.results = greenifyResults;
 
         window._greenify = greenifyResults;
