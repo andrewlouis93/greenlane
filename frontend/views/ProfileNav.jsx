@@ -89,7 +89,7 @@ var ProfileNav = React.createClass({
       <div>
         <div className="profileOpt">
             {(this.state && this.state.auth) ? this.favouritedRoutes() : false}
-            <li><a onClick={this.activateShare}><i className="share left"></i>share</a></li>
+            <li><a onClick={this.activateShare}><i className="share left Social_Initiate"></i>share</a></li>
         </div>
         <div className="footer">
           <li><a onClick={Actions.setActivePage.bind(this,'FAQ')}>faq</a></li>

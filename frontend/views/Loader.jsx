@@ -58,7 +58,7 @@ var Loader = React.createClass({
 								<div className="load-wrapp">
 									<p className='first-timeout flow-text'>oops! a tree fell in the forest and no one heard</p>
 									<p className='second-timeout flow-text'>please map your journey again</p>
-									<a id='timeoutReset' className='btn-primary' onClick={this.resetTimeout}>try again</a>
+									<a id='timeoutReset' className='btn-primary Loading_Refresh' onClick={this.resetTimeout}>try again</a>
 								</div>
 								:
 								[<div className="load-wrapp">

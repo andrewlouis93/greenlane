@@ -8,6 +8,12 @@ var Analytics = require('../stores/Analytics.jsx');
 var ScenicStore = require('../stores/Stores.jsx');
 var Actions = require('../stores/Actions.jsx');
 
+function readCookie(name) {
+    var value = (name = new RegExp('(?:^|;\\s*)' + ('' + name).replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&') + '=([^;]*)').exec(document.cookie)) && name[1];
+    console.log('cookie value', value);
+    return (value == null) ? false : decodeURIComponent(value);
+}
+
 var SetupFlow = React.createClass({
   getInitialState: function(){
     var _seed = this.routes().transBtns;
@@ -22,9 +28,9 @@ var SetupFlow = React.createClass({
     return _initState;
   },
   componentDidMount: function(){
-
-    // Hit landing page
-    Analytics.virtualPage('Home','/home');
+    // Hit landing page as an onboarded user.
+    if ($.parseJSON(readCookie('onboardedUser')))
+      Analytics.virtualPage('Home','/home');
 
     ScenicStore.addChangeListener(this.updateState);
     this.setState({

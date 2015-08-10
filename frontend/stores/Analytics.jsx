@@ -13,7 +13,7 @@ var Analytics = {
    },
    greenLevel: function(_level){
     dataLayer.push({
-      'greenLevel': _level
+      'greenLevel': _level.toString()
     })
    },
    transitMode: function(_mode){
