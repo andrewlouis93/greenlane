@@ -888,6 +888,10 @@ body,
   display: flex;flex-direction: column;align-items: center;justify-content: center;
 }
 
+.google-expando__card{
+  text-align:center;
+}
+
 // Google Expando Config
 $google_expando_radius: 2px;
 $google_expando_whsp: 48px;
@@ -1107,6 +1111,18 @@ hr {
     h3{
       font-size:4.6vw;
     }
+  }
+}
+
+.noparks{
+  margin:0;
+  line-height: 130%;
+  font-family:Roboto-Slab;
+  color :#929496;
+  font-weight:600 !important;
+  font-size:1.6vw;
+  @media #{$medium-and-down} {
+        font-size:4.6vw;
   }
 }
 

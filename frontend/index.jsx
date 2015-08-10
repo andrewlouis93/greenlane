@@ -158,11 +158,10 @@ var Body = React.createClass({
   	ScenicStore.removeChangeListener(this._onChange);
   },
   shouldComponentUpdate: function(){
+    // Needs to be here!
     this.forceUpdate();
   },
   _onChange: function(){
-  	console.log("Change Receeived");
-
   	// Set Loader State
   	this.setState({hideLoader: ScenicStore.getSessionState().isLoading});
   	// Set Updated Layouts State
@@ -174,11 +173,8 @@ var Body = React.createClass({
       	ScenicStore.getBackBtnState().css
       )
     }, function(){
-      console.log('backBtn updated!', ScenicStore.getBackBtnState().css)
+      // console.log('backBtn updated!', ScenicStore.getBackBtnState().css)
     })
-
-
-
   }
 });
 

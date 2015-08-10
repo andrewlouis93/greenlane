@@ -103,7 +103,7 @@ var ParkCarousel = React.createClass({
                   data={this.setCarouselData.bind(this, 'parkCarousel')}>
           {
             this.state.parks.map(function(park){
-              return <h3>{park}</h3>
+                return <h3>{park}</h3>
             })
           }
         </Carousel>
@@ -116,18 +116,29 @@ var ParkTab = React.createClass({
 
   componentDidMount: function(){
         ScenicStore.addChangeListener(this._onChange);
-        $(document).on('click','#routeInfo .activator', this.closeParkInfo);
-    },
-    closeParkInfo: function(){
-      // Use Observer - Listener so we do not DRY.
-      console.log("CLOSING PARK INFO");
-      $(".google-expando__icon").removeClass("active");
-      $(".google-expando__icon").next().removeClass("active");
-
+        $(document).on('click','#routeInfo .activator', this.handleDirectionsTab);
+        $(document).on('click','#routeInfo .card-title', this.closeDirections);
     },
     closeDirections: function(){
-      console.log("CLOSING DIRECTIONS");
+      // Re-activate route options or route chosen.
 
+      // Re-factor to keep this information in
+      // a sessionState attribute as opposed to inferring from the DOM
+      if ($('.favorite').is(':visible'))
+        Analytics.virtualPage('Route Options|Map','/options/map');
+      else
+        Analytics.virtualPage('Route Chosen|Map','/chosen/list');
+
+    },
+    handleDirectionsTab: function(){
+      // Use Observer - Listener so we do not DRY.
+      console.log("CLOSING PARK INFO");
+      // is directions open at this point?
+      $(".google-expando__icon").removeClass("active");
+      $(".google-expando__icon").next().removeClass("active");
+    },
+    handleParkBtn: function(){
+      console.log("Closing directions");
       $('#turnList.card-reveal')
         .css({ display: 'block'})
         .velocity("stop", false)
@@ -140,7 +151,7 @@ var ParkTab = React.createClass({
               queue: false,
               easing: 'easeInOutQuad'
             }
-        );
+      );
     },
 
 getInitialState: function(){
@@ -227,13 +238,13 @@ updateExpInfoHeight: function(){
 
       <div className="google-expando--wrap">
         <div className="google-expando">
-          <div onClick={this.closeDirections} className="google-expando__icon parkBtn">
+          <div onClick={this.handleParkBtn} className="google-expando__icon parkBtn">
             <span className="visuallyhidden" aria-hidden="true">Expand Card</span>
           </div>
 
           <div className="google-expando__card" aria-hidden="true">
 
-            {this.state.parkName.length ? <ParkCarousel updateActiveCarousel={this.updateActiveCarousel}/> : false}
+            {this.state.parkName.length ? <ParkCarousel updateActiveCarousel={this.updateActiveCarousel}/> : <h3 className='noparks'>no parks here</h3>}
 
             <div className="openInfo"></div>
           </div>

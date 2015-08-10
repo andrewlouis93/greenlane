@@ -1,6 +1,7 @@
 var React = require('react');
 var Classnames = require('classnames');
 var config = require('../config.js');
+var Analytics = require('../stores/Analytics.jsx');
 var Actions = require('../stores/Actions.jsx');
 var ScenicStore = require('../stores/Stores.jsx');
 
@@ -103,10 +104,14 @@ var ProfileNav = React.createClass({
   authButtons: function(){
     return ( ( this.state && this.state.auth )? this.userButtons() : this.loginButtons() );
   },
+  menuAnalytics: function(){
+    if ($('#sidenav-overlay'))
+      Analytics.virtualPage('Menu','/menu');
+  },
   render: function() {
     return (
       <nav id='top-nav'>
-        <ul id="slide-out" className="side-nav">
+        <ul onClick={this.menuAnalytics} id="slide-out" className="side-nav">
           {this.authButtons()}
           {this.profileButtons()}
         </ul>

@@ -9,11 +9,20 @@ function googleExpandoToggle() {
   */
   if (!$(this).hasClass('active')){
     // Fire virtualPageView indicating that we clicked on park info
-    dataLayer.push({
-      'event':'VirtualPageview',
-      'virtualPageURL': '/park/all',
-      'virtualPageTitle' : 'Park|All'
-    });
+    if (_Store.getSessionState().activePath.info.parks.length){
+      dataLayer.push({
+        'event':'VirtualPageview',
+        'virtualPageURL': '/park/all',
+        'virtualPageTitle' : 'Park|All'
+      });
+    }
+    else{
+      dataLayer.push({
+        'event':'VirtualPageview',
+        'virtualPageURL': '/park/none',
+        'virtualPageTitle' : 'Park|None'
+      });
+    }
   }
   window.dispatchEvent(new Event('resize'));
   $(this).toggleClass('active');

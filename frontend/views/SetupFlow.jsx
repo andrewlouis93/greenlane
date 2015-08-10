@@ -538,6 +538,22 @@ var SetupFlow = React.createClass({
     // Analytics.virtualPageRouter(nextView);
 
     this.setState(this.routes()[nextView]);
+
+    switch (nextView){
+      case 'transBtns':
+        Analytics.virtualPage('Setup|Transport','/setup/transport');
+        break;
+      case 'travelType':
+        Analytics.virtualPage('Setup|TravelType','/setup/type');
+        break;
+      case 'destSel':
+        Analytics.virtualPage('Setup|Destination','/setup/destination');
+        break;
+      case 'timeSel':
+        Analytics.virtualPage('Setup|Time','/setup/time');
+        break;
+    }
+
     $(".progress-point.active").next().trigger('click');
   },
 
