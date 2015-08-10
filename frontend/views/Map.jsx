@@ -5,20 +5,20 @@ var Classnames = require('classnames');
 var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
 
 
- function toggleFullScreen(){
- 	if ($(window).width() <= 800 && isSafari == false) {
-		var doc = window.document;
-		var docEl = doc.documentElement;
-		var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
-		var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+//  function toggleFullScreen(){
+//  	if ($(window).width() <= 800 && isSafari == false) {
+// 		var doc = window.document;
+// 		var docEl = doc.documentElement;
+// 		var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+// 		var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
 
-		if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
-			requestFullScreen.call(docEl);
-		} else {
-			cancelFullScreen.call(doc);
-		}
-	}
-};
+// 		if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+// 			requestFullScreen.call(docEl);
+// 		} else {
+// 			cancelFullScreen.call(doc);
+// 		}
+// 	}
+// };
 
 var Map = React.createClass({
 
@@ -77,7 +77,6 @@ var Map = React.createClass({
 		this.updateDimensions();
 	},
 	routeNav: function(evt) {
-		//toggleFullScreen();
 		window.scrollTo(0,1);
 		Actions.updateMenu('toggle');
 		$(".progress-point").first().addClass('active');

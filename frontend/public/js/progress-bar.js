@@ -78,7 +78,6 @@
       $('a').has('.routeBtn').animate({padding:'0px'},200);
       $('a').has('.routeBtn').animate({padding:"5%"},200);
     setTimeout( function(){
-      // $('.routeBtn').css("background-image", "url('../../materialize/img/svg/routeEmpty.svg')"),
       $('#locIconStart').attr('class','bounceOne')
       $('#locIconEnd').attr('class','bounceTwo')},350);
 
@@ -90,7 +89,7 @@
           $(".progress-point.active").addClass('routeProg').removeClass('loopProg');
           $("#destSel").removeClass("disabled");
           nextPage();
-        },1500);
+        },1200);
     };
 
     function addLoop(_Actions){
@@ -108,7 +107,7 @@
           $(".progress-point.active").addClass('loopProg').removeClass('routeProg');
           $("#destSel").removeClass("disabled");
           nextPage();
-        },1500);
+        },1200);
     };
 
     function addLoc(){
@@ -150,8 +149,15 @@
         // console.log(val);
         $(".progress-point").eq(val).addClass("active");
 
-        return  $current.css('top', (index / 3 * 92) + "%"),
-                $progress.css('height', (index / 3 * 100)+ "%");
+          if ($(window).height() <= 800){
+                 return $current.css('top', (index / 3 * 91) + "%"),
+                        $progress.css('height', (index / 3 * 100)+ "%");
+                } else {
+                 return $current.css('top', (index / 3 * 93) + "%"),
+                        $progress.css('height', (index / 3 * 100)+ "%");
+
+                };
+
         }
       };
 

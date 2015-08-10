@@ -117,12 +117,14 @@ var PrivacyAccordion = React.createClass({
         	If you click on a third party link, you will be taken to platforms we do not control. This policy does not apply to the privacy practices of that website. Read other company’s privacy policy carefully. We are not responsible for these third parties.
         </Section>
         <Section title="Feel free to contact us if you have more questions">
-        	If you have any questions about this Policy or want to correct or update your information, please email us at criticalmass@criticalmass.com
-				You can also write to us or call at:  Greenlane Help
-				Critical Mass
-				312 Adelaide Street W, 6th floor
-                Toronto, ON  M5V 1R2
-                Phone: 416.673.5275
+        		If you have any questions about this Policy or want to correct or update your information.
+				You can also write to us or call at: 
+				<p>criticalmass@criticalmass.com</p>
+				<p>Greenlane Help</p>
+				<p>Critical Mass</p>
+				<p>312 Adelaide Street W, 6th floor</p>
+                <p>Toronto, ON  M5V 1R2</p>
+                <p>Phone: 416.673.5275</p>
         </Section>
         <Section title="We may link to other sites or apps or have third party services on our platforms we don’t control">
         	If you click on a third party link, you will be taken to platforms we do not control. This policy does not apply to the privacy practices of that website. Read other company’s privacy policy carefully. We are not responsible for these third parties.
@@ -177,13 +179,13 @@ var PageController = React.createClass({
 			<div className="viewContainer">
 				<h1 className="staticTitle">about</h1>
 				<div className="logo"></div>
+				<div className="theTeam"></div>
+				<p className="ourNames">Aditya Rau, Alyssa Jongsma, Kavita Chepovetsky, Charlotte Lewis, Michael Fazal, Nicole Britton, Nathan Toews, Andrew Louis</p> 
+				<hr/>
 					<p>	We’re a group of interns at Critical Mass, an experience design agency based in Toronto.</p>
 					<p>	Though we all specialize in different areas, the one thing we have in common is our love for our city and the great outdoors.</p>
 					<p>	We wanted to create something that used the city’s green spaces to make Torontonians’ lives just a little bit better.  So we got together, thought long and hard and came up with Greenlane - an app that uses park, tree and trail data to map scenic routes through the city.</p>
 					<p>	So next time you’re moving through Toronto, choose Greenlane and see the city differently.</p>
-				<hr/>
-				<h3>the team</h3>
-				<div className="theTeam"></div>
 			</div>
 		);
 	},

@@ -13,37 +13,6 @@ html, body, .table-container{
   display:none;
 }
 
-// .landscape-lock{
-//   &.body {
-//     background-color:$secondary-color;
-//   }
-//  .logoWhite{
-//    display:none;
-//  }
-//  .landError {
-//   background-color:$secondary-color;
-//   text-align:center;
-//   display:block;
-//   width:100vw;
-//   height:100vh;
-//   h1 {
-//     transform:translateY(-50%);
-//     position:absolute;
-//     top:50%;
-//     margin:10% auto;
-//     left:0;
-//     right:0;
-//     text-align:center;
-//     font-family:Roboto-Slab;
-//     font-size:1.5rem;
-//     font-weight:700;
-//     color:#fff !important;
-//   }
-//  }
-//  .progress-meter, #slide-out {
-//   display:none;
-//  }
-// }
 
 /* Navigation Styles Below */
 
@@ -84,7 +53,7 @@ html, body, .table-container{
     top:23vh;
     left: 0;
     right: 0;
-    margin:0 auto;
+    margin:5% auto;
   }
   .user-profile{
     position: absolute;
@@ -578,7 +547,7 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
   // width:60%;
   position: absolute;
   // past this point it gets choppy.
-  max-width:150px;
+  max-width:65%;
 }
 
 @media #{$medium-only}{
@@ -791,13 +760,14 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
 
 #slide-out{
   li{
-    &:hover a{
-      color: rgba(42,209,157, 0.5);
-      font-weight: 500;
+    &:hover{
+      background-color:$primary-color-light;
+      transition:1s;
     }
   }
   a{
     &:hover{
+      color:#fff;
       cursor: pointer;
     }
   }
@@ -1027,7 +997,7 @@ $google_expando_transition: (
   h4 {
       text-align:center;
       margin-bottom:5%;
-      font-size:1.0rem;
+      font-size:1.3rem !important;
       font-family:Roboto-Slab;
       color:$text-color;
       font-weight:600 !important;
@@ -1062,8 +1032,8 @@ $google_expando_transition: (
 
     ul{
       padding: 10% 0;
-      width: 75%;
-      margin: 0 auto;
+      width: 100%;
+      margin: 5% auto;
       display: block;
 
       li{
@@ -1096,7 +1066,7 @@ hr {
     h3 {
       margin:0;
       line-height: 130%;
-      font-size:1.6vw;
+      font-size:2.6vh;
       font-family:Roboto-Slab;
       color:$secondary-color;
       font-weight:600 !important;
@@ -1231,6 +1201,15 @@ hr {
 
 }
 
+.ourNames {
+  padding:5% 10%;
+  text-align:center;
+  font-family:Roboto;
+  font-size:1em;
+  font-weight:300;
+  color:$text-color;
+}
+
 .containerMask::after{
     width: 50px;
     // height: $navbar-height;
@@ -1243,6 +1222,7 @@ hr {
 }
 @media #{$small-and-down} {
   .containerMask::after{
+    width:0 !important;
     // height: $navbar-height-mobile;
     height: 61px;
   }
@@ -1322,7 +1302,7 @@ hr {
 
 .faqMain {
   .sectionhead {
-    width:100%;
+    width:90%;
   }
   button {
     right:0 !important;
@@ -1387,7 +1367,7 @@ hr {
   font-family:Roboto;
   font-weight:300;
   color:$text-color;
-  height:50px;
+  height:auto;
   width: 80%;
   overflow: hidden;
   background: white;
@@ -1447,6 +1427,7 @@ hr {
 }
 
 #error{
+  z-index:1000000;
   position:fixed;
   top: 0;
   left: 0;
@@ -1457,7 +1438,7 @@ hr {
 
   background-color: rgba(42,209,157,0.8);
   height: 100vh;
-  z-index: 1001;
+  z-index: 100005;
   will-change: opacity;
   @media #{$medium-only} {
     // width:calc(100% - 50%);
@@ -1556,6 +1537,7 @@ hr {
 
 .contains_logo{
   #error_content{
+    z-index:10002;
     background: inherit !important;
   }
   #loaderText{
@@ -1564,6 +1546,8 @@ hr {
 }
 
 #error_content{
+  z-index:10002;
+  text-align:center;
   background: white;
   position: relative !important;
   padding: 20px;
@@ -1937,3 +1921,40 @@ hr {
   margin: 0 auto;
   font-size: 2vh;
 }
+
+/// MODAL POPUP JELLY //////////////////////////////////////////////////////////////
+
+.animation-error {
+  animation: animation 750ms linear both;
+}
+
+/* Generated with Bounce.js. Edit at http://goo.gl/ju6Bfe */
+
+@keyframes animation { 
+  0% { transform: matrix3d(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  2.14% { transform: matrix3d(0.227, 0.043, 0, 0, 0.021, 0.227, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  4.27% { transform: matrix3d(0.461, 0.108, 0, 0, 0.053, 0.461, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  4.5% { transform: matrix3d(0.485, 0.114, 0, 0, 0.056, 0.485, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  8.48% { transform: matrix3d(0.843, 0.126, 0, 0, 0.063, 0.843, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  9.01% { transform: matrix3d(0.88, 0.118, 0, 0, 0.059, 0.88, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  12.61% { transform: matrix3d(1.06, 0.051, 0, 0, 0.026, 1.06, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  13.51% { transform: matrix3d(1.087, 0.036, 0, 0, 0.018, 1.087, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  16.82% { transform: matrix3d(1.137, -0.001, 0, 0, -0.001, 1.137, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  17.92% { transform: matrix3d(1.139, -0.007, 0, 0, -0.004, 1.139, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  20.95% { transform: matrix3d(1.124, -0.012, 0, 0, -0.006, 1.124, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  29.03% { transform: matrix3d(1.032, -0.003, 0, 0, -0.001, 1.032, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  34.63% { transform: matrix3d(0.994, 0, 0, 0, 0, 0.994, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  37.64% { transform: matrix3d(0.986, 0.001, 0, 0, 0, 0.986, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  40.14% { transform: matrix3d(0.985, 0, 0, 0, 0, 0.985, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  54.32% { transform: matrix3d(0.999, 0, 0, 0, 0, 0.999, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  62.36% { transform: matrix3d(1.002, 0, 0, 0, 0, 1.002, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  66.67% { transform: matrix3d(1.001, 0, 0, 0, 0, 1.001, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  84.68% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+  100% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); } 
+}
+
+
+
+
+
+
