@@ -1,3 +1,9 @@
+.hw-acceleration{
+  -webkit-transform: translateZ(0);
+  -webkit-perspective: 1000;
+  -webkit-backface-visibility: hidden;
+}
+
 .svg {
   width:100%;
   height:100%;
@@ -25,6 +31,7 @@
 
 .cloudOneBike {
   @extend .cloud;
+  @extend .hw-acceleration;
   top:0;
   right:-30%;
   background-image:url('../img/svg/cloudOne.svg');
@@ -32,6 +39,7 @@
 
 .cloudTwoBike {
   @extend .cloud;
+  @extend .hw-acceleration;
   top:50px;
   left:-30%;
   background-image:url('../img/svg/cloudTwo.svg');
@@ -39,6 +47,7 @@
 
 .cloudOneWalk {
   @extend .cloud;
+  @extend .hw-acceleration;
   top:0;
   right:-30%;
   background-image:url('../img/svg/cloudOne.svg');
@@ -46,6 +55,7 @@
 
 .cloudTwoWalk {
   @extend .cloud;
+  @extend .hw-acceleration;
   top:50px;
   left:-30%;
   background-image:url('../img/svg/cloudTwo.svg');
@@ -84,26 +94,26 @@
     0%, 20%, 40%, 60%, 80%, 100% {-webkit-transform: translateY(0);
                                   -webkit-transform: opacity(1)};
     50% {transform: translateY(-15px);}
-} 
- 
+}
+
 @keyframes bounceOne {
     0%, 20%, 40%, 60%, 80%, 100% {transform: translateY(0);
                                   transform: opacity(1)};
     50% {transform: translateY(-15px);}
-} 
+}
 
 @-webkit-keyframes bounceTwo {
     0%, 20%, 40%, 60%, 80%, 100% {-webkit-transform: translateY(0);
                                   -webkit-transform: opacity(1)};
     50% {transform: translateY(-15px);}
-} 
- 
+}
+
 @keyframes bounceTwo {
     0%, 20%, 40%, 60%, 80%, 100% {transform: translateY(0);
                                   transform: opacity(1)};
     50% {transform: translateY(-15px);}
-} 
- 
+}
+
 /*
  * Adding the animation to our element
 */
@@ -143,15 +153,18 @@
   .st31{fill:#929496;}
 
 .svg-bike-switch {
+  @extend .hw-acceleration;
   background-image:url('../img/svg/bike.svg');
 }
 
 .svg-walk-switch {
+  @extend .hw-acceleration;
   background-image:url('../img/svg/walk.svg');
 }
 
 .routeBtn {
   margin:0 auto;
+  @extend .hw-acceleration;
 }
 
 #routeSmall {
@@ -163,6 +176,7 @@
 }
 
 .loopBtn {
+  @extend .hw-acceleration;
 }
 
 .hamburger {
@@ -425,7 +439,7 @@
 
 .zeroFacilitiesPadding{
   padding-top:5%;
-  
+
   @media #{$large-and-up}{
     padding-top: 15%;
   }

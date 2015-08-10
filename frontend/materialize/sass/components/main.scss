@@ -3,6 +3,11 @@ html, body, .table-container{
   overflow:hidden;
 }
 
+.hw-acceleration{
+  -webkit-transform: translateZ(0);
+  -webkit-perspective: 1000;
+  -webkit-backface-visibility: hidden;
+}
 
 .landError {
   display:none;
@@ -554,12 +559,14 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
 
 /* HEIGHTS OF THE TWO BELOW HAVE TO BE THE SAME!*/
 #drag-cont{
+  @extend .hw-acceleration;
   height:60%;
   position:relative;
   min-height:1px;
 }
 
 #resize-cont{
+  @extend .hw-acceleration;
   -webkit-mask-box-image: url("../img/svg/routeMap.svg");
   mask-border: url("../img/svg/routeMap.svg");
   background-color:$empty-slider-color;
@@ -1421,6 +1428,7 @@ hr {
 // TUTORIAL SLIDER /////////////////////////////////////////////////////////////////
 
 .tutorialSlide{
+  @extend .hw-acceleration;
   height:100%;
   background-position:50% 50%;
   background-size:contain;
