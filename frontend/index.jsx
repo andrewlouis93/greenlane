@@ -38,7 +38,7 @@ var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Const
 
 $(document).on('focus', 'input[type="text"]', function(){
   var _windowHeight = initial_screen_size;
-  document.webkitCancelFullScreen();
+  // document.webkitCancelFullScreen();
   $('body').css({'height':_windowHeight + 'px',
                   'background-color':'white'});
   $('.progress-meter').css({'height':_windowHeight + 'px'});
