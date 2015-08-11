@@ -124,10 +124,13 @@ var ParkTab = React.createClass({
 
       // Re-factor to keep this information in
       // a sessionState attribute as opposed to inferring from the DOM
-      if ($('.favorite').is(':visible'))
+      if ($('.favorite').is(':visible')){
+        Analytics.virtualPage('Route Chosen|Map','/chosen/map');
+      }
+      else{
         Analytics.virtualPage('Route Options|Map','/options/map');
-      else
-        Analytics.virtualPage('Route Chosen|Map','/chosen/list');
+      }
+
 
     },
     handleDirectionsTab: function(){

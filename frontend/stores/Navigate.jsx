@@ -552,7 +552,6 @@ var Navigate = {
   },
   generateRoute: function(event){
 
-    Analytics.virtualPage('Route Options|Map','/options/map');
     // Attach event listener to .activator
     $(document).off('click','.activator', Analytics.virtualPageChosenList );
     $(document).on('click','.activator', Analytics.virtualPageChoiceList );
@@ -663,6 +662,8 @@ var Navigate = {
             $(".favorite").addClass("hide");
 
             Actions.isLoading(false);
+            // This must get triggered after loading completes
+            Analytics.virtualPage('Route Options|Map','/options/map');
 
             setTimeout(function(){
               console.log("timeout invoked");

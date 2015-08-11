@@ -1,5 +1,6 @@
 
 var Dispatcher = require('./Dispatcher.jsx');
+var Analytics = require('./Analytics.jsx');
 var EventEmitter = require('events').EventEmitter;
 EventEmitter.prototype._maxListeners = 100;
 var assign = require('object-assign');
@@ -145,6 +146,8 @@ var backBtn = {
     }
     else if (popped && (popped =='parkview')){
       console.log("Popped Parkview!");
+      // You went back to timeSel
+      Analytics.virtualPage('Setup|Time','/setup/time');
       layout.directionsDeactivate();
     }
     if (this.states.length == 0){

@@ -1,5 +1,6 @@
 var React = require('react/addons');
 var Actions = require('../stores/Actions.jsx');
+var Analytics = require('../stores/Analytics.jsx');
 var ScenicStore = require('../stores/Stores.jsx');
 var Classnames = require('classnames');
 var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
@@ -53,10 +54,10 @@ var Map = React.createClass({
 			console.log("Map Invalidated");
 		}
 
-		// close side-menu, 
+		// close side-menu,
 		if ($("#sidenav-overlay").length == 0)
 			$("#slide-out").css({
-				right: -1*$("#slide-out").width() 
+				right: -1*$("#slide-out").width()
 			});
 		else{
 			;
@@ -82,8 +83,13 @@ var Map = React.createClass({
 		$(".progress-point").first().addClass('active');
 		// Resize the map following state changes.
 		this.updateDimensions();
+
 		evt.stopPropagation();
 		evt.preventDefault();
+
+    /* Send Analytics Tag */
+    Analytics.virtualPage('Setup|Transport','/setup/transport');
+
 		return false;
     },
     componentWillUnmount: function(){

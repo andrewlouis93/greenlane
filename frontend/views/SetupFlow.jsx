@@ -29,8 +29,6 @@ var SetupFlow = React.createClass({
   },
   componentDidMount: function(){
     // Hit landing page as an onboarded user.
-    if ($.parseJSON(readCookie('onboardedUser')))
-      Analytics.virtualPage('Home','/home');
 
     ScenicStore.addChangeListener(this.updateState);
     this.setState({

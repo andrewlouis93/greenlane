@@ -14,6 +14,7 @@ var ErrorView = require('./views/Error.jsx');
 var Tutorial = require('./views/Tutorial.jsx');
 
 var ScenicStore = require('./stores/Stores.jsx');
+var Analytics = require('./stores/Analytics.jsx');
 var Actions = require('./stores/Actions.jsx');
 
 var is_keyboard = false;
@@ -72,6 +73,7 @@ var Body = React.createClass({
 	getInitialState: function(){
     window._BODY = this;
 		window._Actions = Actions;
+    window._Analytics = Analytics;
 		window._Store = ScenicStore;
 		return {
 			hideLoader: ScenicStore.getSessionState().isLoading,
@@ -126,6 +128,7 @@ var Body = React.createClass({
 	},
 	startApplication: function(){
 		this.setState({onboardedUser: true});
+    Analytics.virtualPage('Home','/home');
 	},
   render: function(){
     var tutClasses = Classnames(
