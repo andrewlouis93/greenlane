@@ -36,7 +36,7 @@ var Analytics = {
     });
   },
   virtualPageChoiceList: function(){
-    alert("IN ANALYTICS CHOICE LIST");
+    console.log("IN ANALYTICS CHOICE LIST");
     dataLayer.push({
       'event':'VirtualPageview',
       'virtualPageURL': '/options/list',
@@ -44,7 +44,7 @@ var Analytics = {
     });
   },
   virtualPageChosenList: function(){
-    alert("IN ANALYTICS CHOSEN LIST");
+    console.log("IN ANALYTICS CHOSEN LIST");
     dataLayer.push({
       'event':'VirtualPageview',
       'virtualPageURL': '/chosen/list',
