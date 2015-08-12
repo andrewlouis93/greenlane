@@ -32,7 +32,6 @@ var RouteView = React.createClass({
     console.log("Route View has Mounted!");
     ScenicStore.addChangeListener(this._onChange);
     console.log(ScenicStore.getSessionState().activePath);
-    window.nateState = this.state;
   },
   componentWillUnmount: function(){
     ScenicStore.removeChangeListener(this._onChange);

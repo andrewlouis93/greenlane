@@ -151,7 +151,7 @@
   .st29{fill:#D1D3D4;}
   .st30{fill:#16A457;}
   .st31{fill:#929496;}
-  
+
 
 .svg-bike-switch {
   @extend .hw-acceleration;
@@ -396,13 +396,13 @@
 
 
 .logo {
-  top:5%;
   left:0;
   right:0;
   margin:auto;
+  margin-top:5%;
   width:70%;
   height:100px;
-  position:absolute;
+  position:relative;
   background-image:url('../img/svg/logo.svg');
   background-size:100% 100%;
   background-position:50%;
