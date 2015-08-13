@@ -103,7 +103,7 @@ app.get('/auth/google/callback',
 		res.cookie('profileUrl', req.user.photos[0].value, { maxAge: 600 * 1000 });
 	}
 
-    res.redirect('http://greenlane.io');
+    res.redirect('https://greenlane.io');
  });
 
 module.exports = passport;
