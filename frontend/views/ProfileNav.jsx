@@ -65,7 +65,7 @@ var ProfileNav = React.createClass({
               <i className="fa fa-facebook left fa-2x"></i>sign in with facebook</a>
           </li>
           <li>
-            <a href={`http://localhost:3000/auth/google`} className="btn-google">
+            <a href={`http://greenlane.io/auth/google`} className="btn-google">
               <i className="fa fa-google left fa-2x"></i>sign in with google</a>
           </li>
         </div>
