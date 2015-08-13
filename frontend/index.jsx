@@ -12,9 +12,8 @@ var RouteComponent = require('./views/RouteComponent.jsx');
 var Loader = require('./views/Loader.jsx');
 var ErrorView = require('./views/Error.jsx');
 var Tutorial = require('./views/Tutorial.jsx');
-
+var LandingAnim = require('./views/LandingAnim.jsx');
 var ScenicStore = require('./stores/Stores.jsx');
-var Analytics = require('./stores/Analytics.jsx');
 var Actions = require('./stores/Actions.jsx');
 
 var is_keyboard = false;
@@ -73,7 +72,6 @@ var Body = React.createClass({
 	getInitialState: function(){
     window._BODY = this;
 		window._Actions = Actions;
-    window._Analytics = Analytics;
 		window._Store = ScenicStore;
 		return {
 			hideLoader: ScenicStore.getSessionState().isLoading,
@@ -108,11 +106,11 @@ var Body = React.createClass({
 
     setTimeout(function(){
       $('.landing-animation').animate({
-             'background-position-y': yPos
-      }, 3000, function(){
-        $(this).fadeOut();
+             'top': '-100%'
+      }, 2000, function(){
+        $(this).delay(2000).fadeOut();
       });
-    },1000);
+    },3000);
   },
 	componentDidMount: function(){
 		// only occurs once once the rest of the site has loaded!
@@ -128,7 +126,6 @@ var Body = React.createClass({
 	},
 	startApplication: function(){
 		this.setState({onboardedUser: true});
-    Analytics.virtualPage('Home','/home');
 	},
   render: function(){
     var tutClasses = Classnames(
@@ -141,7 +138,7 @@ var Body = React.createClass({
 
 			<div id='containerRow' style={this.state.lockHeight} className="row">
         <div className={tutClasses}>
-                <div className="landing-animation"></div>
+              <div className="landing-animation"><LandingAnim/></div>
                 <Tutorial startApplication={this.startApplication} />
                 <div onClick={this.startApplication} id='skip-tutorial'>skip</div>
         </div>

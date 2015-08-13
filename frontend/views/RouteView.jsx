@@ -70,6 +70,7 @@ var RouteView = React.createClass({
         //json object to sent to the authentication url
         data: pkg,
         success: function () {
+          $
           $('.favorite').addClass('favorited').removeClass('favorite');
         }
     })
@@ -186,10 +187,10 @@ var RouteView = React.createClass({
                     }
                   }
               )}
-              <a href={this.state.url} target="_blank" className="ui-menu-item hide-on-large-only google-link">
+              <a href={this.state.url} target="_blank" className="ui-menu-item google-link">
                 <div id='gmaps-link' className='btn-secondary'>
                   <i id='gmaps-image' className="fa fa-google left fa-2x"></i>
-                  <span>listen to your route</span>
+                  <span>give it a listen</span>
                 </div>
               </a>
             </ul>),
@@ -231,10 +232,10 @@ var RouteView = React.createClass({
           <div className="routeChoice"></div>
           <div id="routeInfo">
               <ul onClick={this.createList}>
-                <li className="destLbl">
+                <li className="destLbl activator">
                   <span className="activator">{null ? this.state.travelDest : this.state.travelOrig}</span>
                 </li>
-                <li className="timeLbl">
+                <li className="timeLbl activator">
                   <span className="activator">{this.state.travelTime + ' | ' + this.state.travelDist}</span>
                 </li>
               </ul>
