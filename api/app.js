@@ -14,14 +14,14 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 
 mongoose.connect('mongodb://localhost:27017/scenic');
 
-app.get('/users', function(req, res){
+app.get('/auth/users', function(req, res){
 	User.find().exec(function(err, suc){
 		console.log(suc);
 		res.send(suc);
 	});
 });
 
-app.post('/save-route', function(req, res) {
+app.post('/auth/save-route', function(req, res) {
 
   var authId = req.body.authId,
       type = req.body.type,
@@ -54,7 +54,7 @@ app.post('/save-route', function(req, res) {
 });
 
 
-app.post('/delete-route', function(req, res) {
+app.post('/auth/delete-route', function(req, res) {
 
   var authId = req.body.authId,
       type = req.body.type,
@@ -79,7 +79,7 @@ app.post('/delete-route', function(req, res) {
 });
 
 
-app.get('/favourite-routes', function(req, res){
+app.get('/auth/favourite-routes', function(req, res){
   var authId = req.query.authId,
       type = req.query.type;
 

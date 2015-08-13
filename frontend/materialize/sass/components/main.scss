@@ -774,11 +774,12 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
     &:hover{
       background-color:$primary-color-light;
       transition:0.5s;
+      // color: #fff;
     }
   }
   a{
     &:hover{
-      color:#fff;
+      // color:#fff;
       cursor: pointer;
     }
   }
@@ -795,12 +796,16 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
   color:$primary-color;
   font-weight:400;
   border-bottom:1px solid #E8E8E8;
-      li{
-          padding:10px 30px;
+      li:hover a{
+        color: #fff;
+        .share{
+          background-image:url('../img/svg/share-white.svg');
+        }
       }
       a {
-        padding:0 !important;
+        padding:10px 30px;
       }
+
 }
 
 .loginStyles {
@@ -814,11 +819,18 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
   font-size:1rem;
   font-weight:200 !important;
   color:$primary-color;
-
-      li {
-        line-height:35px !important;
-        padding:10px;
+    li {
+      line-height:35px !important;
+      a{
+        padding: 10px 25px;
       }
+    }
+    li:hover{
+      a{
+        color: #fff;
+        font-weight:300;
+      }
+    }
 }
 
 
@@ -1786,8 +1798,13 @@ hr {
 }
 
 .loginSection{
-  li:hover a{
-    color: white !important;
+  li:hover{
+    a{
+      color: white !important;
+    }
+  }
+  li a{
+    padding: 0 15px;
   }
 }
 
@@ -2048,6 +2065,3 @@ hr {
         .st72{clip-path:url(#SVGID_11_);}
         .st73{fill:#ABE6CF;}
         .st74{display:none;}
-
-
-

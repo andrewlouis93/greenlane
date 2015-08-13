@@ -118,7 +118,7 @@ var PrivacyAccordion = React.createClass({
         </Section>
         <Section title="Feel free to contact us if you have more questions">
         		If you have any questions about this Policy or want to correct or update your information.
-				You can also write to us or call at: 
+				You can also write to us or call at:
 				<p>Greenlane Help</p>
 				<p>c/o Critical Mass</p>
 				<p>312 Adelaide Street W, 6th floor</p>
@@ -183,7 +183,7 @@ var PageController = React.createClass({
 				<div className="logo"></div>
 				<h3>the team</h3>
 				<div className="theTeam"></div>
-				<p className="ourNames">Aditya Rau, Alyssa Jongsma, Kavita Chepovetsky, Charlotte Lewis, Michael Fazal, Nicole Britton, Nathan Toews, Andrew Louis</p> 
+				<p className="ourNames">Aditya Rau, Alyssa Jongsma, Kavita Chepovetsky, Charlotte Lewis, Michael Fazal, Nicole Britton, Nathan Toews, Andrew Louis</p>
 				<hr/>
 					<p>	We’re a group of interns at Critical Mass, an experience design agency based in Toronto.</p>
 					<p>	Though we all specialize in different areas, the one thing we have in common is our love for our city and the great outdoors.</p>
@@ -226,7 +226,7 @@ var PageController = React.createClass({
       $.ajax
        ({
            type: "POST",
-           url: 'http://localhost:3000/delete-route',
+           url: 'https://greenlane.io/auth/delete-route',
            dataType: 'json',
            //json object to sent to the authentication url
            data: {
@@ -265,7 +265,7 @@ var PageController = React.createClass({
 		console.log(ScenicStore.getActivePage());
 		console.log(readCookie('authenticated'));
 		if ((ScenicStore.getActivePage() == 'favSection') && readCookie('authenticated')){
-			$.get("http://localhost:3000/favourite-routes", {
+			$.get("https://greenlane.io/auth/favourite-routes", {
 				authId: parseFloat(readCookie('authId')),
 				type: readCookie('type')
 			},
