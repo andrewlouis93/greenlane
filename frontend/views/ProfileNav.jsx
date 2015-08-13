@@ -61,11 +61,11 @@ var ProfileNav = React.createClass({
 
         <div className="loginSection">
           <li>
-            <a href={`http://greenlane.io:8080/auth/facebook`} className="btn-facebook">
+            <a href={`http://greenlane.io/auth/facebook`} className="btn-facebook">
               <i className="fa fa-facebook left fa-2x"></i>sign in with facebook</a>
           </li>
           <li>
-            <a href={`http://104.236.58.153:3000/auth/google`} className="btn-google">
+            <a href={`http://localhost:3000/auth/google`} className="btn-google">
               <i className="fa fa-google left fa-2x"></i>sign in with google</a>
           </li>
         </div>
