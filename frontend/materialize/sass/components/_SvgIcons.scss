@@ -331,6 +331,7 @@
   transform: translateY(-48%);
   float: left;
   background-image:url('../img/svg/park.svg');
+  background-repeat:no-repeat;
   background-size:100% 100%;
   background-position:50%;
   width:10%;
@@ -412,7 +413,7 @@
 .noParkImg {
 
   @media #{$small-and-down} {
-    width: 60%;
+    width: 80%;
     max-height: 70%;
   }
   @media #{$medium-only} {
@@ -609,6 +610,14 @@
     border-top: $secondary-color !important;
     background: $secondary-color !important;
   }
+}
+
+.leaflet-compact-attribution {
+  display:none !important;
+}
+
+.leaflet-control-attribution {
+  display:none !important;
 }
 
 @media #{$medium-and-down} {

@@ -38,9 +38,9 @@ var Section = React.createClass({
   render: function() {
     return (
       <div className={this.state.class}>
-        <button></button>
         <div className="sectionhead" onClick={this.handleClick}>
         	{this.props.title}
+        	<button></button>
         </div>
         <div className="articlewrap">
           <div className="article">
@@ -119,8 +119,8 @@ var PrivacyAccordion = React.createClass({
         <Section title="Feel free to contact us if you have more questions">
         		If you have any questions about this Policy or want to correct or update your information.
 				You can also write to us or call at: 
-				<p>criticalmass@criticalmass.com</p>
 				<p>Greenlane Help</p>
+				<p>criticalmass@criticalmass.com</p>
 				<p>Critical Mass</p>
 				<p>312 Adelaide Street W, 6th floor</p>
                 <p>Toronto, ON  M5V 1R2</p>
@@ -177,8 +177,10 @@ var PageController = React.createClass({
 	aboutUs: function(){
 		return (
 			<div className="viewContainer">
+			  <div className="about">
 				<h1 className="staticTitle">about</h1>
 				<div className="logo"></div>
+				<h3>the team</h3>
 				<div className="theTeam"></div>
 				<p className="ourNames">Aditya Rau, Alyssa Jongsma, Kavita Chepovetsky, Charlotte Lewis, Michael Fazal, Nicole Britton, Nathan Toews, Andrew Louis</p> 
 				<hr/>
@@ -186,6 +188,7 @@ var PageController = React.createClass({
 					<p>	Though we all specialize in different areas, the one thing we have in common is our love for our city and the great outdoors.</p>
 					<p>	We wanted to create something that used the city’s green spaces to make Torontonians’ lives just a little bit better.  So we got together, thought long and hard and came up with Greenlane - an app that uses park, tree and trail data to map scenic routes through the city.</p>
 					<p>	So next time you’re moving through Toronto, choose Greenlane and see the city differently.</p>
+			  </div>
 			</div>
 		);
 	},

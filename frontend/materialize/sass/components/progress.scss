@@ -41,6 +41,13 @@
   }
 }
 
+@media screen and (min-width: 1000px){
+    .progress-meter {
+    height:94%;
+    top:64px;
+  }
+}
+
 
 .progress-meter .current {
   -moz-transition: top 1s;

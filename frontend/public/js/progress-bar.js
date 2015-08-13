@@ -150,7 +150,7 @@
         $(".progress-point").eq(val).addClass("active");
 
           if ($(window).height() <= 800){
-                 return $current.css('top', (index / 3 * 91) + "%"),
+                 return $current.css('top', (index / 3 * 90) + "%"),
                         $progress.css('height', (index / 3 * 100)+ "%");
                 } else {
                  return $current.css('top', (index / 3 * 93) + "%"),

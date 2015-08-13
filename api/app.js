@@ -100,6 +100,6 @@ app.get('/favourite-routes', function(req, res){
 // 	res.send(req.session.passport);
 // })
 
-app.listen(8080, function() {
+app.listen(3000, function() {
   console.log('Listening on port 3000...')
 })
