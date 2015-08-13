@@ -798,11 +798,14 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
   border-bottom:1px solid #E8E8E8;
       li:hover a{
         color: #fff;
-
+        .share{
+          background-image:url('../img/svg/share-white.svg');
+        }
       }
       a {
         padding:10px 30px;
       }
+
 }
 
 .loginStyles {
