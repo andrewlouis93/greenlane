@@ -65,7 +65,7 @@ var RouteView = React.createClass({
    $.ajax
     ({
         type: "POST",
-        url: 'http://localhost:3000/save-route',
+        url: 'https://greenlane.io/auth/save-route',
         dataType: 'json',
         //json object to sent to the authentication url
         data: pkg,
