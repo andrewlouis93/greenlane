@@ -46,10 +46,14 @@ $(document).on('focus', 'input[type="text"]', function(){
   $('.progress-meter').css({'display':'block'});
 });
 
-
-// $(document).on('blur', 'input[type="text"]', function(){
-
-// });
+if ( $(window).width() > 1000) {
+  $(document).on('focus', 'input[type="text"]', function(){   
+    $('body').css({'height':94 + '%',
+                   'background-color':'white'});
+    $('.progress-meter').css({'height':94 + '%'});
+    $('.progress-meter').css({'display':'block'});
+  });
+};
 
 
 function readCookie(name) {

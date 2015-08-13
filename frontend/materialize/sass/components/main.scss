@@ -468,7 +468,7 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
   a {
     position:relative;
     display:inline-block;
-    padding:5% 0%;
+    padding:5%;
     margin-bottom:2%;
     height:50%;
     width:100%;
@@ -1000,13 +1000,6 @@ $google_expando_transition: (
     overflow: visible;
     position: static;
     width: auto;
-}
-
-@media #{$medium-and-down} {
-  .openInfo{
-    margin-top: 0px;
-    height: 15px;
-  }
 }
 
 .expandedInfo {

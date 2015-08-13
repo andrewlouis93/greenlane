@@ -375,17 +375,23 @@
   -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */
   transform: rotate(0deg);
   background-image:url('../img/svg/downChev.svg');
-  background-size:100% 100%;
+  background-repeat:no-repeat;
+  background-size:50% 50%;
   background-position:50%;
   width:100%;
-  height:10px;
+  height:5vh;
   left: 0px;
-  bottom:10px;
 }
 
 @media #{$medium-and-down}{
   .openInfo{
     margin-top: 35px;
+  }
+}
+
+@media #{$medium-and-down} {
+  .openInfo{
+    margin-top: 0px;
   }
 }
 
