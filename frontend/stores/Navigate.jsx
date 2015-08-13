@@ -405,7 +405,7 @@ var Navigate = {
       return cb(predictions);
     });
   },
-  // Sample query: http://104.131.189.81/greenify?origin=-79.380658,43.645388&dest=-79.391974,43.647957
+  // Sample query: http://104.131.189.81/greenify?origin=-79.380658,43.645388&dest=-79.391974,43.647957&greenness=3
   buildGreenifyURL: function() {
     var origin = ScenicStore.getSessionState().origin;
 
@@ -417,7 +417,7 @@ var Navigate = {
     }
     var greenness = ScenicStore.getSessionState().greenness;
 
-    var api = "http://104.131.189.81/greenify?";
+    var api = "https://greenlane.io/greenify?";
     api += "origin=" + origin.latLng.lng + ',' + origin.latLng.lat;
     api += "&";
     api += "dest=" + destination.latLng.lng + ',' + destination.latLng.lat;
@@ -647,7 +647,7 @@ var Navigate = {
         greenifyResults[id].facilities = cleanFacilities;
       })
       // 3 - optimize to re-order waypoints;
-      
+
       // $.ajax({
       //  url: 'https://maps.googleapis.com/maps/api/directions/json',
       //  type: 'GET',
