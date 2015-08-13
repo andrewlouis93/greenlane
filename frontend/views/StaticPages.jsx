@@ -120,11 +120,12 @@ var PrivacyAccordion = React.createClass({
         		If you have any questions about this Policy or want to correct or update your information.
 				You can also write to us or call at: 
 				<p>Greenlane Help</p>
-				<p>criticalmass@criticalmass.com</p>
-				<p>Critical Mass</p>
+				<p>c/o Critical Mass</p>
 				<p>312 Adelaide Street W, 6th floor</p>
                 <p>Toronto, ON  M5V 1R2</p>
                 <p>Phone: 416.673.5275</p>
+                <p>criticalmass@criticalmass.com</p>
+
         </Section>
         <Section title="We may link to other sites or apps or have third party services on our platforms we don’t control">
         	If you click on a third party link, you will be taken to platforms we do not control. This policy does not apply to the privacy practices of that website. Read other company’s privacy policy carefully. We are not responsible for these third parties.
