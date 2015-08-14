@@ -3,7 +3,7 @@
 		      edge: 'right', // Choose the horizontal origin
 		    }
 		  );
-	  }); 
+	  });
 
       $(document).ready(function(){
     $('.collapsible').collapsible({
@@ -19,7 +19,7 @@
     $(document).ready(function(){
     $('ul.tabs').tabs();
     });
-        
+
      $(document).ready(function(){
       $('.slider').slider({
         full_width: true,
@@ -33,8 +33,8 @@
     // INSERTING IMAGE AS PROGRESS MOVES ON ----------------------------------------
 
     function nextPage() {
-      $(".progress-points").data('current', $(".progress-points").data('current') + 1 ); 
-      $(".progress-point.active").next().click();    
+      $(".progress-points").data('current', $(".progress-points").data('current') + 1 );
+      $(".progress-point.active").next().click();
     };
 
 // $('.cloudOne').animate({width:"200px"},200)
@@ -52,7 +52,7 @@
           console.log("Mode set to cycling");
           $(".progress-point.active").addClass('bikeProg').removeClass('walkProg');
           $("#travelType").removeClass("disabled");
-          nextPage(); 
+          nextPage();
         }
       );
     };
@@ -85,7 +85,7 @@
           _Actions.setRoute();
           dataLayer.push({
             'travelType': 'ROUTE',
-          });      
+          });
           $(".progress-point.active").addClass('routeProg').removeClass('loopProg');
           $("#destSel").removeClass("disabled");
           nextPage();
@@ -103,7 +103,7 @@
           _Actions.setLoop();
           dataLayer.push({
             'travelType': 'LOOP',
-          });            
+          });
           $(".progress-point.active").addClass('loopProg').removeClass('routeProg');
           $("#destSel").removeClass("disabled");
           nextPage();
@@ -115,9 +115,9 @@
       $("#timeSel").removeClass("disabled");
       nextPage();
     };
-    // ACTIVE STATE PROGRESS METER 
+    // ACTIVE STATE PROGRESS METER
 
-          $(function() {  
+          $(function() {
       var $point_arr, $current, $points, $progress, $trigger, active, max, tracker, val, $current, index;
 
       $trigger   = $('.trigger').first();
@@ -140,11 +140,11 @@
         active = index;
         window._id = index;
         var $_active = $point_arr.eq(active)
-        
+
         $point_arr
           .removeClass('completed active')
           .slice(0, active).addClass('completed')
-        
+
         // console.log("modified val");
         // console.log(val);
         $(".progress-point").eq(val).addClass("active");

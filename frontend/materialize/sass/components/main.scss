@@ -1444,10 +1444,14 @@ hr {
   z-index: 999;
 }
 
+#seo-container{
+  height:0px;
+  overflow:hidden;
+}
+
 #sidenav-overlay{
   z-index: 1000 !important;
 }
-
 
 // TUTORIAL SLIDER /////////////////////////////////////////////////////////////////
 
@@ -1552,6 +1556,16 @@ hr {
       @media #{$small-and-down} {
         max-width: 100%;
       }
+      &.fb-share-button{
+        cursor: pointer;
+      }
+  }
+
+  .smaller-social{
+    font-size: 1.4em !important;
+  }
+  .smaller-cancel{
+    font-size:1em !important;
   }
 
   .err-cancel{

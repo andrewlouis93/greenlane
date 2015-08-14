@@ -5,11 +5,19 @@
     <title>Greenlane</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-    <meta property="og:url"           content="http://greenlane.io" />
+    <!-- Facebook Shares -->
+    <meta property="og:url"           content="https://greenlane.io" />
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="Greenlane" />
     <meta property="og:description"   content="Greenlane uses park, tree and trail data to map scenic paths through Toronto. Get outside and experience the city within a park." />
-    <meta property="og:image"         content="http://gallery.photo.net/photo/4951429-md.jpg" />
+    <meta property="og:image"         content="https://greenlane.io/public/assets/facebook-share.jpg" />
+    <!--Tweets -->
+    <meta property="twitter:card" content="summary" >
+    <meta property="twitter:title" content="Greenlane" >
+    <meta property="twitter:description" content="Greenlane uses park, tree and trail data to map scenic paths through Toronto. Get outside and experience the city within a park." >
+    <meta property="twitter:creator" content="@GreenlaneTO" >
+    <meta property="twitter:url" content="https://greenlane.io" >
+    <meta property="twitter:image" content="https://greenlane.io/public/assets/facebook-share.jpg" >
 
     <!-- Touch Icons - iOS and Android 2.1+ 180x180 pixels in size. -->
     <link rel="apple-touch-icon-precomposed" href="public/assets/favicons/favicon.png">
@@ -26,15 +34,36 @@
   </head>
   <body>
     <div id="content">
-
+    </div>
+    <div id="seo-container">
+      <h1>Greenlane uses park, tree and trail data to map scenic paths through Toronto.</h1>
+      <section>
+          <h1>About Us</h1>
+          <p>We wanted to create something that used the city’s green spaces to make Torontonian’s lives just a little bit better</p>
+          <p>So next time you're moving through Toronto, choose Greenlane and see the city differently.</p>
+      </section>
+      <section>
+        <h1>FAQ</h1>
+        <p>Greenlane also incorporates trail and tree coverage for you to experience.</p>
+        <p>We can map greenlanes from the North (Steeles Ave) to the South (Downtown Toronto, including the Toronto Islands), and from East (Scarborough Pickering Town Line, including Rouge Park) to West (Dixie Road, Highway 407). </p>
+      </section>
+      <section>
+          <h1>Privacy Policy</h1>
+          <p>
+            Greenlane Help
+            c/o Critical Mass
+            312 Adelaide Street W, 6th floor
+            Toronto, ON M5V 1R2
+            Phone: 416.673.5275
+            criticalmass@criticalmass.com
+          </p>
+      </section>
     </div>
   	<!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="public/js/interact-1.2.4.min.js"></script>
    	<script type="text/javascript" src="public/js/jquery.2.1.1.js"></script>
     <script type="text/javascript" src="public/js/jquery-ui.js"></script>
     <script type="text/javascript" src="public/js/jquery.ui.touch-punch.min.js"></script>
-
-
   	<script type="text/javascript" src="public/js/materialize.js"></script>
     <script type="text/javascript" src="public/js/sideNav.js"></script>
 
@@ -42,15 +71,16 @@
     <script src="https://api.mapbox.com/mapbox.js/v2.2.1/mapbox.js"></script>
     <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/mapbox-directions.js/v0.3.0/mapbox.directions.js'></script>
 
-
     <!-- Autocomplete Deps -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
+
+    <!-- Twitter Widget -->
+    <script type="text/javascript" async src="//platform.twitter.com/widgets.js"></script>
     <script type="text/javascript" src="public/js/typeahead.bundle.js"></script>
 
-
-  <script>
-    dataLayer = [];
-  </script>
+    <script>
+      dataLayer = [];
+    </script>
 
   <!-- Google Tag Manager -->
   <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-M338NG"
@@ -86,13 +116,6 @@
         js.src = "//connect.facebook.net/en_US/all.js";
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
-
-    // Refactor!
-    //   FB.ui({
-    //     method: 'share',
-    //     href: 'http://greenlane.io',
-    // }, function(response){});
    </script>
-
   </body>
 </html>

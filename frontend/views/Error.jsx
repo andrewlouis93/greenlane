@@ -15,6 +15,14 @@ var Error = React.createClass({
 			hasLogo: Classnames()
 		}
 	},
+	facebookShare: function(){
+		  FB.ui({
+        method: 'share',
+        href: 'https://greenlane.io',
+    }, function(response){
+			console.log('facebookShare Response', response);
+		});
+	},
 	componentDidMount: function(){
 		// Seed with default state.
 		// this.setState(this['auth']());
@@ -81,17 +89,17 @@ var Error = React.createClass({
 			title: 'share Greenlane with your friends!',
 			body: (
 			[
-				<a target="_blank" className='btn-facebook error-btn fb-share-button' href="https://www.facebook.com/sharer/sharer.php?u=greenlane.io">
+				<a onClick={this.facebookShare} className='btn-facebook error-btn fb-share-button'>
         		<i className="fa fa-facebook left fa-2x"></i>
-        		<span>share on facebook</span>
+        		<span className="smaller-social">share on facebook</span>
         </a>
 				,
-				<a target="_blank" className='btn-twitter error-btn' href="https://twitter.com/home?status=Get%20your%20friends%20on%20the%20greenlane!">
+				<a target="_blank" className='btn-twitter error-btn' href="https://twitter.com/intent/tweet?related=greenlaneTO&text=What%27s%20good%20Greenlane&hashtags=greenlane,toronto">
         		<i className="fa fa-twitter left fa-2x"></i>
-        		<span>share on twitter</span>
+        		<span className="smaller-social">share on twitter</span>
         </a>
 				,
-				<div onClick={this.deactivate} className='btn-primary err-cancel error-btn'>
+				<div onClick={this.deactivate} className='btn-primary err-cancel error-btn smaller-cancel'>
 					cancel
 				</div>
 			]
