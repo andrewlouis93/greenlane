@@ -47,7 +47,7 @@ $(document).on('focus', 'input[type="text"]', function(){
 });
 
 if ( $(window).width() > 1000) {
-  $(document).on('focus', 'input[type="text"]', function(){   
+  $(document).on('focus', 'input[type="text"]', function(){  
     $('body').css({'height':94 + '%',
                    'background-color':'white'});
     $('.progress-meter').css({'height':94 + '%'});
