@@ -725,6 +725,7 @@ $(document).on('click', '.leaflet-popup', function() {
 });
 
 $(document).on('click', '.go-to-route', function() {
+
   Analytics.virtualPage('Route Chosen|Map', '/chosen/map');
   // Attach click event listener, handler to .activator
   $(document).off('click', '.activator', Analytics.virtualPageChoiceList);
@@ -734,6 +735,8 @@ $(document).on('click', '.go-to-route', function() {
   $("[route]").not("[route=" + activePathIndex + "]").fadeOut();
   $(".go-to-route").addClass("hide");
   $(".favorite").removeClass("hide");
+
+  Analytics.greenOnRoute( paths[activePathIndex].info.scenic_route.length );
 
   // Center the selected route.
   window.map.fitBounds(paths[activePathIndex].getBounds(), {
