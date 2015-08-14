@@ -5,9 +5,6 @@ var Actions = require('../stores/Actions.jsx');
 var ScenicStore = require('../stores/Stores.jsx');
 var TutorialSection = require('./Tutorial.jsx');
 
-
-
-
 function readCookie(name) {
     var value = (name = new RegExp('(?:^|;\\s*)' + ('' + name).replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&') + '=([^;]*)').exec(document.cookie)) && name[1];
     console.log('cookie value', value);

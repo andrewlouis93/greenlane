@@ -396,7 +396,7 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
 }
 
 .startLocation {
-  border-bottom:2px solid $text-color !important;
+  // border-bottom:2px solid $text-color !important;
 }
 
 /// TIME SLIDER STYLES ////////////////////////////////////////////////////
@@ -1290,8 +1290,7 @@ hr {
   margin-left: 50px;
 }
 #backBtn{
-
-  background: url("../img/svg/back.svg") no-repeat !important;
+  background: url("../img/svg/back.svg") no-repeat;
   z-index: 13;
   width: 25px;
   height: 30px;
@@ -1302,12 +1301,18 @@ hr {
     cursor: pointer;
   }
 }
+
 @media #{$small-and-down}{
   #backBtn{
     height: 25px;
   }
 }
 
+.white-on-medium-down{
+  @media #{$medium-and-down}{
+      background: url("../img/svg/white-back.svg") no-repeat !important;
+  }
+}
 
 /// acordian for FAVOURITE ROUTES -----------------------------------
 

@@ -131,17 +131,19 @@ var backBtn = {
    pushState: function(_page){
     if (this.states.indexOf(_page) == -1)
       this.states.push(_page);
-    this.css = "";
-
-    if (_page == 'parkview'){
-      // Google Analytics to only capture
-      // when you go back to the map.
-      this.css = "Back_Map_Edit";
-    }
+      this.css = "";
+      if (_page == 'parkview'){
+        // Google Analytics to only capture
+        // when you go back to the map.
+        this.css = "Back_Map_Edit";
+      }
+     else if (_page == "tutorial"){
+       this.css = "white-on-medium-down";
+     }
    },
    popState: function(){
     var popped = this.states.pop();
-    if (popped && (popped=='static')){
+    if ( (popped && (popped=='static')) || (popped && (popped=='tutorial')) ){
       activePage = null;
     }
     else if (popped && (popped =='parkview')){
@@ -279,7 +281,12 @@ Dispatcher.register(function(payload) {
         break;
       case 'setActivePage':
         activePage = payload.activePage;
-        backBtn.pushState('static');
+        if (activePage == 'tutorial'){
+          backBtn.pushState('tutorial');  
+        }
+        else{
+          backBtn.pushState('static');
+        }
         ScenicStore.emitChange();
         break;
       case 'setParkMode':
