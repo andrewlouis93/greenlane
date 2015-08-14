@@ -16,6 +16,11 @@ var Analytics = {
       'greenLevel': _level.toString()
     })
   },
+  greenOnRoute: function(_greenCount){
+    dataLayer.push({
+      'greenOnRoute': _greenCount
+    })
+  },
   transitMode: function(_mode) {
 // where _mode is either BIKE or WALK
     dataLayer.push({

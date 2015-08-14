@@ -107,6 +107,10 @@ var RouteView = React.createClass({
   createList: function(){
     var Directions = this.state.list;
     var current = null;
+
+    var distanceToPrevious = 0;
+    var distanceToSubsequent = 0;
+
     var updatedStateProp = {
       turns: (<ul tabIndex="-1">
                 <div className="ui-menu-item startLocation">
@@ -129,59 +133,79 @@ var RouteView = React.createClass({
                     var uExp = new RegExp('\\b' + uTurn + '\\b');
                     var hExp = new RegExp('\\b' + head + '\\b');
 
+                    var _addedDistance = null;
+
+                    distanceToPrevious = distanceToSubsequent;
+
                     if (current == row.maneuver.instruction){
+                      distanceToSubsequent += row.distance;
                       return;
                     }
                     else {
                       current = row.maneuver.instruction;
+                      distanceToSubsequent = row.distance;
+
+                      if (row.way_name == ""){
+                        _addedDistance = (" in <b>" + distanceToPrevious + "</b>m") ;
+                      }
+
                     }
 
+                    // Check for wayname here...
                     if (rExp.test(row.maneuver.instruction)){
+                      var printInstruction = ( _addedDistance ) ? ( row.maneuver.instruction + " in <b>" + distanceToPrevious + "</b>m" ) : ( row.maneuver.instruction );
                       return (
                         <div className="ui-menu-item"><li className="rightTurn"></li>
-                        <li dangerouslySetInnerHTML={{__html:row.maneuver.instruction}}  className="menuitem">
+                        <li dangerouslySetInnerHTML={{__html:printInstruction}}  className="menuitem">
                         </li></div>
                       )
                     } else if (lExp.test(row.maneuver.instruction)){
+                      var printInstruction = ( _addedDistance ) ? ( row.maneuver.instruction + " in <b>" + distanceToPrevious + "</b>m" ) : ( row.maneuver.instruction );
                       return(
                         <div className="ui-menu-item"><li className="leftTurn"></li>
-                        <li dangerouslySetInnerHTML={{__html:row.maneuver.instruction}}  className="menuitem">
+                        <li dangerouslySetInnerHTML={{__html:printInstruction}}  className="menuitem">
                         </li></div>
                       )
                     } else if (sExp.test(row.maneuver.type)){
+                      var printInstruction = ( _addedDistance ) ? ( row.maneuver.instruction + " for <b>" + distanceToPrevious + "</b>m" ) : ( row.maneuver.instruction );
                       return(
                         <div className="ui-menu-item"><li className="straight"></li>
-                        <li dangerouslySetInnerHTML={{__html:row.maneuver.instruction}}  className="menuitem">
+                        <li dangerouslySetInnerHTML={{__html:printInstruction}}  className="menuitem">
                         </li></div>
                       )
                     } else if (pExp.test(row.maneuver.instruction)){
+                      var printInstruction = ( _addedDistance ) ? ( row.maneuver.instruction + " in <b>" + distanceToPrevious + "</b>m" ) : ( row.maneuver.instruction );
                       return(
                         <div className="ui-menu-item"><li className="parkIcon"></li>
-                        <li dangerouslySetInnerHTML={{__html:row.maneuver.instruction}}  className="menuitem">
+                        <li dangerouslySetInnerHTML={{__html:printInstruction}}  className="menuitem">
                         </li></div>
                       )
                     } else if (dExp.test(row.maneuver.type)){
+                      var printInstruction = ( _addedDistance ) ? ( row.maneuver.instruction + " in <b>" + distanceToPrevious + "</b>m" ) : ( row.maneuver.instruction );
                       return(
                         <div className="ui-menu-item"><li className="locIcon"></li>
-                        <li dangerouslySetInnerHTML={{__html:row.maneuver.instruction}}  className="menuitem">
+                        <li dangerouslySetInnerHTML={{__html:printInstruction}}  className="menuitem">
                         </li></div>
                       )
                     } else if (uExp.test(row.maneuver.type)){
+                      var printInstruction = ( _addedDistance ) ? ( row.maneuver.instruction + " in <b>" + distanceToPrevious + "</b>m" ) : ( row.maneuver.instruction );
                       return(
                         <div className="ui-menu-item"><li className="uTurn"></li>
-                        <li dangerouslySetInnerHTML={{__html:row.maneuver.instruction}}  className="menuitem">
+                        <li dangerouslySetInnerHTML={{__html:printInstruction}}  className="menuitem">
                         </li></div>
                       )
                     } else if (hExp.test(row.maneuver.instruction)){
+                      var printInstruction = ( _addedDistance ) ? ( row.maneuver.instruction + " in <b>" + distanceToPrevious + "</b>m" ) : ( row.maneuver.instruction );
                       return(
                         <div className="ui-menu-item"><li className="straight"></li>
-                        <li dangerouslySetInnerHTML={{__html:row.maneuver.instruction}}  className="menuitem">
+                        <li dangerouslySetInnerHTML={{__html:printInstruction}}  className="menuitem">
                         </li></div>
                       )
                     } else {
+                      var printInstruction = ( _addedDistance ) ? ( row.maneuver.instruction + " in <b>" + distanceToPrevious + "</b>m" ) : ( row.maneuver.instruction );
                       return (
                         <div className="ui-menu-item">
-                        <li dangerouslySetInnerHTML={{__html:row.maneuver.instruction}} className="menuitem">
+                        <li dangerouslySetInnerHTML={{__html:printInstruction}} className="menuitem">
                         </li></div>
                       )
                     }
