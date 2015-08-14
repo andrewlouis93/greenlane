@@ -39,21 +39,24 @@ var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Const
 
 
 $(document).on('focus', 'input[type="text"]', function(){
+  if ( $(window).width() < 993) {
+
   var _windowHeight = initial_screen_size;
   $('body').css({'height':_windowHeight + 'px',
                   'background-color':'white'});
   $('.progress-meter').css({'height':_windowHeight + 'px'});
   $('.progress-meter').css({'display':'block'});
+};
 });
 
-if ( $(window).width() > 1000) {
-  $(document).on('focus', 'input[type="text"]', function(){   
-    $('body').css({'height':94 + '%',
-                   'background-color':'white'});
-    $('.progress-meter').css({'height':94 + '%'});
-    $('.progress-meter').css({'display':'block'});
-  });
-};
+// if ( $(window).width() > 1000) {
+//   $(document).on('focus', 'input[type="text"]', function(){   
+//     $('body').css({'height':94 + '%',
+//                    'background-color':'white'});
+//     $('.progress-meter').css({'height':94 + '%'});
+//     $('.progress-meter').css({'display':'block'});
+//   });
+// };
 
 
 function readCookie(name) {
@@ -89,6 +92,7 @@ var Body = React.createClass({
 	componentWillMount: function(){
     ScenicStore.addChangeListener(this._onChange);
 		var onboardedUser = $.parseJSON(readCookie('onboardedUser'));
+    // var onboardedUser = false;
 		if (onboardedUser) // change to onboardedUser
 			this.setState({onboardedUser: true});
 		else
@@ -110,11 +114,19 @@ var Body = React.createClass({
 
     setTimeout(function(){
       $('.landing-animation').animate({
-             'top': '-100%'
-      }, 2000, function(){
-        $(this).delay(2000).fadeOut();
+            'background-position-y': yPos
+      }, 3000, function(){
+        $(this).fadeOut();
       });
-    },3000);
+    },1000);
+
+    // setTimeout(function(){
+    //   $('.landing-animation').animate({
+    //          'top': '-100%'
+    //   }, 2000, function(){
+    //     $(this).delay(2000).fadeOut();
+    //   });
+    // },3000);
   },
 	componentDidMount: function(){
 		// only occurs once once the rest of the site has loaded!
@@ -142,7 +154,7 @@ var Body = React.createClass({
 
 			<div id='containerRow' style={this.state.lockHeight} className="row">
         <div className={tutClasses}>
-              <div className="landing-animation"><LandingAnim/></div>
+              <div className="landing-animation"></div>
                 <Tutorial startApplication={this.startApplication} />
                 <div onClick={this.startApplication} id='skip-tutorial'>skip</div>
         </div>
