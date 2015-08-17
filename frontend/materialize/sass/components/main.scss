@@ -1004,7 +1004,7 @@ $google_expando_transition: (
   transform: scale(1) translateZ(0);
   opacity: 1;
   @media #{$medium-and-down}{
-     height:200px !important;
+     height:20vh !important;
 
   }
 }
@@ -1427,8 +1427,8 @@ hr {
   transition:0.5s;
   }
   .articlewrap {
-    max-height: 600px;
-    transition: max-height 0.5s ease-in-out;
+    min-height: 100px;
+    transition: min-height 0.5s ease-in-out;
   }
     .favDelete {
       opacity:1;
@@ -1611,10 +1611,11 @@ hr {
   }
 
   .smaller-social{
-    font-size: 1.4em !important;
+    font-weight:200 !important;
+    font-size: 1.2em !important;
   }
   .smaller-cancel{
-    font-size:1em !important;
+    font-size:1.2em !important;
   }
 
   .err-cancel{
