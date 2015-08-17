@@ -47,23 +47,25 @@ html, body, .table-container{
 
 .favorite-alert{
   position: absolute;
-  width: 20%;
+  width: 40%;
   color: white;
-  border-radius: 15px;
+  border-radius: 5px;
   z-index: 10;
-  opacity:0.8;
+  opacity:1;
   letter-spacing:1px;
   text-align: center;
-  font-size: 3em;
-  height: 4rem;
-  line-height: 4rem;
+  font-size: 1.5em;
+  font-weight:200;
+  font-family:Roboto;
+  height: 36px;
+  line-height: 36px;
   top: 0;
   bottom: 0;
   margin: auto;
   left: 0;
   right: 0;
   display:none;
-  &.fav{
+  &.fav{ 
     background: $primary-color;
   }
   &.unfav{
@@ -1364,13 +1366,17 @@ hr {
 
 .favouritedRoute {
   .sectionhead {
-    padding-left:0 !important;
+    padding: 0 !important;
     span {
       padding-left:1em;
-      width:auto;
+      width:80%;
       float: left;
+
+    button {
+      right:0.4em !important;
     }
   }
+}
 
   .articlewrap {
     padding-left:3em !important;
