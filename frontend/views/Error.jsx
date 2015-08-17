@@ -16,12 +16,16 @@ var Error = React.createClass({
 		}
 	},
 	facebookShare: function(){
-		  FB.ui({
-        method: 'share',
-        href: 'https://greenlane.io',
-    }, function(response){
-			console.log('facebookShare Response', response);
-		});
+		if( navigator.userAgent.match('CriOS') ) {
+			window.open('https://www.facebook.com/sharer/sharer.php?u=greenlane.io','',null);
+		} else {
+			  FB.ui({
+	        method: 'share',
+	        href: 'https://greenlane.io',
+	    }, function(response){
+				console.log('facebookShare Response', response);
+			});
+		};
 	},
 	componentDidMount: function(){
 		// Seed with default state.
