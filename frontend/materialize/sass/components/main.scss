@@ -1369,7 +1369,7 @@ hr {
     padding:1em !important;
   }
   .sectionhead {
-    padding:0 !important;
+    padding:0 1em !important;
     span {
       padding-left:1em;
       width:80%;
@@ -1436,8 +1436,9 @@ hr {
   transition:0.5s;
   }
   .articlewrap {
-    min-height: 100px;
-    transition: min-height 0.5s ease-in-out;
+    min-height:100px;
+    max-height: 600px;
+    transition: max-height 0.5s ease-in-out;
   }
     .favDelete {
       opacity:1;
