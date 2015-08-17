@@ -230,8 +230,13 @@ updateExpInfoHeight: function(){
     if (this.state.parkFac && this.state.parkFac[this.state.activeCarousel]){
       for (var i = 0; i < this.state.parkFac[this.state.activeCarousel].length; i++){
         var current = this.state.parkFac[this.state.activeCarousel][i];
-        if (current != "NULL")
-          legitFac.push(current.split('"').join(""));
+        console.log('current', current);
+        if (current != "NULL"){
+          legitFac.push(current[0].split('"').join(""));
+          legitFac.push(current[1].split('"').join(""));
+        }
+
+
       }
     }
 

@@ -29,6 +29,10 @@ var Error = React.createClass({
 		ScenicStore.addErrorListener(this._errorUpdate);
 		// Orientation Lock!
 
+		if (window.orientation && (window.orientation!==0)){
+			Actions.activateError('landscape');
+			this.setState({hasLogo: Classnames('contains_logo')})
+		}
 		window.addEventListener("orientationchange", function() {
 			if (window.orientation === 0){
 				this.setState({hasLogo: Classnames()})

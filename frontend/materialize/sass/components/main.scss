@@ -266,6 +266,7 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
 
 #turnList{
   z-index: 50;
+  border-radius: 15px 15px 0px 0px;
 }
 
 .mapbox-directions-way-name{
@@ -1602,7 +1603,7 @@ hr {
   span{
     font-family:Roboto !important;
     font-weight:300 !important;
-    font-size: 2vw;
+    font-size: 2vh;
     text-align: center;
     width: 90%;
     display: block;

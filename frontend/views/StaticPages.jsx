@@ -182,10 +182,10 @@ var PageController = React.createClass({
 				<div className="theTeam"></div>
 				<p className="ourNames">Aditya Rau, Alyssa Jongsma, Kavita Chepovetsky, Charlotte Lewis, Michael Fazal, Nicole Britton, Nathan Toews, Andrew Louis</p>
 				<hr/>
-					<p>	We’re a group of interns at Critical Mass, an experience design agency based in Toronto.</p>
+					<p>	We're a group of interns at Critical Mass, an experience design agency based in Toronto.</p>
 					<p>	Though we all specialize in different areas, the one thing we have in common is our love for our city and the great outdoors.</p>
-					<p>	We wanted to create something that used the city’s green spaces to make Torontonians’ lives just a little bit better.  So we got together, thought long and hard and came up with Greenlane - an app that uses park, tree and trail data to map scenic routes through the city.</p>
-					<p>	So next time you’re moving through Toronto, choose Greenlane and see the city differently.</p>
+					<p>	We wanted to create something that used the city’s green spaces to make Torontonians' lives just a little bit better.  So we got together, thought long and hard and came up with Greenlane - an app that uses park, tree and trail data to map scenic routes through the city.</p>
+					<p>	So next time you're moving through Toronto, choose Greenlane and see the city differently.</p>
 			  </div>
 			</div>
 		);
