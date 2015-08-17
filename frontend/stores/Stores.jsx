@@ -143,6 +143,8 @@ var backBtn = {
    },
    popState: function(){
     var popped = this.states.pop();
+    // These should be hidden unless activated
+    $(".favorite, .favorited").hide();
     if ( (popped && (popped=='static')) || (popped && (popped=='tutorial')) ){
       activePage = null;
     }
@@ -151,6 +153,8 @@ var backBtn = {
       // You went back to timeSel
       Analytics.virtualPage('Setup|Time','/setup/time');
       layout.directionsDeactivate();
+      // Should go back to origin/destinatino setup.
+      $("#travelType").trigger('click');
     }
     if (this.states.length == 0){
       this.css = "hide"
@@ -282,7 +286,7 @@ Dispatcher.register(function(payload) {
       case 'setActivePage':
         activePage = payload.activePage;
         if (activePage == 'tutorial'){
-          backBtn.pushState('tutorial');  
+          backBtn.pushState('tutorial');
         }
         else{
           backBtn.pushState('static');

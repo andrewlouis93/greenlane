@@ -99,6 +99,7 @@ var Map = React.createClass({
 	render: function(){
 		return (
 			<div id="map" className={this.state.layout}>
+				<div className='favorite-alert fav'>favorited</div>
 				<div id="map-container">
 					<div className={this.state.logoStyle}></div>
 					<a onClick={this.routeNav} className={this.state.startButtonStyle} autoFocus>

@@ -32,6 +32,7 @@ var RouteView = React.createClass({
     console.log("Route View has Mounted!");
     ScenicStore.addChangeListener(this._onChange);
     console.log(ScenicStore.getSessionState().activePath);
+    $(document).on('click', '.favorite', this.favouriteRoute);
   },
   componentWillUnmount: function(){
     ScenicStore.removeChangeListener(this._onChange);
@@ -70,10 +71,27 @@ var RouteView = React.createClass({
         //json object to sent to the authentication url
         data: pkg,
         success: function () {
-          $
           $('.favorite').addClass('favorited').removeClass('favorite');
         }
     })
+  },
+  unfavouriteRoute: function(){
+    var pkg = {
+      authId: parseFloat(readCookie('authId')),
+      type: readCookie('type')
+    };
+    // Route to delete the last element.
+    $.ajax
+     ({
+         type: "POST",
+         url: 'https://greenlane.io/auth/delete-last-route',
+         dataType: 'json',
+         //json object to sent to the authentication url
+         data: pkg,
+         success: function () {
+           $('.favorited').removeClass('favorited').addClass('favorite');
+         }
+     })
   },
   googleMapsURL: function(){
     //https://www.google.com/maps/dir/lat,lng/...
@@ -146,7 +164,7 @@ var RouteView = React.createClass({
                       distanceToSubsequent = row.distance;
 
                       if ((row.way_name == "")&&(distanceToPrevious)){
-                        _addedDistance = (" in <b>" + distanceToPrevious + "</b>m") ;
+                        _addedDistance = (" in <b>" + distanceToPrevious + "m</b>") ;
                       }
 
                     }
@@ -265,7 +283,7 @@ var RouteView = React.createClass({
               </ul>
           </div>
           <div className="go-to-route"></div>
-          <div onClick={this.favouriteRoute} className="favorite hide"></div>
+          <div className="favorite hide"></div>
         </div>
 
         <div id="turnList" className='card-reveal'>
@@ -282,7 +300,7 @@ var RouteView = React.createClass({
               </ul>
           </div>
           <div className="go-to-route goToRoute"></div>
-          <div onClick={this.favouriteRoute} className="favorite hide"></div>
+          <div className="favorite hide"></div>
           </div>
           <div className="turnDirect">
           {this.state.turns}
