@@ -98,9 +98,9 @@ var Body = React.createClass({
 			this.setState({bodyContent: false});
 	},
   landingAnimation: function(){
-    var small = '-78vh';
-    var tablet = '-100vh';
-    var large = '-80vh';
+    var small = "100%";
+    var tablet = "100%";
+    var large = "100%";
     var yPos;
 
     var wWidth = $(window).width();
@@ -113,9 +113,9 @@ var Body = React.createClass({
 
     setTimeout(function(){
       $('.landing-animation').animate({
-            'background-position-y': yPos
+            'background-position-y':yPos
       }, 3000, function(){
-        $(this).fadeOut();
+        $(this).delay(2000).fadeOut();
       });
     },1000);
 

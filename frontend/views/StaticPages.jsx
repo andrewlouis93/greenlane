@@ -154,8 +154,9 @@ var PageController = React.createClass({
 			<div className='favouritedRoute'>
 			{
 			    this.state.saved.map(function(route, key) {
-			        var destFav = 'to: ' + route.destinationName +  '\n' + 'from: '  + route.originName;
-			        var transitType = route.transit == 'cycling' ? <div><div className='bikeGrey'></div>{destFav}</div>: false || route.transit == 'walking' ? <div><div className='walkGrey'></div>{destFav}</div> : false;
+			        var destFav = 'to: ' + route.destinationName;
+			        var origFav = 'from: '  + route.originName;
+			        var transitType = route.transit == 'cycling' ? <div><div className='bikeGrey'></div>{destFav + origFav}</div>: false || route.transit == 'walking' ? <div><div className='walkGrey'></div>{destFav + origFav}</div> : false;
 			    	console.log('ROUTE', route.originName)
 			        return  <Section title={transitType}>
 								<div>{route.formatted.duration}</div>
@@ -232,7 +233,7 @@ var PageController = React.createClass({
              routeId: routeId
            },
            success: function () {
-             $(_this).parent().parent().fadeOut();
+             $(_this).parent().parent().parent().fadeOut();
            }
        })
     })
