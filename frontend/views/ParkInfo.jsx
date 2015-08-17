@@ -277,14 +277,12 @@ updateExpInfoHeight: function(){
                       return <div className="noParkImg"></div>
                     }
                     else{
-                      var htmlBlock = $.ajax({type: "GET", url: "https://api.instagram.com/publicapi/oembed/?url=http://instagram.com/p/fA9uwTtkSN/", async: false}).responseText.html;
-                      return (htmlBlock) ? htmlBlock : null;
-                      // http://api.instagram.com/publicapi/oembed/?url=
-                      //
-                      // var divStyle = {
-                      //   backgroundImage: 'url(' + it + ')',
-                      // };
-                      // return <div style={divStyle} className="square"></div>
+                      // var htmlBlock = $.ajax({type: "GET", url: "https://api.instagram.com/publicapi/oembed/?url=http://instagram.com/p/fA9uwTtkSN/", async: false}).responseText.html;
+                      // return (htmlBlock) ? htmlBlock : null;
+                      var divStyle = {
+                        backgroundImage: 'url(' + it + ')',
+                      };
+                      return <div style={divStyle} className="square"></div>
                     }
                   })
                 :
