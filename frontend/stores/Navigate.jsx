@@ -25,6 +25,7 @@ function serializeWaypoints(arr){
   }
   return str;
 }
+
 function googlifyMode(mode){
     if (mode == "cycling")
       return "BICYCLING";
@@ -645,18 +646,28 @@ var Navigate = {
         greenifyResults[id].parks = cleanParks;
         greenifyResults[id].pictures = cleanPictures;
         greenifyResults[id].facilities = cleanFacilities;
-      })
-      // 3 - optimize to re-order waypoints;
 
-      // $.ajax({
-      //  url: 'https://maps.googleapis.com/maps/api/directions/json',
-      //  type: 'GET',
-      //  data: {
-      //    origin:
-      //  },
-      //  async: false, //blocks window close
-      //  fail: function(){},
-      //  success: function() {}
+        // 3 - optimize to re-order waypoints;
+        // $.ajax({
+        //  url: 'https://maps.googleapis.com/maps/api/directions/json',
+        //  type: 'GET',
+        //  data: {
+        //    origin: serializeObj(ScenicStore.getSessionState().origin),
+        //    destination: serializeObj(ScenicStore.getSessionState().destination),
+        //    waypoints: serializeWaypoints( greenifyResults[id].scenic_route ),
+        //    mode: googlifyMode(ScenicStore.getSessionState().transit),
+        //    key :'AIzaSyChQYTBtW433Szc2Sq_nTOVCGjQJWa_CVE'
+        //  },
+        //  async: false,
+        //  fail: function(){},
+        //  success: function(results, err) {
+        //    console.log(results);
+        //    console.log(err);
+        //   }
+        // })
+      })
+
+
 
       //https://maps.googleapis.com/maps/api/directions/json?
       // origin=43.6573801,-79.4168093&

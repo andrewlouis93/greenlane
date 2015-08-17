@@ -98,9 +98,9 @@ var Body = React.createClass({
 			this.setState({bodyContent: false});
 	},
   landingAnimation: function(){
-    var small = '78%';
-    var tablet = '75%';
-    var large = '100%';
+    var small = '-78vh';
+    var tablet = '-100vh';
+    var large = '-100vh';
     var yPos;
 
     var wWidth = $(window).width();
