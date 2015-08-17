@@ -98,8 +98,8 @@ var Body = React.createClass({
 			this.setState({bodyContent: false});
 	},
   landingAnimation: function(){
-    var small = "100%";
-    var tablet = "100%";
+    var small = "90%";
+    var tablet = "70%";
     var large = "100%";
     var yPos;
 
