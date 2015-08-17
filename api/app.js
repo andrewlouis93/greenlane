@@ -55,7 +55,6 @@ app.post('/auth/save-route', function(req, res) {
 
 
 app.post('/auth/delete-route', function(req, res) {
-
   var authId = req.body.authId,
       type = req.body.type,
       // should receive trimmed down active path.
@@ -72,12 +71,33 @@ app.post('/auth/delete-route', function(req, res) {
       user.routes.splice(routeId, 1);
     	user.markModified('routes');
     	user.save(function(){
-    		console.log("Saved Route!");
+    		console.log("Deleted Route!");
     		res.send('200');
     	});
     })
 });
 
+
+app.post('/auth/delete-last-route', function(req, res) {
+  var authId = req.body.authId,
+      type = req.body.type;
+
+    User.findOne({
+    	authId: authId,
+    	type: type
+    },function(err, user){
+    	if (err){
+    		res.send(err);
+    	}
+    	console.log('err', err);
+      user.routes.pop();
+    	user.markModified('routes');
+    	user.save(function(){
+    		console.log("Deleted Last Route!");
+    		res.send('200');
+    	});
+    })
+});
 
 app.get('/auth/favourite-routes', function(req, res){
   var authId = req.query.authId,

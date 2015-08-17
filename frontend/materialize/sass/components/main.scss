@@ -48,7 +48,6 @@ html, body, .table-container{
 .favorite-alert{
   position: absolute;
   width: 20%;
-  background: $primary-color;
   color: white;
   border-radius: 15px;
   z-index: 10;
@@ -64,6 +63,12 @@ html, body, .table-container{
   left: 0;
   right: 0;
   display:none;
+  &.fav{
+    background: $primary-color;
+  }
+  &.unfav{
+    background: $secondary-color;
+  }
 }
 #map-container{
   text-align: center;

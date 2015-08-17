@@ -71,7 +71,7 @@ var RouteView = React.createClass({
         //json object to sent to the authentication url
         data: pkg,
         success: function () {
-          $(".favorite-alert").text('favourited').fadeIn().fadeOut('slow');
+          $(".favorite-alert").text('favourited').removeClass('unfav').addClass('fav').fadeIn('slow').fadeOut('slow');
           $('.favorite').addClass('favorited').removeClass('favorite');
         }
     })
@@ -90,6 +90,7 @@ var RouteView = React.createClass({
          //json object to sent to the authentication url
          data: pkg,
          success: function () {
+           $(".favorite-alert").text('unfavourited').removeClass('fav').addClass('unfav').fadeIn('slow').fadeOut('slow');
            $('.favorited').removeClass('favorited').addClass('favorite');
          }
      })

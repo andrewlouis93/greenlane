@@ -547,6 +547,9 @@ var Navigate = {
 // Andrew: Why was this placed here??
     Actions.goBack();
 
+    $(".favorite, .go-to-route").hide();
+    $(".favorited").removeClass("hide").show();
+
     event.preventDefault();
     event.stopPropagation();
 /*
