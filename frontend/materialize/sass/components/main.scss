@@ -44,6 +44,27 @@ html, body, .table-container{
     height: calc(100% - 64px) !important;
   }
 }
+
+.favorite-alert{
+  position: absolute;
+  width: 20%;
+  background: $primary-color;
+  color: white;
+  border-radius: 15px;
+  z-index: 10;
+  opacity:0.8;
+  letter-spacing:1px;
+  text-align: center;
+  font-size: 3em;
+  height: 4rem;
+  line-height: 4rem;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  left: 0;
+  right: 0;
+  display:none;
+}
 #map-container{
   text-align: center;
   .map-start-btn{

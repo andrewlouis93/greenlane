@@ -144,11 +144,12 @@ var backBtn = {
    popState: function(){
     var popped = this.states.pop();
     // These should be hidden unless activated
-    $(".favorite, .favorited").hide();
     if ( (popped && (popped=='static')) || (popped && (popped=='tutorial')) ){
       activePage = null;
     }
     else if (popped && (popped =='parkview')){
+      $(".favorite, .favorited").hide();
+      $(".go-to-route").show();
       console.log("Popped Parkview!");
       // You went back to timeSel
       Analytics.virtualPage('Setup|Time','/setup/time');

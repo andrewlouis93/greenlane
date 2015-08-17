@@ -71,6 +71,7 @@ var RouteView = React.createClass({
         //json object to sent to the authentication url
         data: pkg,
         success: function () {
+          $(".favorite-alert").text('favourited').fadeIn().fadeOut('slow');
           $('.favorite').addClass('favorited').removeClass('favorite');
         }
     })

@@ -779,7 +779,7 @@ $(document).on('click', '.go-to-route', function() {
   var activePathIndex = parseFloat($('.activePath').attr('route'));
   $("[route]").not("[route=" + activePathIndex + "]").fadeOut();
   $(".go-to-route").addClass("hide");
-  $(".favorite").removeClass("hide");
+  $(".favorite").removeClass("hide").show();
 
   Analytics.greenOnRoute( paths[activePathIndex].info.scenic_route.length );
 
