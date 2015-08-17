@@ -10,6 +10,22 @@ var originMarker;
 var destMarker;
 var curMarker;
 
+function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+  var R = 6371; // Radius of the earth in km
+  var dLat = deg2rad(lat2-lat1);  // deg2rad below
+  var dLon = deg2rad(lon2-lon1);
+  var a =
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+    Math.sin(dLon/2) * Math.sin(dLon/2);
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  var d = R * c; // Distance in km
+  return d;
+}
+function deg2rad(deg) {
+  return deg * (Math.PI/180)
+}
+
 function serializeObj(mObj){
   return mObj.latLng.lat + "," + mObj.latLng.lng;
 }
@@ -613,6 +629,14 @@ var Navigate = {
 
       var greenifyResults = results.results;
 
+      // 0 - Reverse everything.
+      greenifyResults.map(function(it, id){
+        it.parks = it.parks.reverse();
+        it.facilities = it.facilities.reverse();
+        it.pictures = it.pictures.reverse();
+        it.scenic_route = it.scenic_route.reverse();
+      })
+
       // Formatting API Results for convenience
       // 1 - Cleaning out duplicates
       greenifyResults.map(function(it, id) {
@@ -646,35 +670,14 @@ var Navigate = {
         greenifyResults[id].parks = cleanParks;
         greenifyResults[id].pictures = cleanPictures;
         greenifyResults[id].facilities = cleanFacilities;
-
-        // 3 - optimize to re-order waypoints;
-        // $.ajax({
-        //  url: 'https://maps.googleapis.com/maps/api/directions/json',
-        //  type: 'GET',
-        //  data: {
-        //    origin: serializeObj(ScenicStore.getSessionState().origin),
-        //    destination: serializeObj(ScenicStore.getSessionState().destination),
-        //    waypoints: serializeWaypoints( greenifyResults[id].scenic_route ),
-        //    mode: googlifyMode(ScenicStore.getSessionState().transit),
-        //    key :'AIzaSyChQYTBtW433Szc2Sq_nTOVCGjQJWa_CVE'
-        //  },
-        //  async: false,
-        //  fail: function(){},
-        //  success: function(results, err) {
-        //    console.log(results);
-        //    console.log(err);
-        //   }
-        // })
       })
 
-
-
-      //https://maps.googleapis.com/maps/api/directions/json?
+      // https://maps.googleapis.com/maps/api/directions/json?
       // origin=43.6573801,-79.4168093&
       // destination=43.6476654,-79.3917897&
       // waypoints=optimize:true|43.63951581,-79.39037859|43.65472984,-79.41547642
-      //&mode=bicycling
-      //&key=AIzaSyChQYTBtW433Szc2Sq_nTOVCGjQJWa_CVE
+      // &mode=bicycling
+      // &key=AIzaSyChQYTBtW433Szc2Sq_nTOVCGjQJWa_CVE
 
       results.results = greenifyResults;
       window._greenify = greenifyResults;
