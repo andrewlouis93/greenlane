@@ -1366,16 +1366,16 @@ hr {
 
 .favouritedRoute {
   .sectionhead {
-    padding: 0 !important;
+    padding-right:1em !important;
     span {
       padding-left:1em;
       width:80%;
       float: left;
+  }
 
-    button {
+      button {
       right:0.4em !important;
     }
-  }
 }
 
   .articlewrap {
