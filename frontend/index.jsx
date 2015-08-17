@@ -100,7 +100,7 @@ var Body = React.createClass({
   landingAnimation: function(){
     var small = '-78vh';
     var tablet = '-100vh';
-    var large = '-100vh';
+    var large = '-80vh';
     var yPos;
 
     var wWidth = $(window).width();

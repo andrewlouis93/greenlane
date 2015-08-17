@@ -337,6 +337,37 @@ function fetchData(callback, pathLength) {
         // Grabbing map and directions
         routesInfo = JSON.parse(routesInfo.responseText);
         console.log(routesInfo);
+
+        /* Format directions to get rid of {highway:footway...} */
+        window.yooo = routesInfo;
+        routesInfo.routes[0].steps.map(function(direction, id){
+          console.log("Splitting", direction.way_name);
+
+          // Replacing waypoint with greenpoint
+          if (direction.maneuver.instruction.split("waypoint").length > 1){
+            direction.maneuver.instruction = direction.maneuver.instruction.split("waypoint").join("<span class='green-emphasis'>greenpoint</span>");
+          }
+
+          // Cleaning out {...}
+          if ( direction.way_name && (direction.way_name.split("{").length > 1)){
+            // Must sanitize!
+            direction.way_name = "";
+
+            if (direction.maneuver.instruction.split(" on ").length > 1){
+              direction.maneuver.instruction = direction.maneuver.instruction.split(" on ")[0].trim();
+            }
+            else if (direction.maneuver.instruction.split(" onto ").length > 1){
+              direction.maneuver.instruction = direction.maneuver.instruction.split(" onto ")[0].trim();
+            }
+            else{
+              console.log("You shouldnt be here!!!");
+            }
+          }
+          return direction;
+        })
+
+
+
         var poly_raw = routesInfo.routes[0].geometry.coordinates;
         // Route coordinates received as (lng,lat), and
         // must be inverted to (lat,lng) for plotting
@@ -480,7 +511,7 @@ var Navigate = {
 
     console.log("I'm grabbing destination below");
     api += destination.latLng.lng + ',' + destination.latLng.lat;
-    api += '.json?instructions=text&access_token=';
+    api += '.json?instructions=html&access_token=';
     api += 'pk.eyJ1IjoibWFwYm94IiwiYSI6IlhHVkZmaW8ifQ.hAMX5hSW-QnTeRCMAy9A8Q';
     return api;
   },

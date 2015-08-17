@@ -229,6 +229,10 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
   width: 100%;
 }
 
+.ui-menu-item b{
+  font-weight: 400 !important;
+}
+
 .loaderText {
   font-family: Roboto-Slab;
   font-weight: 500 !important;
@@ -262,6 +266,14 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
 
 #turnList{
   z-index: 50;
+}
+
+.mapbox-directions-way-name{
+  font-weight: 400;
+}
+.green-emphasis{
+  font-weight: 400;
+  color: $secondary-color;
 }
 
 .turnDirect {
@@ -1922,6 +1934,7 @@ hr {
   width: auto;
   height: 45px;
   line-height: 45px;
+  max-width: 80%;
   span{
     font-size:2.4vh;
   }

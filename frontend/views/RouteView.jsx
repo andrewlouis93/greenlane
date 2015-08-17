@@ -121,7 +121,7 @@ var RouteView = React.createClass({
                     var rightTurn = "right";
                     var leftTurn = "left";
                     var straight = "continue";
-                    var wayPark = "waypoint";
+                    var wayPark = "greenpoint";
                     var uTurn = "u-turn";
                     var yourLoc = "arrive";
                     var head = "Head";
@@ -145,7 +145,7 @@ var RouteView = React.createClass({
                       current = row.maneuver.instruction;
                       distanceToSubsequent = row.distance;
 
-                      if (row.way_name == ""){
+                      if ((row.way_name == "")&&(distanceToPrevious)){
                         _addedDistance = (" in <b>" + distanceToPrevious + "</b>m") ;
                       }
 
