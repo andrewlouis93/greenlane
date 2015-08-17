@@ -33,6 +33,7 @@ var RouteView = React.createClass({
     ScenicStore.addChangeListener(this._onChange);
     console.log(ScenicStore.getSessionState().activePath);
     $(document).on('click', '.favorite', this.favouriteRoute);
+    $(document).on('click','.favorited', this.unfavouriteRoute);
   },
   componentWillUnmount: function(){
     ScenicStore.removeChangeListener(this._onChange);
