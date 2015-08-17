@@ -1365,8 +1365,11 @@ hr {
 /// acordian for FAVOURITE ROUTES -----------------------------------
 
 .favouritedRoute {
+  .section {
+    padding:1em !important;
+  }
   .sectionhead {
-    padding-right:1em !important;
+    padding:0 !important;
     span {
       padding-left:1em;
       width:80%;
