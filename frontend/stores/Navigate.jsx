@@ -549,6 +549,7 @@ var Navigate = {
 
     $(".favorite, .go-to-route").hide();
     $(".favorited").removeClass("hide").show();
+    $(".favorite").removeClass("hide").show();
 
     event.preventDefault();
     event.stopPropagation();

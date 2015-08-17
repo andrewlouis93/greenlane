@@ -3,6 +3,21 @@ var Carousel = require('nuka-carousel');
 var ScenicStore = require('../stores/Stores.jsx');
 var Actions = require('../stores/Actions.jsx');
 var Analytics = require('../stores/Analytics.jsx');
+var ReactAsync = require('react-async');
+
+var Instagram = React.createClass({
+  mixins: [ReactAsync.Mixin],
+  getInitialStateAsync(cb) {
+    var _url = 'https://api.instagram.com/publicapi/oembed/?' + this.props.url;
+    xhr(_url, function(data) {
+      console.log(data);
+      cb(null, data)
+    }.bind(this))
+  },
+  render() {
+    return this.state.data;
+   }
+})
 
 var Decorators = [{
   component: React.createClass({
@@ -277,8 +292,9 @@ updateExpInfoHeight: function(){
                       return <div className="noParkImg"></div>
                     }
                     else{
-                      // var htmlBlock = $.ajax({type: "GET", url: "https://api.instagram.com/publicapi/oembed/?url=http://instagram.com/p/fA9uwTtkSN/", async: false}).responseText.html;
-                      // return (htmlBlock) ? htmlBlock : null;
+                      // return <Instagram url='http://instagram.com/p/fA9uwTtkSN/' />
+                      // https://api.instagram.com/publicapi/oembed/?url=http://instagram.com/p/fA9uwTtkSN/
+
                       var divStyle = {
                         backgroundImage: 'url(' + it + ')',
                       };
