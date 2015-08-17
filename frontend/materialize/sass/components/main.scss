@@ -1358,36 +1358,39 @@ hr {
 /// acordian for FAVOURITE ROUTES -----------------------------------
 
 .favouritedRoute {
-  margin:0 -30px;
-
   .sectionhead {
-    height:100%;
-  }
-  .section {
-    padding:1em 2em;
-    border-bottom:1px solid rgba(146,148,154,0.5);
-    opacity:50%;
-
-    .article {
-      right:0;
+    padding-left:0 !important;
+    span {
+      padding-left:1em;
+      width:auto;
+      float: left;
     }
-
   }
+
+  .articlewrap {
+    padding-left:3em !important;
+  }
+  .section.open {
+    .articlewrap {
+      padding-left:3em !important;
+    }
+  }
+
 }
 
-.privacyMain {
-  .sectionhead {
-    width:100%;
-  }
-}
+// .privacyMain {
+//   .sectionhead {
+//     width:100%;
+//   }
+// }
 
-.faqMain {
-  .sectionhead {
-    width:100%;
-  }
-  button {
-  }
-}
+// .faqMain {
+//   .sectionhead {
+//     width:100%;
+//   }
+//   button {
+//   }
+// }
 .section {
   padding:1em 2em;
   position: relative;
@@ -1454,7 +1457,7 @@ hr {
   font-weight:400;
   color:$text-color;
   height:auto;
-  width: 80%;
+  width: 100%;
   overflow: hidden;
   background: white;
   cursor: pointer;
@@ -1835,15 +1838,16 @@ hr {
   background-size: 100% !important;
   @media #{$small-and-down}{
     background: url("/public/assets/splash-mobile.svg") no-repeat;
-    background-position-y: -10vh;
+    background-position-y: 0%;
   }
   @media #{$medium-only}{
     background: url("/public/assets/splash-mobile.svg") no-repeat;
-    background-position-y: -55vh;
+    background-position-y: 0%;
   }
   @media #{$large-and-up}{
     background: url("/public/assets/splash-large.svg") no-repeat;
-    background-position-y: 0vh;
+    background-size:cover !important;
+    background-position-y: 0%;
   }
 }
 
