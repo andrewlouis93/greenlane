@@ -83,7 +83,7 @@ var RouteView = React.createClass({
   },
   unfavouriteRoute: function(){
     var pkg = {
-      routeId: parseFloat()$(".favorited").data('favouriteIndex')),
+      routeId: parseFloat( $(".favorited").data('favouriteIndex') ),
       authId: parseFloat(readCookie('authId')),
       type: readCookie('type')
     };
