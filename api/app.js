@@ -48,7 +48,7 @@ app.post('/auth/save-route', function(req, res) {
     	user.markModified('routes');
     	user.save(function(){
     		console.log("Saved Route!");
-    		res.send({state: 200, index: (user.routes.length-1) }});
+    		res.send({state: 200, index: (user.routes.length-1) });
     	});
     })
 });
