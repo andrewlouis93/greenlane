@@ -484,7 +484,7 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
   font-size:2.5vh;
   font-weight:300;
   text-align:center;
-  z-index:1;
+  // z-index:1;
 }
 
 .scaleG {
@@ -506,7 +506,6 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
 
 .optSwitch {
   height:90%;
-  overflow: visible;
   a {
     position:relative;
     display:inline-block;
@@ -514,7 +513,7 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
     margin-bottom:2%;
     height:50%;
     width:100%;
-    z-index:2;
+    // z-index:2;
   }
   // To vertically center fa elements underneath
   -webkit-transform-style: preserve-3d;
