@@ -485,7 +485,15 @@ var Navigate = {
     api += "dest=" + destination.latLng.lng + ',' + destination.latLng.lat;
     api += "&";
 
-    api += "greenness=" + (greenness + 3);
+    let offset;
+    if (greenness == 1){
+      offset = 2
+    }
+    else{
+      offset = 3;
+    }
+
+    api += "greenness=" + (greenness + offset);
     return api;
   },
   buildMapboxDirectionsURL: function(item) {
