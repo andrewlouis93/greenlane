@@ -244,8 +244,8 @@ var Endpoints = React.createClass({
                             var err = {};
                             Analytics.locationError(_id.toUpperCase());
                             err[_id + '_error'] = "we're only able to map greenlanes in toronto. please try again";
+                            _this.setState({"validating": false});
                             _this.setState(err)
-                            _this.setState({"validating": true});
                             // alert('No results found for ' + _id);
                           }
                         }
@@ -253,8 +253,8 @@ var Endpoints = React.createClass({
                             var err = {};
                             Analytics.locationError(_id.toUpperCase());
                             err[_id + '_error'] = "we're only able to map greenlanes in toronto. please try again";
+                            _this.setState({"validating": false});
                             _this.setState(err)
-                            _this.setState({"validating": true});
                         }
                 })
             }
