@@ -24,7 +24,8 @@ var RouteView = React.createClass({
           travelOrig: null,
           turns: null,
           directionsState: Classnames('card','col','l3','m12','s12',ScenicStore.getLayout().directions),
-          url: null
+          url: null,
+          parkViewBtnState: Classnames(ScenicStore.getParkViewBtnState())
         };
         return listItem;
   },
@@ -71,9 +72,12 @@ var RouteView = React.createClass({
         dataType: 'json',
         //json object to sent to the authentication url
         data: pkg,
-        success: function () {
+        success: function (res) {
+
+          // Grab index right here mate!
           $(".favorite-alert").text('favourited').removeClass('unfav').addClass('fav').fadeIn('slow').fadeOut(1200);
-          $('.favorite').addClass('favorited').removeClass('favorite');
+
+          Actions.changeParkViewBtn('favorited');
         }
     })
   },
@@ -92,7 +96,9 @@ var RouteView = React.createClass({
          data: pkg,
          success: function () {
            $(".favorite-alert").text('unfavourited').removeClass('fav').addClass('unfav').fadeIn('slow').fadeOut(1200);
-           $('.favorited').removeClass('favorited').addClass('favorite');
+
+          Actions.changeParkViewBtn('favorite');
+          //  $('.favorited').removeClass('favorited').addClass('favorite');
          }
      })
   },
@@ -265,6 +271,10 @@ var RouteView = React.createClass({
     window._hrrr = this.state.list;
 
     this.setState({url: this.googleMapsURL()});
+    this.setState({parkViewBtnState: Classnames( ScenicStore.getParkViewBtnState() )});
+    this.setState({favouriteIndex: ScenicStore.getFavouritedIndex()})
+    window._park = this.state.parkViewBtnState;
+
   },
   render: function() {
     return (
@@ -285,8 +295,7 @@ var RouteView = React.createClass({
                 </li>
               </ul>
           </div>
-          <div className="go-to-route"></div>
-          <div className="favorite hide"></div>
+          <div data-favouriteIndex={this.state.favouriteIndex} className={this.state.parkViewBtnState}></div>
         </div>
 
         <div id="turnList" className='card-reveal'>
@@ -302,8 +311,7 @@ var RouteView = React.createClass({
                 </li>
               </ul>
           </div>
-          <div className="go-to-route goToRoute"></div>
-          <div className="favorite hide"></div>
+          <div data-favouriteIndex={this.state.favouriteIndex} className={this.state.parkViewBtnState}></div>
           </div>
           <div className="turnDirect">
           {this.state.turns}

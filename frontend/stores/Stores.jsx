@@ -34,6 +34,26 @@ var sessionState = {
 };
 
 
+// Classnames for the favorite button
+// Can be either go-to-route, favorite, or favorited.
+var parkViewBtnState = {
+  state: "go-to-route goToRoute",
+  index: null,
+  setState: function(_state, _index){
+    if (_state == "go-to-route"){
+      _state += " goToRoute";
+    }
+
+    if (_state == "favorited"){
+      this.index = _index;
+    }
+    else{
+      this.index = null;
+    }
+
+    this.state = _state;
+  }
+};
 
 /*
  * Toggling CSS classes based on whether
@@ -187,6 +207,12 @@ var ScenicStore = assign({}, EventEmitter.prototype, {
   getLayout: function(){
     return layout;
   },
+  getParkViewBtnState: function(){
+    return parkViewBtnState.state;
+  },
+  getFavouritedIndex: function(){
+    return parkViewBtnState.index;
+  },
   emitChange: function() {
     console.log("Change Emitted");
     this.emit(CHANGE_EVENT);
@@ -320,6 +346,10 @@ Dispatcher.register(function(payload) {
         break;
       case 'resetTimeout':
         sessionState.timedOut = false;
+        ScenicStore.emitChange();
+      case 'changeParkViewBtn':
+        var idx = (payload && payload.index) ? payload.index : null;
+        parkViewBtnState.setState(payload.state, idx);
         ScenicStore.emitChange();
         break;
       // add more cases for other actionTypes, like TODO_UPDATE, etc.

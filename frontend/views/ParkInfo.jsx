@@ -294,7 +294,6 @@ updateExpInfoHeight: function(){
                     else{
                       // return <Instagram url='http://instagram.com/p/fA9uwTtkSN/' />
                       // https://api.instagram.com/publicapi/oembed/?url=http://instagram.com/p/fA9uwTtkSN/
-
                       var divStyle = {
                         backgroundImage: 'url(' + it + ')',
                       };

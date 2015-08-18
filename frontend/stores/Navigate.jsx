@@ -547,9 +547,11 @@ var Navigate = {
 // Andrew: Why was this placed here??
     Actions.goBack();
 
-    $(".favorite, .go-to-route").hide();
-    $(".favorited").removeClass("hide").show();
-    $(".favorite").removeClass("hide").show();
+    Actions.changeParkViewBtn('favorited');
+
+    // $(".favorite, .go-to-route").hide();
+    // $(".favorited").removeClass("hide").show();
+    // $(".favorite").removeClass("hide").show();
 
     event.preventDefault();
     event.stopPropagation();
@@ -733,8 +735,12 @@ var Navigate = {
         $(".leaflet-popup[route=0]").addClass("active-popup");
         // Turn the park view off if active
         $(".parkBtn.active").trigger('click') // Setting up for a fresh run.
-        $(".go-to-route").removeClass("hide");
-        $(".favorite").addClass("hide");
+
+        Actions.changeParkViewBtn('go-to-route');
+        // $(".go-to-route").removeClass("hide");
+        // // reset favorite btn state
+        // $(".favorited").removeClass("favorited").addClass("favorite").addClass("hide");
+
         Actions.isLoading(false);
         // This must get triggered after loading completes
         Analytics.virtualPage('Route Options|Map', '/options/map');
@@ -782,8 +788,10 @@ $(document).on('click', '.go-to-route', function() {
 
   var activePathIndex = parseFloat($('.activePath').attr('route'));
   $("[route]").not("[route=" + activePathIndex + "]").fadeOut();
-  $(".go-to-route").addClass("hide");
-  $(".favorite").removeClass("hide").show();
+
+  Actions.changeParkViewBtn('favorite');
+  // $(".go-to-route").addClass("hide");
+  // $(".favorite").removeClass("hide").show();
 
   Analytics.greenOnRoute( paths[activePathIndex].info.scenic_route.length );
 
