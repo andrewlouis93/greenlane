@@ -192,13 +192,17 @@ function drawPins() {
     ] // point of the icon which will correspond to marker's location
   });
   if (ScenicStore.getSessionState().loop) {
-    originMarker = L.marker(ScenicStore.getSessionState().origin.latLng, {
-      icon: originIcon
-    }).addTo(window.map) // destMarker = L.marker(ScenicStore.getSessionState().origin.latLng,{icon: destIcon}).addTo(window.map)
+    if (!curMarker){
+        originMarker = L.marker(ScenicStore.getSessionState().origin.latLng, {
+          icon: originIcon
+        }).addTo(window.map) // destMarker = L.marker(ScenicStore.getSessionState().origin.latLng,{icon: destIcon}).addTo(window.map)
+    }
   } else {
-    originMarker = L.marker(ScenicStore.getSessionState().origin.latLng, {
-      icon: originIcon
-    }).addTo(window.map)
+    if (!curMarker){
+      originMarker = L.marker(ScenicStore.getSessionState().origin.latLng, {
+        icon: originIcon
+      }).addTo(window.map)
+    }
     destMarker = L.marker(ScenicStore.getSessionState().destination.latLng, {
       icon: destIcon
     }).addTo(window.map)
@@ -558,8 +562,8 @@ var Navigate = {
 /*
      * Set session origin, destination, transit, greenpoints
     */
-    console.log("in generate singleton");
-    console.log(route);
+    // console.log("in generate singleton");
+    // console.log(route);
     window._comemyroute = route;
 
     Navigate.prepareSingleton(route);
@@ -568,9 +572,9 @@ var Navigate = {
 
     var destination;
     if (ScenicStore.getSessionState().loop) {
-      console.log("im in generate route and im looping");
+      //console.log("im in generate route and im looping");
       destination = ScenicStore.getSessionState().origin;
-      console.log(destination);
+      //console.log(destination);
     } else {
       destination = ScenicStore.getSessionState().destination;
     }
@@ -586,10 +590,10 @@ var Navigate = {
     Actions.isLoading(true);
     fetchData(function(array) {
       // Debugging variable below.
-      console.log("Finished getting everything");
+      // console.log("Finished getting everything");
       window._paths = paths;
-      console.log(array);
-      console.log(paths);
+      // console.log(array);
+      // console.log(paths);
 
       Actions.setDirectionsState(true);
 
@@ -638,9 +642,9 @@ var Navigate = {
 
     var destination;
     if (ScenicStore.getSessionState().loop) {
-      console.log("im in generate route and im looping");
+      // console.log("im in generate route and im looping");
       destination = ScenicStore.getSessionState().origin;
-      console.log(destination);
+      // console.log(destination);
     } else {
       destination = ScenicStore.getSessionState().destination;
     }
@@ -656,13 +660,13 @@ var Navigate = {
     Actions.isLoading(true);
 
     $.get(Navigate.buildGreenifyURL(), function(results, err) {
-      console.log("Hit Greenify API", results);
-      console.log('catching error here', err);
+      // console.log("Hit Greenify API", results);
+      // console.log('catching error here', err);
 
       // Do the click handler stuff here...
       results.results = results.results.slice(-3);
 
-      console.log("This is right after you get it", results.results);
+      // console.log("This is right after you get it", results.results);
 
       var greenifyResults = results.results;
 
@@ -720,10 +724,10 @@ var Navigate = {
       window._greenify = greenifyResults;
       Actions.setGreenpoints(results);
       fetchData(function(array) {
-        console.log("Finished getting everything");
+        // console.log("Finished getting everything");
         window._paths = paths;
-        console.log(array);
-        console.log(paths);
+        // console.log(array);
+        // console.log(paths);
         Actions.setDirectionsState(true);
         Actions.setParkMode();
         drawPins();
@@ -746,7 +750,7 @@ var Navigate = {
         Analytics.virtualPage('Route Options|Map', '/options/map');
         // Handling smooth transition to the new map view.
         setTimeout(function() {
-          console.log("timeout invoked");
+          // console.log("timeout invoked");
           window.map.fitBounds(L.featureGroup(paths).getBounds(), {
             padding: [
               10, 10
@@ -767,7 +771,7 @@ var Navigate = {
 // Similar to the onPathClick, but for when you click the
 // popup associated with a path.
 $(document).on('click', '.leaflet-popup', function() {
-  console.log("Clicked popup");
+  // console.log("Clicked popup");
   var routeId = $(this).attr('route');
   var relatedRoute = $("path[route='" + routeId + "']");
 
