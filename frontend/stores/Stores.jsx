@@ -173,7 +173,7 @@ var backBtn = {
       Analytics.virtualPage('Setup|Time','/setup/time');
       layout.directionsDeactivate();
       // Should go back to origin/destinatino setup.
-      $("#travelType").trigger('click');
+      $("#destSel").trigger('click');
     }
     if (this.states.length == 0){
       this.css = "hide"

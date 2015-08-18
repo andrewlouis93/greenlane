@@ -484,7 +484,8 @@ var Navigate = {
     api += "&";
     api += "dest=" + destination.latLng.lng + ',' + destination.latLng.lat;
     api += "&";
-    api += "greenness=" + (greenness * 3);
+
+    api += "greenness=" + (greenness + 3);
     return api;
   },
   buildMapboxDirectionsURL: function(item) {

@@ -506,6 +506,7 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
 
 .optSwitch {
   height:90%;
+  overflow:visible;
   a {
     position:relative;
     display:inline-block;
@@ -2002,6 +2003,10 @@ hr {
     border-radius: 5px;
     text-align: center;
 }
+.load-wrapp.endpoints-view{
+  position:absolute;
+  bottom:0;
+}
 
 .load-wrapp p {padding: 0 0 20px;}
 .load-wrapp:last-child {margin-right: 0;}
@@ -2013,6 +2018,10 @@ hr {
     height: 2vh;
     border-radius: 2vh;
     background-color: white;
+}
+
+.in-page .line{
+  background-color: $secondary-color;
 }
 
 

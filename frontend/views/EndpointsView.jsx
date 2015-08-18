@@ -30,7 +30,8 @@ var Endpoints = React.createClass({
       "destination": {},
       "greenpoints": [],
       "origin_error": false,
-      "destination_error": false
+      "destination_error": false,
+      "validating": false
     };
   },
   componentDidMount: function(){
@@ -184,6 +185,8 @@ var Endpoints = React.createClass({
       }
   },
   validate: function(){
+
+    this.setState({"validating": true});
     var geocoder = new google.maps.Geocoder();
 
     var TorontoBbox = new google.maps.LatLngBounds(
@@ -235,13 +238,14 @@ var Endpoints = React.createClass({
                             // proceed to the next page ONLY after
                             // processing the input field args
                             ++ validatedCount;
-                            (validatedCount == inputCount) ? addLoc() : null;
+                            (validatedCount == inputCount) ? _this.viewProceed() : null;
 
                           } else {
                             var err = {};
                             Analytics.locationError(_id.toUpperCase());
                             err[_id + '_error'] = "we're only able to map greenlanes in toronto. please try again";
                             _this.setState(err)
+                            _this.setState({"validating": true});
                             // alert('No results found for ' + _id);
                           }
                         }
@@ -250,6 +254,7 @@ var Endpoints = React.createClass({
                             Analytics.locationError(_id.toUpperCase());
                             err[_id + '_error'] = "we're only able to map greenlanes in toronto. please try again";
                             _this.setState(err)
+                            _this.setState({"validating": true});
                         }
                 })
             }
@@ -257,6 +262,10 @@ var Endpoints = React.createClass({
 
 
     return false;
+  },
+  viewProceed: function(){
+    addLoc();
+    this.setState({"validating": false});
   },
   render: function() {
     return (
@@ -266,8 +275,13 @@ var Endpoints = React.createClass({
                 return reactComponent;
               })
             }
-          <button id='submitRoute' onClick={this.validate} tabIndex="3" className="btn-secondary col s9 offset-s1.5 m6 offset-m3">continue
-          </button>
+          {(this.state.validating) ? <div className="load-wrapp endpoints-view">
+              <div className="load-3 in-page">
+                      <div className="line"></div>
+                      <div className="line"></div>
+                      <div className="line"></div>
+                </div>
+          </div> : <button id='submitRoute' onClick={this.validate} tabIndex="3" className="btn-secondary col s9 offset-s1.5 m6 offset-m3">continue</button>}
         </div>
     );
   }
