@@ -77,12 +77,13 @@ var RouteView = React.createClass({
           // Grab index right here mate!
           $(".favorite-alert").text('favourited').removeClass('unfav').addClass('fav').fadeIn('slow').fadeOut(1200);
 
-          Actions.changeParkViewBtn('favorited');
+          Actions.changeParkViewBtn('favorited', res.index);
         }
     })
   },
   unfavouriteRoute: function(){
     var pkg = {
+      routeId: parseFloat()$(".favorited").data('favouriteIndex'));
       authId: parseFloat(readCookie('authId')),
       type: readCookie('type')
     };
@@ -90,15 +91,13 @@ var RouteView = React.createClass({
     $.ajax
      ({
          type: "POST",
-         url: 'https://greenlane.io/auth/delete-last-route',
+         url: 'https://greenlane.io/auth/delete-route',
          dataType: 'json',
          //json object to sent to the authentication url
          data: pkg,
          success: function () {
            $(".favorite-alert").text('unfavourited').removeClass('fav').addClass('unfav').fadeIn('slow').fadeOut(1200);
-
           Actions.changeParkViewBtn('favorite');
-          //  $('.favorited').removeClass('favorited').addClass('favorite');
          }
      })
   },
