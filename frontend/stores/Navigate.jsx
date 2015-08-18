@@ -197,10 +197,20 @@ function drawPins() {
           icon: originIcon
         }).addTo(window.map) // destMarker = L.marker(ScenicStore.getSessionState().origin.latLng,{icon: destIcon}).addTo(window.map)
     }
+    else{
+      originMarker = L.marker(ScenicStore.getSessionState().origin.latLng, {
+        icon: destIcon
+      }).addTo(window.map)
+    }
   } else {
     if (!curMarker){
       originMarker = L.marker(ScenicStore.getSessionState().origin.latLng, {
         icon: originIcon
+      }).addTo(window.map)
+    }
+    else{
+      originMarker = L.marker(ScenicStore.getSessionState().origin.latLng, {
+        icon: destIcon
       }).addTo(window.map)
     }
     destMarker = L.marker(ScenicStore.getSessionState().destination.latLng, {
