@@ -83,7 +83,7 @@ var RouteView = React.createClass({
   },
   unfavouriteRoute: function(){
     var pkg = {
-      routeId: parseFloat( $(".favorited").attr('favouriteIndex') ),
+      routeId: ScenicStore.getFavouritedIndex(),
       authId: parseFloat(readCookie('authId')),
       type: readCookie('type')
     };
@@ -294,7 +294,7 @@ var RouteView = React.createClass({
                 </li>
               </ul>
           </div>
-          <div favouriteIndex={this.state.favouriteIndex} className={this.state.parkViewBtnState}></div>
+          <div className={this.state.parkViewBtnState}></div>
         </div>
 
         <div id="turnList" className='card-reveal'>
@@ -310,7 +310,7 @@ var RouteView = React.createClass({
                 </li>
               </ul>
           </div>
-          <div favouriteIndex={this.state.favouriteIndex} className={this.state.parkViewBtnState}></div>
+          <div className={this.state.parkViewBtnState}></div>
           </div>
           <div className="turnDirect">
           {this.state.turns}
