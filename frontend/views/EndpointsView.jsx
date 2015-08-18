@@ -25,7 +25,6 @@ var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Const
 
 var Endpoints = React.createClass({
   getInitialState: function(){
-    console.log("In Endpoints");
     return {
       "origin": {},
       "destination": {},
@@ -67,7 +66,6 @@ var Endpoints = React.createClass({
       if (e.keyCode == 13){
         e.preventDefault();
         if (document.getElementById('destination')){
-          console.log("triggered");
           $("#destination").focus();
         }
         else{
@@ -92,10 +90,8 @@ var Endpoints = React.createClass({
   // Looks at the store state and decides whether
   // to show one or two inputs.
   routeInputs: function(){
-      console.log("Returning Route Inputs");
       if (this.props.loop){
         // Show looping inputs!
-        console.log("I'M LOOPING");
         return [
               <div className="introTag">i am</div>,
               <div className="input-field">
@@ -110,7 +106,6 @@ var Endpoints = React.createClass({
       }
       else{
         // Show routing inputs
-        console.log("I'M ROUTING!");
         return [
               <div className="introTag">i am</div>,
               <div className="input-field">
@@ -141,9 +136,6 @@ var Endpoints = React.createClass({
       if (navigator.geolocation) {
           Actions.activateError('location');
           navigator.geolocation.getCurrentPosition(function (position) {
-              console.log('Grabbed current location!');
-
-
               var latitude = position.coords.latitude;
               var longitude = position.coords.longitude;
               var latlng = new google.maps.LatLng(latitude, longitude);
@@ -152,12 +144,10 @@ var Endpoints = React.createClass({
                 location: latlng,
             }, function(results, status){
                         if (status == google.maps.GeocoderStatus.OK) {
-                          console.log(results);
+                          console.log('Geolocation user...',results);
                           // Grab the most likely candidate for the reverse geocode lookup.
                           if (results[0]){
                             //setting store with destination sessions state////////////////
-                            console.log("REVERSE GEOCODE HERE");
-                            console.log(results[0]);
                             var _Name = results[0].formatted_address;
                             _Name = _Name.split(',', 1).join("");
                             Actions.setSessionState('originName', _Name );

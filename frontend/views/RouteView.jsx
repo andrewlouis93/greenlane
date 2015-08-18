@@ -9,7 +9,7 @@ var ParkInfo = require('./ParkInfo.jsx');
 
 function readCookie(name) {
     var value = (name = new RegExp('(?:^|;\\s*)' + ('' + name).replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&') + '=([^;]*)').exec(document.cookie)) && name[1];
-    console.log('cookie value', value);
+    // console.log('cookie value', value);
     return (value == null) ? false : decodeURIComponent(value);
 }
 
@@ -30,9 +30,9 @@ var RouteView = React.createClass({
         return listItem;
   },
   componentDidMount: function(){
-    console.log("Route View has Mounted!");
+    // console.log("Route View has Mounted!");
     ScenicStore.addChangeListener(this._onChange);
-    console.log(ScenicStore.getSessionState().activePath);
+    // console.log(ScenicStore.getSessionState().activePath);
     $(document).on('click', '.favorite', this.favouriteRoute);
     $(document).on('click','.favorited', this.unfavouriteRoute);
   },
@@ -64,7 +64,7 @@ var RouteView = React.createClass({
         info: ScenicStore.getSessionState().activePath.info
       }
     };
-    console.log(pkg);
+    // console.log(pkg);
    $.ajax
     ({
         type: "POST",
@@ -250,8 +250,8 @@ var RouteView = React.createClass({
   },
 
     _onChange: function(){
-    console.log("in directions view, the following is the updated directions list.");
-    console.log(ScenicStore.getLayout().directions);
+    // console.log("in directions view, the following is the updated directions list.");
+    // console.log(ScenicStore.getLayout().directions);
 
     var oldList = this.state.list;
 

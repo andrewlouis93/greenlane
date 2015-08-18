@@ -10,7 +10,7 @@ var Actions = require('../stores/Actions.jsx');
 
 function readCookie(name) {
     var value = (name = new RegExp('(?:^|;\\s*)' + ('' + name).replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&') + '=([^;]*)').exec(document.cookie)) && name[1];
-    console.log('cookie value', value);
+    // console.log('cookie value', value);
     return (value == null) ? false : decodeURIComponent(value);
 }
 

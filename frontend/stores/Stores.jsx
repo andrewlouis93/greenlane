@@ -168,8 +168,6 @@ var backBtn = {
       activePage = null;
     }
     else if (popped && (popped =='parkview')){
-      $(".favorite, .favorited").hide();
-      $(".go-to-route").show();
       console.log("Popped Parkview!");
       // You went back to timeSel
       Analytics.virtualPage('Setup|Time','/setup/time');
