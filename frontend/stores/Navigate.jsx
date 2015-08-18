@@ -690,11 +690,50 @@ var Navigate = {
       var greenifyResults = results.results;
 
       // 0 - Reverse everything.
+
+
       greenifyResults.map(function(it, id){
-        it.parks = it.parks.reverse();
-        it.facilities = it.facilities.reverse();
-        it.pictures = it.pictures.reverse();
-        it.scenic_route = it.scenic_route.reverse();
+
+        var optimal_order = [];
+        // find closest to origin
+        while (optimal_order.length != it.scenic_route.length){
+          var minDelta = Infinity, current_idx = -1;
+
+          for (var i = 0; i < it.scenic_route.length; i++){
+            var dist;
+            if (optimal_order.length == 0){
+              let temp = getDistanceFromLatLonInKm(ScenicStore.getSessionState().origin.latLng.lat,ScenicStore.getSessionState().origin.latLng.lng,it.scenic_route[i][1],it.scenic_route[i][0]);
+              if (temp > 0)
+                dist = temp;
+              console.log("distance between origin and A", i, dist);
+            }
+            else if( optimal_order.indexOf(i) == -1){
+              let temp = getDistanceFromLatLonInKm(it.scenic_route[ optimal_order[optimal_order.length-1] ][1],it.scenic_route[ optimal_order[optimal_order.length-1] ][0],it.scenic_route[i][1],it.scenic_route[i][0]);
+              if (temp > 0)
+                dist = temp;
+              console.log(" distance between A, B and distance",optimal_order[optimal_order.length-1], i, dist);
+            }
+            if (dist < minDelta){
+              minDelta = dist;
+              current_idx = i;
+            }
+          }
+          optimal_order.push(current_idx);
+        }
+        
+        var reParks = [], reFac = [], rePic = [], reRoute = [];
+        for (var i = 0; i < optimal_order.length; i++){
+          reParks.push( it.parks[ optimal_order[i] ] );
+          reFac.push( it.facilities[ optimal_order[i] ] );
+          rePic.push( it.pictures[ optimal_order[i] ] );
+          reRoute.push( it.scenic_route[ optimal_order[i] ] );
+        }
+        console.log("OPTIMAL_ORDER", optimal_order);
+        it.parks = reParks;
+        it.facilities = reFac;
+        it.pictures = rePic;
+        it.scenic_route = reRoute;
+        
       })
 
       // Formatting API Results for convenience

@@ -179,7 +179,7 @@ getInitialState: function(){
     parkName: (ScenicStore.getSessionState().activePath) ? ScenicStore.getSessionState().activePath.info.parks : [],
     parkFac: (ScenicStore.getSessionState().activePath) ? ScenicStore.getSessionState().activePath.info.facilities : [],
     parkPic: (ScenicStore.getSessionState().activePath) ? ScenicStore.getSessionState().activePath.info.pictures : []
-  };
+  }; 
   return parkList;
  },
 updateExpInfoHeight: function(){
