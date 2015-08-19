@@ -280,9 +280,13 @@ updateExpInfoHeight: function(){
                       // var htmlBlock = $.ajax({type: "GET", url: "https://api.instagram.com/publicapi/oembed/?url=http://instagram.com/p/fA9uwTtkSN/", async: false}).responseText.html;
                       // return (htmlBlock) ? htmlBlock : null;
                       var divStyle = {
-                        backgroundImage: 'url(' + it + ')',
+                        backgroundImage: 'url(' + it + ')'
                       };
-                      return <div style={divStyle} className="square"></div>
+                      return <div style={divStyle} href="#"  data-featherlight={it} className="square"></div>
+                      
+
+
+
                     }
                   })
                 :

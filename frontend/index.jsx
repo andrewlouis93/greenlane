@@ -14,7 +14,9 @@ var ErrorView = require('./views/Error.jsx');
 var Tutorial = require('./views/Tutorial.jsx');
 var LandingAnim = require('./views/LandingAnim.jsx');
 var ScenicStore = require('./stores/Stores.jsx');
+var Lightbox = require('./views/Lightbox.jsx');
 var Actions = require('./stores/Actions.jsx');
+
 
 var is_keyboard = false;
 var is_landscape = false;

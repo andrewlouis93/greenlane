@@ -1011,6 +1011,10 @@ $google_expando_transition: (
   }
 }
 
+.card {
+  overflow:auto !important;
+}
+
 // @media #{large}{
 //   .google-expando__card.active {
 //    height:200px !important;
@@ -1101,7 +1105,7 @@ $google_expando_transition: (
       padding: 10% 0;
       width: 100%;
       margin: 5% auto;
-      display: block;
+      display:inline-block;
 
       li{
         font-size:1.35rem;
@@ -1119,6 +1123,12 @@ $google_expando_transition: (
     background-position:center center;
     background-repeat:no-repeat;
     background-size:cover;
+}
+
+ .featherlight .featherlight-content {
+  margin:0 !important;
+  padding:0 !important;
+  border-bottom:0 !important;
 }
 
 hr {
@@ -1375,11 +1385,11 @@ hr {
       width:80%;
       float: left;
   }
-
-      button {
+    button {
       right:0.4em !important;
     }
 }
+
 
   .articlewrap {
     padding-left:3em !important;
