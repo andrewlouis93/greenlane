@@ -216,7 +216,7 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
   -moz-transform-style: preserve-3d;
   transform-style: preserve-3d;
   /* Where's this 1% of overflow coming from????? */
-  // overflow: hidden;
+  overflow: hidden;
 }
 
 /*
@@ -892,6 +892,7 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
 
 /* Styles for Directions Tab */
 #directionsContainer{
+  overflow-x:hidden;
   min-height: 95px;
   max-height: 100%;
   position: absolute;
@@ -1127,10 +1128,21 @@ $google_expando_transition: (
     background-size:cover;
 }
 
- .featherlight .featherlight-content {
+.featherlight-content {
   margin:0 !important;
   padding:0 !important;
   border-bottom:0 !important;
+  background-position:center center;
+  background-repeat:no-repeat;
+  background-size:cover;
+}
+
+.featherlight {
+  margin:0 !important;
+  padding:0 !important;
+  border-bottom:0 !important;
+  background-position:center center;
+  background-repeat:no-repeat;
 }
 
 hr {
