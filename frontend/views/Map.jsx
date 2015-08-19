@@ -51,7 +51,7 @@ var Map = React.createClass({
 	updateDimensions: function(){
 		if (window && window.map){
 			window.map.invalidateSize();
-			console.log("Map Invalidated");
+			// console.log("Map Invalidated");
 		}
 
 		// close side-menu,

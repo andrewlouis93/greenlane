@@ -39,7 +39,7 @@ var config = require('../config.js');
     render: function() {
       var settings = {
         dots: true,
-        infinite: true,
+        infinite: false,
         slidesToShow: 1,
         slidesToScroll: 1,
         afterChange: function(slideId){

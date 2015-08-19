@@ -34,7 +34,6 @@ var TimeDrag = React.createClass({
       // Plant the draggable to where it should be.
       var seedResizer = ($("#drag-cont").height() - $("#resizable-element").height()) + 'px';
       // Doesn't seem to set the top attribute the jQuery way?
-      // console.log("IN INIT RESIZER", seedResizer);
       document.getElementById('resizer').style.top = seedResizer;
     }
   },
@@ -79,9 +78,6 @@ var TimeDrag = React.createClass({
         }, 200);
 
         var adjustTo = sliderHeight - new_top;
-
-        console.log("RESIZING, NEW TOP", new_top);
-
         var greenness = normalize(adjustTo / $("#resizable-element").parent().height());
 
         // Analytics line here.

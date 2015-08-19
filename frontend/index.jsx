@@ -93,7 +93,7 @@ var Body = React.createClass({
 	componentWillMount: function(){
     ScenicStore.addChangeListener(this._onChange);
 		var onboardedUser = $.parseJSON(readCookie('onboardedUser'));
-    // var onboardedUser = false;
+    //var onboardedUser = false;
 		if (onboardedUser) // change to onboardedUser
 			this.setState({onboardedUser: true});
 		else
@@ -113,21 +113,12 @@ var Body = React.createClass({
     else
       yPos = large;
 
-    setTimeout(function(){
-      $('.landing-animation').animate({
-            'background-position-y':yPos
-      }, 3000, function(){
-        $(this).delay(2000).fadeOut();
-      });
-    },1000);
 
-    // setTimeout(function(){
-    //   $('.landing-animation').animate({
-    //          'top': '-100%'
-    //   }, 2000, function(){
-    //     $(this).delay(2000).fadeOut();
-    //   });
-    // },3000);
+    setTimeout(function(){
+      $(".landing-animation").fadeOut();
+    },5100);
+
+
   },
 	componentDidMount: function(){
 		// only occurs once once the rest of the site has loaded!

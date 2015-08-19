@@ -3,6 +3,21 @@ var Carousel = require('nuka-carousel');
 var ScenicStore = require('../stores/Stores.jsx');
 var Actions = require('../stores/Actions.jsx');
 var Analytics = require('../stores/Analytics.jsx');
+var ReactAsync = require('react-async');
+
+var Instagram = React.createClass({
+  mixins: [ReactAsync.Mixin],
+  getInitialStateAsync(cb) {
+    var _url = 'https://api.instagram.com/publicapi/oembed/?' + this.props.url;
+    xhr(_url, function(data) {
+      // console.log(data);
+      cb(null, data)
+    }.bind(this))
+  },
+  render() {
+    return this.state.data;
+   }
+})
 
 var Decorators = [{
   component: React.createClass({
@@ -43,15 +58,15 @@ var Decorators = [{
 
 var ParkCarousel = React.createClass({
   getInitialState: function(){
-    console.log("MOUNTING PARK CAROUSEL");
+    // console.log("MOUNTING PARK CAROUSEL");
     return {
       parks: ScenicStore.getSessionState().activePath.info.parks
     }
   },
   componentWillMount: function(){
-    console.log("in componet will mount");
-    console.log(this.state.parks);
-    window._carousel = this;
+    // console.log("in componet will mount");
+    // console.log(this.state.parks);
+    // window._carousel = this;
   },
   componentDidMount: function(){
     ScenicStore.addChangeListener(this.updateParkList);
@@ -65,15 +80,15 @@ var ParkCarousel = React.createClass({
       this.setState({parks: ScenicStore.getSessionState().activePath.info.parks});
       // Check that they are both equal!
       var noChange = true;
-      console.log('oldParks',oldParks);
-      console.log('newParks',this.state.parks);
+      // console.log('oldParks',oldParks);
+      // console.log('newParks',this.state.parks);
       for (var i = 0; i < Math.max(oldParks.length,this.state.parks.length); i++){
         if (oldParks[i] != this.state.parks[i])
           noChange = false;
       }
 
-      console.log('noChange',noChange);
-      window._pC = this.state.carousels.parkCarousel;
+      // console.log('noChange',noChange);
+      // window._pC = this.state.carousels.parkCarousel;
       if (noChange == false){
         this.state.carousels.parkCarousel.goToSlide(0);
         setTimeout(function(){
@@ -90,7 +105,7 @@ var ParkCarousel = React.createClass({
   },
   updateActiveCarousel: function(){
     setTimeout(function(){
-      console.log("IN UPDATE ACTIVE CAROUSEL", this.state.carousels.parkCarousel.state.currentSlide);
+      // console.log("IN UPDATE ACTIVE CAROUSEL", this.state.carousels.parkCarousel.state.currentSlide);
       Actions.setSessionState('activeCarousel', this.state.carousels.parkCarousel.state.currentSlide);
     }.bind(this),0);
   },
@@ -164,7 +179,7 @@ getInitialState: function(){
     parkName: (ScenicStore.getSessionState().activePath) ? ScenicStore.getSessionState().activePath.info.parks : [],
     parkFac: (ScenicStore.getSessionState().activePath) ? ScenicStore.getSessionState().activePath.info.facilities : [],
     parkPic: (ScenicStore.getSessionState().activePath) ? ScenicStore.getSessionState().activePath.info.pictures : []
-  };
+  }; 
   return parkList;
  },
 updateExpInfoHeight: function(){
@@ -182,7 +197,7 @@ updateExpInfoHeight: function(){
 
 },
  updateActiveCarousel: function(current){
-  console.log("updated active carousel");
+  // console.log("updated active carousel");
   this.setState({'activeCarousel': current});
  },
 
@@ -191,7 +206,7 @@ updateExpInfoHeight: function(){
   // To make sure it has the most updated states
   this._onChange();
   var ParkState = this.state.parkName;
-  console.log("IN CREATE PARK LIST", ParkState);
+  // console.log("IN CREATE PARK LIST", ParkState);
 
   var updatedStateProp = {
     parkName: ParkState.map(function(row, i){
@@ -206,9 +221,9 @@ updateExpInfoHeight: function(){
     },
 
   _onChange: function(){
-    console.log("IN PARK TAB");
+    // console.log("IN PARK TAB");
     if (ScenicStore.getSessionState().activePath)
-      console.log("ACTIVE PATH BELOW", ScenicStore.getSessionState().activePath.info);
+      // console.log("ACTIVE PATH BELOW", ScenicStore.getSessionState().activePath.info);
 
     this.setState({
       activeCarousel: ScenicStore.getSessionState().activeCarousel,
@@ -216,7 +231,7 @@ updateExpInfoHeight: function(){
       parkFac: (ScenicStore.getSessionState().activePath) ? ScenicStore.getSessionState().activePath.info.facilities : [],
       parkPic: (ScenicStore.getSessionState().activePath) ? ScenicStore.getSessionState().activePath.info.pictures : []
     });
-    console.log(ScenicStore.getSessionState().activePath);
+    // console.log(ScenicStore.getSessionState().activePath);
     window.myParkState = this.state;
   },
 
@@ -230,7 +245,7 @@ updateExpInfoHeight: function(){
     if (this.state.parkFac && this.state.parkFac[this.state.activeCarousel]){
       for (var i = 0; i < this.state.parkFac[this.state.activeCarousel].length; i++){
         var current = this.state.parkFac[this.state.activeCarousel][i];
-        console.log('current', current);
+        // console.log('current', current);
         if (current != "NULL"){
           legitFac.push(current[0].split('"').join(""));
           legitFac.push(current[1].split('"').join(""));
@@ -277,8 +292,8 @@ updateExpInfoHeight: function(){
                       return <div className="noParkImg"></div>
                     }
                     else{
-                      // var htmlBlock = $.ajax({type: "GET", url: "https://api.instagram.com/publicapi/oembed/?url=http://instagram.com/p/fA9uwTtkSN/", async: false}).responseText.html;
-                      // return (htmlBlock) ? htmlBlock : null;
+                      // return <Instagram url='http://instagram.com/p/fA9uwTtkSN/' />
+                      // https://api.instagram.com/publicapi/oembed/?url=http://instagram.com/p/fA9uwTtkSN/
                       var divStyle = {
                         backgroundImage: 'url(' + it + ')'
                       };

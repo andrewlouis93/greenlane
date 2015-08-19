@@ -192,13 +192,27 @@ function drawPins() {
     ] // point of the icon which will correspond to marker's location
   });
   if (ScenicStore.getSessionState().loop) {
-    originMarker = L.marker(ScenicStore.getSessionState().origin.latLng, {
-      icon: originIcon
-    }).addTo(window.map) // destMarker = L.marker(ScenicStore.getSessionState().origin.latLng,{icon: destIcon}).addTo(window.map)
+    if (!curMarker){
+        originMarker = L.marker(ScenicStore.getSessionState().origin.latLng, {
+          icon: originIcon
+        }).addTo(window.map) // destMarker = L.marker(ScenicStore.getSessionState().origin.latLng,{icon: destIcon}).addTo(window.map)
+    }
+    else{
+      originMarker = L.marker(ScenicStore.getSessionState().origin.latLng, {
+        icon: destIcon
+      }).addTo(window.map)
+    }
   } else {
-    originMarker = L.marker(ScenicStore.getSessionState().origin.latLng, {
-      icon: originIcon
-    }).addTo(window.map)
+    if (!curMarker){
+      originMarker = L.marker(ScenicStore.getSessionState().origin.latLng, {
+        icon: originIcon
+      }).addTo(window.map)
+    }
+    else{
+      originMarker = L.marker(ScenicStore.getSessionState().origin.latLng, {
+        icon: destIcon
+      }).addTo(window.map)
+    }
     destMarker = L.marker(ScenicStore.getSessionState().destination.latLng, {
       icon: destIcon
     }).addTo(window.map)
@@ -470,7 +484,16 @@ var Navigate = {
     api += "&";
     api += "dest=" + destination.latLng.lng + ',' + destination.latLng.lat;
     api += "&";
-    api += "greenness=" + (greenness * 3);
+
+    let offset;
+    if (greenness == 1){
+      offset = 2
+    }
+    else{
+      offset = 3;
+    }
+
+    api += "greenness=" + (greenness + offset);
     return api;
   },
   buildMapboxDirectionsURL: function(item) {
@@ -547,16 +570,19 @@ var Navigate = {
 // Andrew: Why was this placed here??
     Actions.goBack();
 
-    $(".favorite, .go-to-route").hide();
-    $(".favorited").removeClass("hide").show();
+    Actions.changeParkViewBtn('favorited');
+
+    // $(".favorite, .go-to-route").hide();
+    // $(".favorited").removeClass("hide").show();
+    // $(".favorite").removeClass("hide").show();
 
     event.preventDefault();
     event.stopPropagation();
 /*
      * Set session origin, destination, transit, greenpoints
     */
-    console.log("in generate singleton");
-    console.log(route);
+    // console.log("in generate singleton");
+    // console.log(route);
     window._comemyroute = route;
 
     Navigate.prepareSingleton(route);
@@ -565,9 +591,9 @@ var Navigate = {
 
     var destination;
     if (ScenicStore.getSessionState().loop) {
-      console.log("im in generate route and im looping");
+      //console.log("im in generate route and im looping");
       destination = ScenicStore.getSessionState().origin;
-      console.log(destination);
+      //console.log(destination);
     } else {
       destination = ScenicStore.getSessionState().destination;
     }
@@ -583,10 +609,10 @@ var Navigate = {
     Actions.isLoading(true);
     fetchData(function(array) {
       // Debugging variable below.
-      console.log("Finished getting everything");
+      // console.log("Finished getting everything");
       window._paths = paths;
-      console.log(array);
-      console.log(paths);
+      // console.log(array);
+      // console.log(paths);
 
       Actions.setDirectionsState(true);
 
@@ -635,9 +661,9 @@ var Navigate = {
 
     var destination;
     if (ScenicStore.getSessionState().loop) {
-      console.log("im in generate route and im looping");
+      // console.log("im in generate route and im looping");
       destination = ScenicStore.getSessionState().origin;
-      console.log(destination);
+      // console.log(destination);
     } else {
       destination = ScenicStore.getSessionState().destination;
     }
@@ -653,22 +679,61 @@ var Navigate = {
     Actions.isLoading(true);
 
     $.get(Navigate.buildGreenifyURL(), function(results, err) {
-      console.log("Hit Greenify API", results);
-      console.log('catching error here', err);
+      // console.log("Hit Greenify API", results);
+      // console.log('catching error here', err);
 
       // Do the click handler stuff here...
       results.results = results.results.slice(-3);
 
-      console.log("This is right after you get it", results.results);
+      // console.log("This is right after you get it", results.results);
 
       var greenifyResults = results.results;
 
       // 0 - Reverse everything.
+
+
       greenifyResults.map(function(it, id){
-        it.parks = it.parks.reverse();
-        it.facilities = it.facilities.reverse();
-        it.pictures = it.pictures.reverse();
-        it.scenic_route = it.scenic_route.reverse();
+
+        var optimal_order = [];
+        // find closest to origin
+        while (optimal_order.length != it.scenic_route.length){
+          var minDelta = Infinity, current_idx = -1;
+
+          for (var i = 0; i < it.scenic_route.length; i++){
+            var dist;
+            if (optimal_order.length == 0){
+              let temp = getDistanceFromLatLonInKm(ScenicStore.getSessionState().origin.latLng.lat,ScenicStore.getSessionState().origin.latLng.lng,it.scenic_route[i][1],it.scenic_route[i][0]);
+              if (temp > 0)
+                dist = temp;
+              console.log("distance between origin and A", i, dist);
+            }
+            else if( optimal_order.indexOf(i) == -1){
+              let temp = getDistanceFromLatLonInKm(it.scenic_route[ optimal_order[optimal_order.length-1] ][1],it.scenic_route[ optimal_order[optimal_order.length-1] ][0],it.scenic_route[i][1],it.scenic_route[i][0]);
+              if (temp > 0)
+                dist = temp;
+              console.log(" distance between A, B and distance",optimal_order[optimal_order.length-1], i, dist);
+            }
+            if (dist < minDelta){
+              minDelta = dist;
+              current_idx = i;
+            }
+          }
+          optimal_order.push(current_idx);
+        }
+        
+        var reParks = [], reFac = [], rePic = [], reRoute = [];
+        for (var i = 0; i < optimal_order.length; i++){
+          reParks.push( it.parks[ optimal_order[i] ] );
+          reFac.push( it.facilities[ optimal_order[i] ] );
+          rePic.push( it.pictures[ optimal_order[i] ] );
+          reRoute.push( it.scenic_route[ optimal_order[i] ] );
+        }
+        console.log("OPTIMAL_ORDER", optimal_order);
+        it.parks = reParks;
+        it.facilities = reFac;
+        it.pictures = rePic;
+        it.scenic_route = reRoute;
+        
       })
 
       // Formatting API Results for convenience
@@ -717,10 +782,10 @@ var Navigate = {
       window._greenify = greenifyResults;
       Actions.setGreenpoints(results);
       fetchData(function(array) {
-        console.log("Finished getting everything");
+        // console.log("Finished getting everything");
         window._paths = paths;
-        console.log(array);
-        console.log(paths);
+        // console.log(array);
+        // console.log(paths);
         Actions.setDirectionsState(true);
         Actions.setParkMode();
         drawPins();
@@ -732,14 +797,18 @@ var Navigate = {
         $(".leaflet-popup[route=0]").addClass("active-popup");
         // Turn the park view off if active
         $(".parkBtn.active").trigger('click') // Setting up for a fresh run.
-        $(".go-to-route").removeClass("hide");
-        $(".favorite").addClass("hide");
+
+        Actions.changeParkViewBtn('go-to-route');
+        // $(".go-to-route").removeClass("hide");
+        // // reset favorite btn state
+        // $(".favorited").removeClass("favorited").addClass("favorite").addClass("hide");
+
         Actions.isLoading(false);
         // This must get triggered after loading completes
         Analytics.virtualPage('Route Options|Map', '/options/map');
         // Handling smooth transition to the new map view.
         setTimeout(function() {
-          console.log("timeout invoked");
+          // console.log("timeout invoked");
           window.map.fitBounds(L.featureGroup(paths).getBounds(), {
             padding: [
               10, 10
@@ -760,7 +829,7 @@ var Navigate = {
 // Similar to the onPathClick, but for when you click the
 // popup associated with a path.
 $(document).on('click', '.leaflet-popup', function() {
-  console.log("Clicked popup");
+  // console.log("Clicked popup");
   var routeId = $(this).attr('route');
   var relatedRoute = $("path[route='" + routeId + "']");
 
@@ -781,8 +850,10 @@ $(document).on('click', '.go-to-route', function() {
 
   var activePathIndex = parseFloat($('.activePath').attr('route'));
   $("[route]").not("[route=" + activePathIndex + "]").fadeOut();
-  $(".go-to-route").addClass("hide");
-  $(".favorite").removeClass("hide").show();
+
+  Actions.changeParkViewBtn('favorite');
+  // $(".go-to-route").addClass("hide");
+  // $(".favorite").removeClass("hide").show();
 
   Analytics.greenOnRoute( paths[activePathIndex].info.scenic_route.length );
 

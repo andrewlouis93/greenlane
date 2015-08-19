@@ -25,13 +25,13 @@ var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Const
 
 var Endpoints = React.createClass({
   getInitialState: function(){
-    console.log("In Endpoints");
     return {
       "origin": {},
       "destination": {},
       "greenpoints": [],
       "origin_error": false,
-      "destination_error": false
+      "destination_error": false,
+      "validating": false
     };
   },
   componentDidMount: function(){
@@ -67,7 +67,6 @@ var Endpoints = React.createClass({
       if (e.keyCode == 13){
         e.preventDefault();
         if (document.getElementById('destination')){
-          console.log("triggered");
           $("#destination").focus();
         }
         else{
@@ -92,10 +91,8 @@ var Endpoints = React.createClass({
   // Looks at the store state and decides whether
   // to show one or two inputs.
   routeInputs: function(){
-      console.log("Returning Route Inputs");
       if (this.props.loop){
         // Show looping inputs!
-        console.log("I'M LOOPING");
         return [
               <div className="introTag">i am</div>,
               <div className="input-field">
@@ -110,7 +107,6 @@ var Endpoints = React.createClass({
       }
       else{
         // Show routing inputs
-        console.log("I'M ROUTING!");
         return [
               <div className="introTag">i am</div>,
               <div className="input-field">
@@ -141,9 +137,6 @@ var Endpoints = React.createClass({
       if (navigator.geolocation) {
           Actions.activateError('location');
           navigator.geolocation.getCurrentPosition(function (position) {
-              console.log('Grabbed current location!');
-
-
               var latitude = position.coords.latitude;
               var longitude = position.coords.longitude;
               var latlng = new google.maps.LatLng(latitude, longitude);
@@ -152,12 +145,10 @@ var Endpoints = React.createClass({
                 location: latlng,
             }, function(results, status){
                         if (status == google.maps.GeocoderStatus.OK) {
-                          console.log(results);
+                          console.log('Geolocation user...',results);
                           // Grab the most likely candidate for the reverse geocode lookup.
                           if (results[0]){
                             //setting store with destination sessions state////////////////
-                            console.log("REVERSE GEOCODE HERE");
-                            console.log(results[0]);
                             var _Name = results[0].formatted_address;
                             _Name = _Name.split(',', 1).join("");
                             Actions.setSessionState('originName', _Name );
@@ -194,6 +185,8 @@ var Endpoints = React.createClass({
       }
   },
   validate: function(){
+
+    this.setState({"validating": true});
     var geocoder = new google.maps.Geocoder();
 
     var TorontoBbox = new google.maps.LatLngBounds(
@@ -245,12 +238,13 @@ var Endpoints = React.createClass({
                             // proceed to the next page ONLY after
                             // processing the input field args
                             ++ validatedCount;
-                            (validatedCount == inputCount) ? addLoc() : null;
+                            (validatedCount == inputCount) ? _this.viewProceed() : null;
 
                           } else {
                             var err = {};
                             Analytics.locationError(_id.toUpperCase());
                             err[_id + '_error'] = "we're only able to map greenlanes in toronto. please try again";
+                            _this.setState({"validating": false});
                             _this.setState(err)
                             // alert('No results found for ' + _id);
                           }
@@ -259,6 +253,7 @@ var Endpoints = React.createClass({
                             var err = {};
                             Analytics.locationError(_id.toUpperCase());
                             err[_id + '_error'] = "we're only able to map greenlanes in toronto. please try again";
+                            _this.setState({"validating": false});
                             _this.setState(err)
                         }
                 })
@@ -268,6 +263,10 @@ var Endpoints = React.createClass({
 
     return false;
   },
+  viewProceed: function(){
+    addLoc();
+    this.setState({"validating": false});
+  },
   render: function() {
     return (
         <div className="distContainer row">
@@ -276,8 +275,13 @@ var Endpoints = React.createClass({
                 return reactComponent;
               })
             }
-          <button id='submitRoute' onClick={this.validate} tabIndex="3" className="btn-secondary col s9 offset-s1.5 m6 offset-m3">continue
-          </button>
+          {(this.state.validating) ? <div className="load-wrapp endpoints-view">
+              <div className="load-3 in-page">
+                      <div className="line"></div>
+                      <div className="line"></div>
+                      <div className="line"></div>
+                </div>
+          </div> : <button id='submitRoute' onClick={this.validate} tabIndex="3" className="btn-secondary col s9 offset-s1.5 m6 offset-m3">continue</button>}
         </div>
     );
   }

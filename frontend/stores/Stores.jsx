@@ -34,6 +34,26 @@ var sessionState = {
 };
 
 
+// Classnames for the favorite button
+// Can be either go-to-route, favorite, or favorited.
+var parkViewBtnState = {
+  state: "go-to-route goToRoute",
+  index: null,
+  setState: function(_state, _index){
+    if (_state == "go-to-route"){
+      _state += " goToRoute";
+    }
+
+    if (_state == "favorited"){
+      this.index = _index;
+    }
+    else{
+      this.index = null;
+    }
+
+    this.state = _state;
+  }
+};
 
 /*
  * Toggling CSS classes based on whether
@@ -148,14 +168,12 @@ var backBtn = {
       activePage = null;
     }
     else if (popped && (popped =='parkview')){
-      $(".favorite, .favorited").hide();
-      $(".go-to-route").show();
       console.log("Popped Parkview!");
       // You went back to timeSel
       Analytics.virtualPage('Setup|Time','/setup/time');
       layout.directionsDeactivate();
       // Should go back to origin/destinatino setup.
-      $("#travelType").trigger('click');
+      $("#destSel").trigger('click');
     }
     if (this.states.length == 0){
       this.css = "hide"
@@ -186,6 +204,12 @@ var ScenicStore = assign({}, EventEmitter.prototype, {
   },
   getLayout: function(){
     return layout;
+  },
+  getParkViewBtnState: function(){
+    return parkViewBtnState.state;
+  },
+  getFavouritedIndex: function(){
+    return parkViewBtnState.index;
   },
   emitChange: function() {
     console.log("Change Emitted");
@@ -320,6 +344,10 @@ Dispatcher.register(function(payload) {
         break;
       case 'resetTimeout':
         sessionState.timedOut = false;
+        ScenicStore.emitChange();
+      case 'changeParkViewBtn':
+        var idx = (payload && payload.index) ? payload.index : null;
+        parkViewBtnState.setState(payload.state, idx);
         ScenicStore.emitChange();
         break;
       // add more cases for other actionTypes, like TODO_UPDATE, etc.

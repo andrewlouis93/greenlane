@@ -11,6 +11,14 @@ var ScenicActions = {
       actionType: 'test',
     });
   },
+  changeParkViewBtn: function(_state, _index){
+    // state should be one of: go-to-route, favorite, favorited
+    Dispatcher.dispatch({
+      actionType: 'changeParkViewBtn',
+      state: _state,
+      index: (_index) ? _index : null
+    });
+  },
   setTransitMode: function(_mode){
     Dispatcher.dispatch({
       actionType: 'setTransitMode',

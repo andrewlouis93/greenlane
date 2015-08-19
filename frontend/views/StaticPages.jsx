@@ -260,16 +260,16 @@ var PageController = React.createClass({
 		}
 
 
-		console.log(ScenicStore.getActivePage());
-		console.log(readCookie('authenticated'));
+		// console.log(ScenicStore.getActivePage());
+		// console.log(readCookie('authenticated'));
 		if ((ScenicStore.getActivePage() == 'favSection') && readCookie('authenticated')){
 			$.get("https://greenlane.io/auth/favourite-routes", {
 				authId: parseFloat(readCookie('authId')),
 				type: readCookie('type')
 			},
 			function(res, err){
-				console.log(res);
-				console.log(err);
+				// console.log(res);
+				// console.log(err);
 
 				this.setState({'saved': res});
 
