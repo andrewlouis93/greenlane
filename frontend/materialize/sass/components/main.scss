@@ -216,7 +216,7 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
   -moz-transform-style: preserve-3d;
   transform-style: preserve-3d;
   /* Where's this 1% of overflow coming from????? */
-  overflow: hidden;
+  // overflow: hidden;
 }
 
 /*

@@ -279,7 +279,7 @@ updateExpInfoHeight: function(){
                   {
                     legitFac.map(function(it,id){
                         var liClass = (id % 2 == 0) ? 'roboto-thick' : 'roboto-thick-red';
-                        return <li className={liClass}>{it}</li>
+                        return <li className="">{it}</li>
                     })
                    }
                 </ul> : <div className='zeroFacilitiesPadding'></div>
@@ -292,14 +292,14 @@ updateExpInfoHeight: function(){
                       return <div className="noParkImg"></div>
                     }
                     else{
+                      
+                      <h4>pictures taken here</h4>
                       // return <Instagram url='http://instagram.com/p/fA9uwTtkSN/' />
                       // https://api.instagram.com/publicapi/oembed/?url=http://instagram.com/p/fA9uwTtkSN/
                       var divStyle = {
                         backgroundImage: 'url(' + it + ')'
                       };
                       return <div style={divStyle} href="#"  data-featherlight={it} className="square"></div>
-                      
-
 
 
                     }
