@@ -9,7 +9,7 @@ var RouteComponent = React.createClass({
   render: function() {
     return (
       <svg version="1.1" id="routeSmall" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width='100%' height="100%"
-         viewBox="0 0 302.9 327.2">
+         viewBox="0 -10 302.9 337.2">
       <g>
         <g>
           <path className="st29" d="M91.6,79.9h15.6c0.5,0,0.8,0.4,0.8,0.8v1.5c0,0.5-0.4,0.8-0.8,0.8H91.6c-0.5,0-0.8-0.4-0.8-0.8v-1.5

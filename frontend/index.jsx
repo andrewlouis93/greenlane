@@ -101,7 +101,7 @@ var Body = React.createClass({
 	},
   landingAnimation: function(){
     var small = "90%";
-    var tablet = "70%";
+    var tablet = "100%";
     var large = "100%";
     var yPos;
 

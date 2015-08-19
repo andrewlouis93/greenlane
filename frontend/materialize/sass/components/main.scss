@@ -1014,7 +1014,7 @@ $google_expando_transition: (
 }
 
 .card {
-  overflow:auto !important;
+  // overflow:auto !important;
 }
 
 // @media #{large}{
@@ -1633,8 +1633,8 @@ hr {
   }
 
   .smaller-social{
-    font-weight:200 !important;
-    font-size: 1.2em !important;
+    font-weight:300 !important;
+    font-size: 1em !important;
   }
   .smaller-cancel{
     font-size:1.2em !important;
@@ -1887,7 +1887,7 @@ hr {
     }
 
     to {
-      background-position: 0% 70%;
+      background-position: 0% 100%;
     }
   }
 
@@ -1897,7 +1897,7 @@ hr {
     }
 
     to {
-      background-position: 0% 70%;
+      background-position: 0% 100%;
     }
   }
 }
@@ -1941,10 +1941,10 @@ hr {
     background: url("/public/assets/splash-mobile.svg") no-repeat;
   }
   @media #{$medium-only}{
-    background: url("/public/assets/splash-mobile.svg") no-repeat;
+    background: url("/public/assets/splash-medium.svg") no-repeat;
   }
   @media #{$large-and-up}{
-    background: url("/public/assets/splash-medium.svg") no-repeat;
+    background: url("/public/assets/splash-large.svg") no-repeat;
     background-size:cover !important;
 
   }
@@ -2061,7 +2061,7 @@ hr {
   line-height: 45px;
   max-width: 80%;
   span{
-    font-size:2.4vh;
+    font-size:1.2rem;
   }
 }
 #gmaps-image{
