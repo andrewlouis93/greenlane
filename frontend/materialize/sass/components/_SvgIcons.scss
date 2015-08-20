@@ -155,12 +155,16 @@
 
 @-webkit-keyframes bounceList {
     0%, 25%, 50%, 75%, 100% {-webkit-transform: translateY(-16%);};
-    12.5%,37.5%,62.5%,87.5% {transform: translateY(-20%);}
+    37.5% {transform: translateY(-20%);};
+    62.5% {transform: translateY(-18.5%);};
+    87.5% {transform: translateY(-17%);}
 }
 
 @keyframes bounceList {
     0%, 25%, 50%, 75%, 100% {-webkit-transform: translateY(-16%);};
-    12.5%,37.5%,62.5%,87.5% {transform: translateY(-20%);}
+    37.5% {transform: translateY(-20%);};
+    62.5% {transform: translateY(-18.5%);};
+    87.5% {transform: translateY(-17%);}
 }
 
   .st1{fill:#FFFFFF;}
@@ -477,6 +481,15 @@
 }
 
 .noFavImg {
+  background-image: url("../img/svg/noFav.svg");
+  background-size: contain;
+  z-index: 50;
+  left: 0;
+  background-repeat: no-repeat;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
 
 }
 

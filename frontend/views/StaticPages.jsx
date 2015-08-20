@@ -171,7 +171,7 @@ var PageController = React.createClass({
 								<div key={key} className="favDelete"></div>
 							</Section>
 					//}
-				}) : <div className="noParkImg"></div>
+				}) : <div className="noFavImg"></div>
 			}
 				</div>
 			</div>
