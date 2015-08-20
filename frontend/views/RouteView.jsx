@@ -23,7 +23,7 @@ var RouteView = React.createClass({
           travelDest: null,
           travelOrig: null,
           turns: null,
-          directionsState: Classnames('card','col','l3','m12','s12',ScenicStore.getLayout().directions),
+          directionsState: Classnames('card','col','l4','m12','s12',ScenicStore.getLayout().directions),
           url: null,
           parkViewBtnState: Classnames(ScenicStore.getParkViewBtnState())
         };
