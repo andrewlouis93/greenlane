@@ -743,16 +743,18 @@ var Navigate = {
 
         var midPoint = new google.maps.LatLng ((A.lat()+B.lat())/2,(A.lng()+B.lng())/2)
         var boundingRadius = google.maps.geometry.spherical.computeDistanceBetween(A,midPoint);
-
+        console.log('bounding raiuds', boundingRadius);
         function pointInCircle(longitude,latitude){
           var point = new google.maps.LatLng (latitude,longitude);
-          return (google.maps.geometry.spherical.computeDistanceBetween(point, midPoint) <= boundingRadius)
+          console.log('distance between ', google.maps.geometry.spherical.computeDistanceBetween(point, midPoint));
+
+          return (google.maps.geometry.spherical.computeDistanceBetween(point, midPoint) <= (boundingRadius + 500))
         }
 
         // Re-order, check for bounding box.
         var reParks = [], reFac = [], rePic = [], reRoute = [];
 
-        for (let i = 0; i < optimal_order.length; i++){
+        for (var i = 0; i < optimal_order.length; i++){
           let inBbox = pointInCircle(it.scenic_route[optimal_order[i]][0],it.scenic_route[optimal_order[i]][1]);
           if (ScenicStore.getSessionState().loop){
             inBbox = true; // only care about the radius for A->B routes!
@@ -771,7 +773,7 @@ var Navigate = {
               pictures: it.pictures[ optimal_order[i] ],
               scenic_route: it.scenic_route[ optimal_order[i] ]
             };
-            poppedRoutes[i].push(popped);
+            poppedRoutes[id].push(popped);
           }
         }
         console.log("OPTIMAL_ORDER", optimal_order);
