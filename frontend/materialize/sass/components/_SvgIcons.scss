@@ -490,11 +490,11 @@
   top: 0;
   bottom: 0;
   margin: auto;
-  width: 25vw;
-  height: 25vw;
+  width: 50vh;
+  height: 50vh;
   @media #{$large-and-up}{
-    width: 35vh;
-    height: 35vh;
+    width: 25vw;
+    height: 25vw;
   }
   display: block;
   position: absolute;
