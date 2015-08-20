@@ -216,7 +216,7 @@ div[class*="tt-dataset-"] .tt-suggestion:not(:first-child){
   -moz-transform-style: preserve-3d;
   transform-style: preserve-3d;
   /* Where's this 1% of overflow coming from????? */
-  // overflow: hidden;
+  overflow: hidden;
 }
 
 /*
@@ -1127,10 +1127,21 @@ $google_expando_transition: (
     background-size:cover;
 }
 
- .featherlight .featherlight-content {
+.featherlight-content {
   margin:0 !important;
   padding:0 !important;
   border-bottom:0 !important;
+  background-position:center center;
+  background-repeat:no-repeat;
+  background-size:cover;
+}
+
+.featherlight {
+  margin:0 !important;
+  padding:0 !important;
+  border-bottom:0 !important;
+  background-position:center center;
+  background-repeat:no-repeat;
 }
 
 hr {
@@ -1189,15 +1200,13 @@ hr {
 
 .absolute-center{
   // nuka-carousel attempts to put top 50% on it.
-  top: 0 !important;
-  bottom: 0;
-  margin-top: auto;
-  margin-bottom: auto;
+  top: 50% !important;
 }
 
 .slider-decorator-0 {
   @extend .absolute-center;
-
+  left:0 !important;
+  transform:translateY(-50%) rotate(90deg) !important;
   background-color:#fff;
   background-image:url('../img/svg/downChev.svg');
   background-size:100% 100%;
@@ -1212,7 +1221,8 @@ hr {
 
 .slider-decorator-1 {
   @extend .absolute-center;
-
+  right:0 !important;
+  transform:translateY(-50%) rotate(-90deg) !important;
   background-color:#fff;
   background-image:url('../img/svg/downChev.svg');
   background-size:100% 100%;

@@ -31,11 +31,6 @@ var Decorators = [{
     }
   }),
   position: 'CenterLeft',
-  style: {
-    WebkitTransform: 'rotate(90deg)',
-    msTransform: 'rotate(90deg)',
-    transform: 'rotate(90deg)'
-  }
 },
 {
   component: React.createClass({
@@ -49,11 +44,7 @@ var Decorators = [{
     }
   }),
   position: 'CenterRight',
-  style: {
-    WebkitTransform: 'rotate(-90deg)',
-    msTransform: 'rotate(-90deg)',
-    transform: 'rotate(-90deg)'
-  }
+
 }];
 
 var ParkCarousel = React.createClass({
@@ -292,19 +283,8 @@ updateExpInfoHeight: function(){
                       return <div className="noParkImg"></div>
                     }
                     else{
-
                       <h4>pictures taken here</h4>
-                      // return <Instagram url='http://instagram.com/p/fA9uwTtkSN/' />
-                      // https://api.instagram.com/publicapi/oembed/?url=http://instagram.com/p/fA9uwTtkSN/
-                      function imageExists(url, callback) {
-                        var img = new Image();
-                        img.onload = function() { callback(true); };
-                        img.onerror = function() { callback(false); };
-                        img.src = url;
-                      }
-
                       // Sample usage
-
                       var divStyle = {
                         backgroundImage: 'url(' + it + ')'
                       };

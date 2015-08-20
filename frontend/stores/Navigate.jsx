@@ -977,6 +977,11 @@ $(document).on('click', '.go-to-route', function() {
     duration: 0.5
   })
   window.map.invalidateSize();
+  // $('#turnList').addClass('bounceList').delay(2000).queue(function(next){
+  //   $(this).removeClass('bounceList');
+  //   next();
+  // });
+
 })
 $(document).on('click', '.routeChoice', function() {
 
