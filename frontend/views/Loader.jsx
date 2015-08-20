@@ -5,13 +5,14 @@ var Actions = require('../stores/Actions.jsx');
 var Loader = React.createClass({
 	getInitialState: function(){
 		return {
-			quotesId: Math.round(Math.random()*(this.loadText().length-1)),
+			quotesId: Math.round(Math.random()*(this.loadText().length-2)),
 			css: "hide",
 			timedOut: false
 		}
 	},
 	componentDidMount: function(){
 		ScenicStore.addChangeListener(this.updateLoader);
+		ScenicStore.addWaitListener(this.showWaitCopy);
 	},
 	updateLoader: function(){
 		// check for a state update.
@@ -22,7 +23,7 @@ var Loader = React.createClass({
 
 		if (old_css != _css.css){
 			var newIndex;
-			if ( (this.state.quotesId+1) == this.loadText().length)
+			if ( (this.state.quotesId+1) >= (this.loadText().length-1)  )
 				newIndex = 0;
 			else
 				newIndex = ++this.state.quotesId;
@@ -35,6 +36,10 @@ var Loader = React.createClass({
 		console.log("THIS STATE", this.state.timedOut);
 		this.setState({timedOut: ScenicStore.getSessionState().timedOut});
 	},
+	showWaitCopy: function(){
+		// force show the last element in loadText
+		this.setState({quotesId: (this.loadText().length-1) });
+	},
 	loadText: function() {
 		var quotes= new Array();
 		quotes.push("mapping your greenlane");
@@ -42,6 +47,7 @@ var Loader = React.createClass({
 		quotes.push("turning over a new leaf");
 		quotes.push("smelling the roses");
 		quotes.push("mingling with mother nature");
+		quotes.push("you've been waiting a minute tho");
 		return quotes;
 	},
 	resetTimeout: function(){
@@ -76,6 +82,7 @@ var Loader = React.createClass({
 	},
 	componentWillUnmount: function(){
 		ScenicStore.removeChangeListener(this.updateLoader)
+		ScenicStore.removeWaitListener(this.showWaitCopy)
 	}
 });
 module.exports = Loader;

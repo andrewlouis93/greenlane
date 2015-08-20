@@ -179,7 +179,7 @@ getInitialState: function(){
     parkName: (ScenicStore.getSessionState().activePath) ? ScenicStore.getSessionState().activePath.info.parks : [],
     parkFac: (ScenicStore.getSessionState().activePath) ? ScenicStore.getSessionState().activePath.info.facilities : [],
     parkPic: (ScenicStore.getSessionState().activePath) ? ScenicStore.getSessionState().activePath.info.pictures : []
-  }; 
+  };
   return parkList;
  },
 updateExpInfoHeight: function(){
@@ -292,15 +292,23 @@ updateExpInfoHeight: function(){
                       return <div className="noParkImg"></div>
                     }
                     else{
-                      
+
                       <h4>pictures taken here</h4>
                       // return <Instagram url='http://instagram.com/p/fA9uwTtkSN/' />
                       // https://api.instagram.com/publicapi/oembed/?url=http://instagram.com/p/fA9uwTtkSN/
+                      function imageExists(url, callback) {
+                        var img = new Image();
+                        img.onload = function() { callback(true); };
+                        img.onerror = function() { callback(false); };
+                        img.src = url;
+                      }
+
+                      // Sample usage
+
                       var divStyle = {
                         backgroundImage: 'url(' + it + ')'
                       };
                       return <div style={divStyle} href="#"  data-featherlight={it} className="square"></div>
-
 
                     }
                   })

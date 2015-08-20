@@ -115,10 +115,10 @@ var RouteView = React.createClass({
 
       // check for loop or route.
       if (  (ScenicStore.getSessionState().origin && ScenicStore.getSessionState().origin.latLng && ScenicStore.getSessionState().destination && ScenicStore.getSessionState().destination.latLng)||(ScenicStore.getSessionState().origin && ScenicStore.getSessionState().origin.latLng)  ){
-        if (ScenicStore.getSessionState().loop){
+        if (ScenicStore.getSessionState().loop && ScenicStore.getSessionState().origin && ScenicStore.getSessionState().origin.latLng){
           url+="/" + ScenicStore.getSessionState().origin.latLng.lat+","+ScenicStore.getSessionState().origin.latLng.lng;
         }
-        else{
+        else if (ScenicStore.getSessionState().destination && ScenicStore.getSessionState().destination.latLng){
           url+="/" + ScenicStore.getSessionState().destination.latLng.lat+","+ScenicStore.getSessionState().destination.latLng.lng;
         }
       }

@@ -7,6 +7,7 @@ var assign = require('object-assign');
 
 var CHANGE_EVENT = 'change';
 var ERROR_EVENT = 'error';
+var WAIT_EVENT = 'wait';
 
 var dataText = "Test A";
 
@@ -219,6 +220,10 @@ var ScenicStore = assign({}, EventEmitter.prototype, {
     console.log("Error Emitted");
     this.emit(ERROR_EVENT);
   },
+  emitWait: function(){
+    console.log("Wait Emitted");
+    this.emit(WAIT_EVENT);
+  },
   /**
    * @param {function} callback
    */
@@ -236,6 +241,12 @@ var ScenicStore = assign({}, EventEmitter.prototype, {
   },
   removeErrorListener: function(callback){
     this.removeListener(ERROR_EVENT, callback);
+  },
+  addWaitListener: function(callback){
+    this.on(WAIT_EVENT, callback);
+  },
+  removeWaitListener: function(callback){
+    this.removeListener(WAIT_EVENT, callback);
   }
 });
 
@@ -351,6 +362,8 @@ Dispatcher.register(function(payload) {
         ScenicStore.emitChange();
         break;
       // add more cases for other actionTypes, like TODO_UPDATE, etc.
+      case 'showWaitCopy':
+        ScenicStore.emitWait();
     }
     return true; // No errors. Needed by promise in Dispatcher.
 });

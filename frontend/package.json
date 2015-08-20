@@ -11,6 +11,7 @@
     "cssnano": "^2.1.1",
     "deep-equal": "^1.0.0",
     "flux": "^2.0.3",
+    "grunt-contrib-uglify": "^0.9.1",
     "grunt-postcss": "^0.5.5",
     "nuka-carousel": "0.0.17",
     "object-assign": "^3.0.0",

@@ -678,10 +678,18 @@ var Navigate = {
     // Get green waypoints, before you request for directions.
     Actions.isLoading(true);
 
+    // var tenSecondWait = true;
+    var tenSecondWait = false; // set to true if you want this to work...
+    setTimeout(function(){
+      if (tenSecondWait){
+          Actions.showWaitCopy();
+      }
+    },5000);
+
     $.get(Navigate.buildGreenifyURL(), function(results, err) {
       // console.log("Hit Greenify API", results);
       // console.log('catching error here', err);
-
+      tenSecondWait = false;
       // Do the click handler stuff here...
       results.results = results.results.slice(-3);
 
@@ -777,7 +785,6 @@ var Navigate = {
           }
         }
         console.log("OPTIMAL_ORDER", optimal_order);
-
         // Assign corrected values.
         it.parks = reParks;
         it.facilities = reFac;
@@ -790,8 +797,55 @@ var Navigate = {
       // if (greenpoints.length > 1) re-arrange some greenpoints
       // else add popped greenpoint.
       window.poppedRoutes = poppedRoutes;
+      // function hasIdenticalRoutes(){
+      //     var possibleDuplicates = [];
+      //     var previousRouteGreenpointCount = 0;
+      //     greenifyResults.map(function(it,id){
+      //       if (previousRouteGreenpointCount == it.scenic_route.length){
+      //         if (possibleDuplicates.indexOf(id) == -1){
+      //           possibleDuplicates.push( id );
+      //         }
+      //         if (possibleDuplicates.indexOf(id-1) == -1){
+      //           possibleDuplicates.push( id );
+      //         }
+      //         previousRouteGreenpointCount = it.scenic_route.length;
+      //       }
+      //     });
+      //
+      //     if (possibleDuplicates.length){
+      //         var identicalRouteGreenspaceCount = greenifyResults[possibleDuplicates[0]].scenic_route.length;
+      //
+      //         var mapResult = possibleDuplicates.map(function(dupCandidate){
+      //           return (possibleDuplicate.map(function(altDupCandidate){
+      //               if (dupCandidate != altDupCandidate){
+      //                 // Check if scenic_route is the same.
+      //                 var dupCandidateGreenspaces = greenifyResults[dupCandidate].scenic_route;
+      //                 var altDupCandidateGreenspaces = greenifyResults[altDupCandidate].scenic_route;
+      //                 for (var i = 0; i < identicalRouteGreenspaceCount; i++){
+      //                     if ((dupCandidateGreenspaces[0][1] != altDupCandidateGreenspaces[0][1]) || (dupCandidateGreenspaces[1][1] != altDupCandidateGreenspaces[1][1])){
+      //                       // not duplicate.
+      //                       console.log("no identical routes found! - 1");
+      //                       return false;
+      //                     }
+      //                 }
+      //                 console.log("found identical routes!");
+      //                 return true;
+      //               }
+      //           }))
+      //         })
+      //
+      //         console.log("mapResult", mapResult);
+      //         return mapResult;
+      //
+      //     }
+      //     else{
+      //       // no identical routes!
+      //       console.log("no identical routes - 2");
+      //       return false;
+      //     }
+      // }
 
-
+      // hasIdenticalRoutes();
 
       // Formatting API Results for convenience
       // 1 - Cleaning out duplicates
@@ -947,7 +1001,7 @@ $(document).on('click', '.routeChoice', function() {
   });
 
   function showError() {
-    alert("User declined");
+    alert("Activate your location services to use this feature");
     Actions.deactivateError();
   }
   if (navigator.geolocation) {

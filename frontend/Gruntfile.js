@@ -11,7 +11,19 @@ module.exports = function(grunt) {
 			  }
 			}
 		},
-	    connect: {
+		uglify: {
+	    options: {
+	      compress: {
+	        drop_console: true
+	      }
+	    },
+	    dist: {
+	      files: {
+	        'bundle.min.js': ['bundle.js']
+	      }
+	    }
+	  },
+	  connect: {
 	        server:{
 	        	options: {
 	            	port: 3001,
@@ -50,6 +62,7 @@ module.exports = function(grunt) {
 
 	// Required packages
 	grunt.loadNpmTasks('grunt-browserify');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-connect');
@@ -59,6 +72,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('default',[
 									'connect:server',
 									'browserify',
+									'uglify',
 									'sass',
 									'autoprefixer',
 									'watch'

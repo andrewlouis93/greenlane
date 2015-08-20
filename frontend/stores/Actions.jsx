@@ -136,6 +136,11 @@ var ScenicActions = {
       actionType:'timeOut'
     })
   },
+  showWaitCopy: function(){
+    Dispatcher.dispatch({
+      actionType: 'showWaitCopy'
+    })
+  },
   resetTimeout: function(){
     Dispatcher.dispatch({
       actionType:'resetTimeout'
