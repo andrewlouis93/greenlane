@@ -490,8 +490,16 @@
   top: 0;
   bottom: 0;
   margin: auto;
-
+  width: 50vh;
+  height: 50vh;
+  @media #{$large-and-up}{
+    width: 25vw;
+    height: 25vw;
+  }
+  display: block;
+  position: absolute;
 }
+
 
 .zeroFacilitiesPadding{
   padding-top:20%;
