@@ -746,7 +746,7 @@ var Navigate = {
 
         function pointInCircle(longitude,latitude){
           var point = new google.maps.LatLng (latitude,longitude);
-          return (google.maps.geometry.spherical.computeDistanceBetween(point, window.midPoint) <= boundingRadius)
+          return (google.maps.geometry.spherical.computeDistanceBetween(point, midPoint) <= boundingRadius)
         }
             
         // Re-order, check for bounding box.
