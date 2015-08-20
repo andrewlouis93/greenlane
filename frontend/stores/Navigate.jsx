@@ -690,8 +690,8 @@ var Navigate = {
       var greenifyResults = results.results;
 
       var poppedRoutes = {
-        0:[], 
-        1:[], 
+        0:[],
+        1:[],
         2:[]
       };
 
@@ -724,7 +724,7 @@ var Navigate = {
           }
           optimal_order.push(current_idx);
         }
-        
+
         /* Setting up for second bounding box check. */
         var A = new google.maps.LatLng(
                     ScenicStore.getSessionState().origin.latLng.lat,
@@ -738,20 +738,20 @@ var Navigate = {
           B = new google.maps.LatLng(
                       ScenicStore.getSessionState().destination.latLng.lat,
                       ScenicStore.getSessionState().destination.latLng.lng
-          );              
+          );
         }
 
-        var midPoint = new google.maps.LatLng ((A.lat()+B.lat())/2,(A.lng()+B.lng())/2) 
+        var midPoint = new google.maps.LatLng ((A.lat()+B.lat())/2,(A.lng()+B.lng())/2)
         var boundingRadius = google.maps.geometry.spherical.computeDistanceBetween(A,midPoint);
 
         function pointInCircle(longitude,latitude){
           var point = new google.maps.LatLng (latitude,longitude);
           return (google.maps.geometry.spherical.computeDistanceBetween(point, midPoint) <= boundingRadius)
         }
-            
+
         // Re-order, check for bounding box.
         var reParks = [], reFac = [], rePic = [], reRoute = [];
-        
+
         for (let i = 0; i < optimal_order.length; i++){
           let inBbox = pointInCircle(it.scenic_route[optimal_order[i]][0],it.scenic_route[optimal_order[i]][1]);
           if (ScenicStore.getSessionState().loop){
@@ -761,7 +761,7 @@ var Navigate = {
             reParks.push( it.parks[ optimal_order[i] ] );
             reFac.push( it.facilities[ optimal_order[i] ] );
             rePic.push( it.pictures[ optimal_order[i] ] );
-            reRoute.push( it.scenic_route[ optimal_order[i] ] );            
+            reRoute.push( it.scenic_route[ optimal_order[i] ] );
           }
           else{
             // not in bbox, and getting popped!
@@ -771,7 +771,6 @@ var Navigate = {
               pictures: it.pictures[ optimal_order[i] ],
               scenic_route: it.scenic_route[ optimal_order[i] ]
             };
-            window.hello = poppedRoutes;
             poppedRoutes[i].push(popped);
           }
         }
@@ -784,13 +783,13 @@ var Navigate = {
         it.scenic_route = reRoute;
       })
 
-      // 0.5 - 
+      // 0.5 -
       // check if the routes are the same, and if they are:
       // if (greenpoints.length > 1) re-arrange some greenpoints
       // else add popped greenpoint.
       window.poppedRoutes = poppedRoutes;
-     
-      
+
+
 
       // Formatting API Results for convenience
       // 1 - Cleaning out duplicates
