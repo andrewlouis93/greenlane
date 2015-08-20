@@ -31,11 +31,6 @@ var Decorators = [{
     }
   }),
   position: 'CenterLeft',
-  style: {
-    WebkitTransform: 'rotate(90deg)',
-    msTransform: 'rotate(90deg)',
-    transform: 'rotate(90deg)'
-  }
 },
 {
   component: React.createClass({
@@ -49,11 +44,7 @@ var Decorators = [{
     }
   }),
   position: 'CenterRight',
-  style: {
-    WebkitTransform: 'rotate(-90deg)',
-    msTransform: 'rotate(-90deg)',
-    transform: 'rotate(-90deg)'
-  }
+
 }];
 
 var ParkCarousel = React.createClass({

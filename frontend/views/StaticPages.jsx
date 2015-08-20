@@ -146,14 +146,18 @@ var PageController = React.createClass({
 		};
 	},
 
-	favSection: function(){
+	favSection: function(it){
     console.log(this.state.saved);
 		return (
 			<div className="viewContainer">
 			<div className="staticTitle">favourited routes</div>
 			<div className='favouritedRoute'>
 			{
+				(this.state.saved.length) ? 
 			    this.state.saved.map(function(route, key) {
+			    	// if (key == "NULL"){
+        //       		return <div className="noParkImg"></div>
+        //             } else {
 			        var destFav = 'to: ' + route.destinationName;
 			        var origFav = 'from: '  + route.originName;
 			        var transitType = route.transit == 'cycling' ? <div><div className='bikeGrey'></div>{destFav}{origFav}</div>: false || route.transit == 'walking' ? <div><div className='walkGrey'></div>{destFav}{origFav}</div> : false;
@@ -166,8 +170,8 @@ var PageController = React.createClass({
 								<div onClick={Navigate.generateSingleton.bind(this, route)} className="favGo goToRoute"></div>
 								<div key={key} className="favDelete"></div>
 							</Section>
-
-				})
+					//}
+				}) : <div className="noParkImg"></div>
 			}
 				</div>
 			</div>

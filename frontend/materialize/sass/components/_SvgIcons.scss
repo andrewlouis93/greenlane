@@ -113,7 +113,6 @@
                                   transform: opacity(1)};
     50% {transform: translateY(-15px);}
 }
-
 /*
  * Adding the animation to our element
 */
@@ -140,6 +139,28 @@
     animation-fill-mode: both;
     -webkit-animation-name: bounceOne;
     animation-name: bounceOne;
+}
+
+.bounceList {
+    display:block !important;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-timing-function: ease-in-out; /* Chrome, Safari, Opera */
+    animation-timing-function: ease-in-out;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: bounceList;
+    animation-name: bounceList;
+}
+
+@-webkit-keyframes bounceList {
+    0%, 25%, 50%, 75%, 100% {-webkit-transform: translateY(-16%);};
+    12.5%,37.5%,62.5%,87.5% {transform: translateY(-20%);}
+}
+
+@keyframes bounceList {
+    0%, 25%, 50%, 75%, 100% {-webkit-transform: translateY(-16%);};
+    12.5%,37.5%,62.5%,87.5% {transform: translateY(-20%);}
 }
 
   .st1{fill:#FFFFFF;}
@@ -453,6 +474,10 @@
   top: 0;
   bottom: 0;
   margin: auto;
+}
+
+.noFavImg {
+
 }
 
 .zeroFacilitiesPadding{
