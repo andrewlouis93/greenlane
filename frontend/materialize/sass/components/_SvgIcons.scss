@@ -154,17 +154,17 @@
 }
 
 @-webkit-keyframes bounceList {
-  0%, 25%, 50%, 75%, 100% {-webkit-transform: translateY(calc(-9.5vh + 30px));};
-  37.5% {-webkit-transform: translateY(calc(- 9.5vh + 30px + 4%));};
-  62.5% {-webkit-transform: translateY(calc(- 9.5vh + 30px + 2.5%));};
-  87.5% {-webkit-transform: translateY(calc(- 9.5vh + 30px + 1%));}
+  0%, 25%, 50%, 75%, 100% {-webkit-transform: translateY(calc(-9.5vh - 35px));};
+  37.5% {-webkit-transform: translateY(calc(-9.5vh - 30px - 4%));};
+  62.5% {-webkit-transform: translateY(calc(-9.5vh - 30px - 2.5%));};
+  87.5% {-webkit-transform: translateY(calc(-9.5vh - 30px - 1%));}
 }
 
 @keyframes bounceList {
-    0%, 25%, 50%, 75%, 100% {transform: translateY(calc(-9.5vh + 30px));};
-    37.5% {transform: translateY(calc(- 9.5vh + 30px + 4%));};
-    62.5% {transform: translateY(calc(- 9.5vh + 30px + 2.5%));};
-    87.5% {transform: translateY(calc(- 9.5vh + 30px + 1%));}
+    0%, 25%, 50%, 75%, 100% {transform: translateY(calc(-9.5vh - 35px));};
+    37.5% {transform: translateY(calc(-9.5vh - 35px - 4%));};
+    62.5% {transform: translateY(calc(-9.5vh - 35px - 2.5%));};
+    87.5% {transform: translateY(calc(-9.5vh - 35px - 1%));}
 }
 
   .st1{fill:#FFFFFF;}
