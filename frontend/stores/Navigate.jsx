@@ -689,9 +689,13 @@ var Navigate = {
 
       var greenifyResults = results.results;
 
-      // 0 - Reverse everything.
+      var poppedRoutes = {
+        0:[],
+        1:[],
+        2:[]
+      };
 
-
+      // 0 - Optimize the waypoint order.
       greenifyResults.map(function(it, id){
 
         var optimal_order = [];
@@ -720,21 +724,74 @@ var Navigate = {
           }
           optimal_order.push(current_idx);
         }
-        
+
+        /* Setting up for second bounding box check. */
+        var A = new google.maps.LatLng(
+                    ScenicStore.getSessionState().origin.latLng.lat,
+                    ScenicStore.getSessionState().origin.latLng.lng
+        );
+        var B;
+        if (ScenicStore.getSessionState().loop){
+          B = A;
+        }
+        else{
+          B = new google.maps.LatLng(
+                      ScenicStore.getSessionState().destination.latLng.lat,
+                      ScenicStore.getSessionState().destination.latLng.lng
+          );
+        }
+
+        var midPoint = new google.maps.LatLng ((A.lat()+B.lat())/2,(A.lng()+B.lng())/2)
+        var boundingRadius = google.maps.geometry.spherical.computeDistanceBetween(A,midPoint);
+        console.log('bounding raiuds', boundingRadius);
+        function pointInCircle(longitude,latitude){
+          var point = new google.maps.LatLng (latitude,longitude);
+          console.log('distance between ', google.maps.geometry.spherical.computeDistanceBetween(point, midPoint));
+
+          return (google.maps.geometry.spherical.computeDistanceBetween(point, midPoint) <= (boundingRadius + 500))
+        }
+
+        // Re-order, check for bounding box.
         var reParks = [], reFac = [], rePic = [], reRoute = [];
+
         for (var i = 0; i < optimal_order.length; i++){
-          reParks.push( it.parks[ optimal_order[i] ] );
-          reFac.push( it.facilities[ optimal_order[i] ] );
-          rePic.push( it.pictures[ optimal_order[i] ] );
-          reRoute.push( it.scenic_route[ optimal_order[i] ] );
+          let inBbox = pointInCircle(it.scenic_route[optimal_order[i]][0],it.scenic_route[optimal_order[i]][1]);
+          if (ScenicStore.getSessionState().loop){
+            inBbox = true; // only care about the radius for A->B routes!
+          }
+          if (inBbox || (it.scenic_route.length === 1) ){
+            reParks.push( it.parks[ optimal_order[i] ] );
+            reFac.push( it.facilities[ optimal_order[i] ] );
+            rePic.push( it.pictures[ optimal_order[i] ] );
+            reRoute.push( it.scenic_route[ optimal_order[i] ] );
+          }
+          else{
+            // not in bbox, and getting popped!
+            var popped = {
+              parks: it.parks[ optimal_order[i] ],
+              facilities: it.facilities[ optimal_order[i] ],
+              pictures: it.pictures[ optimal_order[i] ],
+              scenic_route: it.scenic_route[ optimal_order[i] ]
+            };
+            poppedRoutes[id].push(popped);
+          }
         }
         console.log("OPTIMAL_ORDER", optimal_order);
+
+        // Assign corrected values.
         it.parks = reParks;
         it.facilities = reFac;
         it.pictures = rePic;
         it.scenic_route = reRoute;
-        
       })
+
+      // 0.5 -
+      // check if the routes are the same, and if they are:
+      // if (greenpoints.length > 1) re-arrange some greenpoints
+      // else add popped greenpoint.
+      window.poppedRoutes = poppedRoutes;
+
+
 
       // Formatting API Results for convenience
       // 1 - Cleaning out duplicates
