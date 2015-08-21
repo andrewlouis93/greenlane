@@ -473,7 +473,6 @@
 .noParkImg {
 
   @media #{$small-and-down} {
-    width: 80%;
     max-height: 70%;
   }
   @media #{$medium-only} {
