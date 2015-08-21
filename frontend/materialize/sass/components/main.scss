@@ -1160,6 +1160,7 @@ hr {
       font-family:Roboto-Slab;
       color:$secondary-color;
       font-weight:600 !important;
+      white-space: pre;
     }
 }
 @media #{$medium-and-down} {

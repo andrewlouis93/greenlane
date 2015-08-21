@@ -29,6 +29,8 @@ var ProfileNav = React.createClass({
         displayName: readCookie('displayName'),
         profileUrl: readCookie('profileUrl') ? readCookie('profileUrl') : '/public/assets/no-profile.svg', // returns false if no picture
       })
+
+      Analytics.authenticatedUser(readCookie('authId'),readCookie('type'));
     }else{
       this.setState({ auth : false });
     }
