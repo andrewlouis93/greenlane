@@ -5,11 +5,21 @@ var Analytics = {
    */
   locationError: function(_type) {
 // transform to uppercase
-    _type = _type.toUpperCase()
+    _type = _type.toUpperCase();
     dataLayer.push({
       'event': 'locationError',
       'locationErrorType': _type
     });
+  },
+  authenticatedUser: function(_uid, _type){
+    _type = _type.toUpperCase();
+    dataLayer.push({
+      'event': 'userLoginEvent',
+      'userLogin': _type
+    })
+    dataLayer.push({
+      'uidDataLayer': _uid
+    })
   },
   greenLevel: function(_level) {
     dataLayer.push({

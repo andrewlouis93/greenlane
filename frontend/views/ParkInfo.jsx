@@ -143,8 +143,9 @@ var ParkTab = React.createClass({
       // Use Observer - Listener so we do not DRY.
       console.log("CLOSING PARK INFO");
       // is directions open at this point?
-      $(".google-expando__icon").removeClass("active");
-      $(".google-expando__icon").next().removeClass("active");
+      if ($(".google-expando__card.active").length){
+        $(".parkBtn").trigger('click');
+      }
     },
     handleParkBtn: function(){
       console.log("Closing directions");
