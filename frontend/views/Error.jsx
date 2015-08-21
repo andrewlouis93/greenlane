@@ -102,7 +102,7 @@ var Error = React.createClass({
         		<span className="smaller-social">share on facebook</span>
         </a>
 				,
-				<a target="_blank" className='btn-twitter error-btn' href="https://twitter.com/intent/tweet?related=greenlaneTO&text=What%27s%20good%20Greenlane&hashtags=greenlane,toronto">
+				<a target="_blank" className='btn-twitter error-btn' href="https://twitter.com/intent/tweet?related=greenlaneTO&text=Take%20@GreenlaneTO%20and%20see%20Toronto%20differently.%20Start%20your%20journey%20at%20www.greenlane.io&hashtags=Greenlane,Toronto">
         		<i className="fa fa-twitter left fa-2x"></i>
         		<span className="smaller-social">share on twitter</span>
         </a>
