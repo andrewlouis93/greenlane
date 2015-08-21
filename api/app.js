@@ -65,14 +65,14 @@ app.post('/auth/delete-route', function(req, res) {
     	type: type
     },function(err, user){
     	if (err){
+        console.log('err', err);
     		res.send(err);
     	}
-    	console.log('err', err);
       user.routes.splice(routeId, 1);
     	user.markModified('routes');
     	user.save(function(){
     		console.log("Deleted Route!");
-    		res.send('200');
+    		res.send({state: 200});
     	});
     })
 });
@@ -90,8 +90,11 @@ app.get('/auth/favourite-routes', function(req, res){
     authId: authId,
     type: type
   }, function(err, user){
-    console.log('err', err);
-    console.log('user', user);
+    if (err)
+      console.log('err', err);
+    else
+      console.log('user', user);
+
     res.send(user.routes);
   })
 })
@@ -99,6 +102,6 @@ app.get('/auth/favourite-routes', function(req, res){
 // 	res.send(req.session.passport);
 // })
 
-app.listen(3000, function() {
-  console.log('Listening on port 3000...')
+app.listen(process.env.PORT || 3000, function() {
+  console.log('listening at http://%s:%s', server.address().address, server.address().port);
 })

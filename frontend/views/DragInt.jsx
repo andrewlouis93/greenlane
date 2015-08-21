@@ -5,17 +5,7 @@ var Navigate = require('../stores/Navigate.jsx');
 var Analytics = require('../stores/Analytics.jsx');
 
 function normalize(percentage) {
-  percentage = Math.floor(percentage * 100);
-  switch (percentage) {
-  case 0 :
-    return 1;
-  case 33 :
-    return 2;
-  case 66 :
-    return 3;
-  case 100 :
-    return 4;
-  }
+  return Math.floor((percentage * 100)/33)+1;  
 }
 
 var TimeDrag = React.createClass({
