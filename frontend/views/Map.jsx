@@ -26,7 +26,7 @@ var Map = React.createClass({
 	getInitialState: function(){
 		return{
 			layout: Classnames('col', this.props.layout),
-			logoStyle: Classnames('logo', ScenicStore.getLayout().logoState),
+			logoStyle: Classnames('logoBeta', ScenicStore.getLayout().logoState),
 			startButtonStyle: Classnames(
 									'col s4 m2 l2 map-start-btn btn-secondary',
 									'Begin_Setup',

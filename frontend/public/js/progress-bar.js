@@ -38,40 +38,40 @@
     };
 
 // $('.cloudOne').animate({width:"200px"},200)
-    function addBike(_Actions, clickEvent){
-
+    function addBike(_Actions){
       $('a').has('.svg-bike-switch').animate({padding:'0px'},200);
       $('a').has('.svg-bike-switch').animate({padding:"5%"},200);
-      $('.cloudTwoBike').delay(400).animate({left:"-15%",opacity:'1'},200);
-      $('.cloudOneBike').delay(400).animate({right:"-10%",opacity:'1'},200).delay(200).promise().then(
-        function() {
+      setTimeout( function(){
+      $('#cloudOneBike').attr('class','cloudLeft')
+      $('#cloudTwoBike').attr('class','cloudRight')},350);
+         setTimeout( function() {
           _Actions.setTransitMode('cycling');
-          dataLayer.push({
-          'transportationType': 'BIKE',
-          });
-          console.log("Mode set to cycling");
-          $(".progress-point.active").addClass('bikeProg').removeClass('walkProg');
-          $("#travelType").removeClass("disabled");
-          nextPage();
-        }
-      );
+            dataLayer.push({
+            'transportationType': 'BIKE',
+            });
+            console.log("Mode set to cycling");
+              $(".progress-point.active").addClass('bikeProg').removeClass('walkProg');
+              $("#travelType").removeClass("disabled");
+            nextPage();
+        },1200);
     };
 
     function addWalk(_Actions){
       $('a').has('.svg-walk-switch').animate({padding:'0px'},200);
       $('a').has('.svg-walk-switch').animate({padding:"5%"},200);
-      $('.cloudTwoWalk').delay(400).animate({left:"-15%",opacity:'1'},200);
-      $('.cloudOneWalk').delay(400).animate({right:"-10%",opacity:'1'},200).delay(200).promise().then(
-        function() {
+      setTimeout( function(){
+      $('#cloudOneWalk').attr('class','cloudLeft')
+      $('#cloudTwoWalk').attr('class','cloudRight')},350);
+        setTimeout( function() {
           _Actions.setTransitMode('walking');
           dataLayer.push({
             'transportationType': 'WALK',
           });
-          $(".progress-point.active").addClass('walkProg').removeClass('bikeProg');
-          $("#travelType").removeClass("disabled");
+          console.log("Mode set to walking");
+            $(".progress-point.active").addClass('walkProg').removeClass('bikeProg');
+            $("#travelType").removeClass("disabled");
           nextPage();
-        }
-      );
+      },1200);
     };
 
     function addRoute(_Actions){

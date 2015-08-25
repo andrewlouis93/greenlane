@@ -4,6 +4,8 @@ var Endpoints = require('./EndpointsView.jsx');
 var TimeDrag = require('./DragInt.jsx')
 var LoopComponent = require('./LoopComponent.jsx');
 var RouteComponent = require('./RouteComponent.jsx');
+var BikeComponent = require('./BikeComponent.jsx');
+var WalkComponent = require('./WalkComponent.jsx');
 var Analytics = require('../stores/Analytics.jsx');
 var ScenicStore = require('../stores/Stores.jsx');
 var Actions = require('../stores/Actions.jsx');
@@ -51,15 +53,15 @@ var SetupFlow = React.createClass({
           (
             <div className="optSwitch">
               <p className="introTag">i have</p>
-              <a className="bikeGroup">
-                <div onClick={addBike.bind(this, Actions)} className="svg svg-bike-switch"></div>
-                <div className="cloudOneBike"></div>
-                <div className="cloudTwoBike"></div>
+              <a>
+                <div onClick={addBike.bind(this, Actions)} className="svg svg-bike-switch">
+                  <BikeComponent/>
+                </div>
               </a>
               <a className="walkGroup">
-                <div onClick={addWalk.bind(this, Actions)} className="svg svg-walk-switch"></div>
-                <div className="cloudOneWalk"></div>
-                <div className="cloudTwoWalk"></div>
+                <div onClick={addWalk.bind(this, Actions)} className="svg svg-walk-switch">
+                  <WalkComponent/>
+                </div>
               </a>
             </div>
           ),

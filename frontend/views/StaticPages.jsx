@@ -121,7 +121,7 @@ var PrivacyAccordion = React.createClass({
 				<p>312 Adelaide Street W, 6th floor</p>
                 <p>Toronto, ON  M5V 1R2</p>
                 <p>Phone: 416.673.5275</p>
-                <p>criticalmass@criticalmass.com</p>
+                <p>greenlane@criticalmass.com</p>
 
         </Section>
         <Section title="We may link to other sites or apps or have third party services on our platforms we don’t control">

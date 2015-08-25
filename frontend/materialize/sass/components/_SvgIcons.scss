@@ -18,77 +18,8 @@
 }
 
 
-.cloud {
-  z-index:-1;
-  width:100%;
-  height:20%;
-  opacity:0;
-  position:absolute;
-  background-repeat:no-repeat;
-  background-size:contain;
-  background-position:center;
-}
+// LOOP AND ROUTE ANIMATION SVG STYLES //////////////////////////////////////////
 
-.cloudOneBike {
-  @extend .cloud;
-  @extend .hw-acceleration;
-  top:0;
-  right:-30%;
-  background-image:url('../img/svg/cloudOne.svg');
-}
-
-.cloudTwoBike {
-  @extend .cloud;
-  @extend .hw-acceleration;
-  top:50px;
-  left:-30%;
-  background-image:url('../img/svg/cloudTwo.svg');
-}
-
-.cloudOneWalk {
-  @extend .cloud;
-  @extend .hw-acceleration;
-  top:0;
-  right:-30%;
-  background-image:url('../img/svg/cloudOne.svg');
-}
-
-.cloudTwoWalk {
-  @extend .cloud;
-  @extend .hw-acceleration;
-  top:50px;
-  left:-30%;
-  background-image:url('../img/svg/cloudTwo.svg');
-}
-
-// .locIconMain {
-//   opacity:0 !important;
-//   position:absolute;
-//   background-image:url('../img/svg/locIcon.svg');
-//   background-size:100% 100%;
-//   background-position:50%;
-//   width:20%;
-//   height:20%;
-// }
-
-// .locIconStart {
-//   @extend .locIconMain;
-//   left:7%;
-// }
-
-// .locIconEnd {
-//   @extend .locIconMain;
-//   top:35%;
-//   right:7% !important;
-
-// }
-
-// .locIconLoop {
-//   @extend .locIconMain;
-//   left:0 !important;
-//   width:100%;
-
-// }
 
 @-webkit-keyframes bounceOne {
     0%, 20%, 40%, 60%, 80%, 100% {-webkit-transform: translateY(0);
@@ -113,9 +44,7 @@
                                   transform: opacity(1)};
     50% {transform: translateY(-15px);}
 }
-/*
- * Adding the animation to our element
-*/
+
 .bounceOne {
     opacity:1 !important;
     -webkit-animation-duration: 1s;
@@ -140,6 +69,79 @@
     -webkit-animation-name: bounceOne;
     animation-name: bounceOne;
 }
+
+// WALK AND BIKE ANIMATION SVG STYLES ////////////////////////////////
+
+#cloudOneBike {
+  -webkit-transform: translateX(-100px);
+}
+
+#cloudTwoBike {
+  -webkit-transform: translateX(100px);
+}
+
+
+#cloudOneWalk {
+  -webkit-transform: translateX(-100px);
+}
+
+#cloudTwoWalk {
+  -webkit-transform: translateX(100px);
+}
+
+@-webkit-keyframes cloudLeft {
+    100% {-webkit-transform: translateX(0);
+          -webkit-transition: opacity(1);};
+
+    0% {-webkit-transform: translateX(-100px);
+        -webkit-transition: opacity(0);}
+}
+
+@keyframes cloudLeft {
+   100% {transform: translateX(0);
+         transition: opacity(1)};
+    0% {transform: translateX(-100px);
+        transition: opacity(0);}
+}
+
+@-webkit-keyframes cloudRight {
+  100% {-webkit-transform: translateX(0);
+        opacity:1;};
+    0% {-webkit-transform: translateX(100px);
+        opacity:0;}
+}
+
+@keyframes cloudRight {
+  100% {transform: translateX(0);
+         opacity:1};
+    0% {transform: translateX(100px);
+        opacity:0;}
+}
+
+.cloudLeft {
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+    -webkit-animation-timing-function: ease-in-out; /* Chrome, Safari, Opera */
+    animation-timing-function: ease-in-out;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: cloudLeft;
+    animation-name: cloudLeft;
+}
+
+.cloudRight {
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+    -webkit-animation-timing-function: ease-in-out; /* Chrome, Safari, Opera */
+    animation-timing-function: ease-in-out;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: cloudRight;
+    animation-name: cloudRight;
+}
+
+
+/// ANIMATING the BOUNCE TURN LIST ///////////////////////////////////
 
 .bounceList {
     display:block !important;
@@ -186,26 +188,8 @@
   }
 }
 
-  .st1{fill:#FFFFFF;}
-  .st4{fill:#2AD19D;}
-  .st5{fill:#F46B83;}
-  .st6{fill:#17916A;}
-  .st13{fill:#A17644;}
-  .st14{fill:#79E2BC;}
-  .st29{fill:#D1D3D4;}
-  .st30{fill:#16A457;}
-  .st31{fill:#929496;}
+// LOOP AND ROUTE STYLES //////////////////////////////////////////
 
-
-.svg-bike-switch {
-  @extend .hw-acceleration;
-  background-image:url('../img/svg/bike.svg');
-}
-
-.svg-walk-switch {
-  @extend .hw-acceleration;
-  background-image:url('../img/svg/walk.svg');
-}
 
 .routeBtn {
   margin:0 auto;
@@ -223,6 +207,84 @@
 .loopBtn {
   @extend .hw-acceleration;
 }
+
+
+  .st1{fill:#FFFFFF;}
+  .st4{fill:#2AD19D;}
+  .st5{fill:#F46B83;}
+  .st6{fill:#17916A;}
+  .st13{fill:#A17644;}
+  .st14{fill:#79E2BC;}
+  .st29{fill:#D1D3D4;}
+  .st30{fill:#16A457;}
+  .st31{fill:#929496;}
+
+
+//  BIKE AND WALK STYLES /////////////////////////////////////////////////////////
+
+.svg-bike-switch {
+  @extend .hw-acceleration;
+}
+
+.svg-walk-switch {
+  @extend .hw-acceleration;
+}
+
+  .st0-bike{fill:#A4EEFF;}
+  .st1-bike{fill:#AA4660;}
+  .st2-bike{fill:#EE6B82;}
+  .st3-bike{fill:#FFFFFF;}
+  .st4-bike{fill:#17916A;}
+  .st5-bike{fill:#2AD19D;}
+  .st6-bike{fill:#C5AE75;}
+  .st7-bike{fill:none;stroke:#A07644;stroke-width:0.8094;stroke-miterlimit:10;}
+  .st8-bike{fill:#79E2BC;}
+  .st9-bike{fill:#34B188;}
+  .st10-bike{fill:#FAEB5F;}
+  .st11-bike{fill:#FBE39A;}
+  .st12-bike{fill:#E2CC89;}
+  .st13-bike{fill:#D8BF80;}
+  .st14-bike{fill:none;stroke:#636466;stroke-width:2.582;stroke-miterlimit:10;}
+  .st15-bike{fill:none;stroke:#EE6B82;stroke-width:2.1947;stroke-linejoin:round;stroke-miterlimit:10;}
+  .st16-bike{fill:none;stroke:#EE6B82;stroke-width:2.1947;stroke-linecap:round;stroke-miterlimit:10;}
+  .st17-bike{fill:#CB486A;}
+  .st18-bike{fill:none;stroke:#CE5B79;stroke-width:1.2106;stroke-linecap:round;stroke-miterlimit:10;}
+  .st19-bike{fill:#636466;}
+  .st20-bike{fill:#FFFFFF;stroke:#636466;stroke-width:1.7451;stroke-linecap:round;stroke-miterlimit:10;}
+  .st21-bike{fill:#929497;}
+  .st22-bike{fill:#A07644;}
+  .st23-bike{fill:#33B087;}
+
+  .st0-walk{fill:#A4EEFF;}
+  .st1-walk{fill:#AA4660;}
+  .st2-walk{fill:#EE6B82;}
+  .st3-walk{fill:#FFFFFF;}
+  .st4-walk{fill:#17916A;}
+  .st5-walk{fill:#2AD19D;}
+  .st6-walk{fill:#C5AE75;}
+  .st7-walk{fill:none;stroke:#A07644;stroke-width:0.8094;stroke-miterlimit:10;}
+  .st8-walk{fill:#79E2BC;}
+  .st9-walk{fill:#34B188;}
+  .st10-walk{fill:#FAEB5F;}
+  .st11-walk{fill:#FBE39A;}
+  .st12-walk{fill:#E2CC89;}
+  .st13-walk{fill:#D8BF80;}
+  .st14-walk{fill:none;stroke:#636466;stroke-width:2.582;stroke-miterlimit:10;}
+  .st15-walk{fill:none;stroke:#EE6B82;stroke-width:2.1947;stroke-linejoin:round;stroke-miterlimit:10;}
+  .st16-walk{fill:none;stroke:#EE6B82;stroke-width:2.1947;stroke-linecap:round;stroke-miterlimit:10;}
+  .st17-walk{fill:#CB486A;}
+  .st18-walk{fill:none;stroke:#CE5B79;stroke-width:1.2106;stroke-linecap:round;stroke-miterlimit:10;}
+  .st19-walk{fill:#636466;}
+  .st20-walk{fill:#FFFFFF;stroke:#636466;stroke-width:1.7451;stroke-linecap:round;stroke-miterlimit:10;}
+  .st21-walk{fill:#929497;}
+  .st22-walk{fill:#A07644;}
+  .st23-walk{fill:#33B087;}
+  .st25-walk{fill:#E6CFB7;}
+  .st26-walk{fill:#EC6D82;}
+  .st27-walk{fill:#5ABAB9;}
+  .st28-walk{fill:#DEDEDD;}
+  .st29-walk{opacity:0.5;}
+ 
 
 .hamburger {
   background-image:url('../img/svg/hamburger.svg');
@@ -465,6 +527,20 @@
   height:100px;
   position:relative;
   background-image:url('../img/svg/logo.svg');
+  background-size:100% 100%;
+  background-position:50%;
+  z-index:50;
+}
+
+.logoBeta {
+  left:0;
+  right:0;
+  margin:auto;
+  margin-top:5%;
+  width:70%;
+  height:100px;
+  position:relative;
+  background-image:url('../img/svg/GreenlaneBeta.svg');
   background-size:100% 100%;
   background-position:50%;
   z-index:50;
