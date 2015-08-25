@@ -536,6 +536,9 @@
 
 .imgGrid{
   position: relative;
+  .square{
+    cursor: pointer;
+  }
 }
 
 .restart {
