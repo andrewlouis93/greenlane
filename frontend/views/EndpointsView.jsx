@@ -205,6 +205,7 @@ var Endpoints = React.createClass({
         if (!this.value){
           var err = {};
           err[this.id + '_error'] = this.id + ' must be filled';
+          _this.setState({"validating": false});
           _this.setState(err)
         }
         else{

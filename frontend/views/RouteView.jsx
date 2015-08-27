@@ -261,7 +261,7 @@ var RouteView = React.createClass({
                      travelDist: (ScenicStore.getSessionState().activePath) ? ScenicStore.getSessionState().activePath.formatted.distance : null,
                      travelDest: ScenicStore.getSessionState().destinationName,
                      travelOrig: ScenicStore.getSessionState().originName,
-                     directionsState: Classnames('card','col','l3','m12','s12',ScenicStore.getLayout().directions)
+                     directionsState: Classnames('card','col','l4','m12','s12',ScenicStore.getLayout().directions)
                   });
 
     if (this.state.list != oldList)

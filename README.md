@@ -10,3 +10,6 @@
 - In the **api** directory, run: `node app.js`
 - In a new tab, go to the **frontend** directory and run: `grunt`
 - (Must have grunt installed globally like so: `npm install -g grunt`!)
+
+# Viewing this application
+- https://greenlane.io :)

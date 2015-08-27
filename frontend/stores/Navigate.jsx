@@ -979,12 +979,12 @@ $(document).on('click', '.go-to-route', function() {
   window.map.invalidateSize();
 
   // should only occur when directions tab is closed.
-  if ($("#turnList").is(':visible') == false){
-    $('#turnList').addClass('bounceList').delay(2000).queue(function(next){
-      $(this).removeClass('bounceList');
-      next();
-    });
-  }
+  // if ($("#turnList").is(':visible') == false){
+  //   $('#turnList').addClass('bounceList').delay(2000).queue(function(next){
+  //     $(this).removeClass('bounceList');
+  //     next();
+  //   });
+  // }
 })
 $(document).on('click', '.routeChoice', function() {
 

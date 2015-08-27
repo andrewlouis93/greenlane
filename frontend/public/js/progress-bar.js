@@ -1,34 +1,19 @@
 	  $(document).ready(function() {
-		  $('.button-collapse').sideNav({
-		      edge: 'right', // Choose the horizontal origin
-		    }
-		  );
+	    $('.button-collapse').sideNav({
+	      edge: 'right', // Choose the horizontal origin
+	    });
+
+	    $('.collapsible').collapsible({
+	      accordion: true,
+	    });
+
+	    $('ul.tabs').tabs();
+
+	    $('.slider').slider({
+	      full_width: true,
+	      height: '40vh'
+	    });
 	  });
-
-      $(document).ready(function(){
-    $('.collapsible').collapsible({
-      accordion: true,
-      });
-    });
-
-    $(document).ready(function(){
-    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-    $('.modal-trigger').leanModal();
-    });
-
-    $(document).ready(function(){
-    $('ul.tabs').tabs();
-    });
-
-     $(document).ready(function(){
-      $('.slider').slider({
-        full_width: true,
-        height: '40vh'
-
-
-      });
-
-    });
 
     // INSERTING IMAGE AS PROGRESS MOVES ON ----------------------------------------
 
