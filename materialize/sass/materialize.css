@@ -4086,13 +4086,13 @@ hr {
           animation-delay: 2s; }
   @media only screen and (max-width: 600px) {
     .landing-animation {
-      background: url("/public/assets/splash-mobile.svg") no-repeat; } }
+      background: url("public/assets/splash-mobile.svg") no-repeat; } }
   @media only screen and (min-width: 601px) and (max-width: 992px) {
     .landing-animation {
-      background: url("/public/assets/splash-medium.svg") no-repeat; } }
+      background: url("/greenlane/public/assets/splash-medium.svg") no-repeat; } }
   @media only screen and (min-width: 993px) {
     .landing-animation {
-      background: url("/public/assets/splash-large.svg") no-repeat;
+      background: url("/greenlane/public/assets/splash-large.svg") no-repeat;
       background-size: cover !important; } }
 
 .roboto-thick-red {
